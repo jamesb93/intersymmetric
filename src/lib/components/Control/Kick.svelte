@@ -7,7 +7,7 @@
     import Presets from "./Presets.svelte";
     import { rng } from "./rng.js";
     import { kick } from '$lib/instruments/ensemble.js';
-    import { freqMap } from "../../_components/utility.js";
+    import { freqMap } from "$lib/components/utility.js";
 
     $: kick.membrane.octaves = $params.kick.octaves
     $: kick.membrane.frequency.rampTo($params.kick.frequency * freqMap($pitchOffset), 0.1)

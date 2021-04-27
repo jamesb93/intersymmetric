@@ -1,5 +1,5 @@
 <script>
-    import { params } from "../_components/stores.js";
+    import { params } from "$lib/components/stores.js";
 	$: json = JSON.stringify($params, null, 4)
     const saveTextAsFile = (textToWrite, fileNameToSaveAs) => {
     	var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'}); 

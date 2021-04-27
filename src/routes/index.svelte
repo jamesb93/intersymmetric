@@ -4,13 +4,13 @@
 	import { fade } from "svelte/transition";
 	import { 
         room, recentParamName, recentParamValue
-    } from "./_components/stores.js";
-	import Grid from "./_components/Grid.svelte";
-	import Snare from "./_components/Control/Snare.svelte";
-	import Kick from "./_components/Control/Kick.svelte";
-	import Metal from "./_components/Control/Metal.svelte";
-	import FM from "./_components/Control/FM.svelte";
-	import Header from "./_components/Header.svelte";
+    } from '$lib/components/stores.js';
+	import Grid from '$lib/components/Grid.svelte';
+	import Snare from '$lib/components/Control/Snare.svelte';
+	import Kick from "$lib/components/Control/Kick.svelte";
+	import Metal from "$lib/components/Control/Metal.svelte";
+	import FM from "$lib/components/Control/FM.svelte";
+	import Header from "$lib/components/Header.svelte";
 	import { metal1, metal2, fm1, fm2 } from '$lib/instruments/ensemble.js';
 </script>
 
