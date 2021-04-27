@@ -2,8 +2,7 @@ import { io } from "socket.io-client";
 import { writable } from 'svelte/store';
 import { browser } from '$app/env';
 
-const isProd = false;
-let socketAddr = isProd ? "wss://8f43.xyz:4300" : "ws://localhost:4300"
+let socketAddr = import.meta.env.PROD ? "wss://8f43.xyz:4300" : "ws://localhost:4300"
 export const socket = io(socketAddr);
 
 export const numUsers = writable(0);
