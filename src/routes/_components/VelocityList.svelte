@@ -11,7 +11,6 @@
     })
     
     function send() {
-        console.log('sending', id, internalValue)
         socket.emit('velocityList', id, internalValue);
     }
 
