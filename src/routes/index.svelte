@@ -1,5 +1,6 @@
 
 <script>
+	import { browser } from '$app/env';
 	import { fade } from "svelte/transition";
 	import { 
         room, recentParamName, recentParamValue
@@ -11,15 +12,13 @@
 	import FM from "./_components/Control/FM.svelte";
 	import Header from "./_components/Header.svelte";
 	import { metal1, metal2, fm1, fm2 } from '$lib/instruments/ensemble.js';
-	import { browser } from '$app/env';
 </script>
 
 <Header />
 
 <main>
 	<!-- {$recentParamName} | {$recentParamValue} -->
-	{#if $room !== ""}
-	{#if browser}
+	{#if $room !== "" && browser}
 		<div class="main-layout" transition:fade="{{duration: 300}}">
 			<Grid />
 			<div class="synth-controls">
@@ -31,7 +30,6 @@
 				<FM id="fm2" instrument={fm2} />
 			</div>
 		</div>
-	{/if}
 	{/if}
 </main>
 
