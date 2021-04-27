@@ -1,5 +1,5 @@
 <script>
-    import { socket, room } from "../../_components/stores.js"
+    import { socket, room } from "$lib/components/stores.js"
     let states = {};
     let rooms = {};
     socket.on('enabledStates', data => states = data)

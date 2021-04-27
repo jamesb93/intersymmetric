@@ -1,5 +1,5 @@
 <script>
-    import { socket, room, numUsers } from "../../_components/stores.js"
+    import { socket, room, numUsers } from "$lib/components/stores.js"
 	let everUsed = false;
     let code = ""
     const handleClick = () => {
