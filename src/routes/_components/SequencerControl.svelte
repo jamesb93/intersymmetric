@@ -70,8 +70,7 @@
         $offset.end = $offset.start
         $offset.start = t
     }
-    console.log(Tone.Transport)
-    // $: Tone.Transport.bpm.value = $bpm;
+    $: Tone.Transport.bpm.value = $bpm;
 
     
     // Declare indices here so you can easily swap the order.
