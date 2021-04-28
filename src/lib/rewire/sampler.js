@@ -5,12 +5,7 @@ class Sampler {
     constructor(buffers) {
         this.out = new Tone.Gain(0.5).toDestination();
         this.players = [];
-
-        // buffers.forEach((buf, i) => {
-        //     const sampler = new Tone.GrainPlayer(buf).connect(this.out);
-        //     this.players.push(sampler)
-        // })
-
+        
         for (let i = 0; i < buffers.length; i++) {
             const sampler = new Tone.Player({
                 fadeIn: 0.01,

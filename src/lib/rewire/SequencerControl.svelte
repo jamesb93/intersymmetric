@@ -12,7 +12,8 @@
         socket, play, states, clockMode, grid, mirrorPoint,
         velocity, length, offset, pitchOffset, bpm,
         clockMultiplierLookup,
-        maxCells, userInteracted, sampleSelectors
+        maxCells, userInteracted, 
+        sampleSelectors, playbackRate
     } from '$lib/components/stores.js'
     
     import { 
@@ -41,6 +42,7 @@
     function sendMultiplier() { socket.emit('clock::multiplier', $clockMultiplierLookup) };
     function sendPitchOffset() { socket.emit('pitchOffset', $pitchOffset) };
     function sendMaxCells() { socket.emit('maxCells', $maxCells) };
+    function sendPlaybackRate() { socket.emit('playbackRate', $playbackRate) };
     
     function updatePlayStatus(status) {
         play.set(status)
@@ -106,6 +108,21 @@
             loaded = true;
         })
     }
+
+    $: samplers.forEach(sampler => {
+        sampler.players.forEach(player => {
+            player.playbackRate = $playbackRate;
+        })
+    })
+
+    // $: samplers.forEach(sampler => {
+    //     sampler.shift.pitch = $pitchOffset;
+    // })
+
+
+
+
+
     if (browser) {
         loop = new Tone.Loop(time => {
             if ($grid[0][pos] === true) {
@@ -229,6 +246,7 @@
             <Knob enabled={$states.maxCells} resetValue={16} scale=0.25 title="Max Cells" min={1} max={32} step={1} bind:value={$maxCells} func={sendMaxCells} />
             <Knob enabled={$states.pitchOffset} resetValue={0} title="Pitch Offset" min={-48} max={48} step={1} bind:value={$pitchOffset} func={sendPitchOffset} />
         </div>
+        <Knob enabled={$states.playbackRate} scale=0.1 resetValue={1} title="Playback Rate" min={0.1} max={8} step={0.01} bind:value={$playbackRate} func={sendPlaybackRate} />
     </div>
 </div>
 {/if}
