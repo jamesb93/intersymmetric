@@ -94,6 +94,9 @@ socket.on('clock::mode', x => clockMode.set(x));
 export const clockMultiplierLookup = writable(0);
 socket.on('clock::multiplier', x => clockMultiplierLookup.set(x));
 
+export const sampleSelectors = writable([0, 0, 0, 0, 0, 0]);
+socket.on('sampleSelectors', x => sampleSelectors.set(x));
+
 // Synthesiser Data
 export const params = writable({
     snare : {

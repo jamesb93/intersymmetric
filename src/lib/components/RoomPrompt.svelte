@@ -23,13 +23,12 @@
         placeholder="enter room" 
         class="code-entry"
         />
-        <!-- <span>{$room}</span> -->
     </div>
 </div>
 
 <style>
 
-    input[type=text], textarea {
+    input[type=text] {
     	/* font-family: 'Major Mono Display', monospace; */
         font-family: 'Courier Prime', monospace;
         display: inline;

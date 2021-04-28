@@ -1,3 +1,21 @@
+<script>
+    const WIDTH = 80;
+    const HEIGHT = 80;
+    $: style = `height: ${HEIGHT}; width: ${WIDTH};`
+    export let playing;
+    function onClick() {
+        playing = !playing;
+        if (!playing) {
+            pause();
+        } else {
+            start();
+        }
+    }
+
+    export let start;
+    export let pause;
+</script>
+
 <div class="container" style={style}>
     <div class="text">Play/Pause</div>
     <button on:click={onClick} class="button" class:pause={playing}></button>
@@ -47,21 +65,3 @@
         border-color: transparent transparent transparent rgba(86,158,70,0.8);
     }
 </style>
-
-<script>
-    const WIDTH = 80;
-    const HEIGHT = 80;
-    $: style = `height: ${HEIGHT}; width: ${WIDTH};`
-    export let playing;
-    function onClick() {
-        playing = !playing;
-        if (!playing) {
-            pause();
-        } else {
-            start();
-        }
-    }
-
-    export let start;
-    export let pause;
-</script>
