@@ -11,7 +11,7 @@
         <!-- Title -->
         <text
             x={MID_X}
-            y=10
+            y={HEIGHT / 7}
             text-anchor="middle"
             fill={textColor}
             class="name"
@@ -45,7 +45,7 @@
         {#if showValue}
         <text
             x={MID_X}
-            y={60}
+            y={HEIGHT}
             text-anchor="middle"
             fill="{textColor}"
             class="value"
