@@ -5,7 +5,7 @@ specifiers:
   '@sveltejs/kit': next
   d3: ^6.7.0
   socket.io-client: ^4.0.1
-  svelte: ^3.29.0
+  svelte: ^3.37.0
   tone: ^14.7.77
   vite: ^2.2.3
 
