@@ -11,7 +11,7 @@ const handleUpload = () => {
         body: formData
     }
 
-    fetch('http://localhost:3000/upload', options)
+    fetch('http://localhost:23000/upload', options)
     .then(response => response.json())
     .then(data => {
         uploadComplete = data.status === 'ok'

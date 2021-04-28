@@ -2,10 +2,11 @@
     export let url;
     let files = [];
     let file;
+    let base = 'http://localhost:23000/files/'
     $: url = base + file; console.log(url)
 
     const getFiles = () => {
-        fetch('http://localhost:3000/files', {method: 'GET'})
+        fetch('http://localhost:23000/files', {method: 'GET'})
         .then(response => response.json())
         .then(data => {
             console.log(data);
