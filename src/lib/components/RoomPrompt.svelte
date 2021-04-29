@@ -1,20 +1,28 @@
 <script>
-    import { socket, room, numUsers } from "./stores.js"
+    import { socket, room, workshopID } from "$lib/components/stores.js"
+    import { createRoomID } from '$lib/components/utility.js'
 	let everUsed = false;
     let code = ""
+    
     const handleClick = () => {
         everUsed = true;
-        socket.emit('roomJoin', code)
-        localStorage.setItem("mfrtjbcode", code);
+        socket.emit('roomJoin', createRoomID($workshopID, code))
+        localStorage.setItem(
+            createRoomID($workshopID, "mfrtjbcode"), 
+            code
+        );
         room.set(code)
         code = ""
     }
-
 </script>
 
 <div class="prompt" >
     <div class="room-code">
-        {$room}
+        <div id="room-name">
+            {#if $room !== undefined}
+                {$room}
+            {/if}
+        </div>
         <input 
         type="text" 
         class:pulsate={!everUsed} 
@@ -27,9 +35,14 @@
 </div>
 
 <style>
+    #room-name {
+        width: 30px;
+        height: 13px;
+        padding-bottom: 4px;
+        text-align: center;
+    }
 
     input[type=text] {
-    	/* font-family: 'Major Mono Display', monospace; */
         font-family: 'Courier Prime', monospace;
         display: inline;
         font-family: inherit;

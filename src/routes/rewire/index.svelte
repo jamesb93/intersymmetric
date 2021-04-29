@@ -5,6 +5,9 @@
 	import { room } from '$lib/components/stores.js';
 	import Grid from '$lib/rewire/Grid.svelte';
     import Header from '$lib/components/Header.svelte';
+	import { workshopID } from '$lib/components/stores.js';
+	$workshopID = "rewire";
+
 </script>
 
 <Header />

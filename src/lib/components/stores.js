@@ -1,35 +1,25 @@
 import { io } from "socket.io-client";
-import { writable } from 'svelte/store';
+import { writable, get } from 'svelte/store';
 import { browser } from '$app/env';
+import { createRoomID } from '$lib/components/utility.js';
 
+// Sockets
 let socketAddr = import.meta.env.PROD ? "wss://8f43.xyz:4300" : "ws://localhost:4300"
 export const socket = io(socketAddr);
 
-export const numUsers = writable(0);
-
-let storedRoom;
-
-if (browser) {
-    storedRoom = localStorage.getItem("mfrtjbcode") || null
-}
-
-if (storedRoom === null) {
-    storedRoom = ""
-}
-
-export const room = writable(storedRoom)
-if (storedRoom !== "") {
-    socket.emit('roomJoin', storedRoom)
-    room.set(storedRoom)
-}
-
-export const recentParamValue = writable('')
-export const recentParamName = writable('')
 socket.on('connect', () => {
     console.log('connected to ', socketAddr)
 })
 
-socket.on('numUsers', num => numUsers.set(num)); 
+// Room Management
+export const workshopID = writable("");
+export const numUsers = writable(0);
+export const room = writable('')
+socket.on('numUsers', x => numUsers.set(x)); 
+
+// High-Level Information
+export const recentParamValue = writable('')
+export const recentParamName = writable('')
 export const userInteracted = writable(false);
 
 // Sequencer Data

@@ -1,7 +1,27 @@
 <script>
-    import { numUsers } from "./stores.js";
-	import RoomPrompt from "./RoomPrompt.svelte";
-	import Editor from "./Editor.svelte";
+    import { browser } from '$app/env';
+    import { socket, numUsers, workshopID, room } from "$lib/components/stores.js";
+	import { createRoomID } from '$lib/components/utility.js';
+    import RoomPrompt from "$lib/components/RoomPrompt.svelte";
+	import Editor from "$lib/components/Editor.svelte";
+
+    let storedRoom = null;
+
+    if (browser) {
+        storedRoom = localStorage.getItem(
+            createRoomID($workshopID, "mfrtjbcode")
+        );
+
+        if (storedRoom === null) {
+            storedRoom = ''
+        }
+
+        if (storedRoom !== null || storedRoom !== '') {
+            socket.emit('roomJoin', createRoomID($workshopID, storedRoom));
+            room.set(storedRoom)
+        }
+    }
+
 
 </script>
 
@@ -26,7 +46,8 @@
     header {
         padding-top: 12px;
         padding-bottom: 12px;
-        max-width: 50%;
+        max-width: 35%;
+        min-width: 30%;
         margin: 0 auto;
         display: flex;
         flex-direction: row;

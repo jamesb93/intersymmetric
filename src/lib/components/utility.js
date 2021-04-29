@@ -1,3 +1,4 @@
+export const createRoomID = (prefix, code) => `${prefix}.${code}`
 
 export const freqMap = (midi) => {
     return Math.pow(2, (midi / 12.0));

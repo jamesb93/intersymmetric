@@ -2,9 +2,7 @@
 <script>
 	import { browser } from '$app/env';
 	import { fade } from "svelte/transition";
-	import { 
-        room, recentParamName, recentParamValue
-    } from '$lib/components/stores.js';
+	import { room, recentParamName, recentParamValue } from '$lib/components/stores.js';
 	import Grid from '$lib/components/Grid.svelte';
 	import Snare from '$lib/components/Control/Snare.svelte';
 	import Kick from "$lib/components/Control/Kick.svelte";
@@ -12,6 +10,9 @@
 	import FM from "$lib/components/Control/FM.svelte";
 	import Header from "$lib/components/Header.svelte";
 	import { metal1, metal2, fm1, fm2 } from '$lib/instruments/ensemble.js';
+
+	import { workshopID } from '$lib/components/stores.js';
+	$workshopID = "nobounds";
 </script>
 
 <Header />
