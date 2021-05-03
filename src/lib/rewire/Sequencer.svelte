@@ -41,14 +41,12 @@
             <div class="cell-container">
                 {#if x === 0}
                     {#each row as _, y}
-                        <!-- <Arrow direction="up" func={() => {shiftColumnUp(grid, y)}}/> -->
+                        <Arrow direction="up" func={ () => {shiftColumnUp(grid, y)} } />
                     {/each}
                 {/if}
             </div>
             <div class="cell-container">
-                <!-- <Arrow direction="left" func={() => {grid[x] = rotate(grid[x], 1); sendGrid()}}/> -->
-                <Arrow direction="left" func={() => {grid[x].rotate(1); sendGrid()}}/>
-
+                <Arrow direction="left" func={ () => {grid[x].rotate(1); sendGrid()} } />
                 {#each row as step, y}
                     <Cell
                     bind:cellSnapshot={cellSnapshot}
@@ -59,15 +57,15 @@
                     y={y}
                     />
                 {/each}
-                <!-- <Arrow direction="right" func={() => {grid[x] = rotate(grid[x], -1); sendGrid()}}/> -->
+                <Arrow direction="right" func={ () => {grid[x].rotate(-1); sendGrid()} } />
             </div>
             <div class="cell-container">
                 {#if x === $grid.length-1}
                     {#each row as _, y}
-                        <!-- <Arrow 
+                        <Arrow 
                         direction="down" 
                         func={ () => {shiftColumnDown(grid, y)} } 
-                        /> -->
+                        />
                     {/each}
                 {/if}
             </div>
