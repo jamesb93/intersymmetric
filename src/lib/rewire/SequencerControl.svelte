@@ -13,7 +13,7 @@
         velocity, length, offset, pitchOffset, bpm,
         clockMultiplierLookup,
         maxCells, userInteracted, 
-        sampleSelectors, playbackRate
+        sampleSelectors, playbackRate, sampleGains
     } from '$lib/components/stores.js'
     
     import { 
@@ -103,11 +103,15 @@
         .then(() => {
             for (let i = 0; i < 6; i++) {
                 const x = new Sampler(buffers);
-                samplers.push(x)
+                samplers.push(x);
             }
             loaded = true;
         })
     }
+
+    $: samplers.forEach(sampler => {
+        sampler.envelope.release = $length;
+    })
 
     $: samplers.forEach(sampler => {
         sampler.players.forEach(player => {
@@ -115,38 +119,34 @@
         })
     })
 
-    // $: samplers.forEach(sampler => {
-    //     sampler.shift.pitch = $pitchOffset;
-    // })
-
-
-
-
+    $: samplers.forEach((sampler, i) => {
+        sampler.out.gain.rampTo($sampleGains[i]);
+    })
 
     if (browser) {
         loop = new Tone.Loop(time => {
             if ($grid[0][pos] === true) {
-                samplers[0].trigger(time, $sampleSelectors[0], 1.0, $length)
+                samplers[0].trigger(time, $sampleSelectors[0], $velocity, $length)
             }
 
             if ($grid[1][pos] === true) {
-                samplers[1].trigger(time, $sampleSelectors[1], 1.0, $length)
+                samplers[1].trigger(time, $sampleSelectors[1], $velocity, $length)
                 
             }
             if ($grid[2][pos] === true) {
-                samplers[2].trigger(time, $sampleSelectors[2], 1.0, $length)
+                samplers[2].trigger(time, $sampleSelectors[2], $velocity, $length)
             }
 
             if ($grid[3][pos] === true) {
-                samplers[3].trigger(time, $sampleSelectors[3], 1.0, $length)
+                samplers[3].trigger(time, $sampleSelectors[3], $velocity, $length)
             }
 
             if ($grid[4][pos] === true) {
-                samplers[4].trigger(time, $sampleSelectors[4], 1.0, $length)
+                samplers[4].trigger(time, $sampleSelectors[4], $velocity, $length)
             }
 
             if ($grid[5][pos] === true) {
-                samplers[5].trigger(time, $sampleSelectors[5], 1.0, $length)
+                samplers[5].trigger(time, $sampleSelectors[5], $velocity, $length)
             }
              
                 
@@ -236,17 +236,16 @@
     </div>
                     
     <div id='other-knobs' class='control-column-container'>
-        <!-- <Knob enabled={$states.offset} scale=0.125 title="start" min={1} max={16} bind:value={$offset.start} func={sendOffset} /> -->
-        <!-- <Knob enabled={$states.offset} scale=0.125 title="end" min={1} max={16} bind:value={$offset.end} func={sendOffset} /> -->
         <div class='control-row-top'>
             <Knob enabled={$states.globalVelocity} resetValue={1.0} scale=0.01 title="Velocity" min={0} max={1} step={0.01} bind:value={$velocity} func={sendVelocity} />
-            <Knob enabled={$states.globalLength} scale=0.008 resetValue={1.0} title="Shape Scale" min={0.05} max={2} step={0.01} bind:value={$length} func={sendLength} />
+            <Knob enabled={$states.globalLength} scale=0.008 resetValue={1.0} title="Shape Scale" min={0.05} max={5} step={0.01} bind:value={$length} func={sendLength} />
+            <Knob enabled={$states.playbackRate} scale=0.1 resetValue={1} title="Playback Rate" min={0.1} max={8} step={0.01} bind:value={$playbackRate} func={sendPlaybackRate} />
         </div>
         <div class='control-row-bottom'>
+            <Knob enabled={$states.offset} scale=0.125 title="start" min={1} max={16} bind:value={$offset.start} func={sendOffset} />
+            <Knob enabled={$states.offset} scale=0.125 title="end" min={1} max={16} bind:value={$offset.end} func={sendOffset} />
             <Knob enabled={$states.maxCells} resetValue={16} scale=0.25 title="Max Cells" min={1} max={32} step={1} bind:value={$maxCells} func={sendMaxCells} />
-            <Knob enabled={$states.pitchOffset} resetValue={0} title="Pitch Offset" min={-48} max={48} step={1} bind:value={$pitchOffset} func={sendPitchOffset} />
         </div>
-        <Knob enabled={$states.playbackRate} scale=0.1 resetValue={1} title="Playback Rate" min={0.1} max={8} step={0.01} bind:value={$playbackRate} func={sendPlaybackRate} />
     </div>
 </div>
 {/if}

@@ -3,24 +3,23 @@ import { Env } from '$lib/instruments/envelope.js';
 
 class Sampler {
     constructor(buffers) {
-        this.out = new Tone.Gain(0.5).toDestination();
         this.players = [];
+        this.envelope = new Env(0.01, 10.0);
+        this.out = new Tone.Gain(1.0).toDestination();
+        this.envelope.out.connect(this.out);
         
-        for (let i = 0; i < buffers.length; i++) {
+        for (let i=0; i < buffers.length; i++) {
             const sampler = new Tone.Player({
                 fadeIn: 0.01,
                 fadeOut: 0.01
-            }).connect(this.out);
+            }).connect(this.envelope.out);
             sampler.buffer = buffers[i]
             this.players.push(sampler)
         }
     }
     trigger(time, sampleIdx, velocity, duration) {
         const play = this.players[sampleIdx];
-        if (play.state === 'started') {
-            play.stop()
-        }
-
+        this.envelope.trigger(time, velocity)
         play.start(time, 0.0, duration)
     }
 }

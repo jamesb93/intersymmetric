@@ -4,7 +4,9 @@
     import Arrow from '$lib/components/Arrow.svelte';
     
     import { shiftColumnDown, shiftColumnUp } from '$lib/grid/transforms.js';
-    import { socket, states, grid, gridValid, euclidSteps, sampleSelectors } from '$lib/components/stores.js';
+    import { socket, states, grid, gridValid, euclidSteps, 
+        sampleSelectors, sampleGains
+    } from '$lib/components/stores.js';
     import { getPattern } from "$lib/components/euclid.js";
 
     export let prePos = 0;
@@ -27,7 +29,7 @@
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={states.euclid} 
             scale=0.2 min={0} max={16} 
-            showValue={false} bind:value={$euclidSteps[x]} 
+            showValue={false} bind:value={ $euclidSteps[x] } 
             func={ () => sendEuclid(x) } 
             />
         {/each}
@@ -72,13 +74,25 @@
         {/each}
     {/if}
     </div>
-    <div class="euclids">
+    <div class="euclids" id="sample">
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true} 
             scale=0.4 min={0} max={85} 
             bind:value={ $sampleSelectors[x] } 
-            func={ () => {} } 
+            func={ () => socket.emit('sampleSelectors', $sampleSelectors) } 
+            />
+        {/each}
+    </div>
+
+    <div class="euclids" id="gain">
+        {#each {length: 6} as _, x}
+            <Knob WIDTH={50} HEIGHT={50} 
+            enabled={true}
+            scale=0.005
+            step=0.01 min={0.0} max={1.0} 
+            bind:value={ $sampleGains[x] } 
+            func={ () => socket.emit('sampleGains', $sampleGains) } 
             />
         {/each}
     </div>
