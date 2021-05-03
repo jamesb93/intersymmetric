@@ -112,6 +112,8 @@
         grid-template-rows: repeat(8, auto);
         grid-template-columns: auto;
         align-items: center;
+        padding-top: 50px;
+        padding-bottom: 50px;
     }
     .grid {
         display: grid;
