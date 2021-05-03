@@ -35,14 +35,20 @@ main {
 }
 
 a {
-	color: rgb(0,100,200);
+	color: #59a245;
 	text-decoration: none;
 }
 
 a:hover {
 	text-decoration: underline;
+	background: #59a245;
+	color: white;
 }
 
 a:visited {
-	color: rgb(0,80,160);
+	color: #59a245
+}
+
+a:visited:hover {
+	color: white;
 }
