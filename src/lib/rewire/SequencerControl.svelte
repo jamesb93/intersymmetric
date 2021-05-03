@@ -13,7 +13,7 @@
         velocity, length, offset, pitchOffset, bpm,
         clockMultiplierLookup,
         maxCells, userInteracted, 
-        sampleSelectors, playbackRate, sampleGains
+        sampleSelectors, playbackRate, trackGains
     } from '$lib/components/stores.js'
     
     import { 
@@ -120,7 +120,7 @@
     })
 
     $: samplers.forEach((sampler, i) => {
-        sampler.out.gain.rampTo($sampleGains[i]);
+        sampler.out.gain.rampTo($trackGains[i]);
     })
 
     if (browser) {

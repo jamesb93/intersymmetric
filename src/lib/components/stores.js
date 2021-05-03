@@ -87,8 +87,8 @@ socket.on('clock::multiplier', x => clockMultiplierLookup.set(x));
 export const sampleSelectors = writable([0, 0, 0, 0, 0, 0]);
 socket.on('sampleSelectors', x => sampleSelectors.set(x));
 
-export const sampleGains = writable([1.0, 1.0, 1.0, 1.0, 1.0, 1.0]);
-socket.on('sampleGains', x => sampleGains.set(x));
+export const trackGains = writable([1.0, 1.0, 1.0, 1.0, 1.0, 1.0]);
+socket.on('trackGains', x => trackGains.set(x));
 
 export const playbackRate = writable(1.0);
 socket.on('playbackRate', x => playbackRate.set(x));

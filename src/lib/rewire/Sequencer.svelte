@@ -5,7 +5,7 @@
     
     import { shiftColumnDown, shiftColumnUp } from '$lib/grid/transforms.js';
     import { socket, states, grid, gridValid, euclidSteps, 
-        sampleSelectors, sampleGains
+        sampleSelectors, trackGains
     } from '$lib/components/stores.js';
     import { getPattern } from "$lib/components/euclid.js";
 
@@ -89,8 +89,8 @@
             enabled={true}
             scale=0.005
             step=0.01 min={0.0} max={1.0} 
-            bind:value={ $sampleGains[x] } 
-            func={ () => socket.emit('sampleGains', $sampleGains) } 
+            bind:value={ $trackGains[x] } 
+            func={ () => socket.emit('trackGains', $trackGains) } 
             />
         {/each}
     </div>
