@@ -19,6 +19,11 @@
         socket.emit('euclid', $euclidSteps);
         sendGrid();
     }
+
+    function rotateGridColumn(amt, column) {
+        $grid[column] = $grid[column].rotate(amt)
+        sendGrid()
+    }
 </script>
 
 <svelte:window on:mouseup={()=>{anyMouseDown=false}} />
@@ -35,7 +40,6 @@
         {/each}
     </div>
     <div class="grid">
-    <!-- <TwoThumb /> -->
     {#if $gridValid}
         {#each $grid as row, x}
             <div class="cell-container">
@@ -46,8 +50,8 @@
                 {/if}
             </div>
             <div class="cell-container">
-                <Arrow direction="left" func={ () => {grid[x].rotate(1); sendGrid()} } />
-                {#each row as step, y}
+                <Arrow direction="left" func={ () => rotateGridColumn(1, x) } />
+                {#each row as _, y}
                     <Cell
                     bind:cellSnapshot={cellSnapshot}
                     bind:anyMouseDown={anyMouseDown}
@@ -57,7 +61,7 @@
                     y={y}
                     />
                 {/each}
-                <Arrow direction="right" func={ () => {grid[x].rotate(-1); sendGrid()} } />
+                <Arrow direction="right" func={ () => rotateGridColumn(-1, x) } />
             </div>
             <div class="cell-container">
                 {#if x === $grid.length-1}
