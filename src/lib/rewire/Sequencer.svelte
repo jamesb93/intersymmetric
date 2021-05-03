@@ -3,7 +3,7 @@
     import Knob from "$lib/components/Knob.svelte";
     import Arrow from '$lib/components/Arrow.svelte';
     
-    import { shiftColumnDown, shiftColumnUp } from '$lib/grid/transforms.js';
+    import { shiftColumnDown, shiftColumnUp, rotateGridColumn } from '$lib/grid/transforms.js';
     import { socket, states, grid, gridValid, euclidSteps, 
         sampleSelectors, trackGains
     } from '$lib/components/stores.js';
@@ -20,10 +20,6 @@
         sendGrid();
     }
 
-    function rotateGridColumn(amt, column) {
-        $grid[column] = $grid[column].rotate(amt)
-        sendGrid()
-    }
 </script>
 
 <svelte:window on:mouseup={()=>{anyMouseDown=false}} />
@@ -50,7 +46,7 @@
                 {/if}
             </div>
             <div class="cell-container">
-                <Arrow direction="left" func={ () => rotateGridColumn(1, x) } />
+                <Arrow direction="left" func={ () => rotateGridColumn(grid, 1, x) } />
                 {#each row as _, y}
                     <Cell
                     bind:cellSnapshot={cellSnapshot}
@@ -61,7 +57,7 @@
                     y={y}
                     />
                 {/each}
-                <Arrow direction="right" func={ () => rotateGridColumn(-1, x) } />
+                <Arrow direction="right" func={ () => rotateGridColumn(grid, -1, x) } />
             </div>
             <div class="cell-container">
                 {#if x === $grid.length-1}

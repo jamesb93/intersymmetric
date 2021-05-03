@@ -7,6 +7,13 @@ const sendGrid = (store) => {
     socket.emit('grid', grid) 
 };
 
+export const rotateGridColumn = (store, amt, column) => {
+    let grid = get(store);
+    grid[column] = grid[column].rotate(amt)
+    store.set(grid);
+    sendGrid()
+}
+
 export const mirrorWithPoint = (store, point) => {
     const arr = get(store)
     const diff = Math.round(arr.length / 2) - point;
