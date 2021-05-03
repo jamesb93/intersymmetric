@@ -21,10 +21,14 @@
 
 <style>
     footer {
-        max-width: 50%;
+        position: relative;
+        width: 425px;
         margin: 0 auto;
+        padding: 10px;
         padding-top: 1em;
         display: flex;
         flex-direction: column;
+        box-shadow: 5px -5px 0 0 #59a245;
+        border: 1px solid #59a245;
     }
 </style>
