@@ -30,12 +30,10 @@
         <span>Intersymmetric Works</span>
         <br>
         <span>Grid Sequencer 01</span>
-    </div>
+</div>
     <RoomPrompt />
     <div>
-        <span>Users:</span>
-        <br>
-        <span>{$numUsers}</span>
+        <span>Users: {$numUsers}</span>
     </div>
     <Editor />
 </header>
