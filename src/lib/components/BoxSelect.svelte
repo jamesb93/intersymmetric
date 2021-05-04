@@ -12,21 +12,13 @@
     button {
         border-radius: 3px;
         background-color: #d3d3d3;
-        border: 1px solid rgba(219, 219, 219, 0.151);
+        border: 1px solid #40ac47;
         height: 40px;
         width: 100px;
     }
 
     button:hover {
         background-color: #b3b3b3;
-    }
-
-    button {
-        border-radius: 3px;
-        background-color: #d3d3d3;
-        border: 1px solid rgba(219, 219, 219, 0.151);
-        height: 40px;
-        width: 100px;
     }
 
     .select {

@@ -20,15 +20,14 @@
 </footer>
 
 <style>
-    footer {
-        position: relative;
+    footer {    
         width: 425px;
-        margin: 0 auto;
+        margin-left: 9%;
         padding: 10px;
         padding-top: 1em;
         display: flex;
         flex-direction: column;
-        box-shadow: 5px -5px 0 0 #59a245;
-        border: 1px solid #59a245;
+        color: #40ac47;
+        font-size: 10px;
     }
 </style>

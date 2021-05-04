@@ -1,5 +1,7 @@
 <script>
     import { browser } from '$app/env';
+    import { page } from '$app/stores';
+    console.log($page)
     import { socket, numUsers, workshopID, room } from "$lib/components/stores.js";
 	import { createRoomID } from '$lib/components/utility.js';
     import RoomPrompt from "$lib/components/RoomPrompt.svelte";
@@ -21,8 +23,6 @@
             room.set(storedRoom)
         }
     }
-
-
 </script>
 
 <header>
@@ -35,7 +35,9 @@
     <div>
         <span>Users: {$numUsers}</span>
     </div>
+    {#if $page.path !== '/rewire'}
     <Editor />
+    {/if}
 </header>
 
 <div class="line"></div>
@@ -44,7 +46,7 @@
     header {
         padding-top: 12px;
         padding-bottom: 12px;
-        max-width: 35%;
+        max-width: 40%;
         min-width: 30%;
         margin: 0 auto;
         display: flex;
@@ -54,7 +56,7 @@
     }
 
     .line {
-        border-bottom: 2px solid #59a245;
+        border-bottom: 2px solid #40ac47;
         width: 100%;
     }
 </style>

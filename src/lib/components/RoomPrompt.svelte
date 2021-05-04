@@ -58,6 +58,7 @@
         display: flex;
         flex-direction: row;
         margin: 0 auto;
+        align-self: center;
     }
 
     .code-entry {

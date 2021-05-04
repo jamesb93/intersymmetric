@@ -101,7 +101,7 @@
     export let secondaryColor = '#989898';
     export let strokeWidth = 1;
 
-    $: primaryColor = enabled ? '#59a245' : '#989898';
+    $: primaryColor = enabled ? '#40ac47;' : '#989898';
     $: textColor = enabled ? '#000000' : '#989898';
     $: containerStyle = `height: ${HEIGHT}px; width: ${WIDTH}px;`;
     
@@ -160,7 +160,7 @@
     const downHandler = (e) => {
         if (enabled) {
             down=true;
-            primaryColor = '#008500';
+            primaryColor = '#5dee67';
             anchor = e.screenY;
         }
     }
@@ -210,6 +210,7 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        font-size: 10px;
     }
 
     .value {

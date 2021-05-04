@@ -47,7 +47,7 @@
     button {
         border-radius: 30px;
         background-color: #ffffff;
-        border: 1px solid rgba(86,158,70,255);
+        border: 1px solid #40ac47;
         height: 30px;
         width: 90px;
     }
@@ -56,20 +56,12 @@
         background-color: #ededed;
     }
 
-    button:active {
-        background-color: rgba(86,158,70,255);
+    button:active, .select:hover, .select {
+        background-color: #40ac47;
     }
 
     button:active > #text {
         color: white;
-    }
-
-    .select:hover {
-        background-color: rgba(86,158,70,255);
-    }
-
-    .select {
-        background-color: rgba(86,158,70,255);
     }
 
     .select > #text {

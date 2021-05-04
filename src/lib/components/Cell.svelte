@@ -125,7 +125,7 @@ on:mousedown={handleMouseDown}
     }
     
     .check {
-        stroke: rgba(118,167,112,255);
+        stroke: #40ac47;
         stroke-width: 1.5px;
     }
     
@@ -134,10 +134,10 @@ on:mousedown={handleMouseDown}
     }
     
     .emphasis {
-        background-color: rgba(224,224,224,255)
+        background-color: #e4e4e3
     }
     
     .selemph {
-        background-color: rgba(118,167,112,255);
+        background-color: #40ac47;
     }
 </style>

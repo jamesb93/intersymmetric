@@ -11,7 +11,7 @@
     button {
         border-radius: 30px;
         background-color: #ffffff;
-        border: 1px solid rgba(86,158,70,255);
+        border: 1px solid #40ac47;
         height: 30px;
         width: 100px;
     }
@@ -21,7 +21,7 @@
     }
 
     button:active {
-        background-color: rgba(86,158,70,255);
+        background-color: #40ac47;
     }
 
     button:active > #text {
