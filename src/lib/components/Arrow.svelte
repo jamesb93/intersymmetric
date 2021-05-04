@@ -41,7 +41,7 @@
         transition: opacity 0.35s;
     }
     line {
-       stroke: rgba(118,167,112,255);
+       stroke: #40ac47;
        stroke-width: 1px;
     }
     
