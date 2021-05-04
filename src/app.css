@@ -36,17 +36,20 @@ main {
 
 a {
 	color: #59a245;
+	color: #40ac47;
 	text-decoration: none;
 }
 
 a:hover {
 	text-decoration: underline;
 	background: #59a245;
+	background-color: #40ac47;
 	color: white;
 }
 
 a:visited {
-	color: #59a245
+	color: #59a245;
+	color: #40ac47
 }
 
 a:visited:hover {
