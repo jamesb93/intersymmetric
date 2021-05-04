@@ -4,8 +4,9 @@
     import Arrow from '$lib/components/Arrow.svelte';
     
     import { shiftColumnDown, shiftColumnUp, rotateGridColumn } from '$lib/grid/transforms.js';
-    import { socket, states, grid, gridValid, euclidSteps, 
-        sampleSelectors, trackGains
+    import { 
+        socket, states, grid, gridValid, euclidSteps, 
+        sampleSelectors, trackRates, trackLengths, recentSample
     } from '$lib/components/stores.js';
     import { getPattern } from "$lib/components/euclid.js";
 
@@ -20,6 +21,11 @@
         sendGrid();
     }
 
+    function updateSample(x) {
+        console.log($sampleSelectors[x])
+        socket.emit('sampleSelectors', $sampleSelectors)
+    }
+
 </script>
 
 <svelte:window on:mouseup={()=>{anyMouseDown=false}} />
@@ -30,7 +36,8 @@
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={states.euclid} 
             scale=0.2 min={0} max={16} 
-            showValue={false} bind:value={ $euclidSteps[x] } 
+            showValue={false} 
+            bind:value={ $euclidSteps[x] } 
             func={ () => sendEuclid(x) } 
             />
         {/each}
@@ -76,21 +83,35 @@
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true} 
-            scale=0.4 min={0} max={85} 
+            scale=0.05 min={0} max={85} 
             bind:value={ $sampleSelectors[x] } 
-            func={ () => socket.emit('sampleSelectors', $sampleSelectors) } 
+            func={ () => updateSample(x) } 
             />
         {/each}
     </div>
 
-    <div class="euclids" id="gain">
+    <div class="euclids" id="playback-rate">
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true}
-            scale=0.005
-            step=0.01 min={0.0} max={1.0} 
-            bind:value={ $trackGains[x] } 
-            func={ () => socket.emit('trackGains', $trackGains) } 
+            resetValue={1.0}
+            scale=0.1
+            step=0.01 min={0.01} max={16.0} 
+            bind:value={ $trackRates[x] } 
+            func={ () => socket.emit('trackRates', $trackRates) } 
+            />
+        {/each}
+    </div>
+
+    <div class="euclids" id="track-env">
+        {#each {length: 6} as _, x}
+            <Knob WIDTH={50} HEIGHT={50} 
+            enabled={true}
+            scale=0.05
+            resetValue={1.0}
+            step=0.01 min={0.1} max={10.0} 
+            bind:value={ $trackLengths[x] } 
+            func={ () => socket.emit('trackLengths', $trackLengths) } 
             />
         {/each}
     </div>

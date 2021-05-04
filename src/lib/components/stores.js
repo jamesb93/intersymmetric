@@ -20,6 +20,7 @@ socket.on('numUsers', x => numUsers.set(x));
 // High-Level Information
 export const recentParamValue = writable('')
 export const recentParamName = writable('')
+export const recentSample = writable(null);
 export const userInteracted = writable(false);
 
 // Sequencer Data
@@ -89,6 +90,12 @@ socket.on('sampleSelectors', x => sampleSelectors.set(x));
 
 export const trackGains = writable([1.0, 1.0, 1.0, 1.0, 1.0, 1.0]);
 socket.on('trackGains', x => trackGains.set(x));
+
+export const trackRates = writable([1.0, 1.0, 1.0, 1.0, 1.0, 1.0]);
+socket.on('trackRates', x => trackRates.set(x));
+
+export const trackLengths = writable([1.0, 1.0, 1.0, 1.0, 1.0, 1.0]);
+socket.on('trackLengths', x => trackLengths.set(x));
 
 export const playbackRate = writable(1.0);
 socket.on('playbackRate', x => playbackRate.set(x));

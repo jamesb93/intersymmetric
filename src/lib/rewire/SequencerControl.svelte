@@ -10,10 +10,11 @@
     
     import { 
         socket, play, states, clockMode, grid, mirrorPoint,
-        velocity, length, offset, pitchOffset, bpm,
+        velocity, length, offset, bpm,
         clockMultiplierLookup,
         maxCells, userInteracted, 
-        sampleSelectors, playbackRate, trackGains
+        sampleSelectors, playbackRate, 
+        trackGains, trackRates, trackLengths
     } from '$lib/components/stores.js'
     
     import { 
@@ -40,7 +41,6 @@
     function sendBpm() { socket.emit('bpm', $bpm) };
     function sendMirrorPoint() { socket.emit('mirrorPoint', $mirrorPoint) };
     function sendMultiplier() { socket.emit('clock::multiplier', $clockMultiplierLookup) };
-    function sendPitchOffset() { socket.emit('pitchOffset', $pitchOffset) };
     function sendMaxCells() { socket.emit('maxCells', $maxCells) };
     function sendPlaybackRate() { socket.emit('playbackRate', $playbackRate) };
     
@@ -87,7 +87,6 @@
     let buffers = [];
     let samplers = [];
 
-    // $: loaded = buffers.length === numSamples;
     let loaded = false;
     let loadedCount = 0;
     
@@ -109,13 +108,13 @@
         })
     }
 
-    $: samplers.forEach(sampler => {
-        sampler.envelope.release = $length;
+    $: samplers.forEach((sampler, i) => {
+        sampler.envelope.release = $length * $trackLengths[i];
     })
 
-    $: samplers.forEach(sampler => {
+    $: samplers.forEach((sampler,i) => {
         sampler.players.forEach(player => {
-            player.playbackRate = $playbackRate;
+            player.playbackRate = $trackRates[i] * $playbackRate;
         })
     })
 
@@ -126,27 +125,27 @@
     if (browser) {
         loop = new Tone.Loop(time => {
             if ($grid[0][pos] === true) {
-                samplers[0].trigger(time, $sampleSelectors[0], $velocity, $length)
+                samplers[0].trigger(time, $sampleSelectors[0], $velocity, $length * $trackLengths[0])
             }
 
             if ($grid[1][pos] === true) {
-                samplers[1].trigger(time, $sampleSelectors[1], $velocity, $length)
+                samplers[1].trigger(time, $sampleSelectors[1], $velocity, $length * $trackLengths[1])
                 
             }
             if ($grid[2][pos] === true) {
-                samplers[2].trigger(time, $sampleSelectors[2], $velocity, $length)
+                samplers[2].trigger(time, $sampleSelectors[2], $velocity, $length * $trackLengths[2])
             }
 
             if ($grid[3][pos] === true) {
-                samplers[3].trigger(time, $sampleSelectors[3], $velocity, $length)
+                samplers[3].trigger(time, $sampleSelectors[3], $velocity, $length * $trackLengths[3])
             }
 
             if ($grid[4][pos] === true) {
-                samplers[4].trigger(time, $sampleSelectors[4], $velocity, $length)
+                samplers[4].trigger(time, $sampleSelectors[4], $velocity, $length * $trackLengths[4])
             }
 
             if ($grid[5][pos] === true) {
-                samplers[5].trigger(time, $sampleSelectors[5], $velocity, $length)
+                samplers[5].trigger(time, $sampleSelectors[5], $velocity, $length * $trackLengths[5])
             }
              
                 
@@ -155,7 +154,7 @@
             if ($clockMode === "forward") {
                 internalPos += clockMultiplier
                 internalPos = wrap(internalPos, $offset.start-1, $offset.end)
-                pos = Math.round(internalPos)
+                pos = Math.floor(internalPos)
                 
             } else if ($clockMode === "rebound") {
                 
@@ -177,7 +176,7 @@
                 }   
             }
             internalPos = wrap(internalPos, $offset.start-1, $offset.end)
-            pos = Math.round(internalPos);
+            pos = Math.floor(internalPos);
             
         } else if ($clockMode === "wander") {
             if (pos === $offset.start-1) {
@@ -194,20 +193,17 @@
                 }
             }
             internalPos = wrap(internalPos, $offset.start-1, $offset.end);
-            pos = Math.round(internalPos);
+            pos = Math.floor(internalPos);
             pos = Math.min(Math.max(pos, $offset.start-1), $offset.end-1);
         }
     }, "16n").start(0);
 }
-    
-    
-    
 </script>
 
 {#if loaded === true}
 <div id="all-controls">
     <div class='control-column-container'>
-        <span class='container-title'>clock</span>
+        <span class='container-title'>Clock</span>
         
         <div class='control-row-top'>
             <Play bind:playing={$play} start={startLoop} pause={stopLoop}/>
@@ -220,7 +216,7 @@
     </div>
     
     <div id='grid-transforms' class='control-column-container'>
-        <span class='container-title'>transforms</span>
+        <span class='container-title'>Transforms</span>
         <BoxButton func={ () => invertGridVertical(grid) } text="Flip V" />
         <BoxButton func={ () => randomiseGrid(grid) } text="randomise" />
         <BoxButton func={ () => clearGrid(grid) } text="clear" />
@@ -237,13 +233,12 @@
                     
     <div id='other-knobs' class='control-column-container'>
         <div class='control-row-top'>
-            <Knob enabled={$states.globalVelocity} resetValue={1.0} scale=0.01 title="Velocity" min={0} max={1} step={0.01} bind:value={$velocity} func={sendVelocity} />
-            <Knob enabled={$states.globalLength} scale=0.008 resetValue={1.0} title="Shape Scale" min={0.05} max={5} step={0.01} bind:value={$length} func={sendLength} />
-            <Knob enabled={$states.playbackRate} scale=0.1 resetValue={1} title="Playback Rate" min={0.1} max={8} step={0.01} bind:value={$playbackRate} func={sendPlaybackRate} />
-        </div>
-        <div class='control-row-bottom'>
             <Knob enabled={$states.offset} scale=0.125 title="start" min={1} max={16} bind:value={$offset.start} func={sendOffset} />
             <Knob enabled={$states.offset} scale=0.125 title="end" min={1} max={16} bind:value={$offset.end} func={sendOffset} />
+        </div>
+        <div class='control-row-bottom'>
+            <Knob enabled={$states.globalVelocity} resetValue={1.0} scale=0.01 title="Velocity" min={0} max={1} step={0.01} bind:value={$velocity} func={sendVelocity} />
+            <Knob enabled={$states.globalLength} scale=0.005 resetValue={1.0} title="Shape Scale" min={0.05} max={1} step={0.01} bind:value={$length} func={sendLength} />
             <Knob enabled={$states.maxCells} resetValue={16} scale=0.25 title="Max Cells" min={1} max={32} step={1} bind:value={$maxCells} func={sendMaxCells} />
         </div>
     </div>
@@ -274,8 +269,8 @@
         display: grid;
         grid-template-rows: auto auto;
         gap: 15px;
-        border-left: 1px dotted #59a245;
-        border-right: 1px dotted #59a245;
+        border-left: 1px dotted #40ac47;
+        border-right: 1px dotted #40ac47;
         
         padding: 10px;
         align-items: center;
@@ -283,6 +278,7 @@
     }
     
     .container-title {
-        color: #59a245
+        color: #40ac47;
+        font-size: 10px;
     }
 </style>
