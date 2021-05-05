@@ -224,7 +224,7 @@
                 
     <div id='mirror' class='control-column-container'>
         <div class='control-row-top'>
-            <Knob enabled={$states.mirrorPoint} resetValue={8} scale=0.125 title="Mirror Point" min={0} max={15} bind:value={$mirrorPoint} func={sendMirrorPoint} />
+            <Knob enabled={$states.mirrorPoint} resetValue={8} scale=0.125 title="Mirror Point" min={1} max={15} bind:value={$mirrorPoint} func={sendMirrorPoint} />
         </div>
         <div class='control-row-bottom'>
             <BoxButton func={ () => mirrorWithPoint(grid, $mirrorPoint) } text="mirror H" />
