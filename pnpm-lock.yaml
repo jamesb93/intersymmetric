@@ -16,7 +16,7 @@ dependencies:
 
 devDependencies:
   '@sveltejs/adapter-static': 1.0.0-next.8
-  '@sveltejs/kit': 1.0.0-next.98_svelte@3.38.2+vite@2.2.4
+  '@sveltejs/kit': 1.0.0-next.99_svelte@3.38.2+vite@2.2.4
   svelte: 3.38.2
   vite: 2.2.4
 
@@ -42,8 +42,8 @@ packages:
     resolution: {integrity: sha512-goE3v68y+pn+fayPDJCCQ7W1QQpSMl86pZS9RvjuG64+TEI/PGsZwYR1RRgvwIiDqu33wBEHj+3ZYHEpJO/gwg==}
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.98_svelte@3.38.2+vite@2.2.4:
-    resolution: {integrity: sha512-WAbxMLAmgJ1dwtmRm46dXSYewIIs8ykjl3yWwdqdPrOBY420HQyrvBjMmh9OVyBaCRy/He5blnMWRFDKUqNQng==}
+  /@sveltejs/kit/1.0.0-next.99_svelte@3.38.2+vite@2.2.4:
+    resolution: {integrity: sha512-eLVo8/fE6DrNFRCx4fLU2MKolVhMPHlBkhA04kpsNaojC6PW9kW9w7DEpeK5WCYYzxhirvmABsUyw37pQfjZVA==}
     engines: {node: '>= 12.17.0'}
     hasBin: true
     peerDependencies:
@@ -505,8 +505,8 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
-  /postcss/8.2.13:
-    resolution: {integrity: sha512-FCE5xLH+hjbzRdpbRb1IMCvPv9yZx2QnDarBEYSN0N0HYk+TcXsEhwdFcFb+SRWOKzKGErhIEbBK2ogyLdTtfQ==}
+  /postcss/8.2.14:
+    resolution: {integrity: sha512-+jD0ZijcvyCqPQo/m/CW0UcARpdFylq04of+Q7RKX6f/Tu+dvpUI/9Sp81+i6/vJThnOBX09Quw0ZLOVwpzX3w==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       colorette: 1.2.2
@@ -595,8 +595,8 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  /standardized-audio-context/25.1.17:
-    resolution: {integrity: sha512-KZwU9OfgMkzy1XYPmiFNfdWVx3yTuvEjA4ByYWWIowzmU6asgQrK2ThyW//muk8Q7dADF20BROQGO17VQAzWdQ==}
+  /standardized-audio-context/25.1.19:
+    resolution: {integrity: sha512-D8bVM1KFYiIP/+adyXgry/NRMrLUtZ+s908/UXkILWEK5BfApnIHZ+FZ4jbGVmbIGzrQrt+I7nGHZHIzyG/IBg==}
     dependencies:
       '@babel/runtime': 7.14.0
       automation-events: 3.0.13
@@ -626,7 +626,7 @@ packages:
   /tone/14.7.77:
     resolution: {integrity: sha512-tCfK73IkLHyzoKUvGq47gyDyxiKLFvKiVCOobynGgBB9Dl0NkxTM2p+eRJXyCYrjJwy9Y0XCMqD3uOYsYt2Fdg==}
     dependencies:
-      standardized-audio-context: 25.1.17
+      standardized-audio-context: 25.1.19
       tslib: 2.2.0
     dev: false
 
@@ -640,7 +640,7 @@ packages:
     hasBin: true
     dependencies:
       esbuild: 0.9.7
-      postcss: 8.2.13
+      postcss: 8.2.14
       resolve: 1.20.0
       rollup: 2.47.0
     optionalDependencies:

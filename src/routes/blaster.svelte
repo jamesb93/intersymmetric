@@ -11,7 +11,6 @@
 
     socket.on('grid', x => {
         grid = x
-        console.log(grid)
     })
 
     function go() {

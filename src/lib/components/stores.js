@@ -1,10 +1,9 @@
 import { io } from "socket.io-client";
-import { writable, get } from 'svelte/store';
-import { browser } from '$app/env';
-import { createRoomID } from '$lib/components/utility.js';
+import { writable } from 'svelte/store';
 
 // Sockets
 let socketAddr = import.meta.env.PROD ? "wss://8f43.xyz:4300" : "ws://localhost:4300"
+
 export const socket = io(socketAddr);
 
 socket.on('connect', () => {

@@ -1,7 +1,6 @@
 <script>
     import { browser } from '$app/env';
     import { page } from '$app/stores';
-    console.log($page)
     import { socket, numUsers, workshopID, room } from "$lib/components/stores.js";
 	import { createRoomID } from '$lib/components/utility.js';
     import RoomPrompt from "$lib/components/RoomPrompt.svelte";
