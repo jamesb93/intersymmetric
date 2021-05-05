@@ -6,6 +6,8 @@
     import BoxButton from "$lib/components/BoxButton.svelte";
     import Clock from "$lib/components/Control/Clock.svelte";
 
+    import sampleList from "/static/sampleList.json"
+
     import { Sampler } from '$lib/rewire/sampler.js';
     
     import { 
@@ -42,7 +44,6 @@
     function sendMirrorPoint() { socket.emit('mirrorPoint', $mirrorPoint) };
     function sendMultiplier() { socket.emit('clock::multiplier', $clockMultiplierLookup) };
     function sendMaxCells() { socket.emit('maxCells', $maxCells) };
-    function sendPlaybackRate() { socket.emit('playbackRate', $playbackRate) };
     
     function updatePlayStatus(status) {
         play.set(status)
@@ -83,7 +84,7 @@
     
     let loop;
 
-    const numSamples = 86;
+    const numSamples = sampleList.samples.length;
     let buffers = [];
     let samplers = [];
 
@@ -92,11 +93,10 @@
     
     if (browser) {
         // Load Sounds to Buffers (we'll reuse these everywhere)
-        for (let i=0; i < numSamples; i ++) {
-            const url = '/rewire_samples/compressed/' + i + '.mp3';
-            const buf = new Tone.ToneAudioBuffer(url);
+        sampleList.samples.forEach(samplePath => {
+            const buf = new Tone.ToneAudioBuffer(samplePath);
             buffers.push(buf);
-        }
+        })
 
         Tone.loaded()
         .then(() => {

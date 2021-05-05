@@ -22,7 +22,6 @@
     }
 
     function updateSample(x) {
-        console.log($sampleSelectors[x])
         socket.emit('sampleSelectors', $sampleSelectors)
     }
 
@@ -83,7 +82,7 @@
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true} 
-            scale=0.05 min={0} max={85} 
+            scale=0.1 min={0} max={118} 
             bind:value={ $sampleSelectors[x] } 
             func={ () => updateSample(x) } 
             />

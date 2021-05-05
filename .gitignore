@@ -5,3 +5,4 @@ node_modules
 /functions
 *.wav
 .svelte-kit
+static/rewire_samples/compressed_old
