@@ -14,13 +14,36 @@ export const rotateGridColumn = (store, amt, column) => {
     sendGrid()
 }
 
-export const mirrorWithPoint = (store, point) => {
-    const arr = get(store)
-    const diff = Math.round(arr.length / 2) - point;
-    arr.rotate(diff);
-    const reflected = mirror(arr);
-    reflected.rotate(-diff);
-    store.set(reflected);
+export const mirrorWithPoint = (store, axis) => {
+    if (axis < 1) {
+        return
+    }
+    const grid = get(store);
+    let temp = new Array(grid.length).fill([]);
+    grid.forEach((row, i) => {
+        const slice = row.slice(0, axis);
+        const sliceRev = row.slice(0, axis).reverse();
+        // how many times can we copy the slice 
+        const how = Math.floor(row.length / (axis))
+        let mirrored = [];
+        for (let i=0; i < how; i++) {
+            if (i % 2 == 0) {
+                mirrored.push(slice)
+            } else {
+                mirrored.push(sliceRev)
+            }
+        }
+
+        mirrored = mirrored.flat();
+        const diff = row.length - mirrored.length;
+        if (diff != 0) {
+            const append = sliceRev.slice(0, diff);
+            mirrored.push(append);
+            mirrored = mirrored.flat();
+        }
+        temp[i] = mirrored;
+    })
+    store.set(temp);
     sendGrid(store);
 }
 
