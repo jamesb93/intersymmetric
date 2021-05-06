@@ -36,7 +36,7 @@
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={states.euclid} 
             scale=0.2 
-            title="pattern"
+            title="Pattern"
             showTitle={false}
             min={0} max={16} 
             bind:value={ $euclidSteps[x] } 
