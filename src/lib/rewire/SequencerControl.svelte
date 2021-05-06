@@ -89,7 +89,6 @@
     let samplers = null;
 
     let loaded = false;
-    let loadedCount = 0;
     let reverb, dac;
     if (browser) {
 
