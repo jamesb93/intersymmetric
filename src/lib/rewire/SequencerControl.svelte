@@ -229,8 +229,8 @@
     <div id='grid-transforms' class='control-column-container'>
         <span class='container-title'>Transforms</span>
         <BoxButton func={ () => invertGridVertical(grid) } text="Flip V" />
-        <BoxButton func={ () => randomiseGrid(grid) } text="randomise" />
-        <BoxButton func={ () => clearGrid(grid) } text="clear" />
+        <BoxButton func={ () => randomiseGrid(grid) } text="Randomise" />
+        <BoxButton func={ () => clearGrid(grid) } text="Clear" />
     </div>
                 
     <div id='mirror' class='control-column-container'>
@@ -238,14 +238,14 @@
             <Knob enabled={$states.mirrorPoint} resetValue={8} scale=0.125 title="Mirror Point" min={1} max={15} bind:value={$mirrorPoint} func={sendMirrorPoint} />
         </div>
         <div class='control-row-bottom'>
-            <BoxButton func={ () => mirrorWithPoint(grid, $mirrorPoint) } text="mirror H" />
+            <BoxButton func={ () => mirrorWithPoint(grid, $mirrorPoint) } text="Mirror H" />
         </div>
     </div>
                     
     <div id='other-knobs' class='control-column-container'>
         <div class='control-row-top'>
-            <Knob enabled={$states.offset} scale=0.125 title="start" min={1} max={16} bind:value={$offset.start} func={sendOffset} />
-            <Knob enabled={$states.offset} scale=0.125 title="end" min={1} max={16} bind:value={$offset.end} func={sendOffset} />
+            <Knob enabled={$states.offset} scale=0.125 title="Start" min={1} max={16} bind:value={$offset.start} func={sendOffset} />
+            <Knob enabled={$states.offset} scale=0.125 title="End" min={1} max={16} bind:value={$offset.end} func={sendOffset} />
         </div>
         <div class='control-row-bottom'>
             <Knob enabled={$states.globalVelocity} resetValue={1.0} scale=0.01 title="Velocity" min={0} max={1} step={0.01} bind:value={$velocity} func={sendVelocity} />

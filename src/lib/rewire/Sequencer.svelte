@@ -31,7 +31,7 @@
 
 <div class="sequencer">
     <div class="euclids">
-        <span class="knob-category">pattern</span>
+        <span class="knob-category">Pattern</span>
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={states.euclid} 
@@ -82,11 +82,11 @@
     {/if}
     </div>
     <div class="euclids" id="sample">
-        <span class="knob-category">sample</span>
+        <span class="knob-category">Sample</span>
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true}
-            title="sample"
+            title="Sample"
             showTitle={false}
             scale=0.1 min={0} max={117} 
             bind:value={ $sampleSelectors[x] } 
@@ -96,7 +96,7 @@
     </div>
 
     <div class="euclids" id="playback-rate">
-        <span class="knob-category">rate</span>
+        <span class="knob-category">Pitch</span>
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true}
@@ -112,12 +112,12 @@
     </div>
 
     <div class="euclids" id="track-env">
-        <span class="knob-category">length</span>
+        <span class="knob-category">Shape</span>
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true}
             scale=0.05
-            title="length"
+            title="shape"
             showTitle={false}
             resetValue={1.0}
             step=0.01 min={0.1} max={10.0} 
