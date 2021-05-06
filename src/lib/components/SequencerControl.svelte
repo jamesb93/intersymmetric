@@ -193,8 +193,6 @@
     }, "16n").start(0);
 }
 
-
-
 </script>
 
 <div id="all-controls">
