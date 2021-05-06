@@ -1,7 +1,12 @@
 <script>
     import { browser } from '$app/env';
     import { page } from '$app/stores';
-    import { socket, numUsers, workshopID, room } from "$lib/components/stores.js";
+    import { 
+        socket, 
+        numUsers, 
+        workshopID, 
+        room, recentParamValue, recentParamName
+    } from "$lib/components/stores.js";
 	import { createRoomID } from '$lib/components/utility.js';
     import RoomPrompt from "$lib/components/RoomPrompt.svelte";
 	import Editor from "$lib/components/Editor.svelte";
@@ -35,13 +40,24 @@
         <span>Users: {$numUsers}</span>
     </div>
     {#if $page.path !== '/rewire'}
-    <Editor />
+        <Editor />
     {/if}
+    <div id="recent-params">
+        {$recentParamName}
+        {parseFloat($recentParamValue).toFixed(2)}
+    </div>
 </header>
 
 <div class="line"></div>
 
 <style>
+    #recent-params {
+        display: flex;
+        flex-direction: column;
+        padding-left: 40px;
+        width: 100px;
+    }
+
     header {
         padding-top: 12px;
         padding-bottom: 12px;

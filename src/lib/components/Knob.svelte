@@ -9,6 +9,7 @@
     >
     <svg width='{WIDTH}px' height='{HEIGHT}px' >
         <!-- Title -->
+        {#if showTitle}
         <text
             x={MID_X}
             y={HEIGHT / 7}
@@ -18,6 +19,7 @@
             >
             {title}
         </text>
+        {/if}
         <!-- Arc -->
         <path
             d={rangePath}
@@ -62,13 +64,14 @@
 
 
 <script>
+    import { onMount } from 'svelte';
+    import { recentParamName, recentParamValue } from '$lib/components/stores.js';
     function resetHandler() {
         if (resetValue !== null) {
             value = resetValue
             func()
         }
     }
-    import { onMount } from 'svelte';
     const clip = (i, low, high) => {
         return Math.min(Math.max(i, low), high)
     }
@@ -89,6 +92,7 @@
     let interval = null;
     
     export let resetValue = null;
+    export let showTitle = true;
     export let title = "";
     export let value;
     export let max = 100;
@@ -142,9 +146,10 @@
         internal = clip(internal, min, max);
         value = internal
         value = Math.round((value - min) / step) * step + min;
-        if (pv !== value)
+        if (pv !== value) 
             func()
-        pv = internal
+            pv = internal
+            $recentParamValue = value
     }
     
     let anchor = null;
@@ -159,6 +164,7 @@
     
     const downHandler = (e) => {
         if (enabled) {
+            $recentParamName = title;
             down=true;
             primaryColor = '#5dee67';
             anchor = e.screenY;
