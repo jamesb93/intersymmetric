@@ -90,8 +90,11 @@
 
     let loaded = false;
     let loadedCount = 0;
-    
+    let reverb, dac;
     if (browser) {
+
+        reverb = new Tone.Reverb(0.4).toDestination();
+        dac = new Tone.Gain(1.0).toDestination();
         // Load Sounds to Buffers (we'll reuse these everywhere)
         sampleList.samples.forEach(samplePath => {
             const buf = new Tone.ToneAudioBuffer(samplePath);
@@ -102,6 +105,7 @@
         .then(() => {
             for (let i = 0; i < 6; i++) {
                 const x = new Sampler(buffers);
+                x.output.fan(reverb, dac);
                 samplers.push(x);
             }
             loaded = true;

@@ -4,9 +4,9 @@ import { Env } from '$lib/instruments/envelope.js';
 class Sampler {
     constructor(buffers) {
         this.players = [];
+        this.output = new Tone.Gain(1.0);
         this.envelope = new Env(0.01, 1.0);
-        this.out = new Tone.Gain(1.0).toDestination();
-        this.envelope.out.connect(this.out);
+        this.envelope.out.connect(this.output);
         
         for (let i=0; i < buffers.length; i++) {
             const sampler = new Tone.Player({
