@@ -100,7 +100,7 @@
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true}
-            title="rate"
+            title="pitch"
             showTitle={false}
             resetValue={1.0}
             scale=0.1
