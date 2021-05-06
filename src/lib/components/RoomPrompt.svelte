@@ -17,28 +17,30 @@
 </script>
 
 <div class="prompt" >
-    <div class="room-code">
-        <div id="room-name">
-            {#if $room !== undefined}
-                {$room}
-            {/if}
-        </div>
-        <input 
-        type="text" 
-        class:pulsate={!everUsed} 
-        bind:value={code} 
-        on:change={handleClick} 
-        placeholder="enter room" 
-        class="code-entry"
-        />
+    <div id="room-name">
+        {#if $room !== undefined}
+            {$room}
+        {/if}
     </div>
+    <input 
+    type="text" 
+    class:pulsate={!everUsed} 
+    bind:value={code} 
+    on:change={handleClick} 
+    placeholder="enter room" 
+    class="code-entry"
+    />
 </div>
 
 <style>
+    .prompt {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+    }
     #room-name {
-        width: 30px;
         height: 13px;
-        padding-bottom: 4px;
+        padding-bottom: 2px;
         text-align: center;
     }
 
@@ -48,27 +50,14 @@
         font-family: inherit;
         font-size: inherit;
         padding: none;
-        width: auto;
+        align-self: center;
         background: rgba(243,243,246,255);
         border: none;
         font-style: italic;
     }
-    
-    .prompt {
-        display: flex;
-        flex-direction: row;
-        margin: 0 auto;
-        align-self: center;
-    }
 
     .code-entry {
         text-align: center;
-    }
-
-    .room-code {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
     }
 
     .code-entry:focus {
