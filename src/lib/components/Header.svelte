@@ -27,6 +27,8 @@
             room.set(storedRoom)
         }
     }
+
+    console.log("%c Intersymmetric Version 0.1", 'background: #222; color: #bada55');
 </script>
 
 <header>
