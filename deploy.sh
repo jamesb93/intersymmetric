@@ -1,3 +1,3 @@
-pnpm run build
-rsync -a dist/ /var/www/distrib.xyz/html
+yarn run build
+rsync -a build/ /var/www/distrib.xyz/html
 systemctl restart nginx
