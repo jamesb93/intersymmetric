@@ -22,7 +22,7 @@
             storedRoom = ''
         }
 
-        if (storedRoom !== null || storedRoom !== '') {
+        if (storedRoom !== null && storedRoom !== '') {
             socket.emit('roomJoin', createRoomID($workshopID, storedRoom));
             room.set(storedRoom)
         }
