@@ -86,7 +86,7 @@
 
     const numSamples = sampleList.samples.length;
     let buffers = [];
-    let samplers = [];
+    let samplers = null;
 
     let loaded = false;
     let loadedCount = 0;
@@ -102,29 +102,30 @@
         })
 
         Tone.loaded()
-        .then(() => {
-            for (let i = 0; i < 6; i++) {
-                const x = new Sampler(buffers);
-                x.output.fan(reverb, dac);
-                samplers.push(x);
-            }
-            loaded = true;
+            .then(() => {
+                samplers = [];
+                for (let i = 0; i < 6; i++) {
+                    const x = new Sampler(buffers);
+                    x.output.fan(reverb, dac);
+                    samplers.push(x);
+                }
+                loaded = true;
+            })
+    }
+
+    $: if (samplers !== null) {
+            samplers.forEach((sampler, i) => {
+            sampler.envelope.release = $length * $trackLengths[i];
         })
     }
 
-    $: samplers.forEach((sampler, i) => {
-        sampler.envelope.release = $length * $trackLengths[i];
-    })
-
-    $: samplers.forEach((sampler,i) => {
-        sampler.players.forEach(player => {
-            player.playbackRate = $trackRates[i] * $playbackRate;
+    $: if (samplers !== null) {
+        samplers.forEach((sampler,i) => {
+            sampler.players.forEach(player => {
+                player.playbackRate = $trackRates[i] * $playbackRate;
+            })
         })
-    })
-
-    $: samplers.forEach((sampler, i) => {
-        sampler.out.gain.rampTo($trackGains[i]);
-    })
+    }
 
     if (browser) {
         loop = new Tone.Loop(time => {
