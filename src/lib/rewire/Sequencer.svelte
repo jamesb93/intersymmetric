@@ -100,7 +100,7 @@
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true}
-            title="pitch"
+            title="Pitch"
             showTitle={false}
             resetValue={1.0}
             scale=0.1
@@ -117,7 +117,7 @@
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true}
             scale=0.05
-            title="shape"
+            title="Shape"
             showTitle={false}
             resetValue={1.0}
             step=0.01 min={0.1} max={10.0} 
@@ -129,14 +129,16 @@
 </div>
 
 <style>
-    .sequencer {
+    /* .sequencer {
         display: flex;
         flex-direction: row;
         margin: 0 auto;
-    }
+    } */
 
-    .knob-category {
-        font-size: 10px;
+    .sequencer {
+        display: grid;
+        grid-template-columns: repeat(5, auto);
+        justify-content: center;
     }
 
     .euclids {
@@ -160,5 +162,9 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
+    }
+
+    .knob-category {
+        font-size: 10px;
     }
 </style>
