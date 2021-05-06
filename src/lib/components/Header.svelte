@@ -39,7 +39,7 @@
 </div>
     <RoomPrompt />
     <div>
-        <span>Users: {$numUsers}</span>
+        <span>Participants: {$numUsers}</span>
     </div>
     {#if $page.path !== '/rewire'}
         <Editor />
