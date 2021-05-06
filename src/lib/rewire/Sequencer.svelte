@@ -82,11 +82,11 @@
     {/if}
     </div>
     <div class="euclids" id="sample">
-        <span class="knob-category">Sample</span>
+        <span class="knob-category">Sound</span>
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true}
-            title="Sample"
+            title="Sound"
             showTitle={false}
             scale=0.1 min={0} max={117} 
             bind:value={ $sampleSelectors[x] } 
