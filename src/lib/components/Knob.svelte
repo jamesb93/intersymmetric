@@ -146,7 +146,6 @@
         if (internal === null) {
             internal = value
         }
-        console.log(title, internal)
         internal += change * scale;
         internal = clip(internal, min, max);
         value = internal
