@@ -84,7 +84,8 @@
     
     let loop;
 
-    const numSamples = sampleList.samples.length;
+    // const numSamples = sampleList.samples.length;
+    const numSamples = 118;
     let buffers = [];
     let samplers = null;
 
@@ -95,10 +96,16 @@
         reverb = new Tone.Reverb(0.4).toDestination();
         dac = new Tone.Gain(1.0).toDestination();
         // Load Sounds to Buffers (we'll reuse these everywhere)
-        sampleList.samples.forEach(samplePath => {
-            const buf = new Tone.ToneAudioBuffer(samplePath);
+        // sampleList.samples.forEach(samplePath => {
+        //     console.log(samplePath)
+        //     const buf = new Tone.ToneAudioBuffer(samplePath);
+        //     buffers.push(buf);
+        // })
+        for (let i=1; i <= numSamples; i++) {
+            const url = '/rewire_samples/compressed/' +i+ '.mp3';
+            const buf = new Tone.ToneAudioBuffer(url)
             buffers.push(buf);
-        })
+        }
 
         Tone.loaded()
             .then(() => {
