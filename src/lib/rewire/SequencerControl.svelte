@@ -260,7 +260,6 @@
     #all-controls {
         display: grid;
         grid-template-columns: auto auto auto auto;
-        padding-bottom: 30px;
         margin: 0 auto;
     }
     
