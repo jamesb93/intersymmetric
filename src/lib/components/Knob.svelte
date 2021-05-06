@@ -99,6 +99,7 @@
     export let min = 0;
     export let showValue = true;
     export let altValue = null;
+    export let scale = 1.0;
     
     export let enabled = true;
     export let step = 1;
@@ -138,10 +139,14 @@
     $: largeArc = Math.abs(zeroRadians - valueRadians) < Math.PI ? 0 : 1;
     $: sweep = valueRadians > zeroRadians ? 0 : 1;
     
-    export let scale = 1.0;
-    let internal = value;
+    let internal = null;
     let pv = null;
     const updatePosition = (change) => {
+        // This way it always forces it to match the bound value when it is first moved.
+        if (internal === null) {
+            internal = value
+        }
+        console.log(title, internal)
         internal += change * scale;
         internal = clip(internal, min, max);
         value = internal
