@@ -18,7 +18,6 @@ class Sampler {
         }
     }
     trigger(time, sampleIdx, velocity, duration) {
-        console.log(duration)
         const play = this.players[sampleIdx];
         this.envelope.trigger(time, velocity)
         play.start(time, 0.0, duration)
