@@ -9,7 +9,6 @@
     } from "$lib/components/stores.js";
 	import { createRoomID } from '$lib/components/utility.js';
     import RoomPrompt from "$lib/components/RoomPrompt.svelte";
-	import Editor from "$lib/components/Editor.svelte";
 
     let storedRoom = null;
 
@@ -36,40 +35,88 @@
         <span>Intersymmetric Works</span>
         <br>
         <span>Grid Sequencer 01</span>
-</div>
-    <RoomPrompt />
-    <div>
-        <span>Participants: {$numUsers}</span>
     </div>
-    {#if $page.path !== '/rewire'}
-        <Editor />
-    {/if}
-    <div id="recent-params">
-        {$recentParamName}
-        {parseFloat($recentParamValue).toFixed(2)}
+    <div id="room">
+        <RoomPrompt />
+    </div>
+    <div id="other">
+        <span id="participants">Participants: {$numUsers}</span>
+        <div id="recent-param">
+            <span id="param-name">{$recentParamName}</span>
+            <div id="recent-value">
+                {#if $recentParamName !== ""}
+                {parseFloat($recentParamValue).toFixed(2)}
+                {/if}
+            </div>
+        </div>
     </div>
 </header>
 
 <div class="line"></div>
 
 <style>
-    #recent-params {
-        display: flex;
-        flex-direction: column;
-        padding-left: 40px;
+    header {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        font-size: 10px;
+        width: 100%;
+    }
+
+    @media screen and (min-width: 1440px) {
+        header {
+            width: 50%;
+            margin: 0 auto;
+        }
+    }
+
+    #title {
+        justify-self: left;
+        margin-left: 30px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    #room {
+        justify-self: center;
+        max-width: 50px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    #other {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 50px;
+        justify-self: right;
+        margin-right: 30px;
+        min-width: 100px;
         width: 100px;
     }
 
-    header {
+    #participants {
         padding-top: 12px;
         padding-bottom: 12px;
-        max-width: 40%;
-        min-width: 30%;
-        margin: 0 auto;
+    }
+
+    #param-name {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        width: 75px;
+        text-align: right;
+    }
+    
+    #recent-param {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
-        font-size: 10px;
+        gap: 10px;
+    }
+
+    #recent-value {
+        text-align: center;
+        background-color: #e4e4e3;
+        font-size: 18px;
+        padding-top: 12px;
+        min-width: 75px;
     }
 
     .line {
