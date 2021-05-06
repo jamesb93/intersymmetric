@@ -88,7 +88,7 @@
             enabled={true}
             title="sample"
             showTitle={false}
-            scale=0.1 min={0} max={118} 
+            scale=0.1 min={0} max={117} 
             bind:value={ $sampleSelectors[x] } 
             func={ () => updateSample(x) } 
             />
