@@ -1,6 +1,5 @@
 <script>
     import { browser } from '$app/env';
-    import { page } from '$app/stores';
     import { 
         socket, 
         numUsers, 
@@ -45,21 +44,26 @@
             <span id="param-name">{$recentParamName}</span>
             <div id="recent-value">
                 {#if $recentParamName !== ""}
-                {parseFloat($recentParamValue).toFixed(2)}
+                    {parseFloat($recentParamValue).toFixed(2)}
                 {/if}
             </div>
         </div>
+
     </div>
+
 </header>
 
 <div class="line"></div>
 
 <style>
     header {
-        display: grid;
-        grid-template-columns: auto auto auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 100px;
         font-size: 10px;
-        width: 100%;
+        margin: 0 auto;
+        width: 90%;
     }
 
     @media screen and (min-width: 1440px) {
@@ -70,26 +74,19 @@
     }
 
     #title {
-        justify-self: left;
-        margin-left: 30px;
         padding-top: 12px;
         padding-bottom: 12px;
     }
 
     #room {
         justify-self: center;
-        max-width: 50px;
         padding-top: 12px;
-        padding-bottom: 12px;
+        padding-bottom: 12px;        
     }
 
     #other {
         display: grid;
         grid-template-columns: auto auto;
-        gap: 50px;
-        justify-self: right;
-        margin-right: 30px;
-        min-width: 100px;
         width: 100px;
     }
 
