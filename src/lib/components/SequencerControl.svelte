@@ -148,7 +148,7 @@
             if ($clockMode === "forward") {
                 internalPos += clockMultiplier
                 internalPos = wrap(internalPos, $offset.start-1, $offset.end)
-                pos = Math.round(internalPos)
+                pos = Math.floor(internalPos)
                 
             } else if ($clockMode === "rebound") {
                 
@@ -170,7 +170,7 @@
                 }   
             }
             internalPos = wrap(internalPos, $offset.start-1, $offset.end)
-            pos = Math.round(internalPos);
+            pos = Math.floor(internalPos);
             
         } else if ($clockMode === "wander") {
             if (pos === $offset.start-1) {
@@ -187,7 +187,7 @@
                 }
             }
             internalPos = wrap(internalPos, $offset.start-1, $offset.end);
-            pos = Math.round(internalPos);
+            pos = Math.floor(internalPos);
             pos = Math.min(Math.max(pos, $offset.start-1), $offset.end-1);
         }
     }, "16n").start(0);
