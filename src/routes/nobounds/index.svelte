@@ -18,7 +18,6 @@
 <Header />
 
 <main>
-	<!-- {$recentParamName} | {$recentParamValue} -->
 	{#if $room !== "" && browser}
 		<div class="main-layout" transition:fade="{{duration: 300}}">
 			<Grid />
@@ -33,7 +32,6 @@
 		</div>
 	{/if}
 </main>
-
 	
 <style>
 	.main-layout {
