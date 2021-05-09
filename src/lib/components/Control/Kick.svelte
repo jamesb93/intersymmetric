@@ -4,7 +4,6 @@
     import VelocityList from "../VelocityList.svelte";
     import ControlTitle from "./ControlTitle.svelte";
     import ControlContainer from "./ControlContainer.svelte";
-    import Presets from "./Presets.svelte";
     import { rng } from "./rng.js";
     import { kick } from '$lib/instruments/ensemble.js';
     import { freqMap } from "$lib/components/utility.js";
