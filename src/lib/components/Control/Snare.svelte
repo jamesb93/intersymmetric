@@ -1,15 +1,15 @@
 <script>
-    import { socket, params, length, pitchOffset } from "../stores.js";
+    import { socket, params, length, pitchOffset, trackPitch  } from "$lib/components/stores.js";
     import { snare } from "$lib/instruments/ensemble.js";
     import ASlider from "../ASlider.svelte";
     import VelocityList from "../VelocityList.svelte";
     import ControlTitle from "./ControlTitle.svelte";
     import ControlContainer from "./ControlContainer.svelte";
-    import Presets from "./Presets.svelte";
-    import { rng } from "./rng.js";
     import { freqMap } from "../utility.js";
     
-    $: snare.filter.frequency.rampTo($params.snare.frequency * freqMap($pitchOffset), 0.1);
+    $: snare.filter.frequency.rampTo(
+        $params.snare.frequency * freqMap($pitchOffset + $trackPitch[1]), 0.1
+    );
     $: snare.env.attack = $params.snare.attack * $length;
     $: snare.env.decay = $params.snare.decay * $length;
     $: snare.env.release = $params.snare.release * $length;

@@ -1,5 +1,5 @@
 <script>
-    import { socket, params, length, pitchOffset } from "../stores.js";
+    import { socket, params, length, pitchOffset, trackPitch } from "../stores.js";
     import ASlider from "../ASlider.svelte";
     import VelocityList from "../VelocityList.svelte";
     import ControlTitle from "./ControlTitle.svelte";
@@ -10,7 +10,7 @@
     import { freqMap } from "$lib/components/utility.js";
 
     $: kick.membrane.octaves = $params.kick.octaves
-    $: kick.membrane.frequency.rampTo($params.kick.frequency * freqMap($pitchOffset), 0.1)
+    $: kick.membrane.frequency.rampTo($params.kick.frequency * freqMap($pitchOffset+$trackPitch[0]), 0.1)
     $: kick.membrane.envelope.attack = $params.kick.attack * $length;
     $: kick.membrane.envelope.sustain = $params.kick.sustain;
     $: kick.membrane.envelope.decay = $params.kick.decay * $length;

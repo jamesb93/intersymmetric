@@ -1,17 +1,19 @@
 <script>
-    import { socket, params, length, pitchOffset } from "../stores.js";
+    import { socket, params, length, pitchOffset, trackPitch } from "../stores.js";
     import ASlider from "../ASlider.svelte";
     import VelocityList from "../VelocityList.svelte";
     import ControlTitle from "./ControlTitle.svelte";
     import ControlContainer from "./ControlContainer.svelte";
-    import Presets from "./Presets.svelte";
-    import { rng } from "./rng.js";
     import { freqMap } from "../utility.js";
 
     export let instrument;
     export let id;
 
-    $: instrument.source.frequency.rampTo($params[id].frequency * freqMap($pitchOffset), 0.1);
+    const pitchIndex = id === 'metal1' ? 2 : 3
+
+    $: instrument.source.frequency.rampTo(
+        $params[id].frequency * freqMap($pitchOffset+$trackPitch[pitchIndex]), 0.1
+    );
     $: instrument.source.harmonicity = $params[id].harmonicity;
     $: instrument.source.modulationIndex = $params[id].modulationIndex;
     $: instrument.source.resonance = $params[id].resonance;
