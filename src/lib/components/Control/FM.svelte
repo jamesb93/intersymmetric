@@ -47,13 +47,13 @@
         socket.emit('params::'+id, 'fm3to1', $params[id].fm3to1);
     };
     const uc1env = () => {
-        socket.emit('params::'+id, 'release', $params[id].c1release);
+        socket.emit('params::'+id, 'c1release', $params[id].c1release);
     };
     const uc2env = () => {
-        socket.emit('params::'+id, 'release', $params[id].c2release);
+        socket.emit('params::'+id, 'c2release', $params[id].c2release);
     };
     const uc3env = () => {
-        socket.emit('params::'+id, 'release', $params[id].release);
+        socket.emit('params::'+id, 'c3release', $params[id].c3release);
     };
     const uop1gain = () => {
         socket.emit('params::'+id, 'op1gain', $params[id].op1gain);
@@ -96,5 +96,4 @@
     <ASlider title="OP2 Gain" min="0" max="1" step="0.001" bind:value={$params[id].op2gain} func={uop2gain} />
     <ASlider title="OP3 Gain" min="0" max="1" step="0.001" bind:value={$params[id].op3gain} func={uop3gain} />
     <VelocityList id={id} bind:value={$params[id].velocityList}/>
-    <!-- <Presets bind:data={$params} key={id} /> -->
 </ControlContainer>
