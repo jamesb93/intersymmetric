@@ -6,7 +6,7 @@
     import { shiftColumnDown, shiftColumnUp, rotateGridColumn } from '$lib/grid/transforms.js';
     import { 
         socket, states, grid, gridValid, euclidSteps, 
-        sampleSelectors, trackRates, trackLengths, recentSample
+        sampleSelectors, trackRates, trackLengths,
     } from '$lib/components/stores.js';
     import { getPattern } from "$lib/components/euclid.js";
 
@@ -129,12 +129,6 @@
 </div>
 
 <style>
-    /* .sequencer {
-        display: flex;
-        flex-direction: row;
-        margin: 0 auto;
-    } */
-
     .sequencer {
         display: grid;
         grid-template-columns: repeat(5, auto);
