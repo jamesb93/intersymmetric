@@ -99,6 +99,16 @@ socket.on('trackLengths', x => trackLengths.set(x));
 export const playbackRate = writable(1.0);
 socket.on('playbackRate', x => playbackRate.set(x));
 
+// No Bounds MetaData
+export const trackPitch = writable( new Array(6).fill(0.0) );
+socket.on('trackPitch', x => trackPitch.set(x));
+
+export const trackShape = writable( new Array(6).fill(0.5) );
+socket.on('trackShape', x => trackShape.set(x));
+
+export const trackSound = writable( new Array(6).fill(0.5) );
+socket.on('trackSound', x => trackSound.set(x));
+
 // Synthesiser Data
 export const params = writable({
     snare : {
