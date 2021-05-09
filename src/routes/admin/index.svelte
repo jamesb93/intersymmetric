@@ -1,7 +1,7 @@
 <script>
-    import RoomPrompt from './_components/RoomPrompt.svelte';
-    import AdminControl from './_components/AdminControl.svelte';
+    import Header from '$lib/components/Header.svelte';
+    import AdminControl from './AdminControl.svelte';
 </script>
- 
-<RoomPrompt />
+
+<Header />
 <AdminControl />
