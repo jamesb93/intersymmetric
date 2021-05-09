@@ -7,7 +7,7 @@
     let prePos = 0;
 </script>
 
-<div class='container'>
+<div>
     <SequencerControl bind:pos={pos} bind:prePos={prePos} />
     <Sequencer bind:prePos={prePos} />
 </div>
