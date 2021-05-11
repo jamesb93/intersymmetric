@@ -11,7 +11,7 @@
 <div class="container">
     <button 
         class:select="{value === 'forward'}"
-        on:click={() => handleClick('forward')}
+        on:click={ () => handleClick('forward') }
     >
         <span id="text" class:select-text={value==='forward'}>
             Forward
@@ -20,7 +20,7 @@
 
     <button 
         class:select="{value === 'rebound'}"
-        on:click={() => handleClick('rebound')}
+        on:click={ () => handleClick('rebound') }
     >
         <span id="text" class:select-text={value==='rebound'}>
             Rebound
@@ -29,7 +29,7 @@
 
     <button 
         class:select="{value === 'wander'}"
-        on:click={() => handleClick('wander')}
+        on:click={ () => handleClick('wander') }
     >
         <span id="text" class:select-text={value==='wander'}>
             Wander
@@ -69,7 +69,7 @@
     }
 
     #text {
-        font-family: 'Space Mono', monospace;
+        font-family: var(--font);
         color: black;
         font-size: 10px;
         text-align: center;
