@@ -37,7 +37,7 @@
         user-select: none;
         text-align: center;
         font-size: 10px;
-        font-family: 'Space Mono', monospace;
+        font-family: var(--font);
     }
     .button {
         border: 0;

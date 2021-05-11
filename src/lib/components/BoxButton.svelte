@@ -29,7 +29,7 @@
     }
 
     #text {
-        font-family: 'Space Mono', monospace;
+        font-family: var(--font);
         color: black;
         font-size: 10px;
         text-align: center;

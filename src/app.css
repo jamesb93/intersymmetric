@@ -4,7 +4,7 @@
 }
 
 :root {
-	--font: 'Space Mono', monospace;
+	--font: 'Space Mono', 'Courier New', Courier, monospace
 }
 
 text {

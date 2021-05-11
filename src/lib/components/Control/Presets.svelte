@@ -75,8 +75,7 @@
         background-color: rgb(175, 175, 175);
     }
     .title {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-	    /* font-family: 'Major Mono Display', monospace; */
+        font-family: var(--font);
         color: grey;
         font-size: 14px;
     }

@@ -49,7 +49,7 @@
     .numbox {
         margin: 5px;
         width: 50%;
-        font-family: 'Space Mono', monospace;
+        font-family: var(--font);
     }
     .pad {
         padding-top: 10px;
@@ -67,7 +67,7 @@
     }
     
     .text {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family: var(--font);
         font-size: 10px;
         color: grey;
     }

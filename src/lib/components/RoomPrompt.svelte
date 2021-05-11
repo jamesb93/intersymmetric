@@ -45,9 +45,8 @@
     }
 
     input[type=text] {
-        font-family: 'Courier Prime', monospace;
+        font-family: var(--font);
         display: inline;
-        font-family: inherit;
         font-size: inherit;
         padding: none;
         align-self: center;

@@ -31,8 +31,7 @@
     }
     .select-text {
         color: whitesmoke;
-        /* font-family: 'VT323', monospace; */
-    	font-family: 'Major Mono Display', monospace;
+    	font-family: var(--font);
         color: grey;
         font-size: 14px;
     }
