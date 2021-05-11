@@ -4,21 +4,21 @@ specifiers:
   '@sveltejs/adapter-static': next
   '@sveltejs/kit': next
   d3: ^6.7.0
-  socket.io-client: ^4.0.1
+  socket.io-client: ^4.1.0
   svelte: ^3.38.2
   tone: ^14.7.77
-  vite: ^2.2.4
+  vite: ^2.3.0
 
 dependencies:
   d3: 6.7.0
-  socket.io-client: 4.0.2
+  socket.io-client: 4.1.0
   tone: 14.7.77
 
 devDependencies:
   '@sveltejs/adapter-static': 1.0.0-next.9
-  '@sveltejs/kit': 1.0.0-next.102_svelte@3.38.2
+  '@sveltejs/kit': 1.0.0-next.105_svelte@3.38.2
   svelte: 3.38.2
-  vite: 2.2.4
+  vite: 2.3.0
 
 packages:
 
@@ -42,25 +42,25 @@ packages:
     resolution: {integrity: sha512-yqZ+4dzi+2+2jDPHCrI7WrLdXyQ/0U56a7aFdepmodpvpxhazF203D1ez+AtTo27FjMmHjfI+q0O2FivUOosxg==}
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.102_svelte@3.38.2:
-    resolution: {integrity: sha512-zLCPiKguhN3LjOTnAqudYm9uhkc3O1ELAV8SkXvs1O/a7hWSMFlbuF0aWXE8g6f79aCKjihd29RrdFkLnaZrog==}
+  /@sveltejs/kit/1.0.0-next.105_svelte@3.38.2:
+    resolution: {integrity: sha512-bmo5OD5cLyxk1DWE0Boj6NOXI4CviE93WCcdTpLpAXi8l/JQIk38o/lCbtm+edmdYdEI+J6TuseU2zTa+bA6cg==}
     engines: {node: '>= 12.17.0'}
     hasBin: true
     peerDependencies:
       svelte: ^3.38.2
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 1.0.0-next.9_svelte@3.38.2+vite@2.2.4
+      '@sveltejs/vite-plugin-svelte': 1.0.0-next.10_svelte@3.38.2+vite@2.3.0
       cheap-watch: 1.0.3
       sade: 1.7.4
       svelte: 3.38.2
-      vite: 2.2.4
+      vite: 2.3.0
     transitivePeerDependencies:
       - rollup
       - supports-color
     dev: true
 
-  /@sveltejs/vite-plugin-svelte/1.0.0-next.9_svelte@3.38.2+vite@2.2.4:
-    resolution: {integrity: sha512-ySB/GJsZV3h3jqjq5WIiaxVFkJK6vqtG9gS7Iw6SfUH9ZiFNw5JjQF69g68j9cNep3q4yRIYiG5/pI3YIdXEuA==}
+  /@sveltejs/vite-plugin-svelte/1.0.0-next.10_svelte@3.38.2+vite@2.3.0:
+    resolution: {integrity: sha512-ImvxbhPePm2hWNTKBSA3LHAYGwiEjHjvvgfPLXm4R87sfZ+BMXql9jBmDpzUC/URBLT4BB3Jxos/i523qkJBHg==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       svelte: ^3.37.0
@@ -75,7 +75,7 @@ packages:
       source-map: 0.7.3
       svelte: 3.38.2
       svelte-hmr: 0.14.3_svelte@3.38.2
-      vite: 2.2.4
+      vite: 2.3.0
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -92,9 +92,9 @@ packages:
       color-convert: 2.0.1
     dev: true
 
-  /automation-events/3.0.13:
-    resolution: {integrity: sha512-9V51BbdJiwMEeN8efkCwcMEWP+X7w7+TcJPqiugYLhw6wrYvd5QXQO2Py0xbXW0lZDEUhrWKZbkeCz0yOHbyyQ==}
-    engines: {node: '>=10.15.3'}
+  /automation-events/4.0.0:
+    resolution: {integrity: sha512-DcS6qMkMFlh5ebcJG8/fbVDOC8iyXiltVWk1lBzjmwmpFIvc4eoF2fzSlYoMuBKUI+Adx2NNNKIHO1mHlr3XiA==}
+    engines: {node: '>=12.20.1'}
     dependencies:
       '@babel/runtime': 7.14.0
       tslib: 2.2.0
@@ -390,8 +390,8 @@ packages:
     resolution: {integrity: sha512-WNPWi1IRKZfCt/qIDMfERkDp93+iZEmOxN2yy4Jg+Xhv8SLk2UTqqbe1sfiipn0and9QrE914/ihdx82Y/Giag==}
     dev: false
 
-  /engine.io-client/5.0.1:
-    resolution: {integrity: sha512-CQtGN3YwfvbxVwpPugcsHe5rHT4KgT49CEcQppNtu9N7WxbPN0MAG27lGaem7bvtCFtGNLSL+GEqXsFSz36jTg==}
+  /engine.io-client/5.1.1:
+    resolution: {integrity: sha512-jPFpw2HLL0lhZ2KY0BpZhIJdleQcUO9W1xkIpo0h3d6s+5D6+EV/xgQw9qWOmymszv2WXef/6KUUehyxEKomlQ==}
     dependencies:
       base64-arraybuffer: 0.1.4
       component-emitter: 1.3.0
@@ -415,8 +415,8 @@ packages:
       base64-arraybuffer: 0.1.4
     dev: false
 
-  /esbuild/0.9.7:
-    resolution: {integrity: sha512-VtUf6aQ89VTmMLKrWHYG50uByMF4JQlVysb8dmg6cOgW8JnFCipmz7p+HNBl+RR3LLCuBxFGVauAe2wfnF9bLg==}
+  /esbuild/0.11.20:
+    resolution: {integrity: sha512-QOZrVpN/Yz74xfat0H6euSgn3RnwLevY1mJTEXneukz1ln9qB+ieaerRMzSeETpz/UJWsBMzRVR/andBht5WKw==}
     hasBin: true
     requiresBuild: true
     dev: true
@@ -467,8 +467,8 @@ packages:
     resolution: {integrity: sha512-lDB5YccMydFBtasVtxnZ3MRBHuaoE8GKsppq+EchKL2U4nK/DmEpPHNH8MZe5HkMtpSiTSOZwfN0tzYjO/lJEw==}
     dev: false
 
-  /is-core-module/2.3.0:
-    resolution: {integrity: sha512-xSphU2KG9867tsYdLD4RWQ1VqdFl4HTO9Thf3I/3dLEfr0dbPTWKsuCKrgqMljg4nPE+Gq0VCnzT3gr0CyBmsw==}
+  /is-core-module/2.4.0:
+    resolution: {integrity: sha512-6A2fkfq1rfeQZjxrZJGerpLCTHRNEBiSgnu0+obeJpEPZRUooHgsizvzv0ZjJwOz3iWIHdJtVWJ/tmPr3D21/A==}
     dependencies:
       has: 1.0.3
     dev: true
@@ -481,8 +481,8 @@ packages:
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
 
-  /nanoid/3.1.22:
-    resolution: {integrity: sha512-/2ZUaJX2ANuLtTvqTlgqBQNJoQO398KyJgZloL0PZkC0dpysjncRUPsFe3DUPzz/y3h+u7C46np8RMuvF3jsSQ==}
+  /nanoid/3.1.23:
+    resolution: {integrity: sha512-FiB0kzdP0FFVGDKlRLEQ1BgDzU87dy5NnzjeW9YZNt+/c3+q82EQDUwniSAUxp/F0gFNI1ZhKU1FqYsMuqZVnw==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
     dev: true
@@ -504,12 +504,12 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
-  /postcss/8.2.14:
-    resolution: {integrity: sha512-+jD0ZijcvyCqPQo/m/CW0UcARpdFylq04of+Q7RKX6f/Tu+dvpUI/9Sp81+i6/vJThnOBX09Quw0ZLOVwpzX3w==}
+  /postcss/8.2.15:
+    resolution: {integrity: sha512-2zO3b26eJD/8rb106Qu2o7Qgg52ND5HPjcyQiK2B98O388h43A448LCslC0dI2P97wCAQRJsFvwTRcXxTKds+Q==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       colorette: 1.2.2
-      nanoid: 3.1.22
+      nanoid: 3.1.23
       source-map: 0.6.1
     dev: true
 
@@ -524,7 +524,7 @@ packages:
   /resolve/1.20.0:
     resolution: {integrity: sha512-wENBPt4ySzg4ybFQW2TT1zMQucPK95HSh/nq2CFTZVOGut2+pQvSsgtda4d26YrYcr067wjbmzOG8byDPBX63A==}
     dependencies:
-      is-core-module: 2.3.0
+      is-core-module: 2.4.0
       path-parse: 1.0.6
     dev: true
 
@@ -556,15 +556,15 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /socket.io-client/4.0.2:
-    resolution: {integrity: sha512-z6Hw9Cs+cc7BEkSPlDrtHFpAI++xXMklG9iEEyPJdK4WcFcVrhrXcczYVDZmV3GIpFed5hL3LEXhpnmMy8DqDg==}
+  /socket.io-client/4.1.0:
+    resolution: {integrity: sha512-L0lCCPTb5xz+KQ3Wrq0077XjJwpaYpjagRvqE5Sg9aXWekfrEqPFvICCUWs7pJqPv7QVN09KoaPKPkVOOetmbw==}
     engines: {node: '>=10.0.0'}
     dependencies:
       '@types/component-emitter': 1.2.10
       backo2: 1.0.2
       component-emitter: 1.3.0
       debug: 4.3.1
-      engine.io-client: 5.0.1
+      engine.io-client: 5.1.1
       parseuri: 0.0.6
       socket.io-parser: 4.0.4
     transitivePeerDependencies:
@@ -594,11 +594,11 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  /standardized-audio-context/25.2.0:
-    resolution: {integrity: sha512-EnUloaqmd+ovLt0dTXEq750WhGCQmyKY1SwbvqCiBv+iqrzQSn7eKdZKrRE+28+tJWaG1+GhENUDTIqXl/zwaA==}
+  /standardized-audio-context/25.2.1:
+    resolution: {integrity: sha512-s5N3EV5lHDCCruwGEGtcrLVGUzopAZb5PZ1GTjKSmYa00ZIJtJMc3D4x82hnB7v+X9huJQi1QA+10VCxMqi0pQ==}
     dependencies:
       '@babel/runtime': 7.14.0
-      automation-events: 3.0.13
+      automation-events: 4.0.0
       tslib: 2.2.0
     dev: false
 
@@ -625,7 +625,7 @@ packages:
   /tone/14.7.77:
     resolution: {integrity: sha512-tCfK73IkLHyzoKUvGq47gyDyxiKLFvKiVCOobynGgBB9Dl0NkxTM2p+eRJXyCYrjJwy9Y0XCMqD3uOYsYt2Fdg==}
     dependencies:
-      standardized-audio-context: 25.2.0
+      standardized-audio-context: 25.2.1
       tslib: 2.2.0
     dev: false
 
@@ -633,13 +633,13 @@ packages:
     resolution: {integrity: sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==}
     dev: false
 
-  /vite/2.2.4:
-    resolution: {integrity: sha512-vnIwSNci+phFMp6krhy+FbYzKL0R67Sdt9mVZ96S27AewrApSJjTqncJcalk8sf60BgcbW4+1C6DFIWkxquO9g==}
+  /vite/2.3.0:
+    resolution: {integrity: sha512-gsCy0t3X9nGGYDoNiE2NJgYq6BPxrtKeo6FkpMXdMvtUluYxnRhl7xfpHaYDmQLCnMbYTWhvWS1L/Hpw/V9L5w==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
-      esbuild: 0.9.7
-      postcss: 8.2.14
+      esbuild: 0.11.20
+      postcss: 8.2.15
       resolve: 1.20.0
       rollup: 2.47.0
     optionalDependencies:
