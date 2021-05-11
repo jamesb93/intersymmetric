@@ -8,6 +8,8 @@
     } from "$lib/components/stores.js";
 	import { createRoomID } from '$lib/components/utility.js';
     import RoomPrompt from "$lib/components/RoomPrompt.svelte";
+    import Editor from '$lib/components/Editor.svelte';
+
 
     let storedRoom = null;
 
@@ -30,6 +32,7 @@
 </script>
 
 <header>
+    <Editor />
     <div id="title">
         <span>Intersymmetric Works</span>
         <br>
@@ -48,7 +51,6 @@
                 {/if}
             </div>
         </div>
-
     </div>
 
 </header>
