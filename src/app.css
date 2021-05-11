@@ -1,4 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+@font-face {
+	font-family: 'Space Mono';
+	src: url('/fonts/SpaceMono-Regular.ttf') format('truetype')
+}
+
+:root {
+	--font: 'Space Mono', monospace;
+}
 
 text {
     -webkit-touch-callout: none;
@@ -18,7 +25,7 @@ body {
 	color: #333;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: 'Space Mono', monospace;
+	font-family: var(--font);
 }
 
 main {
