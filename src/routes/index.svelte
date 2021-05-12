@@ -1,7 +1,7 @@
 <div id="container">
     <ul id="list">
         <li>
-            <!-- <a href="/nobounds">nobounds</a> -->
+            <a href="/nobounds">nobounds</a>
         </li>
         <li>
             <!-- <a href="/rewire">rewire</a> -->

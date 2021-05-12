@@ -1,9 +1,7 @@
 <script>
     import { browser } from '$app/env';
     import { 
-        socket, 
-        numUsers, 
-        workshopID, 
+        socket, numUsers, workshopID, 
         room, recentParamValue, recentParamName
     } from "$lib/components/stores.js";
 	import { createRoomID } from '$lib/components/utility.js';
@@ -31,48 +29,42 @@
     console.log("%c Intersymmetric Version 0.1", 'background: #222; color: #bada55');
 </script>
 
-<header>
-    <Editor />
-    <div id="title">
-        <span>Intersymmetric Works</span>
-        <br>
-        <span>Grid Sequencer 01</span>
-    </div>
-    <div id="room">
-        <RoomPrompt />
-    </div>
-    <div id="other">
-        <span id="participants">Participants: {$numUsers}</span>
-        <div id="recent-param">
-            <span id="param-name">{$recentParamName}</span>
-            <div id="recent-value">
-                {#if $recentParamName !== ""}
-                    {parseFloat($recentParamValue).toFixed(2)}
-                {/if}
+<div id='container'>
+    <header>
+        <div id="title">
+            <span>Intersymmetric Works</span>
+            <br>
+            <span>Grid Sequencer 01</span>
+        </div>
+        <div id="room">
+            <RoomPrompt />
+        </div>
+        <div id="other">
+            <span id="participants">Participants: {$numUsers}</span>
+            <div id="recent-param">
+                <span id="param-name">{$recentParamName}</span>
+                <div id="recent-value">
+                    {#if $recentParamName !== ""}
+                        {parseFloat($recentParamValue).toFixed(2)}
+                    {/if}
+                </div>
             </div>
         </div>
-    </div>
-
-</header>
+    </header>
+</div>
 
 <div class="line"></div>
 
 <style>
-    header {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 100px;
-        font-size: 10px;
+    #container { 
         margin: 0 auto;
-        width: 90%;
+        align-items: center;
     }
-
-    @media screen and (min-width: 1440px) {
-        header {
-            width: 50%;
-            margin: 0 auto;
-        }
+    header {
+        display: grid;
+        grid-template-columns: 100px auto 200px;
+        font-size: 10px;
+        align-items: center;
     }
 
     #title {
@@ -119,7 +111,7 @@
     }
 
     .line {
-        border-bottom: 2px solid #40ac47;
+        border-bottom: 1px solid #40ac47;
         width: 100%;
     }
 </style>

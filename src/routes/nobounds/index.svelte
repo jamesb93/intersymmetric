@@ -15,26 +15,22 @@
 </script>
 
 <Header />
-<main>
-	{#if $room !== "" && browser}
-		<div class="main-layout" transition:fade="{{duration: 100}}">
-			<Grid />
-			<div class="synth-controls">
-				<Snare />
-				<Kick />
-				<Metal id="metal1" instrument={metal1} />
-				<Metal id="metal2" instrument={metal2} />
-				<FM id="fm1" instrument={fm1} />
-				<FM id="fm2" instrument={fm2} />
-			</div>
-		</div>
-	{/if}
-</main>
+
+{#if $room !== "" && browser}
+	<div class="main-layout" transition:fade="{{duration: 100}}">
+		<Grid />
+		<!-- <div class="synth-controls">
+			<Snare />
+			<Kick />
+			<Metal id="metal1" instrument={metal1} />
+			<Metal id="metal2" instrument={metal2} />
+			<FM id="fm1" instrument={fm1} />
+			<FM id="fm2" instrument={fm2} />
+		</div> -->
+	</div>
+{/if}
 	
 <style>
-	main { 
-		padding-top: 10px;
-	}
 	.main-layout {
 		display: flex;
 		flex-direction: column;

@@ -268,6 +268,7 @@
         display: grid;
         grid-template-columns: 100px auto 200px;
         margin: 0 auto;
+        padding-top: 10px;
     }
 
     #centre-section {
