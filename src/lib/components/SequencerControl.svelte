@@ -308,7 +308,6 @@
         display: flex;
         flex-direction: row;
         gap: 20px;
-        margin-left: 20px;
         height: 100%;
     }
 
