@@ -34,6 +34,9 @@
 </main>
 	
 <style>
+	main { 
+		padding-top: 10px;
+	}
 	.main-layout {
 		display: flex;
 		flex-direction: column;

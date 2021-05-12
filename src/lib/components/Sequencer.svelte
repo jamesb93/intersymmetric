@@ -134,11 +134,9 @@
 
     .euclids {
         display: grid;
-        grid-template-rows: repeat(8, auto);
+        grid-template-rows: repeat(8, 50px);
         grid-template-columns: auto;
         align-items: center;
-        padding-top: 50px;
-        padding-bottom: 70px;
     }
     .grid {
         display: grid;

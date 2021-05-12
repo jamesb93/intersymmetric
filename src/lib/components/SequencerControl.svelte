@@ -192,88 +192,129 @@
         }
     }, "16n").start(0);
 }
-
 </script>
 
 <div id="all-controls">
-    <div class='control-column-container'>
-        <span class='container-title'>Clock</span>
+    <div id='left-section'>
+    </div>
+
+    <div id='centre-section'>
+        <div id='clock' class='control-column-container'>
+            <span class='container-title'>Clock</span>
+            <div id='clock-top'>
+                <Play bind:playing={$play} start={startLoop} pause={stopLoop}/>
+                <Knob enabled={$states.bpm} title="Rate" resetValue={120} min={5} max={300} step={1} bind:value={$bpm} func={sendBpm} />
+                <Knob enabled={$states.multiplier} resetValue={0} scale=0.4 title="Multiplier" min={0} max={22} step={1} bind:value={$clockMultiplierLookup} bind:altValue={clockMultiplier} func={sendMultiplier} />
+            </div>
+            <div id='clock-bottom'>
+                <Clock bind:value={$clockMode}/>
+                <Knob enabled={$states.offset} scale=0.125 title="Start" min={1} max={16} bind:value={$offset.start} func={sendOffset} />
+                <Knob enabled={$states.offset} scale=0.125 title="End" min={1} max={16} bind:value={$offset.end} func={sendOffset} />
+            </div>
+        </div>
         
-        <div class='control-row-top'>
-            <Play bind:playing={$play} start={startLoop} pause={stopLoop}/>
-            <Knob enabled={$states.bpm} title="Rate" resetValue={120} min={5} max={300} step={1} bind:value={$bpm} func={sendBpm} />
-            <Knob enabled={$states.multiplier} resetValue={0} scale=0.4 title="Multiplier" min={0} max={22} step={1} bind:value={$clockMultiplierLookup} bind:altValue={clockMultiplier} func={sendMultiplier} />
+        <div id='grid-transforms' class='control-column-container'>
+            <span class='container-title'>Transforms</span>
+            <div id='max-cells'>
+                <Knob enabled={$states.maxCells} resetValue={16} scale=0.25 title="Max Cells" min={1} max={32} step={1} bind:value={$maxCells} func={sendMaxCells} />
+            </div>
+            <div id='transform-functions'>
+                <BoxButton func={ () => invertGridVertical(grid) } text="Flip V" />
+                <BoxButton func={ () => randomiseGrid(grid) } text="Randomise" />
+                <BoxButton func={ () => clearGrid(grid) } text="Clear" />
+            </div>
         </div>
-        <div class='control-row-bottom'>
-            <Clock bind:value={$clockMode}/>
-        </div>
-    </div>
-    
-    <div id='grid-transforms' class='control-column-container'>
-        <span class='container-title'>Transforms</span>
-        <BoxButton func={ () => invertGridVertical(grid) } text="Flip V" />
-        <BoxButton func={ () => randomiseGrid(grid) } text="Randomise" />
-        <BoxButton func={ () => clearGrid(grid) } text="Clear" />
-    </div>
-                
-    <div id='mirror' class='control-column-container'>
-        <div class='control-row-top'>
-            <Knob enabled={$states.mirrorPoint} resetValue={8} scale=0.125 title="Mirror Point" min={1} max={15} bind:value={$mirrorPoint} func={sendMirrorPoint} />
-        </div>
-        <div class='control-row-bottom'>
+                    
+        <div id='mirror' class='control-column-container'>
+            <div></div>
+            <div id='other-knobs'>
+                <Knob enabled={$states.mirrorPoint} resetValue={8} scale=0.125 title="Mirror Point" min={1} max={15} bind:value={$mirrorPoint} func={sendMirrorPoint} />
+                <Knob enabled={$states.globalVelocity} resetValue={1.0} scale=0.01 title="Velocity" min={0} max={1} step={0.01} bind:value={$velocity} func={sendVelocity} />
+            </div>
             <BoxButton func={ () => mirrorWithPoint(grid, $mirrorPoint) } text="Mirror H" />
         </div>
     </div>
-                    
-    <div id='other-knobs' class='control-column-container'>
-        <div class='control-row-top'>
-            <Knob enabled={$states.offset} scale=0.125 title="Start" min={1} max={16} bind:value={$offset.start} func={sendOffset} />
-            <Knob enabled={$states.offset} scale=0.125 title="End" min={1} max={16} bind:value={$offset.end} func={sendOffset} />
+
+    <div id='right-section' class='control-column-container'>
+        <div />
+        <div id='global-parameters'>
+            <Knob
+            enabled={$states.pitchOffset} 
+            resetValue={0} 
+            title="Pitch Offset" 
+            min={-48} max={48} step={1} 
+            bind:value={$pitchOffset} 
+            func={sendPitchOffset} 
+            />
+            <Knob 
+            enabled={$states.globalLength} 
+            scale=0.005 
+            resetValue={1.0} 
+            title="Shape Scale" 
+            min={0.05} max={1} step={0.01} 
+            bind:value={$length} 
+            func={sendLength} 
+            />
         </div>
-        <div class='control-row-bottom'>
-            <Knob enabled={$states.globalVelocity} resetValue={1.0} scale=0.01 title="Velocity" min={0} max={1} step={0.01} bind:value={$velocity} func={sendVelocity} />
-            <Knob enabled={$states.globalLength} scale=0.005 resetValue={1.0} title="Shape Scale" min={0.05} max={1} step={0.01} bind:value={$length} func={sendLength} />
-            <Knob enabled={$states.maxCells} resetValue={16} scale=0.25 title="Max Cells" min={1} max={32} step={1} bind:value={$maxCells} func={sendMaxCells} />
-            <Knob enabled={$states.pitchOffset} resetValue={0} title="Pitch Offset" min={-48} max={48} step={1} bind:value={$pitchOffset} func={sendPitchOffset} />
-        </div>
+        <div></div>
     </div>
 </div>
-    
 
-                
 <style>
+    :root {
+        --button-gap: 2px;
+    }
     #all-controls {
         display: grid;
-        grid-template-columns: auto auto auto auto;
+        grid-template-columns: 100px auto 200px;
         margin: 0 auto;
     }
-    
-    .control-row-top {
+
+    #centre-section {
         display: flex;
         flex-direction: row;
-        margin: 0 auto;
-    }
-    
-    .control-row-bottom {
-        display: flex;
-        flex-direction: row;
-        margin: 0 auto;
     }
     
     .control-column-container {
+        --pad: 30px;
         display: grid;
-        grid-template-rows: auto auto;
-        gap: 15px;
-        border-left: 1px dotted #40ac47;
-        border-right: 1px dotted #40ac47;
-        
-        padding: 10px;
-        align-items: center;
-        margin: 0 auto;
+        grid-template-rows: 30px 85px 100px;
+        border-left: 1px dashed #40ac47;
+        padding-left: var(--pad);
+        padding-right: var(--pad);
     }
     
     .container-title {
         color: #40ac47;
         font-size: 10px;
     }
+
+    #clock-top, #clock-bottom {
+        display: grid;
+        grid-template-columns: repeat(3, 80px);
+    }
+
+    #transform-functions {
+        display: flex;
+        flex-direction: column;
+        gap: var(--button-gap)
+    }
+
+    #max-cells {
+        margin: 0 auto;
+    }
+
+    #global-parameters {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        margin-left: 20px;
+        height: 100%;
+    }
+
+    #other-knobs {
+        display: flex;
+        flex-direction: row;
+    }
+
 </style>

@@ -26,15 +26,10 @@
     .container {
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
 
     .text {
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
         text-align: center;
         font-size: 10px;
         font-family: var(--font);
@@ -43,8 +38,6 @@
         border: 0;
         background: transparent;
         box-sizing: border-box;
-        width: 40px;
-        height: 40px;
         
         border-color: transparent transparent transparent rgba(86,158,70,255);
         transition: 100ms all ease;

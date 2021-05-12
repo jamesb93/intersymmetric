@@ -69,6 +69,7 @@
     function resetHandler() {
         if (resetValue !== null) {
             value = resetValue
+            $recentParamValue = value
             func()
         }
     }
@@ -78,7 +79,7 @@
     
     export let WIDTH = 80;
     export let HEIGHT = 60;
-    const RADIUS = 17;
+    const RADIUS = 21;
     const MID_X = WIDTH/2;
     const MID_Y = HEIGHT/2;
     const SHIFT = 1.1;
