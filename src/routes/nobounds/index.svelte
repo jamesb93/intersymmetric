@@ -10,16 +10,14 @@
 	import FM from "$lib/components/Control/FM.svelte";
 	import Header from "$lib/components/Header.svelte";
 	import { metal1, metal2, fm1, fm2 } from '$lib/instruments/ensemble.js';
-
 	import { workshopID } from '$lib/components/stores.js';
 	$workshopID = "nobounds";
 </script>
 
 <Header />
-
 <main>
 	{#if $room !== "" && browser}
-		<div class="main-layout" transition:fade="{{duration: 300}}">
+		<div class="main-layout" transition:fade="{{duration: 100}}">
 			<Grid />
 			<div class="synth-controls">
 				<Snare />
@@ -41,7 +39,6 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 25px;
 	}
 
 	.synth-controls {
