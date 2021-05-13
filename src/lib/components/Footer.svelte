@@ -25,6 +25,7 @@
     #bottom-panel {
         display: grid;
         grid-template-columns: auto auto 200px;
+        padding-top: 10px;
     }
 
     footer {    
