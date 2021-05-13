@@ -19,10 +19,10 @@
     <span id='title'>Room Code:</span>
     <input 
     type="text" 
-    class:pulsate={!everUsed} 
+    class:init={!everUsed} 
     bind:value={code} 
     on:change={handleClick} 
-    placeholder={$room}
+    placeholder={ everUsed === false && $room === '' ? "enter room code" : $room }
     id='room-input'
     />
 </div>
@@ -34,6 +34,10 @@
     .prompt {
         display: flex;
         flex-direction: column;
+    }
+
+    .init {
+        border:1px solid rgb(204, 204, 204);
     }
 
     #room-input {
