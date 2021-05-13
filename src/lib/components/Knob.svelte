@@ -110,8 +110,8 @@
     export let secondaryColor = '#989898';
     export let strokeWidth = 1;
 
-    $: primaryColor = enabled ? '#40ac47;' : '#989898';
-    $: textColor = enabled ? '#000000' : '#989898';
+    $: primaryColor = enabled ? '#40ac47;' : secondaryColor;
+    $: textColor = enabled ? '#000000' : secondaryColor;
     $: containerStyle = `height: ${HEIGHT}px; width: ${WIDTH}px;`;
     
     export let func = () => {};

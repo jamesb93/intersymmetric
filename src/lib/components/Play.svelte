@@ -1,9 +1,16 @@
 <script>
-    const WIDTH = 80;
-    const HEIGHT = 80;
+    export let WIDTH = 80;
+    export let HEIGHT = 60;
     $: style = `height: ${HEIGHT}; width: ${WIDTH};`
+
+    const offsetX = 25
+    const offsetY = 15
+
+    const triangle = `${offsetX},${offsetY} ${offsetX},${HEIGHT-offsetY}, ${WIDTH-30},${HEIGHT/2}`
+
     export let playing;
-    function onClick() {
+
+    function clickHandler() {
         playing = !playing;
         if (!playing) {
             pause();
@@ -18,7 +25,16 @@
 
 <div class="container" style={style}>
     <div class="text">Play/Pause</div>
-    <button on:click={onClick} class="button" class:pause={playing}></button>
+    <!-- <button on:click={onClick} class="button" class:pause={playing}></button> -->
+
+    <svg width={WIDTH} height={HEIGHT} on:click={clickHandler}>
+        {#if !playing}
+        <polygon class='tri' points={triangle} />
+        {:else}
+        <rect class='tri'  x={offsetX} y={offsetY} width='6px' height='60px' />
+        <rect class='tri'  x={WIDTH-40} y={offsetY} width='6px' height='60px'/>
+        {/if}
+    </svg>
 </div>
 
 
@@ -27,6 +43,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        height: 60px;
+        width: 80px;
+
     }
 
     .text {
@@ -34,27 +53,12 @@
         font-size: 10px;
         font-family: var(--font);
     }
-    .button {
-        border: 0;
-        background: transparent;
-        box-sizing: border-box;
-        
-        border-color: transparent transparent transparent rgba(86,158,70,255);
-        transition: 100ms all ease;
-        cursor: pointer;
 
-        margin-left: 20px;
-        
-        border-style: solid;
-        border-width: 20px 0 20px 20px;
+    .tri {
+        fill: var(--primary-color);
     }
-        
-    .pause {
-        border-style: double;
-        border-width: 0px 0 0px 20px;
-    }
-        
-    button:hover {
-        border-color: transparent transparent transparent rgba(86,158,70,0.8);
+
+    .tri:hover, .tri:active {
+        fill: var(--primary-color-darker);
     }
 </style>
