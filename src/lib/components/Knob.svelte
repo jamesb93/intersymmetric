@@ -7,9 +7,12 @@
     on:mousedown|preventDefault={downHandler}
     on:dblclick={resetHandler}
     >
+    {#if showTitle}
+    <span id='title'>{title}</span>
+    {/if}
     <svg width='{WIDTH}px' height='{HEIGHT}px' >
         <!-- Title -->
-        {#if showTitle}
+        <!-- {#if showTitle}
         <text
             x={MID_X}
             y={HEIGHT / 7}
@@ -19,7 +22,7 @@
             >
             {title}
         </text>
-        {/if}
+        {/if} -->
         <!-- Arc -->
         <path
             d={rangePath}
@@ -197,7 +200,8 @@
 
 <style>
     .knob-control {
-        height: 50px;
+        display: grid;
+        grid-template-rows: 7px 60px;
     }
     
     .knob-control__range {
@@ -210,22 +214,14 @@
         animation-fill-mode: forwards;
         fill: none;
     }
-    
-    .name {
-        font-family: 'Space Mono', monospace;
-        font-size: 10px;
+
+    #title {
         text-align: center;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        font-size: 10px;
+        font-size: var(--font-size);
     }
 
     .value {
-        font-size: 10px;
+        font-size: var(--font-size);
     }
 </style>
 
