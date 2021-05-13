@@ -37,15 +37,16 @@
     <div id="room">
         <RoomPrompt />
     </div>
-    <div id="other">
-        <span id="participants">Participants: {$numUsers}</span>
-        <div id="recent-param">
-            <span id="param-name">{$recentParamName}</span>
-            <div id="recent-value">
-                {#if $recentParamName !== ""}
-                    {parseFloat($recentParamValue).toFixed(2)}
-                {/if}
-            </div>
+    <div id='participants'>
+        <span>Users:</span>
+        <span>{$numUsers}</span>
+    </div>
+    <div id="recent-param">
+        <span id='param'>{$recentParamName}</span>
+        <div id='value'>
+            {#if $recentParamName !== ""}
+                {parseFloat($recentParamValue).toFixed(2)}
+            {/if}
         </div>
     </div>
 </header>
@@ -58,7 +59,7 @@
     }
     header {
         display: grid;
-        grid-template-columns: 552px auto 200px;
+        grid-template-columns: 411px 141px auto 200px;
         font-size: 10px;
         min-height: var(--h);
         max-height: var(--h);
@@ -72,33 +73,25 @@
         flex-direction: column;
     }
 
-    #room {
-    }
-
-    #other {
-        display: grid;
-        grid-template-columns: auto auto;
-        width: 100px;
-    }
-
     #participants {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
     }
 
-    #param-name {
-        text-align: right;
+    #recent-param {
+        display: grid;
+        grid-template-columns: 50px 100px;
+        gap: 10px;
+        text-align: left;
     }
     
-    #recent-param {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-    }
-
-    #recent-value {
+    #value {
         text-align: center;
         background-color: #e4e4e3;
-        font-size: 18px;
-        min-width: 75px;
+        margin-top: -10px;
+        font-size: 20px;
+        padding-top: 20px;
     }
 
 
