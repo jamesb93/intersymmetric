@@ -200,7 +200,7 @@
 
     <div id='centre-section'>
         <div id='clock' class='control-column-container'>
-            <span class='container-title'>Clock</span>
+            <span id='clock-title' class='container-title'>Clock</span>
             <div id='clock-top'>
                 <Play bind:playing={$play} start={startLoop} pause={stopLoop}/>
                 <Knob enabled={$states.bpm} title="Rate" resetValue={120} min={5} max={300} step={1} bind:value={$bpm} func={sendBpm} />
@@ -277,6 +277,10 @@
         max-width: 250px;
     }
 
+    #clock-title {
+        padding-left: 10px;
+    }
+
     #grid-transforms {
         min-width: 80px;
         max-width: 80px;
@@ -302,7 +306,7 @@
 
     #clock-top, #clock-bottom {
         display: grid;
-        grid-template-columns: repeat(3, 80px);
+        grid-template-columns: 1.1fr 0.9fr 1fr;
     }
 
     #transform-functions {
