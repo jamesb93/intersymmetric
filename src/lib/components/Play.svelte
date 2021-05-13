@@ -31,8 +31,10 @@
         {#if !playing}
         <polygon class='tri' points={triangle} />
         {:else}
-        <rect class='tri'  x={offsetX} y={offsetY} width='6px' height='60px' />
-        <rect class='tri'  x={WIDTH-40} y={offsetY} width='6px' height='60px'/>
+        <g class='tri'>
+            <rect x={offsetX} y={offsetY} width='6px' height='60px' />
+            <rect x={WIDTH-40} y={offsetY} width='6px' height='60px'/>
+        </g>
         {/if}
     </svg>
 </div>
