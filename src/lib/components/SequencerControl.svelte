@@ -310,6 +310,7 @@
         flex-direction: row;
         gap: 20px;
         height: 100%;
+        padding-left: 4px;
     }
 
     #other-knobs {
