@@ -263,12 +263,23 @@
 <style>
     :root {
         --button-gap: 2px;
+        --pad: 30px;
     }
+    
     #all-controls {
         display: grid;
         grid-template-columns: 100px auto 200px;
-        margin: 0 auto;
         padding-top: 10px;
+    }
+
+    #clock {
+        min-width: 250px;
+        max-width: 250px;
+    }
+
+    #grid-transforms {
+        min-width: 80px;
+        max-width: 80px;
     }
 
     #centre-section {
@@ -277,7 +288,6 @@
     }
     
     .control-column-container {
-        --pad: 30px;
         display: grid;
         grid-template-rows: 30px 85px 100px;
         border-left: 1px dashed #40ac47;

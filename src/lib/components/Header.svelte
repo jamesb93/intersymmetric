@@ -29,53 +29,50 @@
     console.log("%c Intersymmetric Version 0.1", 'background: #222; color: #bada55');
 </script>
 
-<div id='container'>
-    <header>
-        <div id="title">
-            <span>Intersymmetric Works</span>
-            <br>
-            <span>Grid Sequencer 01</span>
-        </div>
-        <div id="room">
-            <RoomPrompt />
-        </div>
-        <div id="other">
-            <span id="participants">Participants: {$numUsers}</span>
-            <div id="recent-param">
-                <span id="param-name">{$recentParamName}</span>
-                <div id="recent-value">
-                    {#if $recentParamName !== ""}
-                        {parseFloat($recentParamValue).toFixed(2)}
-                    {/if}
-                </div>
+<header>
+    <div id="title">
+        <span>Intersymmetric Works</span>
+        <span>Grid Sequencer 01</span>
+    </div>
+    <div id="room">
+        <RoomPrompt />
+    </div>
+    <div id="other">
+        <span id="participants">Participants: {$numUsers}</span>
+        <div id="recent-param">
+            <span id="param-name">{$recentParamName}</span>
+            <div id="recent-value">
+                {#if $recentParamName !== ""}
+                    {parseFloat($recentParamValue).toFixed(2)}
+                {/if}
             </div>
         </div>
-    </header>
-</div>
+    </div>
+</header>
 
 <div class="line"></div>
 
 <style>
-    #container { 
-        margin: 0 auto;
-        align-items: center;
+    :root {
+        --h: 60px;
     }
     header {
         display: grid;
-        grid-template-columns: 100px auto 200px;
+        grid-template-columns: 552px auto 200px;
         font-size: 10px;
-        align-items: center;
+        min-height: var(--h);
+        max-height: var(--h);
+        padding-top: 10px;
     }
 
     #title {
-        padding-top: 12px;
-        padding-bottom: 12px;
+        text-align: left;
+        word-wrap: none;
+        display: flex;
+        flex-direction: column;
     }
 
     #room {
-        justify-self: center;
-        padding-top: 12px;
-        padding-bottom: 12px;        
     }
 
     #other {
@@ -85,14 +82,9 @@
     }
 
     #participants {
-        padding-top: 12px;
-        padding-bottom: 12px;
     }
 
     #param-name {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        width: 75px;
         text-align: right;
     }
     
@@ -106,12 +98,8 @@
         text-align: center;
         background-color: #e4e4e3;
         font-size: 18px;
-        padding-top: 12px;
         min-width: 75px;
     }
 
-    .line {
-        border-bottom: 1px solid #40ac47;
-        width: 100%;
-    }
+
 </style>

@@ -129,7 +129,6 @@
     .sequencer {
         display: grid;
         grid-template-columns: repeat(5, auto);
-        justify-content: center;
     }
 
     .euclids {

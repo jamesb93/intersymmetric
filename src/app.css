@@ -4,7 +4,9 @@
 }
 
 :root {
-	--font: 'Space Mono', 'Courier New', Courier, monospace
+	--font: 'Space Mono', 'Courier New', Courier, monospace;
+	--font-size: 10px;
+	--primary-color: #40ac47;
 }
 
 text {
@@ -14,40 +16,32 @@ text {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+	font-family: var(--font);
 }
 
 html, body {
-    background: rgba(255, 255, 255);
 	height: 100%;
+	text-align: center;
 }
 
 body {
-	color: #333;
 	margin: 0;
 	font-family: var(--font);
 }
 
-main {
-	text-align: center;
-	max-width: 100%;
-}
-
 a {
-	color: #59a245;
-	color: #40ac47;
+	color: var(--primary-color);
 	text-decoration: none;
 }
 
 a:hover {
 	text-decoration: underline;
-	background: #59a245;
-	background-color: #40ac47;
+	background-color: var(--primary-color);
 	color: white;
 }
 
 a:visited {
-	color: #59a245;
-	color: #40ac47
+	color: var(--primary-color);
 }
 
 a:visited:hover {

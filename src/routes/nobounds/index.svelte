@@ -14,24 +14,26 @@
 	$workshopID = "nobounds";
 </script>
 
-<Header />
-
-{#if $room !== "" && browser}
-	<div class="main-layout" transition:fade="{{duration: 100}}">
-		<Grid />
-		<!-- <div class="synth-controls">
-			<Snare />
-			<Kick />
-			<Metal id="metal1" instrument={metal1} />
-			<Metal id="metal2" instrument={metal2} />
-			<FM id="fm1" instrument={fm1} />
-			<FM id="fm2" instrument={fm2} />
-		</div> -->
-	</div>
-{/if}
+<div class="main-layout">
+	<Grid />
+	<!-- <div class="synth-controls">
+		<Snare />
+		<Kick />
+		<Metal id="metal1" instrument={metal1} />
+		<Metal id="metal2" instrument={metal2} />
+		<FM id="fm1" instrument={fm1} />
+		<FM id="fm2" instrument={fm2} />
+	</div> -->
+</div>
 	
 <style>
 	.main-layout {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.top-bar {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -41,4 +43,7 @@
 		display: flex;
 		flex-direction: row;
 	}
+
+
+
 </style>

@@ -15,53 +15,39 @@
         code = ""
     }
 </script>
-
 <div class="prompt" >
-    <div id="room-name">
-        {#if $room !== undefined}
-            {$room}
-        {/if}
-    </div>
+    <span id='title'>Room Code:</span>
     <input 
     type="text" 
     class:pulsate={!everUsed} 
     bind:value={code} 
     on:change={handleClick} 
-    placeholder="enter room" 
-    class="code-entry"
+    placeholder={$room}
+    id='room-input'
     />
 </div>
 
 <style>
+    #title {
+        text-align: left;
+    }
     .prompt {
         display: flex;
         flex-direction: column;
-        margin: 0 auto;
-    }
-    #room-name {
-        height: 13px;
-        padding-bottom: 2px;
-        text-align: center;
     }
 
-    input[type=text] {
+    #room-input {
         font-family: var(--font);
-        display: inline;
-        font-size: inherit;
+        font-size: var(--font-size);
         padding: none;
-        align-self: center;
-        background: rgba(243,243,246,255);
+        background: white;
         border: none;
-        font-style: italic;
+        width: 100px;
+        padding-top: 1px;
     }
 
-    .code-entry {
-        text-align: center;
-    }
-
-    .code-entry:focus {
-        border: none !important;
-        border:1px solid red;
-        box-shadow: 0 0 10px #8fce71;
+    #room-input:focus, #room-input:active {
+        outline: none !important;
+        border:1px solid rgb(204, 204, 204);
     }
 </style>
