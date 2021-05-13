@@ -6,6 +6,7 @@
     bind:this={knob} 
     on:mousedown|preventDefault={downHandler}
     on:dblclick={resetHandler}
+    on:click={clickHandler}
     >
     {#if showTitle}
     <span id='title'>{title}</span>
@@ -169,6 +170,13 @@
             }
         }
     };
+
+    const clickHandler = (e) => {
+        if (enabled) {
+            $recentParamName = title;
+            $recentParamValue = value
+        }
+    }
     
     const downHandler = (e) => {
         if (enabled) {

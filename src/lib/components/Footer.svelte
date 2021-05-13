@@ -1,3 +1,7 @@
+<script>
+    import Editor from '$lib/components/Editor.svelte';
+</script>
+
 <div id="bottom-panel">
     <footer>
         <span>
@@ -13,7 +17,7 @@
             Graphic Design by <a target="_blank" href="https://qubik.com/">Joe Gilmore</a>
         </span>
     </footer>
-    <div/>
+    <Editor />    
     <div></div>
 </div>
 

@@ -1,4 +1,5 @@
 <script>
+	import BoxButton from '$lib/components/BoxButton.svelte';
     import { params } from "$lib/components/stores.js";
 	$: json = JSON.stringify($params, null, 4)
     const saveTextAsFile = (textToWrite, fileNameToSaveAs) => {
@@ -20,14 +21,21 @@
 </script>
 
 <div class="container">
-	<button on:click={() => {saveTextAsFile(json, 'data.json')}}>Download</button>
+	<BoxButton func={ () => {saveTextAsFile(json, 'data.json')} } text='Download' />
+
+
 </div>
 
 <style>
 	.container {
 		display:flex;
 		flex-direction: row;
-		width: 30px;
+		width: 100px;
 		height: 30px;
+		padding-top: 10px;
+
+	}
+
+	button {
 	}
 </style>

@@ -27,7 +27,7 @@
         left: 0;
         right: 0px;
         bottom: 10;
-        top: 70px;
+        top: 50px;
 
     }
 </style>

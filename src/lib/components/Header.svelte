@@ -55,7 +55,7 @@
 
 <style>
     :root {
-        --h: 60px;
+        --h: 40px;
     }
     header {
         display: grid;
@@ -81,7 +81,7 @@
 
     #recent-param {
         display: grid;
-        grid-template-columns: 50px 100px;
+        grid-template-columns: 60px 100px;
         gap: 10px;
         text-align: left;
     }
@@ -91,7 +91,7 @@
         background-color: #e4e4e3;
         margin-top: -10px;
         font-size: 20px;
-        padding-top: 20px;
+        padding-top: 11px;
     }
 
 
