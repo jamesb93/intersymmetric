@@ -16,14 +16,14 @@
 
 <div class="main-layout">
 	<Grid />
-	<!-- <div class="synth-controls">
+	<div class="synth-controls">
 		<Snare />
 		<Kick />
 		<Metal id="metal1" instrument={metal1} />
 		<Metal id="metal2" instrument={metal2} />
 		<FM id="fm1" instrument={fm1} />
 		<FM id="fm2" instrument={fm2} />
-	</div> -->
+	</div>
 </div>
 	
 <style>
