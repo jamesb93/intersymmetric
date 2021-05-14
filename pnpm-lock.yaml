@@ -415,8 +415,8 @@ packages:
       base64-arraybuffer: 0.1.4
     dev: false
 
-  /esbuild/0.11.20:
-    resolution: {integrity: sha512-QOZrVpN/Yz74xfat0H6euSgn3RnwLevY1mJTEXneukz1ln9qB+ieaerRMzSeETpz/UJWsBMzRVR/andBht5WKw==}
+  /esbuild/0.11.21:
+    resolution: {integrity: sha512-FqpYdJqiTeLDbj3vqxc/fG8UmHIEvQrDaUxSw1oJf4giLd/tnMDUUlXellCjOab7qGKQ5hUFD5eQgmO+tkZeow==}
     hasBin: true
     requiresBuild: true
     dev: true
@@ -638,7 +638,7 @@ packages:
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
-      esbuild: 0.11.20
+      esbuild: 0.11.21
       postcss: 8.2.15
       resolve: 1.20.0
       rollup: 2.47.0
