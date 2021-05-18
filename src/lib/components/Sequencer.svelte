@@ -6,8 +6,8 @@
     import { shiftColumnDown, shiftColumnUp, rotateGridColumn } from '$lib/grid/transforms.js';
     import { 
         socket, states, grid, gridValid, euclidSteps,
-        trackPitch, trackSound, trackShape 
-    
+        trackPitch, trackSound, trackShape,
+        params
     } from './stores.js';
     import { getPattern } from "./euclid.js";
 
@@ -21,6 +21,65 @@
         socket.emit('euclid', $euclidSteps);
         sendGrid();
     }
+
+    // 0. Make the JSON files
+    // 1. Import the rest of the JSON files 
+    // 2. Automatically select the right one depending on which knob was turned
+    // 3. Check for any threading wackiness. Can you share this function around?
+    import kickPreset from '$lib/presets/kick.json'
+    import snarePreset from '$lib/presets/snare.json';
+    import metal1Preset from '$lib/presets/metal1.json';
+    import metal2Preset from '$lib/presets/metal2.json';
+    import fm1Preset from '$lib/presets/fm1.json';
+    import fm2Preset from '$lib/presets/fm2.json';
+
+
+    import { interpolateObject } from 'd3';
+
+    let instrumentMap = [
+        'kick','snare',
+        'metal1','metal2',
+        'fm1','fm2'
+    ]
+
+    socket.on('trackSound', x => {
+        trackSound.set(x);
+        $trackSound.forEach((_, i) => {
+            updateSound(i)
+        })
+    });
+
+    function updateSound(x) {
+        let presets;
+        if (x === 0)
+            presets = kickPreset
+        if (x === 1)
+            presets = snarePreset
+        if (x === 2)
+            presets = metal1Preset
+        if (x === 3)
+            presets = metal2Preset
+        if (x === 4)
+            presets = fm1Preset
+        if (x === 5)
+            presets = fm2Preset
+
+        let numPresets = Object.keys(presets).length;
+        let preset1 = Math.floor($trackSound[x] * numPresets);
+        preset1 = Math.min(preset1, numPresets-2)
+        let preset2 = preset1 + 1
+        let amount = (Math.min($trackSound[x], 0.99999999) * numPresets-1) % 1.0;
+         
+		let result = interpolateObject(
+			presets[preset1], 
+            presets[preset2]
+		)(amount)
+        for (const [key, value] of Object.entries(result)) {
+            $params[instrumentMap[x]][key] = value
+        }
+    }
+
+
 </script>
 
 <svelte:window on:mouseup={()=>{anyMouseDown=false}} />
@@ -102,9 +161,9 @@
             title="Sound"
             showTitle={false}
             scale=0.01 min={0} max={1}
-            step={0.01}
+            step={0.001}
             bind:value={ $trackSound[x] } 
-            func={ () => socket.emit('trackSound', $trackSound) } 
+            func={ () => {updateSound(x); socket.emit('trackSound', $trackSound)} } 
             />
         {/each}
     </div>
