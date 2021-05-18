@@ -4,6 +4,10 @@ export const freqMap = (midi) => {
     return Math.pow(2, (midi / 12.0));
 }
 
+export const clip = (i, low, high) => {
+    return Math.min(Math.max(i, low), high)
+}
+
 const fmod = (a,b) => { 
     return Number((a - (Math.floor(a / b) * b)).toPrecision(8));
 };
