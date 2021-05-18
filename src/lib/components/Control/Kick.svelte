@@ -14,9 +14,15 @@
     import { freqMap } from "$lib/components/utility.js";
 
     $: kick.membrane.octaves = Math.max($params.kick.octaves, 0);
-    $: kick.membrane.frequency.rampTo(
-        Math.max(0, $params.kick.frequency * freqMap($pitchOffset+$trackPitch[0])), 
-        0.01)
+    $: {
+        let calculatedFreq = Math.max(
+            0, 
+            $params.kick.frequency * freqMap($pitchOffset + $trackPitch[0])
+        );
+        if ( !Number.isNaN(calculatedFreq) ) {
+            kick.membrane.frequency.rampTo(calculatedFreq, 0.1)
+        }
+    }
     $: kick.membrane.envelope.attack = Math.max(
         $params.kick.attack * $length * Math.max($trackShape[0], 0.1), 
         0
