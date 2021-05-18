@@ -10,6 +10,10 @@ socket.on('connect', () => {
     console.log('connected to ', socketAddr)
 })
 
+// Velocity Patterns
+export const velocityPattern = writable(1);
+socket.on('velocityPattern', x => velocityPattern.set(x));
+
 // No Bounds MetaData // Interpolation
 export const trackSound = writable( new Array(6).fill(0.5) );
 export const trackPitch = writable( new Array(6).fill(0.0) );
@@ -47,10 +51,6 @@ socket.on('grid', x => {
 })
 
 export const play = writable(false);
-// socket.on('play', x => {
-//     if (get(userInteracted) === true)
-//         play.set(x)
-// });
 
 export const velocity = writable(1.0);
 socket.on('velocity', x => velocity.set(x));
@@ -66,7 +66,8 @@ export const states = writable({
     globalVelocity: true,
     globalLength: true,
     multiplier: true,
-    transforms: true
+    transforms: true,
+    velocityPattern: true,
 });
 socket.on('enabledStates', x => states.set(x));
 
@@ -116,7 +117,6 @@ export const params = writable({
         release: 0.49,
         order : 1,
         membraneFreq: 160,
-        velocityList: ["1"]
     },
     kick : {
         frequency : 43,
@@ -126,7 +126,6 @@ export const params = writable({
         sustain : 1.0,
         release : 1.25,
         distortion : 0.0,
-        velocityList: ["1"],
     },
     metal1 : {
         frequency : 28,
@@ -138,7 +137,6 @@ export const params = writable({
         attack: 0.001,
         decay: 1.4,
         release: 0.2,
-        velocityList: ["1"]
 
     },
     metal2 : {
@@ -151,7 +149,6 @@ export const params = writable({
         attack: 0.001,
         decay: 1.4,
         release: 0.2,
-        velocityList: ["1"]
     },
     fm1 : {
         frequency : 90,
@@ -167,7 +164,6 @@ export const params = writable({
         op1gain : 1,
         op2gain : 1,
         op3gain : 1,
-        velocityList: ["1"]     
     },
     fm2 : {
         frequency : 110,
@@ -183,7 +179,6 @@ export const params = writable({
         op1gain : 1,
         op2gain : 1,
         op3gain : 1,
-        velocityList: ["1"]
     }
 });
 socket.on('params', x => params.set(x)); // get all params in one message
