@@ -33,8 +33,7 @@
     import fm1Preset from '$lib/presets/fm1.json';
     import fm2Preset from '$lib/presets/fm2.json';
 
-
-    import { interpolateObject } from 'd3';
+    import * as d3 from 'd3';
 
     let instrumentMap = [
         'kick','snare',
@@ -70,7 +69,7 @@
         let preset2 = preset1 + 1
         let amount = (Math.min($trackSound[x], 0.99999999) * numPresets-1) % 1.0;
          
-		let result = interpolateObject(
+		let result = d3.interpolateObject(
 			presets[preset1], 
             presets[preset2]
 		)(amount)
