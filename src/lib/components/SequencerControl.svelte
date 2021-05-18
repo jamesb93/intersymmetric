@@ -93,52 +93,52 @@
         loop = new Tone.Loop(time => {
             if ($grid[KICK][pos] === true) {
                 kick.trigger(
-                time, 
-                $velocity * $params.kick.velocityList[0], 
-                $length
+                    time, 
+                    $velocity * $params.kick.velocityList[0], 
+                    $length
                 );
                 $params.kick.velocityList.rotate(1);
             } 
             
             if ($grid[SNARE][pos] === true) {
                 snare.trigger(
-                time, 
-                $velocity * $params.snare.velocityList[0],
-                $length
+                    time, 
+                    $velocity * $params.snare.velocityList[0],
+                    $length
                 );
                 $params.snare.velocityList.rotate(1);
             }
             
             if ($grid[M1][pos] === true) {
                 metal1.trigger(
-                time, 
-                $velocity * $params.metal1.velocityList[0],
-                $length
+                    time, 
+                    $velocity * $params.metal1.velocityList[0],
+                    $length
                 );
                 $params.metal1.velocityList.rotate(1);
             }
             
             if ($grid[M2][pos] === true) {
                 metal2.trigger(
-                time, 
-                $velocity * $params.metal2.velocityList[0],
-                $length
+                    time, 
+                    $velocity * $params.metal2.velocityList[0],
+                    $length
                 );
                 $params.metal2.velocityList.rotate(1);
             }
             
             if ($grid[FM1][pos] === true) {
                 fm1.trigger(
-                time, 
-                $velocity * $params.fm1.velocityList[0]
+                    time, 
+                    $velocity * $params.fm1.velocityList[0]
                 );
                 $params.fm1.velocityList.rotate(1);
             }
             
             if ($grid[FM2][pos] === true) {
                 fm2.trigger(
-                time, 
-                $velocity * $params.fm2.velocityList[0],
+                    time, 
+                    $velocity * $params.fm2.velocityList[0],
                 );
                 $params.fm2.velocityList.rotate(1);
             }
