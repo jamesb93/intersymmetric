@@ -1,5 +1,4 @@
 <script>
-    import { recentParamName, recentParamValue } from './stores.js';
     export let value;
     export let min = "0";
     export let max = "100";
@@ -8,9 +7,6 @@
     export let func = () => {};
     export let logScale = false;
     let tempValue = value;
-
-    $: $recentParamValue = value; 
-    $: value, $recentParamName = title;
 
     function inputFunc() {
         value = tempValue;
