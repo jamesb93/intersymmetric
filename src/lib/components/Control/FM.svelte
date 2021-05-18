@@ -1,5 +1,5 @@
 <script>
-    import { socket, params, length, pitchOffset, trackPitch } from "../stores.js";
+    import { socket, params, length, pitchOffset, trackPitch, trackShape } from "../stores.js";
     import ASlider from "../ASlider.svelte";
     import VelocityList from "../VelocityList.svelte";
     import ControlTitle from "./ControlTitle.svelte";
@@ -9,18 +9,18 @@
     export let instrument;  
     export let id;
 
-    const pitchIndex = id === 'fm1' ? 4 : 5
+    const trackIdx = id === 'fm1' ? 4 : 5
 
-    $: instrument.fund.rampTo($params[id].frequency * freqMap($pitchOffset+$trackPitch[pitchIndex]), 0.1);
+    $: instrument.fund.rampTo($params[id].frequency * freqMap($pitchOffset+$trackPitch[trackIdx]), 0.1);
     $: instrument.c1ratio.rampTo($params[id].c1ratio, 0.1);
     $: instrument.c2ratio.rampTo($params[id].c2ratio, 0.1)
     $: instrument.c3ratio.rampTo($params[id].c3ratio, 0.1)
     $: instrument.fm2to1.factor.rampTo($params[id].fm2to1, 0.1)
     $: instrument.fm3to2.factor.rampTo($params[id].fm3to2, 0.1)
     $: instrument.fm3to1.factor.rampTo($params[id].fm3to1, 0.1)
-    $: instrument.c1env.release = $params[id].c1release * ($length)
-    $: instrument.c2env.release = $params[id].c2release * ($length)
-    $: instrument.c3env.release = $params[id].c3release * ($length)
+    $: instrument.c1env.release = $params[id].c1release * ($length, Math.max($trackShape[trackIdx], 0.01))
+    $: instrument.c2env.release = $params[id].c2release * ($length, Math.max($trackShape[trackIdx], 0.01))
+    $: instrument.c3env.release = $params[id].c3release * ($length, Math.max($trackShape[trackIdx], 0.01))
     $: instrument.op1gain.gain.rampTo($params[id].op1gain * 0.33, 0.1);
     $: instrument.op2gain.gain.rampTo($params[id].op2gain * 0.33, 0.1);
     $: instrument.op3gain.gain.rampTo($params[id].op3gain * 0.33, 0.1);

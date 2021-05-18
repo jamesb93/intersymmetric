@@ -1,21 +1,28 @@
 <script>
-    import { socket, params, length, pitchOffset, trackPitch  } from "$lib/components/stores.js";
+    import { 
+        socket, 
+        params, 
+        length, 
+        pitchOffset, 
+        trackPitch, trackShape,
+    } from "$lib/components/stores.js";
+    import { clip } from '$lib/components/utility.js';
     import { snare } from "$lib/instruments/ensemble.js";
     import ASlider from "../ASlider.svelte";
     import VelocityList from "../VelocityList.svelte";
     import ControlTitle from "./ControlTitle.svelte";
     import ControlContainer from "./ControlContainer.svelte";
     import { freqMap } from "../utility.js";
-    
+
     $: snare.filter.frequency.rampTo(
         $params.snare.frequency * freqMap($pitchOffset + $trackPitch[1]), 0.1
     );
-    $: snare.env.attack = $params.snare.attack * $length;
-    $: snare.env.decay = $params.snare.decay * $length;
-    $: snare.env.release = $params.snare.release * $length;
+    $: snare.env.attack = $params.snare.attack * $length * $trackShape[1];
+    $: snare.env.decay = $params.snare.decay * $length * $trackShape[1];
+    $: snare.env.release = $params.snare.release * $length * $trackShape[1];
     $: snare.env.sustain = $params.snare.sustain
     $: snare.membrane.frequency.rampTo($params.snare.membraneFreq * freqMap($pitchOffset), 0.1)
-    $: snare.waveshaper.order = $params.snare.order;
+    $: snare.waveshaper.order = clip(Math.round($params.snare.order), 1, 100);
 
     const uFrequency = () => {
         socket.emit('params::snare', 'frequency', $params.snare.frequency);

@@ -1,19 +1,34 @@
 <script>
-    import { socket, params, length, pitchOffset, trackPitch } from "../stores.js";
+    import { 
+        socket, 
+        params, 
+        length, 
+        pitchOffset, 
+        trackPitch, trackShape 
+    } from "../stores.js";
     import ASlider from "../ASlider.svelte";
     import VelocityList from "../VelocityList.svelte";
     import ControlTitle from "./ControlTitle.svelte";
     import ControlContainer from "./ControlContainer.svelte";
-    import { rng } from "./rng.js";
     import { kick } from '$lib/instruments/ensemble.js';
     import { freqMap } from "$lib/components/utility.js";
 
-    $: kick.membrane.octaves = $params.kick.octaves
-    $: kick.membrane.frequency.rampTo($params.kick.frequency * freqMap($pitchOffset+$trackPitch[0]), 0.1)
-    $: kick.membrane.envelope.attack = $params.kick.attack * $length;
-    $: kick.membrane.envelope.sustain = $params.kick.sustain;
-    $: kick.membrane.envelope.decay = $params.kick.decay * $length;
-    $: kick.membrane.envelope.release = $params.kick.release * $length;
+    $: kick.membrane.octaves = Math.max($params.kick.octaves, 0);
+    $: kick.membrane.frequency.rampTo(
+        Math.max(0, $params.kick.frequency * freqMap($pitchOffset+$trackPitch[0])), 
+        0.01)
+    $: kick.membrane.envelope.attack = Math.max(
+        $params.kick.attack * $length * Math.max($trackShape[0], 0.1), 
+        0
+        );
+    $: kick.membrane.envelope.sustain = Math.max($params.kick.sustain, 0);
+    $: kick.membrane.envelope.decay = Math.max(
+        $params.kick.decay * $length * Math.max($trackShape[0], 0.1), 0
+        );
+    $: kick.membrane.envelope.release = Math.max(
+        $params.kick.release * $length * Math.max($trackShape[0], 0.1), 
+        0
+        );
     $: kick.distortion.distortion = $params.kick.distortion;
 
     const uFrequency = () => {
@@ -50,16 +65,6 @@
     socket.on('params::kick::decay', (data) => {$params.kick.decay = data});
     socket.on('params::kick::release', (data) => {$params.kick.release = data});
     socket.on('params::kick::sustain', (data) => {$params.kick.sustain = data});
-
-    const randomise = () => {
-        $params.kick.frequency = rng(35, 90); uFrequency();
-        $params.kick.octaves = rng(0.5, 8); uOctaves();
-        $params.kick.attack = rng(0.001, 0.09); uAttack();
-        $params.kick.decay = rng(0.001, 1); uDecay();
-        $params.kick.sustain = rng(0.001, 1); uSustain();
-        $params.kick.release = rng(0.001, 1.4); uRelease();
-        $params.kick.distortion = rng(0.0, 1.0); uDistortion();
-    }
 </script>
 
 <ControlContainer>
@@ -72,5 +77,4 @@
     <ASlider title="Release" min="0.0" max="1.4" step="0.05" bind:value={$params.kick.release} func={uRelease} />
     <ASlider title="Distortion" min="0.0" max="1.0" step="0.01" bind:value={$params.kick.distortion} func={uDistortion} />
     <VelocityList id="kick" bind:value={$params.kick.velocityList}/>
-    <!-- <Presets bind:data={$params} key={'kick'} /> -->
 </ControlContainer>
