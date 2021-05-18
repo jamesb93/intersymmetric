@@ -6,11 +6,13 @@
     import BoxButton from "./BoxButton.svelte";
     import Clock from "./Control/Clock.svelte";
     
+    import patterns from '$lib/presets/velocity.json'
     import { 
         socket, play, states, clockMode, grid, mirrorPoint,
         velocity, length, offset, pitchOffset, bpm,
         clockMultiplierLookup,
-        maxCells, userInteracted, params
+        maxCells, userInteracted, params,
+        velocityPattern
     } from './stores.js'
     
     import { 
@@ -34,6 +36,7 @@
     function sendMultiplier() { socket.emit('clock::multiplier', $clockMultiplierLookup) };
     function sendPitchOffset() { socket.emit('pitchOffset', $pitchOffset) };
     function sendMaxCells() { socket.emit('maxCells', $maxCells) };
+    function sendVelocityPattern() { socket.emit('velocityPattern', $velocityPattern) };
     
     function updatePlayStatus(status) {
         play.set(status)
@@ -71,7 +74,7 @@
         $offset.start = t
     }
     $: Tone.Transport.bpm.value = $bpm;
-
+    $: selectedPattern = patterns[$velocityPattern];
     
     // Declare indices here so you can easily swap the order.
     const FM1 = 4
@@ -90,58 +93,54 @@
     let loop;
     
     if (browser) {
+
         loop = new Tone.Loop(time => {
             if ($grid[KICK][pos] === true) {
                 kick.trigger(
                     time, 
-                    $velocity * $params.kick.velocityList[0], 
+                    $velocity * selectedPattern[0],
                     $length
                 );
-                $params.kick.velocityList.rotate(1);
             } 
             
             if ($grid[SNARE][pos] === true) {
                 snare.trigger(
                     time, 
-                    $velocity * $params.snare.velocityList[0],
+                    $velocity * selectedPattern[0],
                     $length
                 );
-                $params.snare.velocityList.rotate(1);
             }
             
             if ($grid[M1][pos] === true) {
                 metal1.trigger(
                     time, 
-                    $velocity * $params.metal1.velocityList[0],
+                    $velocity * selectedPattern[0],
                     $length
                 );
-                $params.metal1.velocityList.rotate(1);
             }
             
             if ($grid[M2][pos] === true) {
                 metal2.trigger(
                     time, 
-                    $velocity * $params.metal2.velocityList[0],
+                    $velocity * selectedPattern[0],
                     $length
                 );
-                $params.metal2.velocityList.rotate(1);
             }
             
             if ($grid[FM1][pos] === true) {
                 fm1.trigger(
                     time, 
-                    $velocity * $params.fm1.velocityList[0]
+                    $velocity * selectedPattern[0]
                 );
-                $params.fm1.velocityList.rotate(1);
             }
             
             if ($grid[FM2][pos] === true) {
                 fm2.trigger(
                     time, 
-                    $velocity * $params.fm2.velocityList[0],
+                    $velocity * selectedPattern[0]
                 );
-                $params.fm2.velocityList.rotate(1);
             }
+            selectedPattern.rotate(1)
             
             prePos = pos;
             
@@ -228,8 +227,24 @@
         <div id='mirror' class='control-column-container'>
             <div></div>
             <div id='other-knobs'>
-                <Knob enabled={$states.mirrorPoint} resetValue={8} scale=0.125 title="Mirror Point" min={1} max={15} bind:value={$mirrorPoint} func={sendMirrorPoint} />
-                <Knob enabled={$states.globalVelocity} resetValue={1.0} scale=0.01 title="Velocity" min={0} max={1} step={0.01} bind:value={$velocity} func={sendVelocity} />
+                <Knob 
+                title="Mirror Point"
+                enabled={$states.mirrorPoint} resetValue={8} 
+                scale=0.125 min={1} max={15} 
+                bind:value={$mirrorPoint} func={sendMirrorPoint} 
+                />
+                <Knob 
+                title="Velocity"
+                enabled={$states.globalVelocity} resetValue={1.0} 
+                scale=0.01 min={0} max={1} step={0.01} 
+                bind:value={$velocity} func={sendVelocity} 
+                />
+                <Knob 
+                title="Pattern"
+                enabled={$states.velocityPattern} resetValue={0.0} 
+                scale=0.25 min={1} max={24} step={1} 
+                bind:value={$velocityPattern} func={sendVelocityPattern} 
+                />
             </div>
             <BoxButton func={ () => mirrorWithPoint(grid, $mirrorPoint) } text="Mirror H" />
         </div>
