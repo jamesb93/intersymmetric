@@ -173,7 +173,7 @@
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true}
-            scale=0.05
+            scale=0.01
             title="Shape"
             showTitle={false}
             resetValue={1.0}
