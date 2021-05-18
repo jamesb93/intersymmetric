@@ -6,9 +6,6 @@
     } from "$lib/components/stores.js";
 	import { createRoomID } from '$lib/components/utility.js';
     import RoomPrompt from "$lib/components/RoomPrompt.svelte";
-    import Editor from '$lib/components/Editor.svelte';
-
-
     let storedRoom = null;
 
     if (browser) {
