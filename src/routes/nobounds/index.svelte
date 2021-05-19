@@ -7,7 +7,7 @@
 	import Metal from "$lib/components/Control/Metal.svelte";
 	import FM from "$lib/components/Control/FM.svelte";
 	import { metal1, metal2, fm1, fm2 } from '$lib/instruments/ensemble.js';
-	import { workshopID } from '$lib/components/stores.js';
+	import { workshopID, room } from '$lib/components/stores.js';
 	$workshopID = "nobounds";
 </script>
 
@@ -15,12 +15,12 @@
 	<Grid />
 	{#if browser}
 	<div class="synth-controls">
-		<Snare />
-		<Kick />
-		<Metal id="metal1" instrument={metal1} />
-		<Metal id="metal2" instrument={metal2} />
-		<FM id="fm1" instrument={fm1} />
-		<FM id="fm2" instrument={fm2} />
+		<Snare hide={ !$room.includes('test') } />
+		<Kick hide={ !$room.includes('test') } />
+		<Metal id="metal1" instrument={metal1} hide={ !$room.includes('test') } />
+		<Metal id="metal2" instrument={metal2} hide={ !$room.includes('test') } />
+		<FM id="fm1" instrument={fm1} hide={ !$room.includes('test') } />
+		<FM id="fm2" instrument={fm2} hide={ !$room.includes('test') } />
 	</div>
 	{/if}
 </div>
