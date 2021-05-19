@@ -24,7 +24,7 @@ if (browser) {
     
     // Compressor Options
     const compOpts = {
-        attack: 1 / 1000,
+        attack: 10 / 1000,
         release: 300 / 1000,
         ratio: 4,
         knee: 5,
@@ -34,18 +34,18 @@ if (browser) {
     // Connect together the master bus DSP
     const masterLimiter = new Tone.Limiter(-3)
         .toDestination();
-    const masterComp = new Tone.Compressor(compOpts)
+    const verb = new Tone.Reverb(0.25)
         .connect(masterLimiter);
-    const verb = new Tone.Reverb(0.4)
-        .connect(masterComp);
+    const masterComp = new Tone.Compressor(compOpts)
+        .fan(masterLimiter, verb);
     
     // Connect instruments to the master bus processing chain
-    kick.out.fan(masterComp, verb);
-    snare.out.fan(masterComp, verb);
-    metal1.out.fan(masterComp, verb);
-    metal2.out.fan(masterComp, verb);
-    fm1.out.fan(masterComp, verb);
-    fm2.out.fan(masterComp, verb);
+    kick.out.fan(masterComp);
+    snare.out.fan(masterComp);
+    metal1.out.fan(masterComp);
+    metal2.out.fan(masterComp);
+    fm1.out.fan(masterComp);
+    fm2.out.fan(masterComp);
     // export them so you can use them all around the app
 }
 
