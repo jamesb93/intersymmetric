@@ -13,13 +13,15 @@
     import { kick } from '$lib/instruments/ensemble.js';
     import { freqMap } from "$lib/components/utility.js";
 
+    export let hide = false;
+
     $: kick.membrane.octaves = Math.max($params.kick.octaves, 0);
     $: {
         let calculatedFreq = Math.max(
             0, 
             $params.kick.frequency * freqMap($pitchOffset + $trackPitch[0])
         );
-        if ( !Number.isNaN(calculatedFreq) ) {
+        if ( !Number.isNaN(calculatedFreq) && Math.sign(calculatedFreq) === 1) {
             kick.membrane.frequency.rampTo(calculatedFreq, 0.1)
         }
     }
@@ -73,7 +75,7 @@
     socket.on('params::kick::sustain', (data) => {$params.kick.sustain = data});
 </script>
 
-<ControlContainer>
+<ControlContainer hide={ hide }>
     <ControlTitle title="Kick Synth"/>
     <ASlider logScale={true} title="Frequency" min="35" max="90" bind:value={$params.kick.frequency} func={uFrequency} />
     <ASlider title="Octaves" min="0.5" max="8" step="0.5" bind:value={$params.kick.octaves} func={uOctaves}/>

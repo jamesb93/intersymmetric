@@ -14,6 +14,8 @@
     import ControlContainer from "./ControlContainer.svelte";
     import { freqMap } from "../utility.js";
 
+    export let hide = false;
+
     $: snare.filter.frequency.rampTo(
         $params.snare.frequency * freqMap($pitchOffset + $trackPitch[1]), 0.1
     );
@@ -61,7 +63,7 @@
     socket.on('params::snare::frequency', data => $params.snare.frequency = data);
 </script>
 
-<ControlContainer>
+<ControlContainer hide={ hide }>
     <ControlTitle title="Snare"/>
     <ASlider logScale={true} min="300" max="5000" step="1" title="filter freq" bind:value={$params.snare.frequency} func={uFrequency} />
     <ASlider min="0.001" max="1.0" step="0.001" title="attack" bind:value={$params.snare.attack} func={uAttack} />

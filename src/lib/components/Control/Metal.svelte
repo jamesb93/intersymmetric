@@ -14,6 +14,7 @@
 
     export let instrument;
     export let id;
+    export let hide = false;
 
     const trackIdx = id === 'metal1' ? 2 : 3
 
@@ -75,7 +76,7 @@
     socket.on('params::'+id+'::release', data => {$params[id].release = data})
 </script>
 
-<ControlContainer>
+<ControlContainer hide={ hide }>
     <ControlTitle title="Metal Synthesis" />
     <ASlider logScale={true} min="10" max="5000" step="1" title="Frequency" bind:value={$params[id].frequency} func={uFrequency} />
     <ASlider min="0.0" max="5.1" step="0.1" title="Harmonicity" bind:value={$params[id].harmonicity} func={uHarmonicity} />

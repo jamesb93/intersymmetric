@@ -8,6 +8,7 @@
 
     export let instrument;  
     export let id;
+    export let hide = false;
 
     const trackIdx = id === 'fm1' ? 4 : 5
 
@@ -18,9 +19,9 @@
     $: instrument.fm2to1.factor.rampTo($params[id].fm2to1, 0.1)
     $: instrument.fm3to2.factor.rampTo($params[id].fm3to2, 0.1)
     $: instrument.fm3to1.factor.rampTo($params[id].fm3to1, 0.1)
-    $: instrument.c1env.release = $params[id].c1release * ($length, Math.max($trackShape[trackIdx], 0.01))
-    $: instrument.c2env.release = $params[id].c2release * ($length, Math.max($trackShape[trackIdx], 0.01))
-    $: instrument.c3env.release = $params[id].c3release * ($length, Math.max($trackShape[trackIdx], 0.01))
+    $: instrument.c1env.release = $params[id].c1release * ($length * Math.max($trackShape[trackIdx], 0.01))
+    $: instrument.c2env.release = $params[id].c2release * ($length * Math.max($trackShape[trackIdx], 0.01))
+    $: instrument.c3env.release = $params[id].c3release * ($length * Math.max($trackShape[trackIdx], 0.01))
     $: instrument.op1gain.gain.rampTo($params[id].op1gain * 0.33, 0.1);
     $: instrument.op2gain.gain.rampTo($params[id].op2gain * 0.33, 0.1);
     $: instrument.op3gain.gain.rampTo($params[id].op3gain * 0.33, 0.1);
@@ -80,7 +81,7 @@
     socket.on('params::'+id+'::op3gain', data => $params[id].op3gain = data);
 </script>
 
-<ControlContainer>
+<ControlContainer hide={ hide }>
     <ControlTitle title="3OP FM"/>
     <ASlider logScale={true} title="Frequency" min="1" max="100000" bind:value={$params[id].frequency} func={uFrequency} />
     <ASlider title="Ratio 1" min="0.0" max="1000" bind:value={$params[id].c1ratio} func={uc1ratio} />
