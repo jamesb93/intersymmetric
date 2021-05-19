@@ -70,13 +70,7 @@
 <script>
     import { onMount } from 'svelte';
     import { recentParamName, recentParamValue } from '$lib/components/stores.js';
-    function resetHandler() {
-        if (resetValue !== null) {
-            value = resetValue
-            $recentParamValue = value
-            func()
-        }
-    }
+
     const clip = (i, low, high) => {
         return Math.min(Math.max(i, low), high)
     }
@@ -200,6 +194,15 @@
         element.dataset.dash = length
         length = length
     };
+
+    function resetHandler() {
+        if (resetValue !== null) {
+            value = resetValue;
+            internal = value;
+            $recentParamValue = value;
+            func()
+        }
+    }
     
     function mapRange(x, inMin, inMax, outMin, outMax)  {
         return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
