@@ -90,12 +90,21 @@
         "membraneFreq": 100
     },
     "10" : {
-        "frequency": 5000.000000000022,
+        "frequency": 5000,
+        "attack": 0.001,
+        "decay": 1,
+        "sustain": 1,
+        "release": 1,
+        "order": 2,
+        "membraneFreq": 600
+    },
+        "11" : {
+        "frequency": 5000,
         "attack": 0.001,
         "decay": 1,
         "sustain": 1,
         "release": 0.942,
         "order": 7,
-        "membraneFreq": 633
+        "membraneFreq": 1233
     }
 }
