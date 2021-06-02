@@ -64,10 +64,9 @@
             presets = fm2Preset
 
         let numPresets = Object.keys(presets).length;
-        let preset1 = Math.floor($trackSound[x] * numPresets);
-        preset1 = Math.min(preset1, numPresets-2)
+        let preset1 = Math.floor($trackSound[x] * numPresets-1);
         let preset2 = preset1 + 1
-        let amount = (Math.min($trackSound[x], 0.99999999) * numPresets-1) % 1.0;
+        let amount = $trackSound[x] % 1.0;
          
 		let result = d3.interpolateObject(
 			presets[preset1], 
@@ -159,8 +158,8 @@
             enabled={true}
             title="Sound"
             showTitle={false}
-            scale=0.01 min={0} max={1}
-            step={0.001}
+            scale=0.001 min={0} max={1.0}
+            step={0.0001}
             bind:value={ $trackSound[x] } 
             func={ () => {updateSound(x); socket.emit('trackSound', $trackSound)} } 
             />
