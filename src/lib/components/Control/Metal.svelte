@@ -32,7 +32,10 @@
         $params[id].decay * Math.max($length, 0.1) * Math.max($trackShape[trackIdx], 0.01)
     );
     $: instrument.source.envelope.release = (
-        $params[id].release * Math.max($length, 0.1) * Math.max($trackShape[trackIdx], 0.01)
+        Math.max(
+            $params[id].release * Math.max($length, 0.1) * Math.max($trackShape[trackIdx], 0.01),
+            0
+        )
     );
 
 
@@ -86,6 +89,4 @@
     <ASlider min="0.001" max="1" step="0.001" title="attack" bind:value={$params[id].attack} func={uAttack} />
     <ASlider min="0.001" max="2" step="0.001" title="decay" bind:value={$params[id].decay} func={uDecay} />
     <ASlider min="0.001" max="1" step="0.001" title="release" bind:value={$params[id].release} func={uRelease} />
-    <VelocityList id={id} bind:value={$params[id].velocityList}/>
-    <!-- <Presets bind:data={$params} key={id} /> -->
 </ControlContainer>

@@ -11,7 +11,7 @@
     import ControlTitle from "./ControlTitle.svelte";
     import ControlContainer from "./ControlContainer.svelte";
     import { kick } from '$lib/instruments/ensemble.js';
-    import { freqMap } from "$lib/components/utility.js";
+    import { freqMap, clip } from "$lib/components/utility.js";
 
     export let hide = false;
 
@@ -29,7 +29,8 @@
         $params.kick.attack * $length * Math.max($trackShape[0], 0.1), 
         0
         );
-    $: kick.membrane.envelope.sustain = Math.max($params.kick.sustain, 0);
+    $: kick.membrane.envelope.sustain = clip($params.kick.sustain, 0.0, 1.0);
+
     $: kick.membrane.envelope.decay = Math.max(
         $params.kick.decay * $length * Math.max($trackShape[0], 0.1), 0
         );
@@ -37,7 +38,7 @@
         $params.kick.release * $length * Math.max($trackShape[0], 0.1), 
         0
         );
-    $: kick.distortion.distortion = $params.kick.distortion;
+    $: kick.distortion.distortion = clip($params.kick.distortion, 0.0, 1.0);
 
     const uFrequency = () => {
         socket.emit('params::kick', 'frequency', $params.kick.frequency);
