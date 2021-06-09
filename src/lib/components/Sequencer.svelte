@@ -158,8 +158,8 @@
             enabled={true}
             title="Sound"
             showTitle={false}
-            scale=0.001 min={0} max={1.0}
-            step={0.001}
+            scale=0.0025 min={0} max={1.0}
+            step={0.0001}
             bind:value={ $trackSound[x] } 
             func={ () => {updateSound(x); socket.emit('trackSound', $trackSound)} } 
             />
