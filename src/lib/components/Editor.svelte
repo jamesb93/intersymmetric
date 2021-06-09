@@ -1,6 +1,6 @@
 <script>
 	import BoxButton from '$lib/components/BoxButton.svelte';
-    import { params } from "$lib/components/stores.js";
+    import { params, room } from "$lib/components/stores.js";
 	$: json = JSON.stringify($params, null, 4)
     const saveTextAsFile = (textToWrite, fileNameToSaveAs) => {
     	var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'}); 
@@ -20,10 +20,8 @@
     }
 </script>
 
-<div class="container">
+<div class="container" class:hide={ !$room.includes('test') }>
 	<BoxButton func={ () => {saveTextAsFile(json, 'data.json')} } text='Download' />
-
-
 </div>
 
 <style>
@@ -33,9 +31,9 @@
 		width: 100px;
 		height: 30px;
 		padding-top: 10px;
-
 	}
 
-	button {
+	.hide {
+		display: none;
 	}
 </style>
