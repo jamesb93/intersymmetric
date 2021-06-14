@@ -9,9 +9,9 @@ const sendGrid = (store) => {
 
 export const rotateGridColumn = (store, amt, column) => {
     let grid = get(store);
-    grid[column] = grid[column].rotate(amt)
+    grid[column].rotate(amt)
     store.set(grid);
-    sendGrid()
+    sendGrid(store)
 }
 
 export const mirrorWithPoint = (store, axis) => {
