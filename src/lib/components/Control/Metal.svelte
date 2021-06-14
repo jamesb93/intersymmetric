@@ -1,10 +1,7 @@
 <script>
     import { 
-        socket, 
-        params, 
-        length,
-        pitchOffset, 
-        trackPitch, trackShape
+        socket, params, length,
+        pitchOffset, trackPitch, trackShape
     } from '$lib/app.js';
     import ASlider from "../ASlider.svelte";
     import VelocityList from "../VelocityList.svelte";
