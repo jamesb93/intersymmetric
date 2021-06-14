@@ -11,7 +11,7 @@ socket.on('connect', () => {
 })
 
 // Velocity Patterns
-export const velocityPattern = writable(1);
+export const velocityPattern = writable(0);
 socket.on('velocityPattern', x => velocityPattern.set(x));
 
 // No Bounds MetaData // Interpolation
