@@ -3,6 +3,6 @@
     import { browser } from '$app/env';
 
     if (browser) {
-        goto('/nobounds');
+        goto('/seq-1');
     }
 </script>
