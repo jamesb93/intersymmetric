@@ -1,15 +1,23 @@
 <script>
-    import Cell from "./Cell.svelte";
-    import Knob from "./Knob.svelte";
-    import Arrow from './Arrow.svelte';
+    import kickPreset from '$lib/presets/kick.json'
+    import snarePreset from '$lib/presets/snare.json';
+    import metal1Preset from '$lib/presets/metal1.json';
+    import metal2Preset from '$lib/presets/metal2.json';
+    import fm1Preset from '$lib/presets/fm1.json';
+    import fm2Preset from '$lib/presets/fm2.json';
+    import Cell from "$lib/components/Cell.svelte";
+    import Knob from "$lib/components/Knob.svelte";
+    import Arrow from '$lib/components/Arrow.svelte';
     
     import { shiftColumnDown, shiftColumnUp, rotateGridColumn } from '$lib/grid/transforms.js';
     import { 
         socket, states, grid, gridValid, euclidSteps,
         trackPitch, trackSound, trackShape,
         params
-    } from './stores.js';
-    import { getPattern } from "./euclid.js";
+    } from '$lib/app.js';
+    import { getPattern } from "$lib/grid/euclid.js";
+
+    import * as d3 from 'd3';
 
     export let prePos = 0;
     let anyMouseDown = false;
@@ -21,19 +29,6 @@
         socket.emit('euclid', $euclidSteps);
         sendGrid();
     }
-
-    // 0. Make the JSON files
-    // 1. Import the rest of the JSON files 
-    // 2. Automatically select the right one depending on which knob was turned
-    // 3. Check for any threading wackiness. Can you share this function around?
-    import kickPreset from '$lib/presets/kick.json'
-    import snarePreset from '$lib/presets/snare.json';
-    import metal1Preset from '$lib/presets/metal1.json';
-    import metal2Preset from '$lib/presets/metal2.json';
-    import fm1Preset from '$lib/presets/fm1.json';
-    import fm2Preset from '$lib/presets/fm2.json';
-
-    import * as d3 from 'd3';
 
     let instrumentMap = [
         'kick','snare',
@@ -83,6 +78,7 @@
 <svelte:window on:mouseup={()=>{anyMouseDown=false}} />
 
 <div class="sequencer">
+    {#if $gridValid}
     <div class="euclids">
         <span class="knob-category">Pattern</span>
         {#each {length: 6} as _, x}
@@ -97,6 +93,7 @@
             />
         {/each}
     </div>
+    {/if}
     <div class="grid">
     {#if $gridValid}
         {#each $grid as row, x}
@@ -132,9 +129,12 @@
                 {/if}
             </div>
         {/each}
+    {:else}
+    <div id='error'>Connecting to the server...</div>
     {/if}
     </div>
-
+    
+    {#if $gridValid}
     <div class="euclids">
         <span class="knob-category">Pitch</span>
         {#each {length: 6} as _, x}
@@ -181,6 +181,7 @@
             />
         {/each}
     </div>
+    {/if}
 </div>
 
 <style>

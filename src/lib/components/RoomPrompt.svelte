@@ -1,6 +1,6 @@
 <script>
-    import { socket, room, workshopID } from "$lib/components/stores.js"
-    import { createRoomID } from '$lib/components/utility.js'
+    import { socket, room, workshopID } from "$lib/app.js"
+    import { createRoomID } from '$lib/utility.js'
 	let everUsed = false;
     let code = ""
     

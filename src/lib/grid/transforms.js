@@ -1,4 +1,4 @@
-import { socket } from "../components/stores.js";
+import { socket } from "../app.js";
 import { mirror, deepCopy } from "./matrix.js";
 import { get } from "svelte/store";
 

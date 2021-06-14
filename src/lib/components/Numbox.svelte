@@ -41,11 +41,8 @@
     }
 </script>
 
-<!-- on:mousemove={ moveHandler }  -->
-<!-- on:mouseup={ handleMouseUp }  -->
-<svelte:window 
-on:keydown={ keyDownHandler }
-/>
+<svelte:window on:keydown={ keyDownHandler } />
+
 <div class="container">
     <span class="title">{title}</span>
     <input 

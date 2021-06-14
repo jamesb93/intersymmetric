@@ -13,7 +13,7 @@
         clockMultiplierLookup,
         maxCells, userInteracted, params,
         velocityPattern
-    } from './stores.js'
+    } from '$lib/app.js'
     
     import { 
         mirrorWithPoint,
@@ -22,7 +22,7 @@
     } from "$lib/grid/transforms.js";
     
     import { kick, snare, fm1, fm2, metal1, metal2 } from '$lib/instruments/ensemble.js';
-    import { wrap } from './utility.js';
+    import { wrap } from '$lib/utility.js';
     
     const multiplierTable = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0.875,0.75,0.66,0.5,0.33,0.25,0.125,0];
     $: clockMultiplier = multiplierTable[$clockMultiplierLookup];

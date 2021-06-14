@@ -1,8 +1,8 @@
 <script>
     import { browser } from '$app/env';
-    import { room } from '$lib/components/stores.js';
-    import SequencerControl from './SequencerControl.svelte';
-    import Sequencer from './Sequencer.svelte';
+    import { room } from '$lib/app.js';
+    import SequencerControl from '$lib/components/SequencerControl.svelte';
+    import Sequencer from '$lib/components/Sequencer.svelte';
     import Footer from '$lib/components/Footer.svelte';
     import Header from '$lib/components/Header.svelte';
     // We define this here because the Tone.js callback is a little finnicky.

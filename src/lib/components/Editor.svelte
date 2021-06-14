@@ -1,6 +1,6 @@
 <script>
 	import BoxButton from '$lib/components/BoxButton.svelte';
-    import { params, room } from "$lib/components/stores.js";
+    import { params, room } from "$lib/app.js";
 	$: json = JSON.stringify($params, null, 4)
     const saveTextAsFile = (textToWrite, fileNameToSaveAs) => {
     	var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'}); 

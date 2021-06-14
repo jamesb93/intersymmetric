@@ -1,6 +1,5 @@
 <script>
-    import { socket } from '$lib/components/stores.js';
-    let joined = false;
+    import { socket } from '$lib/app.js';
     let grid = null;
     let interval = null;
     socket.emit('roomJoin', 'rewire.test');

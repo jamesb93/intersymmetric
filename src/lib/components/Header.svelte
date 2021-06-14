@@ -3,8 +3,8 @@
     import { 
         socket, numUsers, workshopID, 
         room, recentParamValue, recentParamName
-    } from "$lib/components/stores.js";
-	import { createRoomID } from '$lib/components/utility.js';
+    } from "$lib/app.js";
+	import { createRoomID } from '$lib/utility.js';
     import RoomPrompt from "$lib/components/RoomPrompt.svelte";
     let storedRoom = null;
 

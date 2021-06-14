@@ -4,7 +4,7 @@
     import VelocityList from "../VelocityList.svelte";
     import ControlTitle from "./ControlTitle.svelte";
     import ControlContainer from "./ControlContainer.svelte";
-    import { freqMap } from "../utility.js";
+    import { freqMap } from "$lib/utility.js";
 
     export let instrument;  
     export let id;

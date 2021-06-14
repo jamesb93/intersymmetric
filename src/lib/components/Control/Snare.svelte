@@ -73,5 +73,4 @@
     <ASlider logScale={true} min="30" max="15000" step="1" title="membrane frequency" bind:value={$params.snare.membraneFreq} func={uMembraneFreq} />
     <ASlider min="1" max="50" step="1" title="waveshaping" bind:value={$params.snare.order} func={uOrder} />
     <VelocityList id="snare" bind:value={$params.snare.velocityList}/>
-    <!-- <Presets bind:data={$params} key={'snare'} /> -->
 </ControlContainer>

@@ -7,7 +7,8 @@
 	import Metal from "$lib/components/Control/Metal.svelte";
 	import FM from "$lib/components/Control/FM.svelte";
 	import { metal1, metal2, fm1, fm2 } from '$lib/instruments/ensemble.js';
-	import { workshopID, room } from '$lib/components/stores.js';
+	import { workshopID, room } from '$lib/app.js';
+	
 	$workshopID = "nobounds";
 </script>
 

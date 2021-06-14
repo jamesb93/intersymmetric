@@ -1,8 +1,8 @@
 <script>
-    import { socket } from './stores.js';
+    import { socket } from '$lib/app.js';
     export let value;
-    let internalValue = "";
     export let id = ""
+    let internalValue = "";
 
     socket.on('velocityList', (identifier, value) => {
         if (id === identifier) {
