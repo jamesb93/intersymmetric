@@ -25,17 +25,14 @@
             kick.membrane.frequency.rampTo(calculatedFreq, 0.1)
         }
     }
-    $: kick.membrane.envelope.attack = Math.max(
-        $params.kick.attack * $length * Math.max($trackShape[0], 0.1), 
-        0
-        );
+    $: kick.membrane.envelope.attack = Math.max($params.kick.attack * $length * Math.max($trackShape[0], 0.01), 0);
     $: kick.membrane.envelope.sustain = clip($params.kick.sustain, 0.0, 1.0);
 
     $: kick.membrane.envelope.decay = Math.max(
-        $params.kick.decay * $length * Math.max($trackShape[0], 0.1), 0
+        $params.kick.decay * $length * Math.max($trackShape[0], 0.01), 0
         );
     $: kick.membrane.envelope.release = Math.max(
-        $params.kick.release * $length * Math.max($trackShape[0], 0.1), 
+        $params.kick.release * $length * Math.max($trackShape[0], 0.01), 
         0
         );
     $: kick.distortion.distortion = clip($params.kick.distortion, 0.0, 1.0);
