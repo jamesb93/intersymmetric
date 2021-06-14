@@ -136,6 +136,21 @@
     
     {#if $gridValid}
     <div class="euclids">
+        <span class="knob-category">Sound</span>
+        {#each {length: 6} as _, x}
+            <Knob WIDTH={50} HEIGHT={50} 
+            enabled={true}
+            title="Sound"
+            showTitle={false}
+            scale=0.0025 min={0} max={1.0}
+            step={0.0001}
+            bind:value={ $trackSound[x] } 
+            func={ () => {updateSound(x); socket.emit('trackSound', $trackSound)} } 
+            />
+        {/each}
+    </div>
+
+    <div class="euclids">
         <span class="knob-category">Pitch</span>
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
@@ -147,21 +162,6 @@
             step=1 min={-24} max={24} 
             bind:value={ $trackPitch[x] } 
             func={ () => socket.emit('trackPitch', $trackPitch) } 
-            />
-        {/each}
-    </div>
-
-    <div class="euclids">
-        <span class="knob-category">Sound</span>
-        {#each {length: 6} as _, x}
-            <Knob WIDTH={50} HEIGHT={50} 
-            enabled={true}
-            title="Sound"
-            showTitle={false}
-            scale=0.0025 min={0} max={1.0}
-            step={0.0001}
-            bind:value={ $trackSound[x] } 
-            func={ () => {updateSound(x); socket.emit('trackSound', $trackSound)} } 
             />
         {/each}
     </div>

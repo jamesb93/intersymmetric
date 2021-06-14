@@ -5,11 +5,13 @@
     import Knob from "./Knob.svelte";
     import BoxButton from "./BoxButton.svelte";
     import Clock from "./Control/Clock.svelte";
+    import { kick, snare, fm1, fm2, metal1, metal2 } from '$lib/instruments/ensemble.js';
+    import { wrap } from '$lib/utility.js';
     
     import patterns from '$lib/presets/velocity.json'
     import { 
         socket, play, states, clockMode, grid, mirrorPoint,
-        velocity, length, offset, pitchOffset, bpm,
+        length, offset, pitchOffset, bpm,
         clockMultiplierLookup,
         maxCells, userInteracted, params,
         velocityPattern
@@ -21,14 +23,10 @@
         clearGrid, randomiseGrid
     } from "$lib/grid/transforms.js";
     
-    import { kick, snare, fm1, fm2, metal1, metal2 } from '$lib/instruments/ensemble.js';
-    import { wrap } from '$lib/utility.js';
-    
     const multiplierTable = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0.875,0.75,0.66,0.5,0.33,0.25,0.125,0];
     $: clockMultiplier = multiplierTable[$clockMultiplierLookup];
     
     // Sending Data Back to the Server
-    function sendVelocity() { socket.emit('velocity', $velocity) };
     function sendLength() { socket.emit('length', $length) };
     function sendOffset() { socket.emit('clock::offset', $offset) };
     function sendBpm() { socket.emit('bpm', $bpm) };
@@ -74,31 +72,29 @@
         $offset.start = t
     }
     $: Tone.Transport.bpm.value = $bpm;
-    $: selectedPattern = patterns[$velocityPattern];
+    $: selectedPattern = patterns[$velocityPattern + 12];
     
     // Declare indices here so you can easily swap the order.
-    const FM1 = 4
-    const FM2 = 5
+    const KICK = 0;
+    const SNARE = 1;
     const M1 = 2
     const M2 = 3
-    const SNARE = 1;
-    const KICK = 0;
+    const FM1 = 4
+    const FM2 = 5
     
     let internalPos = 0;
     let clockDirection = 1;
+    let loop;
     
     export let pos = 0;
     export let prePos = 0;
     
-    let loop;
-    
     if (browser) {
-
         loop = new Tone.Loop(time => {
             if ($grid[KICK][pos] === true) {
                 kick.trigger(
                     time, 
-                    $velocity * selectedPattern[0],
+                    selectedPattern[0],
                     $length
                 );
             } 
@@ -106,7 +102,7 @@
             if ($grid[SNARE][pos] === true) {
                 snare.trigger(
                     time, 
-                    $velocity * selectedPattern[0],
+                    selectedPattern[0],
                     $length
                 );
             }
@@ -114,7 +110,7 @@
             if ($grid[M1][pos] === true) {
                 metal1.trigger(
                     time, 
-                    $velocity * selectedPattern[0],
+                    selectedPattern[0],
                     $length
                 );
             }
@@ -122,7 +118,7 @@
             if ($grid[M2][pos] === true) {
                 metal2.trigger(
                     time, 
-                    $velocity * selectedPattern[0],
+                    selectedPattern[0],
                     $length
                 );
             }
@@ -130,14 +126,14 @@
             if ($grid[FM1][pos] === true) {
                 fm1.trigger(
                     time, 
-                    $velocity * selectedPattern[0]
+                    selectedPattern[0]
                 );
             }
             
             if ($grid[FM2][pos] === true) {
                 fm2.trigger(
                     time, 
-                    $velocity * selectedPattern[0]
+                    selectedPattern[0]
                 );
             }
             selectedPattern.rotate(1)
@@ -194,8 +190,7 @@
 </script>
 
 <div id="all-controls">
-    <div id='left-section'>
-    </div>
+    <div id='left-section'></div>
 
     <div id='centre-section'>
         <div id='clock' class='control-column-container'>
@@ -234,15 +229,9 @@
                 bind:value={$mirrorPoint} func={sendMirrorPoint} 
                 />
                 <Knob 
-                title="Velocity"
-                enabled={$states.globalVelocity} resetValue={1.0} 
-                scale=0.01 min={0} max={1} step={0.01} 
-                bind:value={$velocity} func={sendVelocity} 
-                />
-                <Knob 
                 title="Pattern"
                 enabled={$states.velocityPattern} resetValue={0.0} 
-                scale=0.25 min={1} max={24} step={1} 
+                scale=0.25 min={-11} max={11} step={1}
                 bind:value={$velocityPattern} func={sendVelocityPattern} 
                 />
             </div>
