@@ -5,13 +5,13 @@
         length, 
         pitchOffset, 
         trackPitch, trackShape 
-    } from "../stores.js";
+    } from '$lib/app.js';
     import ASlider from "../ASlider.svelte";
     import VelocityList from "../VelocityList.svelte";
     import ControlTitle from "./ControlTitle.svelte";
     import ControlContainer from "./ControlContainer.svelte";
     import { kick } from '$lib/instruments/ensemble.js';
-    import { freqMap, clip } from "$lib/components/utility.js";
+    import { freqMap, clip } from "$lib/utility.js";
 
     export let hide = false;
 

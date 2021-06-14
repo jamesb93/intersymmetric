@@ -1,5 +1,5 @@
 <script>
-    import { grid, maxCells, prevInsertions, socket } from "$lib/stores.js";
+    import { grid, maxCells, prevInsertions, socket } from "$lib/app.js";
     export let y;
     export let x;
     export let func;

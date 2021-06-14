@@ -1,5 +1,5 @@
 <script>
-    import { socket, params, length, pitchOffset, trackPitch, trackShape } from "../stores.js";
+    import { socket, params, length, pitchOffset, trackPitch, trackShape } from '$lib/app.js';
     import ASlider from "../ASlider.svelte";
     import VelocityList from "../VelocityList.svelte";
     import ControlTitle from "./ControlTitle.svelte";

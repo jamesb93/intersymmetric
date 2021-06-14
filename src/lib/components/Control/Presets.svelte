@@ -1,5 +1,5 @@
 <script>
-    import { socket } from "../stores.js";
+    import { socket } from '$lib/app.js';
     export let data;
     export let key;
 

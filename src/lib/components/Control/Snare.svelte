@@ -5,14 +5,13 @@
         length, 
         pitchOffset, 
         trackPitch, trackShape,
-    } from "$lib/components/stores.js";
-    import { clip } from '$lib/components/utility.js';
+    } from '$lib/app.js';
+    import { clip, freqMap } from '$lib/utility.js';
     import { snare } from "$lib/instruments/ensemble.js";
     import ASlider from "../ASlider.svelte";
     import VelocityList from "../VelocityList.svelte";
     import ControlTitle from "./ControlTitle.svelte";
     import ControlContainer from "./ControlContainer.svelte";
-    import { freqMap } from "../utility.js";
 
     export let hide = false;
 

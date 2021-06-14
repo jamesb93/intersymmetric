@@ -5,12 +5,12 @@
         length,
         pitchOffset, 
         trackPitch, trackShape
-    } from "../stores.js";
+    } from '$lib/app.js';
     import ASlider from "../ASlider.svelte";
     import VelocityList from "../VelocityList.svelte";
     import ControlTitle from "./ControlTitle.svelte";
     import ControlContainer from "./ControlContainer.svelte";
-    import { freqMap } from "../utility.js";
+    import { freqMap } from "$lib/utility.js";
 
     export let instrument;
     export let id;

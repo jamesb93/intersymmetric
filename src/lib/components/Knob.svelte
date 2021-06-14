@@ -69,7 +69,7 @@
 
 <script>
     import { onMount } from 'svelte';
-    import { recentParamName, recentParamValue } from '$lib/components/stores.js';
+    import { recentParamName, recentParamValue } from '$lib/app.js';
 
     const clip = (i, low, high) => {
         return Math.min(Math.max(i, low), high)
