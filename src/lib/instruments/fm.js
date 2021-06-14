@@ -10,7 +10,7 @@ class FMSynth {
     this._fm3to1 = 0.0;
     this._fm2to1 = 0.0;
 
-    this.out = new Tone.Gain(1.0);
+    this.out = new Tone.Gain(0.83);
     this.opLim = new Tone.Limiter(-1.0).connect(this.out);
 
     this.op1gain = new Tone.Gain(1.0).connect(this.opLim);
