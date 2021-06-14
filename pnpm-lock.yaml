@@ -14,7 +14,6 @@ specifiers:
 dependencies:
   global: 4.4.0
   socket.io-client: 4.1.2
-  tone: 14.7.77
 
 devDependencies:
   '@sveltejs/adapter-node': 1.0.0-next.26
@@ -22,6 +21,7 @@ devDependencies:
   '@sveltejs/kit': 1.0.0-next.115_svelte@3.38.2
   d3: 6.7.0
   svelte: 3.38.2
+  tone: 14.7.77
   vite: 2.3.7
 
 packages:
@@ -30,7 +30,7 @@ packages:
     resolution: {integrity: sha512-JELkvo/DlpNdJ7dlyw/eY7E0suy5i5GQH+Vlxaq1nsNJ+H7f4Vtv3jMeCEgRhZZQFXTjldYfQgv2qmM6M1v5wA==}
     dependencies:
       regenerator-runtime: 0.13.7
-    dev: false
+    dev: true
 
   /@rollup/pluginutils/4.1.0:
     resolution: {integrity: sha512-TrBhfJkFxA+ER+ew2U2/fHbebhLT/l/2pRk0hfj9KusXUuRXd2v0R58AfaZK9VXDQ4TogOSEmICVrQAA3zFnHQ==}
@@ -105,7 +105,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.14.0
       tslib: 2.2.0
-    dev: false
+    dev: true
 
   /backo2/1.0.2:
     resolution: {integrity: sha1-MasayLEpNjRj41s+u2n038+6eUc=}
@@ -540,7 +540,7 @@ packages:
 
   /regenerator-runtime/0.13.7:
     resolution: {integrity: sha512-a54FxoJDIr27pgf7IgeQGxmqUNYrcV338lf/6gH456HZ/PhX+5BcwHXG9ajESmwe6WRO0tAzRUrRmNONWgkrew==}
-    dev: false
+    dev: true
 
   /require-relative/0.8.7:
     resolution: {integrity: sha1-eZlTn8ngR6N5KPoZb44VY9q9Nt4=}
@@ -615,7 +615,7 @@ packages:
       '@babel/runtime': 7.14.0
       automation-events: 4.0.1
       tslib: 2.2.0
-    dev: false
+    dev: true
 
   /supports-color/7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
@@ -642,11 +642,11 @@ packages:
     dependencies:
       standardized-audio-context: 25.2.5
       tslib: 2.2.0
-    dev: false
+    dev: true
 
   /tslib/2.2.0:
     resolution: {integrity: sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==}
-    dev: false
+    dev: true
 
   /vite/2.3.7:
     resolution: {integrity: sha512-Y0xRz11MPYu/EAvzN94+FsOZHbSvO6FUvHv127CyG7mV6oDoay2bw+g5y9wW3Blf8OY3chaz3nc/DcRe1IQ3Nw==}

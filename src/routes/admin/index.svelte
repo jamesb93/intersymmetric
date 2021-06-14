@@ -1,7 +1,6 @@
 <script>
     import Header from '$lib/components/Header.svelte';
-    import _AdminControl from './_AdminControl.svelte';
-<Header />
+    import AdminControl from './_AdminControl.svelte';
 </script>
 
 <Header />
