@@ -11,7 +11,6 @@
     export let hide = false;
 
     const trackIdx = id === 'fm1' ? 4 : 5
-
     $: instrument.fund.rampTo($params[id].frequency * freqMap($pitchOffset+$trackPitch[trackIdx]), 0.1);
     $: instrument.c1ratio.rampTo($params[id].c1ratio, 0.1);
     $: instrument.c2ratio.rampTo($params[id].c2ratio, 0.1)

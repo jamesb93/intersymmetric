@@ -14,7 +14,6 @@
     import ControlContainer from "./ControlContainer.svelte";
 
     export let hide = false;
-
     $: snare.filter.frequency.rampTo(
         $params.snare.frequency * freqMap($pitchOffset + $trackPitch[1]), 0.1
     );
