@@ -1,28 +1,8 @@
-<div id="container">
-    <ul id="list">
-        <li>
-            <!-- <a href="/nobounds">nobounds</a> -->
-        </li>
-        <li>
-            <!-- <a href="/rewire">rewire</a> -->
-        </li>
-    </ul>
-</div>
+<script>
+    import { goto } from '$app/navigation';
+    import { browser } from '$app/env';
 
-<style>
-    #list > * {
-        display: block;
+    if (browser) {
+        goto('/nobounds');
     }
-    #list > li {
-        padding: 20px;
-        font-size: 20px;
-    }
-
-    #container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    
-</style>
+</script>
