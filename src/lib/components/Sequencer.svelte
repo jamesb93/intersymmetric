@@ -100,7 +100,7 @@
             <div class="cell-container">
                 {#if x === 0}
                     {#each row as _, y}
-                        <Arrow direction="up" func={ () => {shiftColumnUp(grid, y)} } />
+                        <Arrow direction="up" func={ () => shiftColumnUp(grid, y) } />
                     {/each}
                 {/if}
             </div>
