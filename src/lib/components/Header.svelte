@@ -8,20 +8,20 @@
     import RoomPrompt from "$lib/components/RoomPrompt.svelte";
     let storedRoom = null;
 
-    if (browser) {
-        storedRoom = localStorage.getItem(
-            createRoomID($workshopID, "mfrtjbcode")
-        );
+    // if (browser) {
+    //     storedRoom = localStorage.getItem(
+    //         createRoomID($workshopID, "mfrtjbcode")
+    //     );
 
-        if (storedRoom === null) {
-            storedRoom = ''
-        }
+    //     if (storedRoom === null) {
+    //         storedRoom = ''
+    //     }
 
-        if (storedRoom !== null && storedRoom !== '') {
-            socket.emit('roomJoin', createRoomID($workshopID, storedRoom));
-            room.set(storedRoom)
-        }
-    }
+    //     if (storedRoom !== null && storedRoom !== '') {
+    //         socket.emit('roomJoin', createRoomID($workshopID, storedRoom));
+    //         room.set(storedRoom)
+    //     }
+    // }
 
     console.log("%c Intersymmetric Version 0.1", 'background: #222; color: #bada55');
 </script>
