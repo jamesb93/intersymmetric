@@ -5,6 +5,21 @@
     import { createRoomID } from '$lib/utility.js'
 	let everUsed = false;
     let code = ""
+
+    let placeholder = '...'
+    let blink = null;
+    function createBlink() {
+        blink = setInterval(() => {
+            placeholder = placeholder === '...' ? '' : '...';
+        }, 750)
+    }
+
+    function stopBlink() {
+        clearInterval(blink);
+        placeholder = ''
+    }
+
+    createBlink();
     
     function handleChange() {
         everUsed = true;
@@ -22,8 +37,10 @@
     <input type='text'
         class:init={!everUsed} 
         bind:value={code} 
-        on:change={handleChange} 
-        placeholder={ everUsed === false && $room === '' ? '...' : $room }
+        on:change={handleChange}
+        on:focus={ stopBlink }
+        on:blur={ createBlink }
+        placeholder={ everUsed === false && $room === '' ? placeholder : $room }
         id='room-input'
     />
 </div>
