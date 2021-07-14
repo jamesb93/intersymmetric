@@ -10,13 +10,12 @@
     import { browser } from '$app/env';
 	import { workshopID, room, socket } from '$lib/app.js';
 	import { createRoomID } from '$lib/utility.js';
-	import { Grid } from '$lib/components/Grid.svelte'
+	import Grid from '$lib/components/Grid.svelte'
     export let id;
 
 	$workshopID = "nobounds.sample";
-    const roomCode = createRoomID($workshopID, id);
-
     $room = id;
+    const roomCode = createRoomID($workshopID, id);
     socket.emit('roomJoin', roomCode);
 </script>
 

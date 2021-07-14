@@ -19,9 +19,8 @@
     export let id;
 
 	$workshopID = "nobounds";
-    const roomCode = createRoomID($workshopID, id);
-
     $room = id;
+    const roomCode = createRoomID($workshopID, id);
     socket.emit('roomJoin', roomCode);
 </script>
 

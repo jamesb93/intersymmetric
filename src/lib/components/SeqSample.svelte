@@ -71,8 +71,6 @@
             $params[instrumentMap[x]][key] = value
         }
     }
-
-
 </script>
 
 <svelte:window on:mouseup={ ()=>{ anyMouseDown=false } } />
@@ -142,10 +140,9 @@
             enabled={true}
             title="Sound"
             showTitle={false}
-            scale=0.0025 min={0} max={1.0}
-            step={0.0001}
-            bind:value={ $trackSound[x] } 
-            func={ () => {updateSound(x); socket.emit('trackSound', $trackSound)} } 
+            scale=0.1 min={0} max={117} 
+            bind:value={ $sampleSelectors[x] } 
+            func={ () => updateSample(x) } 
             />
         {/each}
     </div>
@@ -157,11 +154,11 @@
             enabled={true}
             title="Pitch"
             showTitle={false}
-            resetValue={0.0}
+            resetValue={1.0}
             scale=0.1
-            step=1 min={-24} max={24} 
-            bind:value={ $trackPitch[x] } 
-            func={ () => socket.emit('trackPitch', $trackPitch) } 
+            step=0.01 min={0.01} max={16.0} 
+            bind:value={ $trackRates[x] } 
+            func={ () => socket.emit('trackRates', $trackRates) } 
             />
         {/each}
     </div>
@@ -171,13 +168,13 @@
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true}
-            scale=0.01
+            scale=0.05
             title="Shape"
             showTitle={false}
             resetValue={1.0}
-            step=0.01 min={0.0} max={1.0} 
-            bind:value={ $trackShape[x] } 
-            func={ () => socket.emit('trackShape', $trackShape) } 
+            step=0.01 min={0.1} max={10.0} 
+            bind:value={ $trackLengths[x] } 
+            func={ () => socket.emit('trackLengths', $trackLengths) } 
             />
         {/each}
     </div>

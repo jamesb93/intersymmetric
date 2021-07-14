@@ -5,7 +5,7 @@
     import Knob from "./Knob.svelte";
     import BoxButton from "./BoxButton.svelte";
     import Clock from "./Control/Clock.svelte";
-    import { kick, snare, fm1, fm2, metal1, metal2 } from '$lib/instruments/ensemble.js';
+    import { Sampler } from '$lib/instruments/sampler.js'
     import { wrap } from '$lib/utility.js';
     
     import patterns from '$lib/presets/velocity.json'
