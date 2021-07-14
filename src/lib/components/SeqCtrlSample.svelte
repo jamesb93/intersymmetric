@@ -131,51 +131,9 @@
             })
 
         loop = new Tone.Loop(time => {
-            if ($grid[KICK][pos] === true) {
-                kick.trigger(
-                    time, 
-                    selectedPattern[0],
-                    $length
-                );
-            } 
-            
-            if ($grid[SNARE][pos] === true) {
-                snare.trigger(
-                    time, 
-                    selectedPattern[0],
-                    $length
-                );
-            }
-            
-            if ($grid[M1][pos] === true) {
-                metal1.trigger(
-                    time, 
-                    selectedPattern[0],
-                    $length
-                );
-            }
-            
-            if ($grid[M2][pos] === true) {
-                metal2.trigger(
-                    time, 
-                    selectedPattern[0],
-                    $length
-                );
-            }
-            
-            if ($grid[FM1][pos] === true) {
-                fm1.trigger(
-                    time, 
-                    selectedPattern[0]
-                );
-            }
-            
-            if ($grid[FM2][pos] === true) {
-                fm2.trigger(
-                    time, 
-                    selectedPattern[0]
-                );
-            }
+            if (pos === 0)
+                samplers[0].trigger(time, $sampleSelectors[0], $velocity, $length * $trackLengths[0])
+    
             selectedPattern.rotate(1)
             
             prePos = pos;
