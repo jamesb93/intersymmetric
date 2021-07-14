@@ -14,7 +14,8 @@
         length, offset, pitchOffset, bpm,
         clockMultiplierLookup,
         maxCells, userInteracted, params,
-        velocityPattern
+        velocityPattern,
+        trackLengths, trackRates, sampleSelectors
     } from '$lib/app.js'
     
     import { 
@@ -132,7 +133,7 @@
 
         loop = new Tone.Loop(time => {
             if (pos === 0)
-                samplers[0].trigger(time, $sampleSelectors[0], $velocity, $length * $trackLengths[0])
+                samplers[0].trigger(time, $sampleSelectors[0], $length * $trackLengths[0])
     
             selectedPattern.rotate(1)
             

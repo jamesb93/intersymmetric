@@ -12,7 +12,8 @@
     import { shiftColumnDown, shiftColumnUp, rotateGridColumn } from '$lib/grid/transforms.js';
     import { 
         socket, states, grid, gridValid, euclidSteps,
-        trackPitch, trackSound, trackShape,
+        trackLengths, trackRates, sampleSelectors,
+        trackSound,
         params
     } from '$lib/app.js';
     import { getPattern } from "$lib/grid/euclid.js";
