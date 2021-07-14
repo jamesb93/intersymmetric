@@ -7,17 +7,17 @@
     "preview": "svelte-kit preview"
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "next",
     "@sveltejs/adapter-node": "next",
+    "@sveltejs/adapter-static": "next",
     "@sveltejs/kit": "next",
     "d3": "^6.7.0",
-    "svelte": "^3.38.2",
-    "vite": "^2.3.7",
-    "tone": "^14.7.77"
+    "svelte": "^3.38.3",
+    "tone": "^14.7.77",
+    "vite": "^2.4.2"
   },
   "type": "module",
   "dependencies": {
     "global": "^4.4.0",
-    "socket.io-client": "^4.1.2"
+    "socket.io-client": "^4.1.3"
   }
 }
