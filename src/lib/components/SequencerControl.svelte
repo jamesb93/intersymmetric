@@ -73,6 +73,21 @@
     }
     $: Tone.Transport.bpm.value = $bpm;
     $: selectedPattern = patterns[$velocityPattern + 12];
+
+    // Reactivity for Samplers (we might do this a different way)
+    // $: if (samplers !== null) {
+    //         samplers.forEach((sampler, i) => {
+    //         sampler.envelope.release = $length * $trackLengths[i];
+    //     })
+    // }
+
+    // $: if (samplers !== null) {
+    //     samplers.forEach((sampler,i) => {
+    //         sampler.players.forEach(player => {
+    //             player.playbackRate = $trackRates[i] * $playbackRate;
+    //         })
+    //     })
+    // }
     
     // Declare indices here so you can easily swap the order.
     const KICK = 0;
@@ -88,8 +103,33 @@
     
     export let pos = 0;
     export let prePos = 0;
+
+    // Data For Samplers
+    const numSamples = 118;
+    let buffers = [];
+    let samplers = null;
+    let loaded = false;
+    
     
     if (browser) {
+        // Load Samples
+        for (let i=1; i <= numSamples; i++) {
+            const url = '/rewire_samples/compressed/' +i+ '.mp3';
+            const buf = new Tone.ToneAudioBuffer(url)
+            buffers.push(buf);
+        }
+
+        Tone.loaded()
+            .then(() => {
+                samplers = [];
+                for (let i = 0; i < 6; i++) {
+                    const x = new Sampler(buffers);
+                    x.output.fan(reverb, dac);
+                    samplers.push(x);
+                }
+                loaded = true;
+            })
+
         loop = new Tone.Loop(time => {
             if ($grid[KICK][pos] === true) {
                 kick.trigger(
