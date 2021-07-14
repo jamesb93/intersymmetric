@@ -75,7 +75,7 @@
 
 </script>
 
-<svelte:window on:mouseup={()=>{anyMouseDown=false}} />
+<svelte:window on:mouseup={ ()=>{ anyMouseDown=false } } />
 
 <div class="sequencer">
     {#if $gridValid}
