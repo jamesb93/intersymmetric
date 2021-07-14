@@ -14,6 +14,8 @@ socket.on('connect', () => {
 export const velocityPattern = writable(0);
 socket.on('velocityPattern', x => velocityPattern.set(x));
 
+// Sample Data
+
 // No Bounds MetaData // Interpolation
 export const trackSound = writable( new Array(6).fill(0.5) );
 export const trackPitch = writable( new Array(6).fill(0.0) );
