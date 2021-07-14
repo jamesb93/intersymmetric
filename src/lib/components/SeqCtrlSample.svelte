@@ -111,8 +111,12 @@
     let samplers = null;
     let loaded = false;
     
-    
+
     if (browser) {
+        // Create some dac / sound stuff
+        const reverb = new Tone.Reverb(0.4).toDestination();
+        const dac = new Tone.Gain(1.0).toDestination();
+
         // Load Samples
         for (let i=1; i <= numSamples; i++) {
             const url = '/rewire_samples/compressed/' +i+ '.mp3';
