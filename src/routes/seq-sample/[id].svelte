@@ -8,9 +8,10 @@
 
 <script>
     import { browser } from '$app/env';
+	import { onMount } from 'svelte';
 	import { workshopID, room, socket } from '$lib/app.js';
 	import { createRoomID } from '$lib/utility.js';
-	import Grid from '$lib/components/Grid.svelte'
+	import Grid from '$lib/components/Grid.svelte';
     export let id;
 
 	$workshopID = "nobounds.sample";
@@ -20,7 +21,7 @@
 </script>
 
 <div class="main-layout">
-	<Grid />
+	<Grid mode={'sample'} />
 </div>
 	
 <style>
@@ -28,10 +29,5 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-	}
-
-	.synth-controls {
-		display: flex;
-		flex-direction: row;
 	}
 </style>

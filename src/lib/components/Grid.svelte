@@ -1,13 +1,15 @@
 <script>
     import { browser } from '$app/env';
     import { room } from '$lib/app.js';
-    import { page } from '$app/stores.js'
+    import { page } from '$app/stores';
     import SeqCtrlSynth from '$lib/components/SeqCtrlSynth.svelte';
     import SeqCtrlSample from '$lib/components/SeqCtrlSample.svelte';
     import SeqSynth from '$lib/components/SeqSynth.svelte';
     import SeqSample from '$lib/components/SeqSample.svelte';
     import Footer from '$lib/components/Footer.svelte';
     import Header from '$lib/components/Header.svelte';
+
+    export let mode = ''
     // We define this here because the Tone.js callback is a little finnicky.
     let pos = 0;
     let prePos = 0;
@@ -17,12 +19,12 @@
     <Header />
 	<div class='line' />
     {#if browser && $room !== ''}
-        {#if $page.path.slice(0, 7) === '/seq-1/'}
+        {#if mode === 'synth'}
         <SeqCtrlSynth bind:pos={pos} bind:prePos={prePos} />
         <SeqSynth bind:prePos={prePos} />
         {/if}
 
-        {#if $page.path.slice(0, 12) === '/seq-sample/'}
+        {#if mode === 'sample'}
         <SeqCtrlSample bind:pos={pos} bind:prePos={prePos} />
         <SeqSample bind:prePos={prePos} />
         {/if}

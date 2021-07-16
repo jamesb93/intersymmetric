@@ -25,7 +25,7 @@
 </script>
 
 <div class="main-layout">
-	<Grid />
+	<Grid mode={'synth'} />
 	{#if browser}
 	<div class="synth-controls">
 		<Snare hide={ !$room.includes('test') } />

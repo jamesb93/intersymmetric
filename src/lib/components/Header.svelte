@@ -1,35 +1,16 @@
 <script>
-    import { browser } from '$app/env';
     import { 
-        socket, numUsers, workshopID, 
-        room, recentParamValue, recentParamName
+        numUsers, recentParamValue, recentParamName
     } from "$lib/app.js";
-	import { createRoomID } from '$lib/utility.js';
     import RoomPrompt from "$lib/components/RoomPrompt.svelte";
-    let storedRoom = null;
 
-    // if (browser) {
-    //     storedRoom = localStorage.getItem(
-    //         createRoomID($workshopID, "mfrtjbcode")
-    //     );
-
-    //     if (storedRoom === null) {
-    //         storedRoom = ''
-    //     }
-
-    //     if (storedRoom !== null && storedRoom !== '') {
-    //         socket.emit('roomJoin', createRoomID($workshopID, storedRoom));
-    //         room.set(storedRoom)
-    //     }
-    // }
-
-    console.log("%c Intersymmetric Version 0.1", 'background: #222; color: #bada55');
+    console.log("%c Intersymmetric Version 0.2", 'background: #222; color: #bada55');
 </script>
 
 <header>
     <div id="title">
         <span>Intersymmetric Works</span>
-        <span>Grid Sequencer 01</span>
+        <span>Sequencer 01</span>
     </div>
     <div id="room">
         <RoomPrompt />

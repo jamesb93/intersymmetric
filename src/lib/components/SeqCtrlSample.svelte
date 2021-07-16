@@ -13,10 +13,13 @@
         socket, play, states, clockMode, grid, mirrorPoint,
         length, offset, pitchOffset, bpm,
         clockMultiplierLookup,
-        maxCells, userInteracted, params,
+        maxCells, userInteracted,
         velocityPattern,
-        trackLengths, trackRates, sampleSelectors
+        trackLengths, trackRates, sampleSelectors,
+        playbackRate
     } from '$lib/app.js'
+
+    import { sampleResource, info } from '$lib/samplerConfig.js';
     
     import { 
         mirrorWithPoint,
@@ -33,7 +36,7 @@
     function sendBpm() { socket.emit('bpm', $bpm) };
     function sendMirrorPoint() { socket.emit('mirrorPoint', $mirrorPoint) };
     function sendMultiplier() { socket.emit('clock::multiplier', $clockMultiplierLookup) };
-    function sendPitchOffset() { socket.emit('pitchOffset', $pitchOffset) };
+    function sendPlaybackRate() { socket.emit('playbackRate', $playbackRate) };
     function sendMaxCells() { socket.emit('maxCells', $maxCells) };
     function sendVelocityPattern() { socket.emit('velocityPattern', $velocityPattern) };
     
@@ -52,20 +55,12 @@
     function startLoop() {
         userInteracted.set(true);
         updatePlayStatus(true)
-        socket.emit('play', $play)
     }
     
     function stopLoop() {
         userInteracted.set(true);
         updatePlayStatus(false)
-        socket.emit('play', $play)
     }
-    
-    socket.on('play', x => {
-        if ($userInteracted) {
-            updatePlayStatus(x)
-        }
-    })
     
     $: if ($offset.start > $offset.end) {
         let t = $offset.end
@@ -76,27 +71,22 @@
     $: selectedPattern = patterns[$velocityPattern + 12];
 
     // Reactivity for Samplers (we might do this a different way)
-    // $: if (samplers !== null) {
-    //         samplers.forEach((sampler, i) => {
-    //         sampler.envelope.release = $length * $trackLengths[i];
-    //     })
-    // }
+    $: if (samplers !== null) {
+            samplers.forEach((sampler, i) => {
+            sampler.envelope.release = $length * $trackLengths[i];
+        })
+    }
 
-    // $: if (samplers !== null) {
-    //     samplers.forEach((sampler,i) => {
-    //         sampler.players.forEach(player => {
-    //             player.playbackRate = $trackRates[i] * $playbackRate;
-    //         })
-    //     })
-    // }
+    $: if (samplers !== null) {
+        samplers.forEach((sampler,i) => {
+            sampler.players.forEach(player => {
+                // player.playbackRate = $trackRates[i] * $playbackRate;
+                player.playbackRate = $trackRates[i] * $playbackRate;
+            })
+        })
+    }
     
     // Declare indices here so you can easily swap the order.
-    const KICK = 0;
-    const SNARE = 1;
-    const M1 = 2
-    const M2 = 3
-    const FM1 = 4
-    const FM2 = 5
     
     let internalPos = 0;
     let clockDirection = 1;
@@ -106,38 +96,86 @@
     export let prePos = 0;
 
     // Data For Samplers
-    const numSamples = 118;
-    let buffers = [];
-    let samplers = null;
+    let samplers = [];
     let loaded = false;
-    
 
     if (browser) {
+
         // Create some dac / sound stuff
         const reverb = new Tone.Reverb(0.4).toDestination();
         const dac = new Tone.Gain(1.0).toDestination();
 
-        // Load Samples
-        for (let i=1; i <= numSamples; i++) {
-            const url = '/rewire_samples/compressed/' +i+ '.mp3';
-            const buf = new Tone.ToneAudioBuffer(url)
-            buffers.push(buf);
+        const loadSamplers = async() => {
+            await fetch(sampleResource + 'workshop/info.txt')
+            .then(response => response.text())
+            .then(data => $info=data.split('\n'));
+
+            // Create 6 Samplers
+            for (let i=0; i < 6; i++) {
+                const sampler = new Sampler(); // Create instance of sampler
+                const numSamples = $info[i] // Number of samples in this bank
+                for (let j=0; j < numSamples; j++) {
+                    const url = `${sampleResource}workshop/row-${i}/${j}.mp3`;
+                    sampler.load(url)
+                    sampler.output.fan(reverb, dac)
+                }
+                samplers.push(sampler);
+            }
+            loaded = true;
         }
 
-        Tone.loaded()
-            .then(() => {
-                samplers = [];
-                for (let i = 0; i < 6; i++) {
-                    const x = new Sampler(buffers);
-                    x.output.fan(reverb, dac);
-                    samplers.push(x);
-                }
-                loaded = true;
-            })
+        loadSamplers();
 
         loop = new Tone.Loop(time => {
-            if (pos === 0)
-                samplers[0].trigger(time, $sampleSelectors[0], $length * $trackLengths[0])
+            
+            if ($grid[0][pos] === true)
+                // samplers[0].trigger(time, 1, 1.0, 10.0)
+                samplers[0].trigger(
+                    time, 
+                    $sampleSelectors[0], 
+                    1.0, $length * $trackLengths[0]
+                )
+
+            if ($grid[1][pos] === true)
+                // samplers[0].trigger(time, 1, 1.0, 10.0)
+                samplers[1].trigger(
+                    time, 
+                    $sampleSelectors[1], 
+                    1.0, $length * $trackLengths[1]
+                )
+
+            if ($grid[2][pos] === true)
+                // samplers[0].trigger(time, 1, 1.0, 10.0)
+                samplers[2].trigger(
+                    time, 
+                    $sampleSelectors[2], 
+                    1.0, $length * $trackLengths[2]
+                )
+
+            if ($grid[3][pos] === true)
+                // samplers[0].trigger(time, 1, 1.0, 10.0)
+                samplers[3].trigger(
+                    time, 
+                    $sampleSelectors[3], 
+                    1.0, $length * $trackLengths[3]
+                )
+
+            if ($grid[4][pos] === true)
+                // samplers[0].trigger(time, 1, 1.0, 10.0)
+                samplers[4].trigger(
+                    time, 
+                    $sampleSelectors[4], 
+                    1.0, $length * $trackLengths[4]
+                )
+
+            if ($grid[5][pos] === true)
+                // samplers[0].trigger(time, 1, 1.0, 10.0)
+                samplers[5].trigger(
+                    time, 
+                    $sampleSelectors[5], 
+                    1.0, $length * $trackLengths[5]
+                )
+    
     
             selectedPattern.rotate(1)
             
@@ -188,10 +226,10 @@
             pos = Math.floor(internalPos);
             pos = Math.min(Math.max(pos, $offset.start-1), $offset.end-1);
         }
-    }, "16n").start(0);
+    }, '16n').start(0);
 }
-</script>
 
+</script>
 <div id="all-controls">
     <div id='left-section'></div>
 
@@ -248,10 +286,11 @@
             <Knob
             enabled={$states.pitchOffset} 
             resetValue={0} 
-            title="Pitch Offset" 
-            min={-48} max={48} step={1} 
-            bind:value={$pitchOffset} 
-            func={sendPitchOffset} 
+            title="Rate Scale" 
+            scale=0.1
+            min={0.1} max={4} step={0.1} 
+            bind:value={$playbackRate} 
+            func={sendPlaybackRate} 
             />
             <Knob 
             enabled={$states.globalLength} 

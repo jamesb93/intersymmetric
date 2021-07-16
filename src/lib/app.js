@@ -103,7 +103,7 @@ socket.on('trackGains', x => trackGains.set(x));
 export const trackRates = writable([1.0, 1.0, 1.0, 1.0, 1.0, 1.0]);
 socket.on('trackRates', x => trackRates.set(x));
 
-export const trackLengths = writable([1.0, 1.0, 1.0, 1.0, 1.0, 1.0]);
+export const trackLengths = writable([5.0, 5.0, 5.0, 5.0, 5.0, 5.0]);
 socket.on('trackLengths', x => trackLengths.set(x));
 
 export const playbackRate = writable(1.0);
