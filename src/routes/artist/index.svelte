@@ -8,7 +8,6 @@
     
     function handleButton() {
         const href = route + 'nameofartist';
-        console.log(href)
         goto(href)
     }
 </script>

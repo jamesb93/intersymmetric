@@ -10,7 +10,6 @@
         socket.emit('roomJoin', createRoomID($workshopID, code));
         $room = code;
         const href = '/seq-1/' + code;
-        console.log(href);
         goto('/seq-1/'+ $room)
         code = ""
     }

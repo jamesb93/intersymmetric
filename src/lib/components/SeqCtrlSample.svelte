@@ -1,5 +1,5 @@
 <script>
-    import { browser } from '$app/env';
+    import { onMount } from 'svelte';
     import * as Tone from 'tone';
     import Play from "./Play.svelte";
     import Knob from "./Knob.svelte";
@@ -16,7 +16,7 @@
         maxCells, userInteracted,
         velocityPattern,
         trackLengths, trackRates, sampleSelectors,
-        playbackRate
+        playbackRate, samplesLoaded, numSamples
     } from '$lib/app.js'
 
     import { sampleResource, info } from '$lib/samplerConfig.js';
@@ -37,7 +37,7 @@
 
     // Data For Samplers
     let samplers = [];
-    let loaded = false;
+    let totalNumSamples = 0;
     
     const multiplierTable = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0.875,0.75,0.66,0.5,0.33,0.25,0.125,0];
     $: clockMultiplier = multiplierTable[$clockMultiplierLookup];
@@ -98,37 +98,38 @@
         })
     }
 
-    if (browser) {
-
+    onMount(async() => {
         // Create some dac / sound stuff
         const reverb = new Tone.Reverb(0.4).toDestination();
         const dac = new Tone.Gain(1.0).toDestination();
-
-        const loadSamplers = async() => {
-            const url = sampleResource + 'workshop/' + context + '_config.txt'
-            await fetch(url)
-            .then(response => response.text())
-            .then(data => {
-                const rows = data.split('\n');
-                let banks = [rows[0], rows[2], rows[4], rows[6], rows[8], rows[10]];
-                banks.forEach((bank, i) => {
-                    // const sampler = new Sampler();
-                    let sampleList = bank.split(',').slice(1, bank.length);
-                    sampleList.forEach(s => {
-                        let sampleUrl = s.trim().replaceAll(' ', '+');
-                        sampleUrl = `${sampleResource}workshop/samples/${sampleUrl}`;
-                        const buf = new Tone.ToneAudioBuffer(sampleUrl);
-                        // sampler.load(sampleUrl);
-                        // sampler.output.fan(reverb, dac);
-                    });
-                    // samplers.push(sampler);
-                })
-            });
-        }
-
-        Tone
-
-        loadSamplers();
+        const url = sampleResource + 'workshop/' + context + '_config.txt'
+        await fetch(url)
+        .then(response => response.text())
+        .then(data => {
+            const rows = data.split('\n');
+            let banks = [rows[0], rows[2], rows[4], rows[6], rows[8], rows[10]];
+            // banks.forEach(bank => {
+            //     totalNumSamples += bank.split(',').slice(1, bank.length).length
+            // })
+            banks.forEach((bank, i) => {
+                const sampler = new Sampler();
+                let sampleList = bank.split(',').slice(1, bank.length);
+                $numSamples[i] = sampleList.length;
+                sampleList.forEach(s => {
+                    let sampleUrl = s.trim().replaceAll(' ', '+');
+                    sampleUrl = `${sampleResource}workshop/samples/${sampleUrl}`;
+                    // const buf = new Tone.ToneAudioBuffer(sampleUrl);
+                    sampler.load(sampleUrl);
+                    sampler.output.fan(reverb, dac);
+                });
+                samplers.push(sampler);
+            })
+        });
+        Tone.loaded()
+        .then(() => {
+            console.log('loaded!')
+            $samplesLoaded = true;
+        })
 
         loop = new Tone.Loop(time => {
             
@@ -180,7 +181,6 @@
                     1.0, $length * $trackLengths[5]
                 )
     
-    
             selectedPattern.rotate(1)
             
             prePos = pos;
@@ -230,11 +230,12 @@
             pos = Math.floor(internalPos);
             pos = Math.min(Math.max(pos, $offset.start-1), $offset.end-1);
         }
-    }, '16n').start(0);
-}
-
+        }, '16n').start(0);
+    });
 </script>
+
 <div id="all-controls">
+    {#if $samplesLoaded === true}
     <div id='left-section'></div>
 
     <div id='centre-section'>
@@ -308,6 +309,9 @@
         </div>
         <div></div>
     </div>
+    {:else}
+    <div>Samples are loading...</div>
+    {/if}
 </div>
 
 <style>

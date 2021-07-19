@@ -4,13 +4,12 @@
     import Arrow from '$lib/components/Arrow.svelte';
     
     import { shiftColumnDown, shiftColumnUp, rotateGridColumn } from '$lib/grid/transforms.js';
+    import { getPattern } from "$lib/grid/euclid.js";
     import { 
         socket, states, grid, gridValid, euclidSteps,
         trackLengths, trackRates, sampleSelectors,
+        samplesLoaded, numSamples
     } from '$lib/app.js';
-    import { getPattern } from "$lib/grid/euclid.js";
-
-    import { info } from '$lib/samplerConfig';
 
     export let prePos = 0;
     let anyMouseDown = false;
@@ -27,6 +26,7 @@
 <svelte:window on:mouseup={ ()=>{ anyMouseDown=false } } />
 
 <div class="sequencer">
+    {#if $samplesLoaded === true}
     {#if $gridValid}
     <div class="euclids">
         <span class="knob-category">Pattern</span>
@@ -93,13 +93,12 @@
             title="Sound"
             showTitle={false}
             scale=0.1 
-            min={0} max={$info[x]-1} 
+            min={0} max={ $numSamples[x] } 
             bind:value={ $sampleSelectors[x] }
             func={ () => socket.emit('sampleSelectors', $sampleSelectors) }
             />
         {/each}
     </div>
-
     <div class="euclids">
         <span class="knob-category">Rate</span>
         {#each {length: 6} as _, x}
@@ -131,6 +130,7 @@
             />
         {/each}
     </div>
+    {/if}
     {/if}
 </div>
 

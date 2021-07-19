@@ -13,11 +13,19 @@ socket.on('connect', () => {
 export const userMessage = writable('');
 socket.on('userMessage', x => userMessage.set(x));
 
+// High-Level Information
+export const recentParamValue = writable('')
+export const recentParamName = writable('')
+export const recentSample = writable(null);
+export const userInteracted = writable(false);
+
 // Velocity Patterns
 export const velocityPattern = writable(0);
 socket.on('velocityPattern', x => velocityPattern.set(x));
 
 // Sample Data
+export const samplesLoaded = writable(false);
+export const numSamples = writable([0,0,0,0,0,0])
 
 // No Bounds MetaData // Interpolation
 export const trackSound = writable( new Array(6).fill(0.5) );
@@ -31,12 +39,6 @@ export const workshopID = writable("");
 export const numUsers = writable(0);
 export const room = writable('')
 socket.on('numUsers', x => numUsers.set(x)); 
-
-// High-Level Information
-export const recentParamValue = writable('')
-export const recentParamName = writable('')
-export const recentSample = writable(null);
-export const userInteracted = writable(false);
 
 // Sequencer Data
 export const maxCells = writable(32);
@@ -97,7 +99,7 @@ socket.on('clock::mode', x => clockMode.set(x));
 export const clockMultiplierLookup = writable(0);
 socket.on('clock::multiplier', x => clockMultiplierLookup.set(x));
 
-export const sampleSelectors = writable([0, 0, 0, 0, 0, 0]);
+export const sampleSelectors = writable([0,0,0,0,0,0]);
 socket.on('sampleSelectors', x => sampleSelectors.set(x));
 
 export const trackGains = writable([1.0, 1.0, 1.0, 1.0, 1.0, 1.0]);

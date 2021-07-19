@@ -12,7 +12,6 @@ class Sampler {
     }
 
     load(buffer) {
-        console.log(buffer)
         const player = new Tone.Player(buffer).connect(this.envelope.out);
         this.players.push(player)
     }
