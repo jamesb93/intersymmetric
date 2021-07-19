@@ -11,8 +11,9 @@ class Sampler {
         this.fadeTime = 0.01;
     }
 
-    load(url) {
-        const player = new Tone.Player(url).connect(this.envelope.out);
+    load(buffer) {
+        console.log(buffer)
+        const player = new Tone.Player(buffer).connect(this.envelope.out);
         this.players.push(player)
     }
 

@@ -12,13 +12,14 @@
 	import Grid from '$lib/components/Grid.svelte';
     export let id;
 
-	$workshopID = "sample";
+	$workshopID = 'artist';
+    $room = id;
     const roomCode = createRoomID($workshopID, id);
     socket.emit('roomJoin', roomCode);
 </script>
 
 <div class="main-layout">
-	<Grid mode={'sample'} context={'workshop'}/>
+	<Grid mode={'sample'} context={'artist'} />
 </div>
 	
 <style>

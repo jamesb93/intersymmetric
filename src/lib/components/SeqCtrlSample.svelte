@@ -26,6 +26,18 @@
         invertGridVertical,
         clearGrid, randomiseGrid
     } from "$lib/grid/transforms.js";
+
+    export let pos = 0;
+    export let prePos = 0;
+    export let context = '';
+
+    let internalPos = 0;
+    let clockDirection = 1;
+    let loop;
+
+    // Data For Samplers
+    let samplers = [];
+    let loaded = false;
     
     const multiplierTable = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0.875,0.75,0.66,0.5,0.33,0.25,0.125,0];
     $: clockMultiplier = multiplierTable[$clockMultiplierLookup];
@@ -85,19 +97,6 @@
             })
         })
     }
-    
-    // Declare indices here so you can easily swap the order.
-    
-    let internalPos = 0;
-    let clockDirection = 1;
-    let loop;
-    
-    export let pos = 0;
-    export let prePos = 0;
-
-    // Data For Samplers
-    let samplers = [];
-    let loaded = false;
 
     if (browser) {
 
@@ -106,23 +105,28 @@
         const dac = new Tone.Gain(1.0).toDestination();
 
         const loadSamplers = async() => {
-            await fetch(sampleResource + 'workshop/info.txt')
+            const url = sampleResource + 'workshop/' + context + '_config.txt'
+            await fetch(url)
             .then(response => response.text())
-            .then(data => $info=data.split('\n'));
-
-            // Create 6 Samplers
-            for (let i=0; i < 6; i++) {
-                const sampler = new Sampler(); // Create instance of sampler
-                const numSamples = $info[i] // Number of samples in this bank
-                for (let j=0; j < numSamples; j++) {
-                    const url = `${sampleResource}workshop/row-${i}/${j}.mp3`;
-                    sampler.load(url)
-                    sampler.output.fan(reverb, dac)
-                }
-                samplers.push(sampler);
-            }
-            loaded = true;
+            .then(data => {
+                const rows = data.split('\n');
+                let banks = [rows[0], rows[2], rows[4], rows[6], rows[8], rows[10]];
+                banks.forEach((bank, i) => {
+                    // const sampler = new Sampler();
+                    let sampleList = bank.split(',').slice(1, bank.length);
+                    sampleList.forEach(s => {
+                        let sampleUrl = s.trim().replaceAll(' ', '+');
+                        sampleUrl = `${sampleResource}workshop/samples/${sampleUrl}`;
+                        const buf = new Tone.ToneAudioBuffer(sampleUrl);
+                        // sampler.load(sampleUrl);
+                        // sampler.output.fan(reverb, dac);
+                    });
+                    // samplers.push(sampler);
+                })
+            });
         }
+
+        Tone
 
         loadSamplers();
 

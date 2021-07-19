@@ -10,6 +10,9 @@ socket.on('connect', () => {
     console.log('connected to ', socketAddr)
 })
 
+export const userMessage = writable('');
+socket.on('userMessage', x => userMessage.set(x));
+
 // Velocity Patterns
 export const velocityPattern = writable(0);
 socket.on('velocityPattern', x => velocityPattern.set(x));
@@ -184,4 +187,3 @@ export const params = writable({
     }
 });
 socket.on('params', x => params.set(x)); // get all params in one message
-

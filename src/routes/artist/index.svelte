@@ -4,45 +4,23 @@
     import { fade } from 'svelte/transition';
     import { createRoomID } from '$lib/utility.js'
 
-    export let route = '';
-
-	let everUsed = false;
-    let code = ""
-
-    let placeholder = '...'
-    let blink = null;
-    function createBlink() {
-        blink = setInterval(() => {
-            placeholder = placeholder === '...' ? '' : '...';
-        }, 750)
-    }
-
-    function stopBlink() {
-        clearInterval(blink);
-        placeholder = ''
-    }
-
-    createBlink();
+    export let route = '/artist/';
     
-    function handleChange() {
-        everUsed = true;
-        $room = code;
-        goto(route + $room)
-        code = ""
+    function handleButton() {
+        const href = route + 'nameofartist';
+        console.log(href)
+        goto(href)
     }
 </script>
 
+
 <div class='container' transition:fade>
-    <span id='title'>Enter Room Code</span>
-    <input type='text'
-        class:init={!everUsed} 
-        bind:value={code} 
-        on:change={handleChange}
-        on:focus={ stopBlink }
-        on:blur={ createBlink }
-        placeholder={ everUsed === false && $room === '' ? placeholder : $room }
-        id='room-input'
-    />
+    <span id='title'>dont be a dick
+    </span>
+    <button
+    on:click={ handleButton }>
+    Join
+    </button>
 </div>
 
 <style>

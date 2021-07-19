@@ -10,6 +10,7 @@
     import Header from '$lib/components/Header.svelte';
 
     export let mode = ''
+    export let context = ''
     // We define this here because the Tone.js callback is a little finnicky.
     let pos = 0;
     let prePos = 0;
@@ -25,7 +26,7 @@
         {/if}
 
         {#if mode === 'sample'}
-        <SeqCtrlSample bind:pos={pos} bind:prePos={prePos} />
+        <SeqCtrlSample context={context} bind:pos={pos} bind:prePos={prePos} />
         <SeqSample bind:prePos={prePos} />
         {/if}
     {/if}
