@@ -2,10 +2,10 @@
     import { 
         numUsers, 
         recentParamValue,
-        recentParamName } from "$lib/app.js";
+        recentParamName,
+        userMessage } from "$lib/app.js";
     import RoomPrompt from "$lib/components/RoomPrompt.svelte";
 
-    export let mode = '';
     export let context = '';
 
     console.log("%c Intersymmetric Version 0.2", 'background: #222; color: #bada55');
@@ -16,17 +16,20 @@
         <span>Intersymmetric Works</span>
         <span>Sequencer 01</span>
     </div>
-    <div id="room">
-        {#if context === 'artist'}
-            place for messages
-        {:else}
+    {#if context !== 'artist'}
+        <div id="room">
             <RoomPrompt />
-        {/if}
-    </div>
+        </div>
+    {/if}
     <div id='participants'>
         <span>Users:</span>
         <span>{$numUsers}</span>
     </div>
+    {#if context === 'artist'}
+    <div id='user-message'>
+        { $userMessage }
+    </div>
+    {/if}
     <div id="recent-param">
         <span id='param'>{$recentParamName}</span>
         <div id='value'>
@@ -78,6 +81,12 @@
         margin-top: -10px;
         font-size: 20px;
         padding-top: 11px;
+    }
+
+    #user-message {
+        color: green;
+        text-align: left;
+        white-space: nowrap;
     }
 
 

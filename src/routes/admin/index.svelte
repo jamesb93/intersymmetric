@@ -28,7 +28,7 @@
 
 <div class='text-info'>
     {#if $room !== ''}
-    <span>You are connected to</span>
+    <span>You are connected to {$room}</span>
     <span>There are {$numUsers} users</span>
     {:else}
     <p>You are not connected to any room</p>
@@ -65,9 +65,6 @@
         on:change={ sendMessageForUser }
         placeholder='send an admin message'
         />
-        <button on:click={sendMessageForUser}>
-        send
-        </button>
     </div>
 </div>
 
@@ -107,7 +104,7 @@
 
     .chat > input {
         font-size: 20px;
-        max-width: 90%;
+        width: 400px;
     }
 </style>
 
