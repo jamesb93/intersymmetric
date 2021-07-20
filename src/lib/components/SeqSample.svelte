@@ -96,7 +96,7 @@
             title="Sound"
             showTitle={false}
             scale=0.1 
-            min={0} max={ $numSamples[x] } 
+            min={0} max={ $numSamples[x]-1 } 
             bind:value={ $sampleSelectors[x] }
             func={ () => socket.emit('sampleSelectors', $sampleSelectors) }
             />
