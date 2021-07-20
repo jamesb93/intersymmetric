@@ -7,9 +7,12 @@
     import { getPattern } from "$lib/grid/euclid.js";
     import { 
         socket, states, grid, gridValid, euclidSteps,
-        trackLengths, trackRates, sampleSelectors,
-        samplesLoaded, numSamples
+        trackLengths, trackRates, sampleSelectors
     } from '$lib/app.js';
+
+    import { 
+        samplesLoaded, 
+        numSamples } from '$lib/samplerConfig.js';
 
     export let prePos = 0;
     let anyMouseDown = false;

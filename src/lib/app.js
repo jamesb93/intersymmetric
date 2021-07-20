@@ -23,10 +23,6 @@ export const userInteracted = writable(false);
 export const velocityPattern = writable(0);
 socket.on('velocityPattern', x => velocityPattern.set(x));
 
-// Sample Data
-export const samplesLoaded = writable(false);
-export const numSamples = writable([0,0,0,0,0,0])
-
 // No Bounds MetaData // Interpolation
 export const trackSound = writable( new Array(6).fill(0.5) );
 export const trackPitch = writable( new Array(6).fill(0.0) );

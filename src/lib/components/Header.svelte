@@ -1,8 +1,12 @@
 <script>
     import { 
-        numUsers, recentParamValue, recentParamName
-    } from "$lib/app.js";
+        numUsers, 
+        recentParamValue,
+        recentParamName } from "$lib/app.js";
     import RoomPrompt from "$lib/components/RoomPrompt.svelte";
+
+    export let mode = '';
+    export let context = '';
 
     console.log("%c Intersymmetric Version 0.2", 'background: #222; color: #bada55');
 </script>
@@ -13,7 +17,11 @@
         <span>Sequencer 01</span>
     </div>
     <div id="room">
-        <RoomPrompt />
+        {#if context === 'artist'}
+            place for messages
+        {:else}
+            <RoomPrompt />
+        {/if}
     </div>
     <div id='participants'>
         <span>Users:</span>

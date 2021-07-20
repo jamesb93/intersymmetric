@@ -1,5 +1,6 @@
 import * as Tone from "tone";
 import { Env } from '$lib/instruments/envelope.js';
+import { numLoadedSamples } from '$lib/samplerConfig.js';
 
 class Sampler {
     // A Sampler instance is a collection of Tone.Players
@@ -11,8 +12,11 @@ class Sampler {
         this.fadeTime = 0.01;
     }
 
-    load(buffer) {
-        const player = new Tone.Player(buffer).connect(this.envelope.out);
+    load(buffer, cb) {
+        const player = new Tone.Player(
+            buffer,
+            cb
+            ).connect(this.envelope.out);
         this.players.push(player)
     }
 

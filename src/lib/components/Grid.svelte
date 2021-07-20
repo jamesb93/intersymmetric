@@ -1,7 +1,6 @@
 <script>
     import { browser } from '$app/env';
     import { room } from '$lib/app.js';
-    import { page } from '$app/stores';
     import SeqCtrlSynth from '$lib/components/SeqCtrlSynth.svelte';
     import SeqCtrlSample from '$lib/components/SeqCtrlSample.svelte';
     import SeqSynth from '$lib/components/SeqSynth.svelte';
@@ -17,7 +16,7 @@
 </script>
 
 <div>
-    <Header />
+    <Header mode={mode} context={context} />
 	<div class='line' />
     {#if browser && $room !== ''}
         {#if mode === 'synth'}
