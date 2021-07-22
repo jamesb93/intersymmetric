@@ -1,8 +1,7 @@
 <script>
-    import { socket, room, workshopID } from "$lib/app.js"
+    import { room } from "$lib/app.js"
     import { goto } from '$app/navigation';
     import { fade } from 'svelte/transition';
-    import { createRoomID } from '$lib/utility.js'
 
     export let route = '';
 

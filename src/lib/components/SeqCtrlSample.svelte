@@ -96,7 +96,6 @@
     $: if (samplers !== null) {
         samplers.forEach((sampler,i) => {
             sampler.players.forEach(player => {
-                // player.playbackRate = $trackRates[i] * $playbackRate;
                 player.playbackRate = $trackRates[i] * $playbackRate;
             })
         })
@@ -104,9 +103,11 @@
 
     onMount(async() => {
         // Create some dac / sound stuff
+        console.log('mounted')
         const reverb = new Tone.Reverb(0.4).toDestination();
         const dac = new Tone.Gain(1.0).toDestination();
-        const url = sampleResource + 'workshop/' + context + '_config.txt'
+        const url = sampleResource + 'workshop/' + context + '_config.txt';
+        console.log(url);
         await fetch(url)
         .then(response => response.text())
         .then(data => {
@@ -246,7 +247,7 @@
             <span id='clock-title' class='container-title'>Clock</span>
             <div id='clock-top'>
                 <Play bind:playing={$play} start={startLoop} pause={stopLoop}/>
-                <Knob enabled={$states.bpm} title="Rate" resetValue={120} min={5} max={300} step={1} bind:value={$bpm} func={sendBpm} />
+                <Knob enabled={$states.bpm} title="Pitch" resetValue={120} min={5} max={300} step={1} bind:value={$bpm} func={sendBpm} />
                 <Knob enabled={$states.multiplier} resetValue={0} scale=0.4 title="Multiplier" min={0} max={22} step={1} bind:value={$clockMultiplierLookup} bind:altValue={clockMultiplier} func={sendMultiplier} />
             </div>
             <div id='clock-bottom'>
@@ -294,7 +295,7 @@
             <Knob
             enabled={$states.pitchOffset} 
             resetValue={0} 
-            title="Rate Scale" 
+            title="Pitch Scale" 
             scale=0.1
             min={0.1} max={4} step={0.1} 
             bind:value={$playbackRate} 

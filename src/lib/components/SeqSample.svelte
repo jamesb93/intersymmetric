@@ -103,7 +103,7 @@
         {/each}
     </div>
     <div class="euclids">
-        <span class="knob-category">Rate</span>
+        <span class="knob-category">Pitch</span>
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true}
