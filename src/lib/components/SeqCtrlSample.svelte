@@ -103,18 +103,18 @@
 
     onMount(async() => {
         // Create some dac / sound stuff
-        console.log('mounted')
         const reverb = new Tone.Reverb(0.4).toDestination();
         const dac = new Tone.Gain(1.0).toDestination();
-        const url = sampleResource + 'workshop/' + context + '_config.txt';
-        console.log(url);
-        await fetch(url)
+        let url = `${sampleResource}/${context}`
+        let config = `${url}/config.txt`
+
+        await fetch(config)
         .then(response => response.text())
         .then(data => {
             const rows = data.split('\n');
             let banks = [rows[0], rows[2], rows[4], rows[6], rows[8], rows[10]];
             banks.forEach(bank => {
-                $totalNumSamples += bank.split(',').slice(1, bank.length).length
+                $totalNumSamples += bank.split(',').length
             });
             banks.forEach((bank, i) => {
                 const sampler = new Sampler();
@@ -122,7 +122,7 @@
                 $numSamples[i] = sampleList.length;
                 sampleList.forEach(s => {
                     let sampleUrl = s.trim().replaceAll(' ', '+');
-                    sampleUrl = `${sampleResource}workshop/samples/${sampleUrl}`;
+                    sampleUrl = `${url}/samples/${sampleUrl}`;
                     sampler.load(sampleUrl, () => $numLoadedSamples += 1);
                     sampler.output.fan(reverb, dac);
                 });
