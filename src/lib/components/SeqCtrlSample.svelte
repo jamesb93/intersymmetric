@@ -1,5 +1,5 @@
 <script>
-    import { onMount } from 'svelte';
+    import { onMount, onDestroy } from 'svelte';
     import * as Tone from 'tone';
     import Play from "./Play.svelte";
     import Knob from "./Knob.svelte";
@@ -61,10 +61,12 @@
         if ($play === true) {
             Tone.start();
             Tone.Transport.start("+0.05");
-            loop.start();
+            if (loop)
+                loop.start();
         } else if ($play === false) {
             Tone.Transport.stop();
-            loop.stop();
+            if (loop)
+                loop.stop();
         }
     }
     
@@ -100,6 +102,18 @@
             })
         })
     }
+
+    onDestroy(() => {
+        // Packdown
+        Tone.Transport.stop();
+        if (loop)
+            loop.stop();
+        $samplesLoaded = false;
+        $numSamples = [0,0,0,0,0,0];
+        $numLoadedSamples = 0;
+        $totalNumSamples = 0;
+        $play = false;
+    })
 
     onMount(async() => {
         // Create some dac / sound stuff

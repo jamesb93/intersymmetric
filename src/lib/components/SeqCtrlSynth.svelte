@@ -1,4 +1,5 @@
 <script>
+    import { onDestroy } from 'svelte';
     import { browser } from '$app/env';
     import * as Tone from 'tone';
     import Play from "./Play.svelte";
@@ -7,6 +8,13 @@
     import Clock from "./Control/Clock.svelte";
     import { kick, snare, fm1, fm2, metal1, metal2 } from '$lib/instruments/ensemble.js';
     import { wrap } from '$lib/utility.js';
+
+    onDestroy(() => {
+        Tone.Transport.stop();
+        if (loop)
+            loop.stop();
+        $play = false;
+    })
     
     import patterns from '$lib/presets/velocity.json'
     import { 
@@ -41,10 +49,12 @@
         if ($play === true) {
             Tone.start();
             Tone.Transport.start("+0.05");
-            loop.start();
+            if (loop)
+                loop.start();
         } else if ($play === false) {
             Tone.Transport.stop();
-            loop.stop();
+            if (loop)
+                loop.stop();
         }
     }
     
@@ -57,7 +67,6 @@
         userInteracted.set(true);
         updatePlayStatus(false)
     }
-
     
     $: if ($offset.start > $offset.end) {
         let t = $offset.end
@@ -83,6 +92,7 @@
     export let prePos = 0;
     
     if (browser) {
+        updatePlayStatus(false);
         loop = new Tone.Loop(time => {
             if ($grid[KICK][pos] === true) {
                 kick.trigger(
