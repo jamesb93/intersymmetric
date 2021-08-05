@@ -19,7 +19,7 @@ export const recentParamName = writable('')
 export const recentSample = writable(null);
 export const userInteracted = writable(false);
 
-// Velocity Patterns
+//  Patterns
 export const velocityPattern = writable(0);
 socket.on('velocityPattern', x => velocityPattern.set(x));
 

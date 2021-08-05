@@ -51,20 +51,13 @@
     function startLoop() {
         userInteracted.set(true);
         updatePlayStatus(true)
-        socket.emit('play', $play)
     }
     
     function stopLoop() {
         userInteracted.set(true);
         updatePlayStatus(false)
-        socket.emit('play', $play)
     }
-    
-    socket.on('play', x => {
-        if ($userInteracted) {
-            updatePlayStatus(x)
-        }
-    })
+
     
     $: if ($offset.start > $offset.end) {
         let t = $offset.end
