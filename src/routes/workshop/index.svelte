@@ -2,4 +2,4 @@
     import Landing from '$lib/components/Landing.svelte'
 </script>
 
-<Landing route='/seq-1/' />
+<Landing route='/seq-sample/' />

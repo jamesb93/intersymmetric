@@ -57,9 +57,9 @@
             class="value"
         >
         {#if altValue === null}
-            {parseFloat(value.toFixed(1))}
+            { parseFloat(value.toFixed(1)) }
         {:else}
-            {altValue}
+            { altValue }
         {/if}
         </text>
         {/if}

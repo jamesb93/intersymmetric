@@ -19,14 +19,13 @@
     export let id;
 
 	$workshopID = "nobounds";
-    const roomCode = createRoomID($workshopID, id);
-
     $room = id;
+    const roomCode = createRoomID($workshopID, id);
     socket.emit('roomJoin', roomCode);
 </script>
 
 <div class="main-layout">
-	<Grid />
+	<Grid mode={'synth'} />
 	{#if browser}
 	<div class="synth-controls">
 		<Snare hide={ !$room.includes('test') } />

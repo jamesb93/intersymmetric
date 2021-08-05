@@ -1,43 +1,39 @@
 <script>
-    import { browser } from '$app/env';
     import { 
-        socket, numUsers, workshopID, 
-        room, recentParamValue, recentParamName
-    } from "$lib/app.js";
-	import { createRoomID } from '$lib/utility.js';
+        numUsers, 
+        recentParamValue,
+        recentParamName,
+        userMessage } from "$lib/app.js";
     import RoomPrompt from "$lib/components/RoomPrompt.svelte";
-    let storedRoom = null;
 
-    // if (browser) {
-    //     storedRoom = localStorage.getItem(
-    //         createRoomID($workshopID, "mfrtjbcode")
-    //     );
+    export let context = '';
 
-    //     if (storedRoom === null) {
-    //         storedRoom = ''
-    //     }
-
-    //     if (storedRoom !== null && storedRoom !== '') {
-    //         socket.emit('roomJoin', createRoomID($workshopID, storedRoom));
-    //         room.set(storedRoom)
-    //     }
-    // }
-
-    console.log("%c Intersymmetric Version 0.1", 'background: #222; color: #bada55');
+    console.log("%c Intersymmetric Version 0.2", 'background: #222; color: #bada55');
 </script>
 
 <header>
     <div id="title">
         <span>Intersymmetric Works</span>
-        <span>Grid Sequencer 01</span>
+        {#if context === 'artist'}
+        <span>Ewa Justke</span>
+        {:else}
+        <span>Sequencer 01</span>
+        {/if}
     </div>
-    <div id="room">
-        <RoomPrompt />
-    </div>
+    {#if context !== 'artist'}
+        <div id="room">
+            <RoomPrompt />
+        </div>
+    {/if}
     <div id='participants'>
         <span>Users:</span>
         <span>{$numUsers}</span>
     </div>
+    {#if context === 'artist'}
+    <div id='user-message'>
+        { $userMessage }
+    </div>
+    {/if}
     <div id="recent-param">
         <span id='param'>{$recentParamName}</span>
         <div id='value'>
@@ -89,6 +85,12 @@
         margin-top: -10px;
         font-size: 20px;
         padding-top: 11px;
+    }
+
+    #user-message {
+        color: green;
+        text-align: left;
+        white-space: nowrap;
     }
 
 

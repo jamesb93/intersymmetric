@@ -10,7 +10,16 @@ socket.on('connect', () => {
     console.log('connected to ', socketAddr)
 })
 
-// Velocity Patterns
+export const userMessage = writable('');
+socket.on('userMessage', x => userMessage.set(x));
+
+// High-Level Information
+export const recentParamValue = writable('')
+export const recentParamName = writable('')
+export const recentSample = writable(null);
+export const userInteracted = writable(false);
+
+//  Patterns
 export const velocityPattern = writable(0);
 socket.on('velocityPattern', x => velocityPattern.set(x));
 
@@ -26,12 +35,6 @@ export const workshopID = writable("");
 export const numUsers = writable(0);
 export const room = writable('')
 socket.on('numUsers', x => numUsers.set(x)); 
-
-// High-Level Information
-export const recentParamValue = writable('')
-export const recentParamName = writable('')
-export const recentSample = writable(null);
-export const userInteracted = writable(false);
 
 // Sequencer Data
 export const maxCells = writable(32);
@@ -92,7 +95,7 @@ socket.on('clock::mode', x => clockMode.set(x));
 export const clockMultiplierLookup = writable(0);
 socket.on('clock::multiplier', x => clockMultiplierLookup.set(x));
 
-export const sampleSelectors = writable([0, 0, 0, 0, 0, 0]);
+export const sampleSelectors = writable([0,0,0,0,0,0]);
 socket.on('sampleSelectors', x => sampleSelectors.set(x));
 
 export const trackGains = writable([1.0, 1.0, 1.0, 1.0, 1.0, 1.0]);
@@ -101,7 +104,7 @@ socket.on('trackGains', x => trackGains.set(x));
 export const trackRates = writable([1.0, 1.0, 1.0, 1.0, 1.0, 1.0]);
 socket.on('trackRates', x => trackRates.set(x));
 
-export const trackLengths = writable([1.0, 1.0, 1.0, 1.0, 1.0, 1.0]);
+export const trackLengths = writable([5.0, 5.0, 5.0, 5.0, 5.0, 5.0]);
 socket.on('trackLengths', x => trackLengths.set(x));
 
 export const playbackRate = writable(1.0);
@@ -182,4 +185,3 @@ export const params = writable({
     }
 });
 socket.on('params', x => params.set(x)); // get all params in one message
-

@@ -1,21 +1,33 @@
 <script>
     import { browser } from '$app/env';
     import { room } from '$lib/app.js';
-    import SequencerControl from '$lib/components/SequencerControl.svelte';
-    import Sequencer from '$lib/components/Sequencer.svelte';
+    import SeqCtrlSynth from '$lib/components/SeqCtrlSynth.svelte';
+    import SeqCtrlSample from '$lib/components/SeqCtrlSample.svelte';
+    import SeqSynth from '$lib/components/SeqSynth.svelte';
+    import SeqSample from '$lib/components/SeqSample.svelte';
     import Footer from '$lib/components/Footer.svelte';
     import Header from '$lib/components/Header.svelte';
+
+    export let mode = ''
+    export let context = ''
     // We define this here because the Tone.js callback is a little finnicky.
     let pos = 0;
     let prePos = 0;
 </script>
 
 <div>
-    <Header />
+    <Header mode={mode} context={context} />
 	<div class='line' />
     {#if browser && $room !== ''}
-        <SequencerControl bind:pos={pos} bind:prePos={prePos} />
-        <Sequencer bind:prePos={prePos} />
+        {#if mode === 'synth'}
+        <SeqCtrlSynth bind:pos={pos} bind:prePos={prePos} />
+        <SeqSynth bind:prePos={prePos} />
+        {/if}
+
+        {#if mode === 'sample'}
+        <SeqCtrlSample context={context} bind:pos={pos} bind:prePos={prePos} />
+        <SeqSample bind:prePos={prePos} />
+        {/if}
     {/if}
     <Footer />
 </div>
@@ -28,6 +40,5 @@
         right: 0px;
         bottom: 10;
         top: 50px;
-
     }
 </style>

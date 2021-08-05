@@ -1,23 +1,18 @@
 <script>
-    import kickPreset from '$lib/presets/kick.json'
-    import snarePreset from '$lib/presets/snare.json';
-    import metal1Preset from '$lib/presets/metal1.json';
-    import metal2Preset from '$lib/presets/metal2.json';
-    import fm1Preset from '$lib/presets/fm1.json';
-    import fm2Preset from '$lib/presets/fm2.json';
     import Cell from "$lib/components/Cell.svelte";
     import Knob from "$lib/components/Knob.svelte";
     import Arrow from '$lib/components/Arrow.svelte';
     
     import { shiftColumnDown, shiftColumnUp, rotateGridColumn } from '$lib/grid/transforms.js';
+    import { getPattern } from "$lib/grid/euclid.js";
     import { 
         socket, states, grid, gridValid, euclidSteps,
-        trackPitch, trackSound, trackShape,
-        params
+        trackLengths, trackRates, sampleSelectors
     } from '$lib/app.js';
-    import { getPattern } from "$lib/grid/euclid.js";
 
-    import * as d3 from 'd3';
+    import { 
+        samplesLoaded, 
+        numSamples } from '$lib/samplerConfig.js';
 
     export let prePos = 0;
     let anyMouseDown = false;
@@ -29,55 +24,12 @@
         socket.emit('euclid', $euclidSteps);
         sendGrid();
     }
-
-    let instrumentMap = [
-        'kick','snare',
-        'metal1','metal2',
-        'fm1','fm2'
-    ]
-
-    socket.on('trackSound', x => {
-        trackSound.set(x);
-        $trackSound.forEach((_, i) => {
-            updateSound(i)
-        })
-    });
-
-    function updateSound(x) {
-        let presets;
-        if (x === 0)
-            presets = kickPreset
-        if (x === 1)
-            presets = snarePreset
-        if (x === 2)
-            presets = metal1Preset
-        if (x === 3)
-            presets = metal2Preset
-        if (x === 4)
-            presets = fm1Preset
-        if (x === 5)
-            presets = fm2Preset
-
-        let numPresets = Object.keys(presets).length;
-        let preset1 = Math.floor($trackSound[x] * numPresets-1);
-        let preset2 = preset1 + 1
-        let amount = $trackSound[x] % 1.0;
-         
-		let result = d3.interpolateObject(
-			presets[preset1], 
-            presets[preset2]
-		)(amount)
-        for (const [key, value] of Object.entries(result)) {
-            $params[instrumentMap[x]][key] = value
-        }
-    }
-
-
 </script>
 
-<svelte:window on:mouseup={()=>{anyMouseDown=false}} />
+<svelte:window on:mouseup={ ()=>{ anyMouseDown=false } } />
 
 <div class="sequencer">
+    {#if $samplesLoaded === true}
     {#if $gridValid}
     <div class="euclids">
         <span class="knob-category">Pattern</span>
@@ -94,6 +46,7 @@
         {/each}
     </div>
     {/if}
+
     <div class="grid">
     {#if $gridValid}
         {#each $grid as row, x}
@@ -142,14 +95,13 @@
             enabled={true}
             title="Sound"
             showTitle={false}
-            scale=0.0025 min={0} max={1.0}
-            step={0.0001}
-            bind:value={ $trackSound[x] } 
-            func={ () => {updateSound(x); socket.emit('trackSound', $trackSound)} } 
+            scale=0.1 
+            min={0} max={ $numSamples[x]-1 } 
+            bind:value={ $sampleSelectors[x] }
+            func={ () => socket.emit('sampleSelectors', $sampleSelectors) }
             />
         {/each}
     </div>
-
     <div class="euclids">
         <span class="knob-category">Pitch</span>
         {#each {length: 6} as _, x}
@@ -157,11 +109,11 @@
             enabled={true}
             title="Pitch"
             showTitle={false}
-            resetValue={0.0}
+            resetValue={1.0}
             scale=0.1
-            step=1 min={-24} max={24} 
-            bind:value={ $trackPitch[x] } 
-            func={ () => socket.emit('trackPitch', $trackPitch) } 
+            step=0.01 min={0.01} max={4} 
+            bind:value={ $trackRates[x] } 
+            func={ () => socket.emit('trackRates', $trackRates) } 
             />
         {/each}
     </div>
@@ -171,16 +123,17 @@
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true}
-            scale=0.01
+            scale=0.05
             title="Shape"
             showTitle={false}
             resetValue={1.0}
-            step=0.01 min={0.0} max={1.0} 
-            bind:value={ $trackShape[x] } 
-            func={ () => socket.emit('trackShape', $trackShape) } 
+            step=0.01 min={0.1} max={10.0} 
+            bind:value={ $trackLengths[x] } 
+            func={ () => socket.emit('trackLengths', $trackLengths) } 
             />
         {/each}
     </div>
+    {/if}
     {/if}
 </div>
 
