@@ -1,33 +1,23 @@
 <script>
-    import { goto } from '$app/navigation';
-    import { fade } from 'svelte/transition';
+	import { workshopID, room, socket } from '$lib/app.js';
+	import { createRoomID } from '$lib/utility.js';
+	import Grid from '$lib/components/Grid.svelte';
 
-    import BoxButton from '$lib/components/BoxButton.svelte';
-
-    export let route = '/artist/';
-    
-    function handleButton() {
-        const href = route + 'nameofartist';
-        goto(href)
-    }
+	const id = 'ewa-justke'
+	$workshopID = 'artist';
+    $room = id;
+    const roomCode = createRoomID($workshopID, id);
+    socket.emit('roomJoin', roomCode);
 </script>
 
-
-<div class='container' transition:fade>
-    <span id='title'>instructions on how to be a nice person (this is for you to decide Mark/Rian)
-    </span>
-
-    <BoxButton text='Join' func={ handleButton } />
+<div class="main-layout">
+	<Grid mode={'sample'} context={'artist'} />
 </div>
-
+	
 <style>
-    .container {
-        display: flex;
-        flex-direction: column;
-        max-width: 100%;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        min-height: 100vh;
-    }
+	.main-layout {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 </style>
