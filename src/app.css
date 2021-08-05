@@ -15,6 +15,14 @@
 	/* --primary-color-darker: #338b39; */
 }
 
+h1, h2, h3 {
+	margin: 0;
+}
+
+p {
+	margin: 0.1em;
+}
+
 text {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
