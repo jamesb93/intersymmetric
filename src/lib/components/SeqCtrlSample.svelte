@@ -247,7 +247,7 @@
             <span id='clock-title' class='container-title'>Clock</span>
             <div id='clock-top'>
                 <Play bind:playing={$play} start={startLoop} pause={stopLoop}/>
-                <Knob enabled={$states.bpm} title="Pitch" resetValue={120} min={5} max={300} step={1} bind:value={$bpm} func={sendBpm} />
+                <Knob enabled={$states.bpm} title="Rate" resetValue={120} min={5} max={300} step={1} bind:value={$bpm} func={sendBpm} />
                 <Knob enabled={$states.multiplier} resetValue={0} scale=0.4 title="Multiplier" min={0} max={22} step={1} bind:value={$clockMultiplierLookup} bind:altValue={clockMultiplier} func={sendMultiplier} />
             </div>
             <div id='clock-bottom'>
