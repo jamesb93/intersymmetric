@@ -20,8 +20,10 @@
     }
 </script>
 
-<div class="container" class:hide={ !$room.includes('test') }>
+<div class="container">
+	{#if $room.includes('test')}
 	<BoxButton func={ () => {saveTextAsFile(json, 'data.json')} } text='Download' />
+	{/if}	
 </div>
 
 <style>
@@ -31,9 +33,5 @@
 		width: 100px;
 		height: 30px;
 		padding-top: 10px;
-	}
-
-	.hide {
-		display: none;
 	}
 </style>

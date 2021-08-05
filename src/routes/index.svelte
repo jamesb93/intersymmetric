@@ -34,6 +34,10 @@
         When you join a session you will be able to hear, watch and also take part int he performance. Please be aware that if multiple people rapidly change settings it will disrupt the artist's direction, so interact considerably, and give room for others to work together.
     </div>
 
+    <div>
+        This experience is free of charge, so we encourage you to donate what you can to the <a href='https://rema-online.org.uk/'>Rotherham Ethnic Minority Alliance (REMA).</a>
+    </div>
+
     <div class='call'>
         <h3 class='titles'>WORKSHOPS</h3>
         <p id='call-info'>Open call for free music workshop with Rian Treanor & Mark Fell</p>

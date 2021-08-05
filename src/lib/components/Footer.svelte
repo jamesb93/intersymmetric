@@ -18,7 +18,9 @@
         </span>
     </footer>
     <Editor />    
-    <div></div>
+    <div class='donation'>
+        This experience is free of charge but we emplore you to donate to the <a href='https://rema-online.org.uk/'>Rotherham Ethnic Minority Alliance (REMA).</a>
+    </div>
 </div>
 
 <style>
@@ -34,5 +36,10 @@
         color: #40ac47;
         font-size: 10px;
         text-align: left;
+    }
+
+    .donation {
+        font-size: 10px;
+        text-align: right;
     }
 </style>
