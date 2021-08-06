@@ -5,10 +5,8 @@
 
 <div class='container' transition:fade>
     <div id='top'>
-        <div class='instructions'>
-            <p><b>Intersymmetric Sequencer 1</b> is an online multiplayer drum machine that uses shared interfaces, pattern generation and sound synthesis to enable groups of people to play together in real time.</p>
-            <p id='button-helper'>click <a href='seq-1/idx'>here</a> join</p>
-        </div>
+        <p><b>Intersymmetric Sequencer 1</b> is an online multiplayer drum machine that uses shared interfaces, pattern generation and sound synthesis to enable groups of people to play together in real time.</p>
+        <p>click <a href='seq-1/idx'>here</a> join</p>
     </div>
     <div id='bottom'>
         <div id='left'>
@@ -56,14 +54,14 @@
 <style>
 
     .container {
-        display: grid;
-        grid-template-rows: 50% 50%;
+        display: flex;
+        flex-direction: column;
         max-width: 80%;
         margin: 0 auto;
         justify-content: center;
         text-align: left;
         padding-top: 20px;
-        gap: 20px;
+        gap: 80px;
         font-size: 14px;
     }
 
@@ -72,17 +70,16 @@
         font-weight: bold;
     }
 
-    #top{
+    #top {
         display: flex;
         flex-direction: column;
-        gap: 2em;
         max-width: 50%;
     }
 
     #bottom {
         display: grid;
         grid-template-columns: 50% 50%;
-        gap: 5em;
+        gap: 50px;
     }
 
     #left, #right {
@@ -91,28 +88,16 @@
         gap: 2em;
     }
 
-    .instructions {
-        display: flex;
-        flex-direction: column;
-    }
     .times{
         display: flex;
         flex-direction: column;
-    }
-
-    #call-info {
-        font-style: italic;
-        margin-bottom: 10px;
     }
 
     .credit {
         display: flex;
         flex-direction: column;
         text-align: left;
-        margin-top: 6em;
+        margin-top: 2em;
         color: var(--primary-color)
     }
-
-
-
 </style>
