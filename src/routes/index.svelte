@@ -1,77 +1,94 @@
 <script>
-    import BoxButton from '$lib/components/BoxButton.svelte';
     import { fade } from 'svelte/transition';
-    import { goto } from '$app/navigation';
-
-    function handleButton() {
-        // THIS LINK POINTS TO THE CURRENT THING
-        goto('/seq-1/idx')
-    }
-
 </script>
 
-<div id='parent-grid'>
-<div></div>
 
 <div class='container' transition:fade>
-    <div class='instructions'>
-        <p>Intersymmetric Sequencer 1 is an online multiplayer drum machine that uses shared interfaces, pattern generation and sound synthesis to enable groups of people to play together in real time.</p>
-        <p id='button-helper'>Click the button to join.</p>
-        <div id='button-container'>
-            <BoxButton text='join' func={ handleButton }/>
+    <div id='top'>
+        <div class='instructions'>
+            <p><b>Intersymmetric Sequencer 1</b> is an online multiplayer drum machine that uses shared interfaces, pattern generation and sound synthesis to enable groups of people to play together in real time.</p>
+            <p id='button-helper'>click <a href='seq-1/idx'>here</a> join</p>
         </div>
     </div>
-    <div class='times'>
-        <h3 class='titles'>LIVE ARTISTS' PERFORMANCES</h3>
-        <p>13/08 21:00 BST | Modern Institute</p>
-        <p>19/08 21:00 BST | Ewa Justke</p>
-        <p>26/08 21:00 BST | Beatrice Dillon</p>
-        <p>31/08 21:00 BST | Nyege Nyege</p>
-        <p id='other-artists'>(other artists TBA)</p>
-    </div>
+    <div id='bottom'>
+        <div id='left'>
+            <div class='title'>LIVE PERFORMANCES FROM INVITED ARTISTS</div>
+            <div class='times'>
+                <p>Modern Institute - 13 August 7pm BST</p>
+                <p>Ewa Justke - 19 August 7pm BST</p>
+                <p>Beatrice Dillon - 26 August 7pm BST</p>
+                <p>Nyege Nyege - 31 August 7pm BST</p>
+                <p>More artists TBC</p>
+            </div>
+    
+            <div>
+                When you join a session you will be able to hear, watch and also take part int he performance. Please be aware that if multiple people rapidly change settings it will disrupt the artist's direction, so interact considerably, and give room for others to work together.
+            </div>
+        
+            <div>
+                There is no entry fee for the performances. Please consider making a donation to <a href='https://rema-online.org.uk/'>Rotherham Ethnic Minority Alliance</a>,  a charity we support.
+            </div>
 
-    <div class='further-instructions'>
-        When you join a session you will be able to hear, watch and also take part int he performance. Please be aware that if multiple people rapidly change settings it will disrupt the artist's direction, so interact considerably, and give room for others to work together.
-    </div>
+            <div class='credit'>
+                <p><a target="_blank" href="http://www.markfell.com/wiki/">Mark Fell</a> & <a target="_blank" href="https://riantreanor.bandcamp.com/">Rian Treanor</a></p>
+                <p>Programming by <a target="_blank" href="https://www.jamesbradbury.xyz">James Bradbury</a></p>
+                <p>Graphic Design by <a target="_blank" href="https://qubik.com/">Joe Gilmore</a></p>
+                <p>Commissioned by No Bounds 2021 </p>
+            </div> 
+        </div>
+        <div id='right'>
+            <div class='title'>WORKSHOPS</div>
+            <div>
+                Open call for free music workshop with Rian Treanor & Mark Fell
+            </div>
+            <div>
+                The workshop will focus on an exploration of a new online music platform, where people interact together in real time, using pattern generating procedures and digital synthesis. As an inclusive project we want to work with people of different backgrounds, age groups, and abilities. It is open to participants with varying levels of musical expertise, including people with no previous experience and additional needs. The workshop consists of two separate sessions, each of which is 90 minutes long. Workshop dates will be agreed with selected participants. Participants will need access to a computer and a stable internet connection.
+            </div>
 
-    <div>
-        This experience is free of charge, so we encourage you to donate what you can to the <a href='https://rema-online.org.uk/'>Rotherham Ethnic Minority Alliance (REMA).</a>
+            <div>
+                Places are limited, to express your interest in joining these sessions please <a href='https://docs.google.com/forms/d/e/1FAIpQLScKekf6Et-p2fp7GVEdgcwy1j-nZN2uLRWtZV4-2 3k_LWfteA/viewform?usp=sf_link'>complete this form</a>.
+            </div>
+        </div>
     </div>
-
-    <div class='call'>
-        <h3 class='titles'>WORKSHOPS</h3>
-        <p id='call-info'>Open call for free music workshop with Rian Treanor & Mark Fell</p>
-        <p>The workshop will focus on an exploration of a new online music platform, where people interact together in real time, using pattern generating procedures and digital synthesis. As an inclusive project we want to work with people of different backgrounds, age groups, and abilities. It is open to participants with varying levels of musical expertise, including people with no previous experience and additional needs. The workshop consists of two separate sessions, each of which is 90 minutes long. Workshop dates will be agreed with selected participants. Participants will need access to a computer and a stable internet connection.</p>
-        <p>Places are limited, to express your interest in joining these sessions please complete <a href='https://docs.google.com/forms/d/e/1FAIpQLScKekf6Et-p2fp7GVEdgcwy1j-nZN2uLRWtZV4-2 3k_LWfteA/viewform?usp=sf_link'>this form</a>.</p>
-    </div>
-
-    <div class='credit'>
-        <h3 class='titles'>CREDIT</h3>
-        <p>Mark Fell and Rian Treanor</p>
-        <p>Programming by <a href='https://jamesbradbury.xyz'>James Bradbury</a></p>
-        <p>Graphic design by Joe Gilmore</p>
-        <p>Commissioned by No Bounds 2021 </p>
-    </div>
-</div>
-
-<div></div>
 </div>
 
 
 <style>
 
-    #parent-grid {
-        display: grid;
-        grid-template-columns: auto min(80ch, 100%) auto;
-    }
     .container {
-        display: flex;
-        flex-direction: column;
-        max-width: 100%;
+        display: grid;
+        grid-template-rows: 50% 50%;
+        max-width: 80%;
+        margin: 0 auto;
         justify-content: center;
         text-align: left;
         padding-top: 20px;
         gap: 20px;
+        font-size: 14px;
+    }
+
+    .title {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    #top{
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        max-width: 50%;
+    }
+
+    #bottom {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        gap: 5em;
+    }
+
+    #left, #right {
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
     }
 
     .instructions {
@@ -79,12 +96,6 @@
         flex-direction: column;
     }
     .times{
-        display: flex;
-        flex-direction: column;
-        align-self: center;
-    }
-
-    .call {
         display: flex;
         flex-direction: column;
     }
@@ -98,21 +109,10 @@
         display: flex;
         flex-direction: column;
         text-align: left;
+        margin-top: 6em;
+        color: var(--primary-color)
     }
 
-    #other-artists {
-        text-align: center;
-    }
-    #button-container {
-        text-align: center;
-    }
-    #button-helper {
-        margin-top: 10px;
-    }
-
-    .titles {
-        text-decoration: underline;
-    }
 
 
 </style>

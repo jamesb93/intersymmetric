@@ -19,7 +19,7 @@
     </footer>
     <Editor />    
     <div class='donation'>
-        This experience is free of charge, so we encourage you to donate what you can to the <a href='https://rema-online.org.uk/'>Rotherham Ethnic Minority Alliance (REMA).</a>
+        Please consider making a donation to <a href='https://rema-online.org.uk/'>Rotherham Ethnic Minority Alliance</a>, a charity we support.
     </div>
 </div>
 
