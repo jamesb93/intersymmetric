@@ -5,10 +5,7 @@
 <div id="bottom-panel">
     <footer>
         <span>
-            <a target="_blank" href="http://www.markfell.com/wiki/">Mark Fell</a> & <a target="_blank" href="https://riantreanor.bandcamp.com/">Rian Treanor</a>
-        </span>
-        <span>
-            Commissioned by No Bounds / Hope Works 2020
+            <a target="_blank" href="http://www.markfell.com/wiki/">Mark Fell</a> and <a target="_blank" href="https://riantreanor.bandcamp.com/">Rian Treanor</a>
         </span>
         <span>
             Programming by <a target="_blank" href="https://www.jamesbradbury.xyz">James Bradbury</a>
@@ -16,10 +13,13 @@
         <span>
             Graphic Design by <a target="_blank" href="https://qubik.com/">Joe Gilmore</a>
         </span>
+        <span>
+            Comissioned by No Bounds 2021
+        </span>
     </footer>
     <Editor />    
     <div class='donation'>
-        Please consider making a donation to <a href='https://rema-online.org.uk/'>Rotherham Ethnic Minority Alliance</a>, a charity we support.
+        Make a donation to Rotherham Ethnic Minority Alliance <a href='https://rema-online.org.uk/'>here</a>
     </div>
 </div>
 
