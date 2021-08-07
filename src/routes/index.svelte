@@ -55,9 +55,10 @@
 <style>
 
     .container {
-        display: flex;
-        flex-direction: column;
-        max-width: 55%;
+        display: grid;
+        grid-template-rows: auto auto;
+        min-width: 1px;
+        max-width: 60%;
         margin: 0 auto;
         text-align: left;
         padding-top: 20px;
@@ -74,19 +75,28 @@
     #top {
         display: flex;
         flex-direction: column;
-        max-width: 48ch;
+        max-width: 50%;
     }
 
     #bottom {
         display: grid;
-        grid-template-columns: 48ch 48ch;
-        gap: 50px;
+        grid-template-columns: 50% 50%;
+        max-width: 100%;
+
     }
 
     #left, #right {
         display: flex;
         flex-direction: column;
         gap: 2em;
+    }
+
+    #left {
+        margin-right: 15px;
+    }
+
+    #right {
+        margin-left: 15px;
     }
 
     .times{
@@ -101,16 +111,10 @@
         margin-top: 1em;
         color: var(--primary-color)
     }
-/* 
-    @media (min-width: 1200px) {
-        .container {
-            max-width: 50%;
-        }
-    }
 
     @media(max-width: 1200px) {
         .container {
             max-width: 80%;
         }
-    } */
+    }
 </style>
