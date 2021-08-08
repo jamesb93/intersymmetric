@@ -133,7 +133,6 @@
             banks.forEach((bank, i) => {
                 const sampler = new Sampler();
                 let sampleList = bank.split(',');
-                console.log(sampleList)
                 $numSamples[i] = sampleList.length;
                 sampleList.forEach(s => {
                     let sampleUrl = s.trim().replaceAll(' ', '');
