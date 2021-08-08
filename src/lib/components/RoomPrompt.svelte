@@ -9,7 +9,7 @@
         everUsed = true;
         socket.emit('roomJoin', createRoomID($workshopID, code));
         $room = code;
-        const namespace = $workshopID === 'workshop' ? '/seq-sample/' : '/seq-1/';
+        const namespace = $workshopID === 'workshop' ? '/workshop/' : '/seq-1/';
         const href = namespace + code;
         goto(href)
         code = ""
