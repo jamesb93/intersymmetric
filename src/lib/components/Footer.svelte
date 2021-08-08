@@ -19,7 +19,7 @@
     </footer>
     <Editor />    
     <div class='donation'>
-        Make a donation to Rotherham Ethnic Minority Alliance <a href='https://rema-online.org.uk/'>here</a>
+        Make a donation to Rotherham Ethnic Minority Alliance <a target='_blank' href='https://rema-online.org.uk/'>here</a>
     </div>
 </div>
 
