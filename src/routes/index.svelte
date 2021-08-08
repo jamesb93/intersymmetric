@@ -25,7 +25,7 @@
             </div>
         
             <div>
-                There is no entry fee for the performances. Please consider making a donation to <a target='_blank' href='https://rema-online.org.uk/'>Rotherham Ethnic Minority Alliance</a>,  a charity we support.
+                There is no entry fee for the performances. Please consider making a <a href='https://rema-online.org.uk' target='_blank'>donation</a> to <a target='_blank' href='https://rema-online.org.uk/'>Rotherham Ethnic Minority Alliance</a>,  a charity we support.
             </div>
 
             <div class='credit'>
