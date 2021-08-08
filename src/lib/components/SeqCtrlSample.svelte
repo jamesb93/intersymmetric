@@ -132,10 +132,11 @@
             });
             banks.forEach((bank, i) => {
                 const sampler = new Sampler();
-                let sampleList = bank.split(',').slice(1, bank.length);
+                let sampleList = bank.split(',');
+                console.log(sampleList)
                 $numSamples[i] = sampleList.length;
                 sampleList.forEach(s => {
-                    let sampleUrl = s.trim().replaceAll(' ', '+');
+                    let sampleUrl = s.trim().replaceAll(' ', '');
                     sampleUrl = `${url}/samples/${sampleUrl}`;
                     sampler.load(sampleUrl, () => $numLoadedSamples += 1);
                     sampler.output.fan(reverb, dac);
