@@ -17,11 +17,12 @@
                 <p>Ewa Justka - 19 August 7pm BST</p>
                 <p>Beatrice Dillon - 26 August 7pm BST</p>
                 <p>Nyege Nyege - 31 August 7pm BST</p>
+                <p>Nyege Nyege - 2 September 7pm BST</p>
                 <p>More artists TBC</p>
             </div>
     
             <div>
-                When you join a session you will be able to hear, watch and also take part in the performance. Please be aware that if multiple people rapidly change settings it will disrupt the artist's direction, so interact considerably, and give room for others to work together.
+                When you join a session you will be able to hear, watch and also take part in the performance. Please be aware that any changes you make will be heard by everyone else, so interact considerably, and give room for others to work together.
             </div>
         
             <div>
