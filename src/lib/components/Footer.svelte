@@ -19,7 +19,7 @@
     </footer>
     <Editor />    
     <div class='donation'>
-        Make a donation to the <a target='_blank' href='https://rema-online.org.uk/'>Rotherham Ethnic Minority Alliance</a> <a target='_blank' href='https://www.crowdfunder.co.uk/intersymmetric-performance-donation'>here</a>
+        Make a donation to <a target='_blank' href='https://rema-online.org.uk/'>Rotherham Ethnic Minority Alliance</a> <a target='_blank' href='https://www.crowdfunder.co.uk/intersymmetric-performance-donation'>here</a>
     </div>
 </div>
 
