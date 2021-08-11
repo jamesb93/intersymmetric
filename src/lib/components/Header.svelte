@@ -15,7 +15,8 @@
     <div id="title">
         <span>Intersymmetric Works</span>
         {#if context === 'artist'}
-        <span>Ewa Justke</span>
+        <!-- ARTIST NAME GOES HERE -->
+        <span>Sequencer 01</span>
         {:else}
         <span>Sequencer 01</span>
         {/if}

@@ -11,7 +11,7 @@
 </script>
 
 <div class="main-layout">
-	<Grid mode={'sample'} context={'artist'} />
+	<Grid mode={'synth'} context={'artist'} />
 </div>
 	
 <style>
