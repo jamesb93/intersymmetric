@@ -13,11 +13,11 @@
         <div id='left'>
             <div class='title'>LIVE PERFORMANCES FROM INVITED ARTISTS</div>
             <div class='times'>
-                <p>Modern Institute - 13 August 7pm BST</p>
-                <p>Ewa Justka - 19 August 7pm BST</p>
-                <p>Beatrice Dillon - 26 August 7pm BST</p>
-                <p>Nyege Nyege - 31 August 7pm BST</p>
-                <p>Errorsmith - 2 September 7pm BST</p>
+                <p><b>Modern Institute</b> - 13 August 7pm BST</p>
+                <p><b>Ewa Justka</b> - 19 August 7pm BST</p>
+                <p><b>Beatrice Dillon</b> - 26 August 7pm BST</p>
+                <p><b>Nyege Nyege</b> - 31 August 7pm BST</p>
+                <p><b>Errorsmith</b> - 2 September 7pm BST</p>
                 <p>More artists TBC</p>
             </div>
     
@@ -26,7 +26,7 @@
             </div>
         
             <div>
-                There is no entry fee for the performances. Please consider making a <a href='https://rema-online.org.uk' target='_blank'>donation</a> to <a target='_blank' href='https://rema-online.org.uk/'>Rotherham Ethnic Minority Alliance</a>,  a charity we support.
+                There is no entry fee for the performances. Please consider making a <a href='https://www.crowdfunder.co.uk/intersymmetric-performance-donation' target='_blank'>donation</a> to <a target='_blank' href='https://rema-online.org.uk/'>Rotherham Ethnic Minority Alliance</a>,  a charity we support.
             </div>
 
             <div class='credit'>
