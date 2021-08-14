@@ -48,7 +48,7 @@
         play.set(status)
         if ($play === true) {
             Tone.start();
-            Tone.Transport.start("+0.05");
+            Tone.Transport.start("+0.15");
             if (loop)
                 loop.start();
         } else if ($play === false) {
@@ -92,6 +92,7 @@
     export let prePos = 0;
     
     if (browser) {
+        Tone.context.lookAhead = 0.2;
         updatePlayStatus(false);
         loop = new Tone.Loop(time => {
             if ($grid[KICK][pos] === true) {

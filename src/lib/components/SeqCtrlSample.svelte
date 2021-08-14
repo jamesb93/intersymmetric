@@ -60,7 +60,7 @@
         play.set(status)
         if ($play === true) {
             Tone.start();
-            Tone.Transport.start("+0.05");
+            Tone.Transport.start("+0.15");
             if (loop)
                 loop.start();
         } else if ($play === false) {
@@ -116,6 +116,7 @@
     })
 
     onMount(async() => {
+        Tone.context.lookAhead = 0.2;
         // Create some dac / sound stuff
         const reverb = new Tone.Reverb(0.4).toDestination();
         const dac = new Tone.Gain(1.0).toDestination();
