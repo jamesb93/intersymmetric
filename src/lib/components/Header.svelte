@@ -16,7 +16,7 @@
         <span>Intersymmetric Works</span>
         {#if context === 'artist'}
         <!-- ARTIST NAME GOES HERE -->
-        <span>Ewa Justke</span>
+        <span>Ewa Justka</span>
         {:else}
         <span>Sequencer 01</span>
         {/if}

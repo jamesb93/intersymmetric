@@ -3,7 +3,7 @@
 	import { createRoomID } from '$lib/utility.js';
 	import Grid from '$lib/components/Grid.svelte';
 
-	const id = 'ewa-justke'
+	const id = 'ewa-justka'
 	$workshopID = 'artist';
     $room = id;
     const roomCode = createRoomID($workshopID, id);
