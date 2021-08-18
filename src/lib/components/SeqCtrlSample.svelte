@@ -106,8 +106,9 @@
     onDestroy(() => {
         // Packdown
         Tone.Transport.stop();
-        if (loop)
+        if (loop) {
             loop.stop();
+        }
         $samplesLoaded = false;
         $numSamples = [0,0,0,0,0,0];
         $numLoadedSamples = 0;
