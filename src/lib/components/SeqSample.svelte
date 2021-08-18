@@ -110,8 +110,8 @@
             title="Pitch"
             showTitle={false}
             resetValue={1.0}
-            scale=0.1
-            step=0.01 min={0.01} max={4} 
+            scale={0.02}
+            step={0.01} min={0.01} max={4} 
             bind:value={ $trackRates[x] } 
             func={ () => socket.emit('trackRates', $trackRates) } 
             />
@@ -123,9 +123,9 @@
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
             enabled={true}
-            scale=0.05
             title="Shape"
             showTitle={false}
+            scale={0.05}
             resetValue={1.0}
             step=0.01 min={0.1} max={10.0} 
             bind:value={ $trackLengths[x] } 
