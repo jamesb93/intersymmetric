@@ -26,9 +26,9 @@ if (browser) {
     const compOpts = {
         attack: 10 / 1000,
         release: 300 / 1000,
-        ratio: 4,
+        ratio: 2,
         knee: 5,
-        threshold: -3,
+        threshold: -18,
     }
     
     // Connect together the master bus DSP
