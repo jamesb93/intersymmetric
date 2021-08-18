@@ -309,20 +309,20 @@
         <div />
         <div id='global-parameters'>
             <Knob
-            enabled={$states.pitchOffset} 
-            resetValue={0} 
             title="Pitch Scale" 
-            scale=0.1
-            min={0.1} max={4} step={0.1} 
+            scale={0.01}
+            resetValue={1} 
+            min={0.1} max={4} step={0.01} 
+            enabled={$states.pitchOffset} 
             bind:value={$playbackRate} 
             func={sendPlaybackRate} 
             />
             <Knob 
-            enabled={$states.globalLength} 
-            scale=0.005 
-            resetValue={1.0} 
             title="Shape Scale" 
+            scale={0.0025} 
+            resetValue={1.0} 
             min={0.05} max={1} step={0.01} 
+            enabled={$states.globalLength} 
             bind:value={$length} 
             func={sendLength} 
             />
