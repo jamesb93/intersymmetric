@@ -7,7 +7,7 @@ let socketAddr = import.meta.env.PROD ? "wss://interbackend.xyz:4300" : "ws://lo
 export const socket = io(socketAddr);
 
 socket.on('connect', () => {
-    console.log('connected to ', socketAddr)
+    console.log('connected to websocket')
 })
 
 export const userMessage = writable('');
@@ -80,7 +80,7 @@ socket.on('pitchOffset', x => pitchOffset.set(x));
 export const length = writable(1.0);
 socket.on('length', x => length.set(x));
 
-export const euclidSteps = writable([0, 0, 0, 0, 0, 0]);
+export const euclidSteps = writable( new Array(6).fill(0) );
 socket.on('euclid', x => euclidSteps.set(x));
 
 export const offset = writable({start: 1, end: 16});
@@ -98,13 +98,10 @@ socket.on('clock::multiplier', x => clockMultiplierLookup.set(x));
 export const sampleSelectors = writable([0,0,0,0,0,0]);
 socket.on('sampleSelectors', x => sampleSelectors.set(x));
 
-export const trackGains = writable([1.0, 1.0, 1.0, 1.0, 1.0, 1.0]);
-socket.on('trackGains', x => trackGains.set(x));
-
-export const trackRates = writable([1.0, 1.0, 1.0, 1.0, 1.0, 1.0]);
+export const trackRates = writable( new Array(6).fill(1.0) );
 socket.on('trackRates', x => trackRates.set(x));
 
-export const trackLengths = writable([5.0, 5.0, 5.0, 5.0, 5.0, 5.0]);
+export const trackLengths = writable( new Array(6).fill(1.0) );
 socket.on('trackLengths', x => trackLengths.set(x));
 
 export const playbackRate = writable(1.0);
