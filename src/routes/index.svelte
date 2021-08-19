@@ -7,7 +7,7 @@
     <div id='top'>
         <p><b>Intersymmetric Sequencer 1</b> is an online multiplayer drum machine that uses shared interfaces, pattern generation and sound synthesis to enable groups of people to play together in real time.</p>
         <br>
-        <p>click <a href='seq-1/idx'>here</a> to join</p>
+        <p>click <a href='artist'>here</a> to join</p>
     </div>
     <div id='bottom'>
         <div id='left'>
