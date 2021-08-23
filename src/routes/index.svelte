@@ -5,7 +5,7 @@
 
 <div class='container' transition:fade>
     <div id='top'>
-        <p><b>Intersymmetric Sequencer 1</b> is an online multiplayer drum machine that uses shared interfaces, pattern generation and sound synthesis to enable groups of people to play together in real time.</p>
+        <p><b>Intersymmetric <a href='seq-1/idx'>Sequencer 1</a></b> is an online multiplayer drum machine that uses shared interfaces, pattern generation and sound synthesis to enable groups of people to play together in real time.</p>
         <br>
         <p>click <a href='artist'>here</a> to join</p>
     </div>
@@ -15,7 +15,7 @@
             <div class='times'>
                 <p><b>Modern Institute</b> - 13 August 7pm BST</p>
                 <p><b>Ewa Justka</b> - 19 August 7pm BST</p>
-                <p><b>Beatrice Dillon</b> - 26 August 7pm BST</p>
+                <p><b>Beatrice Dillon</b> - 24 August 7pm BST</p>
                 <p><b>Nyege Nyege</b> - 31 August 7pm BST</p>
                 <p><b>Errorsmith</b> - 2 September 7pm BST</p>
                 <p>More artists TBC</p>
