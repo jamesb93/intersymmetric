@@ -16,8 +16,8 @@
                 <p><b>Modern Institute</b> - 13 August 7pm BST</p>
                 <p><b>Ewa Justka</b> - 19 August 7pm BST</p>
                 <p><b>Beatrice Dillon</b> - 24 August 7pm BST</p>
-                <p><b>Nyege Nyege</b> - 31 August 7pm BST</p>
                 <p><b>Errorsmith</b> - 2 September 7pm BST</p>
+                <p><b>Nyege Nyege</b> - TBA</p>
                 <p>More artists TBC</p>
             </div>
     
