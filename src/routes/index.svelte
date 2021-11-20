@@ -62,6 +62,7 @@
 <style>
 
     .container {
+        visibility: hidden;
         display: grid;
         grid-template-rows: auto auto;
         min-width: 1px;
