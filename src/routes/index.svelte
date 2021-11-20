@@ -1,5 +1,11 @@
 <script>
     import { fade } from 'svelte/transition';
+    import { goto } from '$app/navigation';
+    import { onMount } from 'svelte';
+
+    onMount(async() => {
+        goto('/seq-1/idx')
+    })
 </script>
 
 
