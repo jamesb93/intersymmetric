@@ -39,6 +39,7 @@
     }
 
     .donation {
+        visibility: hidden;
         font-size: 10px;
         text-align: right;
     }
