@@ -1,7 +1,7 @@
 <script context="module">
-	export async function load({ page }) {
+	export async function load({ params }) {
         return { 
-            props: {id: page.params.id}
+            props: {id: params.id}
         };
 	}
 </script>
@@ -20,8 +20,8 @@
 
 	$workshopID = "nobounds";
     $room = id;
-    const roomCode = createRoomID($workshopID, id);
-    socket.emit('roomJoin', roomCode);
+    socket.emit('roomJoin', createRoomID($workshopID, id));
+	console.log(createRoomID($workshopID, id));
 </script>
 
 <div class="main-layout">
