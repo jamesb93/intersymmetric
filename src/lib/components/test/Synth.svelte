@@ -1,67 +1,10 @@
 <script>
-    import { onDestroy } from 'svelte';
-    import { browser } from '$app/env';
     import * as Tone from 'tone';
-    import Play from "../Play.svelte";
-    import Knob from "../Knob.svelte";
-    import BoxButton from "../BoxButton.svelte";
-    import Clock from "../Control/Clock.svelte";
-
-    import { kick, snare, fm1, fm2, metal1, metal2 } from '$lib/instruments/ensemble';
+    import { browser } from '$app/env';
     import { wrap } from '$lib/utility';
-    import patterns from '$lib/presets/velocity.json'
-    import { 
-        socket, play, states, clockMode, grid, mirrorPoint,
-        length, offset, pitchOffset, bpm,
-        clockMultiplierLookup,
-        maxCells, userInteracted,
-        velocityPattern
-    } from '$lib/app.js'
-    
-    import { 
-        mirrorWithPoint,
-        invertGridVertical,
-        clearGrid, randomiseGrid
-    } from "$lib/grid/transforms.js";
-
-    onDestroy(() => {
-        Tone.Transport.stop();
-        if (loop)
-            loop.stop();
-        $play = false;
-    })
-    
-    const multiplierTable = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0.875,0.75,0.66,0.5,0.33,0.25,0.125,0];
-    $: clockMultiplier = multiplierTable[$clockMultiplierLookup];
-    
-    // Sending Data Back to the Server
-    function sendLength() { socket.emit('length', $length) };
-    function sendOffset() { socket.emit('clock::offset', $offset) };
-    function sendBpm() { socket.emit('bpm', $bpm) };
-    function sendMirrorPoint() { socket.emit('mirrorPoint', $mirrorPoint) };
-    function sendMultiplier() { socket.emit('clock::multiplier', $clockMultiplierLookup) };
-    function sendPitchOffset() { socket.emit('pitchOffset', $pitchOffset) };
-    function sendMaxCells() { socket.emit('maxCells', $maxCells) };
-    function sendVelocityPattern() { socket.emit('velocityPattern', $velocityPattern) };
-    
-    function startLoop() {
-        userInteracted.set(true);
-        updatePlayStatus(true)
-    }
-    
-    function stopLoop() {
-        userInteracted.set(true);
-        updatePlayStatus(false)
-    }
-    
-    $: if ($offset.start > $offset.end) {
-        let t = $offset.end
-        $offset.end = $offset.start
-        $offset.start = t
-    }
-    $: Tone.Transport.bpm.value = $bpm;
-    $: selectedPattern = patterns[$velocityPattern + 12];
-    
+    import { kick, snare, fm1, fm2, metal1, metal2 } from '$lib/instruments/ensemble';
+    import { socket, bpm, params  } from '$lib/app';
+    import Kick from '$lib/components/Control/Kick.svelte';
     // Declare indices here so you can easily swap the order.
     const KICK = 0;
     const SNARE = 1;
@@ -69,190 +12,98 @@
     const M2 = 3
     const FM1 = 4
     const FM2 = 5
+
+    socket.emit('roomJoin', 'test');
+
+    let toggle = new Array(6).fill(0);
+    toggle[0] = 1;
     
-    let internalPos = 0;
-    let clockDirection = 1;
     let loop;
-    
-    export let pos = 0;
-    export let prePos = 0;
+    let velocity = 1.0;
+    let length = 0.1;
+    let counter = 0;
+
+    $: {
+        if (Tone.Transport.bpm) {
+            Tone.Transport.bpm.value = $bpm
+        }
+    }
+
+    function init() {
+        Tone.start();
+        Tone.Transport.start("+0.15");
+        if (loop) {
+            loop.start();
+        }
+    }
+
+    class Pattern {
+        constructor(pattern) {
+            this.pattern = pattern;
+        }
+
+        value(count) {
+            const index = wrap(count, 0, this.pattern.length);
+            return this.pattern[index]
+        }
+    }
+
+    let patterns = {
+        kick : {
+            distortion : new Pattern([1.0]),
+            frequency: new Pattern([40])
+        }
+    }
+
+    socket.on('pattern', (instrument, parameter, data) => {
+        patterns[instrument][parameter].pattern = data;
+    })
     
     if (browser) {
         Tone.context.lookAhead = 0.2;
-        updatePlayStatus(false);
         loop = new Tone.Loop(time => {
-            if ($grid[KICK][pos] === true) {
-                kick.trigger(
-                    time, 
-                    selectedPattern[0],
-                    $length
-                );
+            counter += 1;
+            kick.distortion.distortion = patterns.kick.distortion.value(counter);
+            kick.membrane.frequency.value = patterns.kick.frequency.value(counter);
+
+
+            if (toggle[KICK]) {
+                kick.trigger(time, velocity, length);
             } 
             
-            if ($grid[SNARE][pos] === true) {
-                snare.trigger(
-                    time, 
-                    selectedPattern[0],
-                    $length
-                );
+            if (toggle[SNARE]) {
+                snare.trigger(time, velocity, length);
             }
             
-            if ($grid[M1][pos] === true) {
-                metal1.trigger(
-                    time, 
-                    selectedPattern[0],
-                    $length
-                );
+            if (toggle[M1]) {
+                metal1.trigger(time, velocity, length);
             }
             
-            if ($grid[M2][pos] === true) {
-                metal2.trigger(
-                    time, 
-                    selectedPattern[0],
-                    $length
-                );
+            if (toggle[M2]) {
+                metal2.trigger(time, velocity, length);
             }
             
-            if ($grid[FM1][pos] === true) {
-                fm1.trigger(
-                    time, 
-                    selectedPattern[0]
-                );
+            if (toggle[FM1]) {
+                fm1.trigger(time, velocity);
             }
             
-            if ($grid[FM2][pos] === true) {
-                fm2.trigger(
-                    time, 
-                    selectedPattern[0]
-                );
+            if (toggle[FM2]) {
+                fm2.trigger(time, velocity);
             }
-            selectedPattern.rotate(1)
-            
-            prePos = pos;
-            
-            if ($clockMode === "forward") {
-                internalPos += clockMultiplier
-                internalPos = wrap(internalPos, $offset.start-1, $offset.end)
-                pos = Math.floor(internalPos)
-                
-            } else if ($clockMode === "rebound") {
-                
-                if (clockDirection === 1) { // if progressing forward
-                    if (pos === $offset.end-1) {
-                        clockDirection = 0 // change to backward
-                    } 
-                    else { // anywhere else
-                        internalPos += clockMultiplier
-                    }
-                } 
-                if (clockDirection === 0) { // if progressing backward
-                    if (pos === $offset.start-1) { // if we're at the left boundary
-                    internalPos += clockMultiplier
-                    clockDirection = 1 // change to forward
-                } 
-                else {
-                    internalPos -= clockMultiplier
-                }   
-            }
-            internalPos = wrap(internalPos, $offset.start-1, $offset.end)
-            pos = Math.floor(internalPos);
-            
-        } else if ($clockMode === "wander") {
-            if (pos === $offset.start-1) {
-                internalPos += clockMultiplier
-            } 
-            else if (pos >= $offset.end-1) {
-                internalPos  -= clockMultiplier
-            } 
-            else {
-                if (Math.random() <= 0.5) {
-                    internalPos += clockMultiplier
-                } else {
-                    internalPos -= clockMultiplier
-                }
-            }
-            internalPos = wrap(internalPos, $offset.start-1, $offset.end);
-            pos = Math.floor(internalPos);
-            pos = Math.min(Math.max(pos, $offset.start-1), $offset.end-1);
-        }
     }, "16n").start(0);
 }
 </script>
 
-<div id="all-controls">
-    <div id='left-section'></div>
+<button on:click={ init }>
+    start audio + looping
+</button>
 
-    <div id='centre-section'>
-        <div id='clock' class='control-column-container'>
-            <span id='clock-title' class='container-title'>Clock</span>
-            <div id='clock-top'>
-                <Play bind:playing={$play} start={startLoop} pause={stopLoop}/>
-                <Knob enabled={$states.bpm} title="Rate" resetValue={120} min={5} max={300} step={1} bind:value={$bpm} func={sendBpm} />
-                <Knob enabled={$states.multiplier} resetValue={0} scale=0.4 title="Multiplier" min={0} max={22} step={1} bind:value={$clockMultiplierLookup} bind:altValue={clockMultiplier} func={sendMultiplier} />
-            </div>
-            <div id='clock-bottom'>
-                <Clock bind:value={$clockMode}/>
-                <Knob enabled={$states.offset} scale=0.125 title="Start" min={1} max={16} bind:value={$offset.start} func={sendOffset} />
-                <Knob enabled={$states.offset} scale=0.125 title="End" min={1} max={16} bind:value={$offset.end} func={sendOffset} />
-            </div>
-        </div>
-        
-        <div id='grid-transforms' class='control-column-container'>
-            <span class='container-title'>Transforms</span>
-            <div id='max-cells'>
-                <Knob enabled={$states.maxCells} resetValue={16} scale=0.25 title="Max Cells" min={1} max={32} step={1} bind:value={$maxCells} func={sendMaxCells} />
-            </div>
-            <div id='transform-functions'>
-                <BoxButton func={ () => invertGridVertical(grid) } text="Flip V" />
-                <BoxButton func={ () => randomiseGrid(grid) } text="Randomise" />
-                <BoxButton func={ () => clearGrid(grid) } text="Clear" />
-            </div>
-        </div>
-                    
-        <div id='mirror' class='control-column-container'>
-            <div></div>
-            <div id='other-knobs'>
-                <Knob 
-                title="Mirror Point"
-                enabled={$states.mirrorPoint} resetValue={8} 
-                scale=0.125 min={1} max={15} 
-                bind:value={$mirrorPoint} func={sendMirrorPoint} 
-                />
-                <Knob 
-                title="Pattern"
-                enabled={$states.velocityPattern} resetValue={0.0} 
-                scale=0.25 min={-11} max={11} step={1}
-                bind:value={$velocityPattern} func={sendVelocityPattern} 
-                />
-            </div>
-            <BoxButton func={ () => mirrorWithPoint(grid, $mirrorPoint) } text="Mirror H" />
-        </div>
-    </div>
+{#if browser}<Kick />{/if}
 
-    <div id='right-section' class='control-column-container'>
-        <div />
-        <div id='global-parameters'>
-            <Knob
-            enabled={$states.pitchOffset} 
-            resetValue={0} 
-            title="Pitch Offset" 
-            min={-48} max={48} step={1} 
-            bind:value={$pitchOffset} 
-            func={sendPitchOffset} 
-            />
-            <Knob 
-            enabled={$states.globalLength} 
-            scale=0.005 
-            resetValue={1.0} 
-            title="Shape Scale" 
-            min={0.05} max={1} step={0.01} 
-            bind:value={$length} 
-            func={sendLength} 
-            />
-        </div>
-        <div></div>
-    </div>
-</div>
+{counter}
+<p>
+    {$params.kick.distortion}
+</p>
 
 <style>
     :root {
