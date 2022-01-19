@@ -12,19 +12,6 @@
     <span id='title'>{title}</span>
     {/if}
     <svg width='{WIDTH}px' height='{HEIGHT}px' >
-        <!-- Title -->
-        <!-- {#if showTitle}
-        <text
-            x={MID_X}
-            y={HEIGHT / 7}
-            text-anchor="middle"
-            fill={textColor}
-            class="name"
-            >
-            {title}
-        </text>
-        {/if} -->
-        <!-- Arc -->
         <path
             d={rangePath}
             stroke-width={strokeWidth}

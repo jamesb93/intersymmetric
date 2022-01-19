@@ -201,20 +201,20 @@
             <span id='clock-title' class='container-title'>Clock</span>
             <div id='clock-top'>
                 <Play bind:playing={$play} start={startLoop} pause={stopLoop}/>
-                <Knob enabled={$states.bpm} title="Rate" resetValue={120} min={5} max={300} step={1} bind:value={$bpm} func={sendBpm} />
-                <Knob enabled={$states.multiplier} resetValue={0} scale=0.4 title="Multiplier" min={0} max={22} step={1} bind:value={$clockMultiplierLookup} bind:altValue={clockMultiplier} func={sendMultiplier} />
+                <Knob title="Rate" resetValue={120} min={5} max={300} step={1} bind:value={$bpm} func={sendBpm} />
+                <Knob resetValue={0} scale=0.4 title="Multiplier" min={0} max={22} step={1} bind:value={$clockMultiplierLookup} bind:altValue={clockMultiplier} func={sendMultiplier} />
             </div>
             <div id='clock-bottom'>
                 <Clock bind:value={$clockMode}/>
-                <Knob enabled={$states.offset} scale=0.125 title="Start" min={1} max={16} bind:value={$offset.start} func={sendOffset} />
-                <Knob enabled={$states.offset} scale=0.125 title="End" min={1} max={16} bind:value={$offset.end} func={sendOffset} />
+                <Knob scale=0.125 title="Start" min={1} max={16} bind:value={$offset.start} func={sendOffset} />
+                <Knob scale=0.125 title="End" min={1} max={16} bind:value={$offset.end} func={sendOffset} />
             </div>
         </div>
         
         <div id='grid-transforms' class='control-column-container'>
             <span class='container-title'>Transforms</span>
             <div id='max-cells'>
-                <Knob enabled={$states.maxCells} resetValue={16} scale=0.25 title="Max Cells" min={1} max={32} step={1} bind:value={$maxCells} func={sendMaxCells} />
+                <Knob resetValue={16} scale=0.25 title="Max Cells" min={1} max={32} step={1} bind:value={$maxCells} func={sendMaxCells} />
             </div>
             <div id='transform-functions'>
                 <BoxButton func={ () => invertGridVertical(grid) } text="Flip V" />
@@ -228,13 +228,13 @@
             <div id='other-knobs'>
                 <Knob 
                 title="Mirror Point"
-                enabled={$states.mirrorPoint} resetValue={8} 
+                resetValue={8} 
                 scale=0.125 min={1} max={15} 
                 bind:value={$mirrorPoint} func={sendMirrorPoint} 
                 />
                 <Knob 
                 title="Pattern"
-                enabled={$states.velocityPattern} resetValue={0.0} 
+                resetValue={0.0} 
                 scale=0.25 min={-11} max={11} step={1}
                 bind:value={$velocityPattern} func={sendVelocityPattern} 
                 />
@@ -247,7 +247,6 @@
         <div />
         <div id='global-parameters'>
             <Knob
-            enabled={$states.pitchOffset} 
             resetValue={0} 
             title="Pitch Offset" 
             min={-48} max={48} step={1} 
@@ -255,7 +254,6 @@
             func={sendPitchOffset} 
             />
             <Knob 
-            enabled={$states.globalLength} 
             scale=0.005 
             resetValue={1.0} 
             title="Shape Scale" 

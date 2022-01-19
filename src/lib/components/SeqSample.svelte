@@ -35,7 +35,6 @@
         <span class="knob-category">Pattern</span>
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
-            enabled={states.euclid} 
             scale=0.2 
             title="Pattern"
             showTitle={false}
@@ -92,7 +91,6 @@
         <span class="knob-category">Sound</span>
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
-            enabled={true}
             title="Sound"
             showTitle={false}
             scale=0.1 
@@ -106,7 +104,6 @@
         <span class="knob-category">Pitch</span>
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
-            enabled={true}
             title="Pitch"
             showTitle={false}
             resetValue={1.0}
@@ -122,7 +119,6 @@
         <span class="knob-category">Shape</span>
         {#each {length: 6} as _, x}
             <Knob WIDTH={50} HEIGHT={50} 
-            enabled={true}
             title="Shape"
             showTitle={false}
             scale={0.05}
