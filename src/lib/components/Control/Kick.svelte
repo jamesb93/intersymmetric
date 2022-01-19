@@ -3,16 +3,7 @@
     import { kick } from '$lib/instruments/ensemble.js';
     import { freqMap, clip } from "$lib/utility.js";
 
-    $: kick.membrane.octaves = Math.max($params.kick.octaves, 0);
-    $: {
-        let calculatedFreq = Math.max(
-            0, 
-            $params.kick.frequency * freqMap($pitchOffset + $trackPitch[0])
-        );
-        if ( !Number.isNaN(calculatedFreq) && Math.sign(calculatedFreq) === 1) {
-            kick.membrane.frequency.rampTo(calculatedFreq, 0.1)
-        }
-    }
+    $: kick.membrane.octaves = clip($params.kick.octaves, 0, 999);
     $: kick.membrane.envelope.attack = Math.max($params.kick.attack * $length * Math.max($trackShape[0], 0.01), 0);
     $: kick.membrane.envelope.sustain = clip($params.kick.sustain, 0.0, 1.0);
 
@@ -24,6 +15,16 @@
         0
         );
     $: kick.distortion.distortion = clip($params.kick.distortion, 0.0, 1.0);
+
+    $: {
+        let calculatedFreq = Math.max(
+            0, 
+            $params.kick.frequency * freqMap($pitchOffset + $trackPitch[0])
+        );
+        if ( !Number.isNaN(calculatedFreq) && Math.sign(calculatedFreq) === 1) {
+            kick.membrane.frequency.rampTo(calculatedFreq, 0.1)
+        }
+    }
     
     socket.on('params::kick::distortion', (data) => {$params.kick.distortion = data});
     socket.on('params::kick::frequency', (data) => {$params.kick.frequency = data});
