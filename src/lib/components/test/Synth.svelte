@@ -1,10 +1,10 @@
 <script>
     import * as Tone from 'tone';
     import { browser } from '$app/env';
-    import { wrap } from '$lib/utility';
+    import { Pattern } from '$lib/components/test/pattern';
     import { kick, snare, fm1, fm2, metal1, metal2 } from '$lib/instruments/ensemble';
-    import { socket, bpm, params  } from '$lib/app';
-    import Kick from '$lib/components/Control/Kick.svelte';
+    import { socket, bpm, params } from '$lib/app';
+    import { Kick, Snare, Metal, FM} from '$lib/components/Control/controllers';
     // Declare indices here so you can easily swap the order.
     const KICK = 0;
     const SNARE = 1;
@@ -31,21 +31,10 @@
 
     function init() {
         Tone.start();
-        Tone.Transport.start("+0.15");
-        if (loop) {
-            loop.start();
-        }
-    }
-
-    class Pattern {
-        constructor(pattern) {
-            this.pattern = pattern;
-        }
-
-        next(count) {
-            const index = wrap(count, 0, this.pattern.length);
-            return this.pattern[index]
-        }
+        // Tone.Transport.start("+0.15");
+        // if (loop) {
+        //     loop.start();
+        // }
     }
 
     let patterns = {
@@ -58,12 +47,56 @@
     socket.on('pattern', (instrument, parameter, data) => {
         patterns[instrument][parameter].pattern = data;
     })
+
+    socket.on('send', (instrument, parameters) => {
+        const now = Tone.now();
+        if (instrument === 'kick' && kick) {
+            $params.kick.distortion = parameters[0];
+            $params.kick.frequency = parameters[1];
+            $params.kick.octaves = parameters[2];
+            $params.kick.attack = parameters[3];
+            $params.kick.decay = parameters[4];
+            $params.kick.sustain = parameters[5];
+            $params.kick.release = parameters[6];
+            kick.trigger(now, 1.0, 1.0);
+        } 
+        else if (instrument === 'metal' && metal1) {
+            $params.metal1.frequency = parameters[0];
+            $params.metal1.harmonicity = parameters[1];
+            $params.metal1.modulationIndex = parameters[2];
+            $params.metal1.resonance = parameters[3];
+            $params.metal1.octaves = parameters[4];
+            $params.metal1.order = parameters[5];
+            $params.metal1.attack = parameters[6];
+            $params.metal1.decay = parameters[7];
+            $params.metal1.release = parameters[8];
+            metal1.trigger(now, 1.0, 4);
+        }
+        else if (instrument === 'fm' && fm1) {
+            $params.fm1.frequency = parameters[0];
+            $params.fm1.c1ratio = parameters[1];
+            $params.fm1.c2ratio = parameters[2];
+            $params.fm1.c3ratio = parameters[3];
+            $params.fm1.fm2to1 = parameters[4];
+            $params.fm1.fm3to1 = parameters[5];
+            $params.fm1.fm3to2 = parameters[6];
+            $params.fm1.c1release = parameters[7];
+            $params.fm1.c2release = parameters[8];
+            $params.fm1.c3release = parameters[9];
+            $params.fm1.op1gain = parameters[10];
+            $params.fm1.op2gain = parameters[11];
+            $params.fm1.op3gain = parameters[12];
+            fm1.trigger(now, 1.0);
+        }
+        else if (instrument === 'snare') {
+
+        }
+    })
     
     if (browser) {
-        Tone.context.lookAhead = 0.2;
         loop = new Tone.Loop(time => {
             counter += 1;
-            
+
             kick.distortion.distortion = patterns.kick.distortion.next(counter);
             kick.membrane.frequency.value = patterns.kick.frequency.next(counter);
 
@@ -94,88 +127,13 @@
     }, "16n").start(0);
 }
 </script>
-
+<button on:click={ () => { kick.trigger(Tone.now(), 1.0, 1.0) }}></button>
 <button on:click={ init }>
     start audio + looping
 </button>
 
-{#if browser}<Kick />{/if}
-
-{counter}
-<p>
-    {$params.kick.distortion}
-</p>
-
-<style>
-    :root {
-        --button-gap: 2px;
-        --pad: 30px;
-    }
-    
-    #all-controls {
-        display: grid;
-        grid-template-columns: 100px auto 200px;
-        padding-top: 10px;
-    }
-
-    #clock {
-        min-width: 250px;
-        max-width: 250px;
-    }
-
-    #clock-title {
-        padding-left: 10px;
-    }
-
-    #grid-transforms {
-        min-width: 80px;
-        max-width: 80px;
-    }
-
-    #centre-section {
-        display: flex;
-        flex-direction: row;
-    }
-    
-    .control-column-container {
-        display: grid;
-        grid-template-rows: 30px 85px 100px;
-        border-left: 1px dashed #40ac47;
-        padding-left: var(--pad);
-        padding-right: var(--pad);
-    }
-    
-    .container-title {
-        color: #40ac47;
-        font-size: 10px;
-    }
-
-    #clock-top, #clock-bottom {
-        display: grid;
-        grid-template-columns: 1.1fr 0.9fr 1fr;
-    }
-
-    #transform-functions {
-        display: flex;
-        flex-direction: column;
-        gap: var(--button-gap)
-    }
-
-    #max-cells {
-        margin: 0 auto;
-    }
-
-    #global-parameters {
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
-        height: 100%;
-        padding-left: 4px;
-    }
-
-    #other-knobs {
-        display: flex;
-        flex-direction: row;
-    }
-
-</style>
+{#if browser}
+<Kick />
+<Metal id={'metal1'} instrument={metal1}/>
+<FM id={'fm1'} instrument={fm1} />
+{/if}
