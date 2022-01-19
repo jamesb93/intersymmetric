@@ -32,6 +32,7 @@
     })
 
     socket.on('send', (instrument, parameters) => {
+        console.log('received message')
         const now = Tone.now();
         if (instrument === 'kick' && kick) {
             $params.kick.distortion = parameters[0];
