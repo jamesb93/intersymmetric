@@ -42,7 +42,7 @@
             this.pattern = pattern;
         }
 
-        value(count) {
+        next(count) {
             const index = wrap(count, 0, this.pattern.length);
             return this.pattern[index]
         }
@@ -63,8 +63,9 @@
         Tone.context.lookAhead = 0.2;
         loop = new Tone.Loop(time => {
             counter += 1;
-            kick.distortion.distortion = patterns.kick.distortion.value(counter);
-            kick.membrane.frequency.value = patterns.kick.frequency.value(counter);
+            
+            kick.distortion.distortion = patterns.kick.distortion.next(counter);
+            kick.membrane.frequency.value = patterns.kick.frequency.next(counter);
 
 
             if (toggle[KICK]) {
