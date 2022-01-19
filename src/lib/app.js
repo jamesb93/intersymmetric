@@ -58,22 +58,6 @@ export const play = writable(false);
 export const velocity = writable(1.0);
 socket.on('velocity', x => velocity.set(x));
 
-export const states = writable({
-    pitchOffset: true,
-    maxCells: true,
-    mirrorPoint: true,
-    grid: true,
-    bpm: true,
-    euclid: true,
-    offset: true,
-    globalVelocity: true,
-    globalLength: true,
-    multiplier: true,
-    transforms: true,
-    velocityPattern: true,
-});
-socket.on('enabledStates', x => states.set(x));
-
 export const pitchOffset = writable(0);
 socket.on('pitchOffset', x => pitchOffset.set(x));
 
