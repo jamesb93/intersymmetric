@@ -3,25 +3,12 @@
     import { browser } from '$app/env';
     import { Pattern } from '$lib/components/test/pattern';
     import { kick, snare, fm1, fm2, metal1, metal2 } from '$lib/instruments/ensemble';
-    import { socket, bpm, params } from '$lib/app';
+    import { socket, bpm, params, length } from '$lib/app';
     import { Kick, Snare, Metal, FM} from '$lib/components/Control/controllers';
-    // Declare indices here so you can easily swap the order.
-    const KICK = 0;
-    const SNARE = 1;
-    const M1 = 2
-    const M2 = 3
-    const FM1 = 4
-    const FM2 = 5
+
+    let error = '';
 
     socket.emit('roomJoin', 'test');
-
-    let toggle = new Array(6).fill(0);
-    toggle[0] = 1;
-    
-    let loop;
-    let velocity = 1.0;
-    let length = 0.1;
-    let counter = 0;
 
     $: {
         if (Tone.Transport.bpm) {
@@ -31,10 +18,6 @@
 
     function init() {
         Tone.start();
-        // Tone.Transport.start("+0.15");
-        // if (loop) {
-        //     loop.start();
-        // }
     }
 
     let patterns = {
@@ -58,7 +41,7 @@
             $params.kick.decay = parameters[4];
             $params.kick.sustain = parameters[5];
             $params.kick.release = parameters[6];
-            kick.trigger(now, 1.0, 1.0);
+            kick.trigger(now, parameters[7], $length);
         } 
         else if (instrument === 'metal' && metal1) {
             $params.metal1.frequency = parameters[0];
@@ -70,7 +53,7 @@
             $params.metal1.attack = parameters[6];
             $params.metal1.decay = parameters[7];
             $params.metal1.release = parameters[8];
-            metal1.trigger(now, 1.0, 4);
+            metal1.trigger(now, parameters[9], $length);
         }
         else if (instrument === 'fm' && fm1) {
             $params.fm1.frequency = parameters[0];
@@ -86,54 +69,68 @@
             $params.fm1.op1gain = parameters[10];
             $params.fm1.op2gain = parameters[11];
             $params.fm1.op3gain = parameters[12];
-            fm1.trigger(now, 1.0);
+            fm1.trigger(now, parameters[13]);
         }
-        else if (instrument === 'snare') {
-
+        else if (instrument === 'snare' && snare) {
+            $params.snare.frequency = parameters[0];
+            $params.snare.attack = parameters[1];
+            $params.snare.decay = parameters[2];
+            $params.snare.sustain = parameters[3];
+            $params.snare.release = parameters[4];
+            $params.snare.order = parameters[5];
+            $params.snare.membraneFreq = parameters[6];
+            snare.trigger(now, parameters[7], $length);
         }
     })
-    
-    if (browser) {
-        loop = new Tone.Loop(time => {
-            counter += 1;
 
-            kick.distortion.distortion = patterns.kick.distortion.next(counter);
-            kick.membrane.frequency.value = patterns.kick.frequency.next(counter);
-
-
-            if (toggle[KICK]) {
-                kick.trigger(time, velocity, length);
-            } 
-            
-            if (toggle[SNARE]) {
-                snare.trigger(time, velocity, length);
-            }
-            
-            if (toggle[M1]) {
-                metal1.trigger(time, velocity, length);
-            }
-            
-            if (toggle[M2]) {
-                metal2.trigger(time, velocity, length);
-            }
-            
-            if (toggle[FM1]) {
-                fm1.trigger(time, velocity);
-            }
-            
-            if (toggle[FM2]) {
-                fm2.trigger(time, velocity);
-            }
-    }, "16n").start(0);
+function parseError(e) {
+    error = e.message;
 }
 </script>
-<button on:click={ () => { kick.trigger(Tone.now(), 1.0, 1.0) }}></button>
-<button on:click={ init }>
-    start audio + looping
+
+<svelte:window on:error={ parseError } />
+
+<button class='btn' on:click={ init }>
+    start audio
 </button>
+
+{#if error !== ''}
+<p class='error'>Error encountered, please refresh</p>
+<p class='error-message'>{ error }</p>
+{/if}
 
 {#if browser}
 <Kick />
+<Snare />
 <Metal id={'metal1'} instrument={metal1}/>
 <FM id={'fm1'} instrument={fm1} />
 {/if}
+
+<style>
+    .error {
+        color:tomato
+    }
+
+    .error-message {
+        font-size: 0.75rem;
+    }
+
+    .btn {
+        font-family: monospace;
+        font-size: 2rem;
+        margin-top: 1em;
+        border: 2px solid black;
+        background: none;
+        box-shadow: none;
+        border-radius: 0px;
+    }
+
+    .btn:hover {
+        background-color:darkolivegreen;
+        color: white;
+    }
+
+    .btn:active {
+        background-color:rgb(57, 71, 32);
+    }
+</style>
