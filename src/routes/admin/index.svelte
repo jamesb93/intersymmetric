@@ -2,16 +2,10 @@
     import { socket, room, numUsers } from '$lib/app.js';
 
     let messageForUser = '';
-    let states = {};
     let rooms = {};
-    socket.on('enabledStates', data => states = data)
     socket.on('rooms', data => {
         rooms = data
     })
-
-    const update = () => {
-        socket.emit('enabledStates', states)
-    }
 
     const joinRoom = (code) => {
         socket.emit('roomJoin', code);
@@ -47,14 +41,6 @@
                 class:selectedRoom={k === $room}
                 >{k}</a>
                 {/if}
-            {/each}
-        </div>
-    
-        <div class="states">
-            <h3>Toggle Features</h3>
-            {#each Object.entries(states) as [k, v]}
-                <input type="checkbox" bind:checked={states[k]} on:change={update} />
-                {k}<br>
             {/each}
         </div>
     </div>

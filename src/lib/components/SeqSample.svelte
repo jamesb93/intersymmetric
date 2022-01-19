@@ -6,7 +6,7 @@
     import { shiftColumnDown, shiftColumnUp, rotateGridColumn } from '$lib/grid/transforms.js';
     import { getPattern } from "$lib/grid/euclid.js";
     import { 
-        socket, states, grid, gridValid, euclidSteps,
+        socket, grid, gridValid, euclidSteps,
         trackLengths, trackRates, sampleSelectors
     } from '$lib/app.js';
 

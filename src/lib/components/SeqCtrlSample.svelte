@@ -11,7 +11,7 @@
     
     import patterns from '$lib/presets/velocity.json'
     import { 
-        socket, play, states, clockMode, grid, mirrorPoint,
+        socket, play, clockMode, grid, mirrorPoint,
         length, offset, bpm,
         clockMultiplierLookup,
         maxCells, userInteracted,
