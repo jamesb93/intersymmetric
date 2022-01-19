@@ -3,7 +3,7 @@
     import { kick } from '$lib/instruments/ensemble.js';
     import { freqMap, clip } from "$lib/utility.js";
 
-    $: kick.membrane.octaves = clip($params.kick.octaves(0, 999));
+    $: kick.membrane.octaves = clip($params.kick.octaves, 0, 999);
     $: kick.membrane.envelope.attack = Math.max($params.kick.attack * $length * Math.max($trackShape[0], 0.01), 0);
     $: kick.membrane.envelope.sustain = clip($params.kick.sustain, 0.0, 1.0);
 
