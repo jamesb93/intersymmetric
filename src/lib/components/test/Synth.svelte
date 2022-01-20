@@ -8,12 +8,6 @@
 
     socket.emit('roomJoin', 'test');
 
-    $: {
-        if (Tone.Transport.bpm) {
-            Tone.Transport.bpm.value = $bpm
-        }
-    }
-
     function init() {
         Tone.start();
     }
