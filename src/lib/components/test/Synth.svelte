@@ -1,10 +1,8 @@
 <script>
     import * as Tone from 'tone';
-    import { browser } from '$app/env';
     import { Pattern } from '$lib/components/test/pattern';
-    import { kick, snare, fm1, fm2, metal1, metal2 } from '$lib/instruments/ensemble';
+    import { kick, snare, fm1, metal1 } from '$lib/instruments/ensemble';
     import { socket, bpm, params, length } from '$lib/app';
-    import { Kick, Snare, Metal, FM} from '$lib/components/Control/controllers';
 
     let error = '';
 
@@ -35,51 +33,51 @@
         console.log('received message')
         const now = Tone.now();
         if (instrument === 'kick' && kick) {
-            $params.kick.distortion = parameters[0];
-            $params.kick.frequency = parameters[1];
-            $params.kick.octaves = parameters[2];
-            $params.kick.attack = parameters[3];
-            $params.kick.decay = parameters[4];
-            $params.kick.sustain = parameters[5];
-            $params.kick.release = parameters[6];
+            kick.distortion.distortion = parameters[0];
+            kick.membrane.frequency.value = parameters[1];
+            kick.membrane.octaves = parameters[2];
+            kick.membrane.envelope.attack = parameters[3];
+            kick.membrane.envelope.decay = parameters[4];
+            kick.membrane.envelope.sustain = parameters[5];
+            kick.membrane.envelope.release = parameters[6];
             kick.trigger(now, parameters[7], $length);
         } 
         else if (instrument === 'metal' && metal1) {
-            $params.metal1.frequency = parameters[0];
-            $params.metal1.harmonicity = parameters[1];
-            $params.metal1.modulationIndex = parameters[2];
-            $params.metal1.resonance = parameters[3];
-            $params.metal1.octaves = parameters[4];
-            $params.metal1.order = parameters[5];
-            $params.metal1.attack = parameters[6];
-            $params.metal1.decay = parameters[7];
-            $params.metal1.release = parameters[8];
+            metal1.source.frequency.value = parameters[0];
+            metal1.source.harmonicity = parameters[1];
+            metal1.source.modulationIndex = parameters[2];
+            metal1.source.resonance = parameters[3];
+            metal1.source.octaves = parameters[4];
+            metal1.source.order = parameters[5];
+            metal1.source.envelope.attack = parameters[6];
+            metal1.source.envelope.decay = parameters[7];
+            metal1.source.envelope.release = parameters[8];
             metal1.trigger(now, parameters[9], $length);
         }
         else if (instrument === 'fm' && fm1) {
-            $params.fm1.frequency = parameters[0];
-            $params.fm1.c1ratio = parameters[1];
-            $params.fm1.c2ratio = parameters[2];
-            $params.fm1.c3ratio = parameters[3];
-            $params.fm1.fm2to1 = parameters[4];
-            $params.fm1.fm3to1 = parameters[5];
-            $params.fm1.fm3to2 = parameters[6];
-            $params.fm1.c1release = parameters[7];
-            $params.fm1.c2release = parameters[8];
-            $params.fm1.c3release = parameters[9];
-            $params.fm1.op1gain = parameters[10];
-            $params.fm1.op2gain = parameters[11];
-            $params.fm1.op3gain = parameters[12];
+            fm1.fund.value = parameters[0];
+            fm1.c1ratio.value = parameters[1];
+            fm1.c2ratio.value = parameters[2];
+            fm1.c3ratio.value = parameters[3];
+            fm1.fm2to1.factor.value = parameters[4];
+            fm1.fm3to1.factor.value = parameters[5];
+            fm1.fm3to2.factor.value = parameters[6];
+            fm1.c1env.release = parameters[7];
+            fm1.c2env.release = parameters[8];
+            fm1.c3env.release = parameters[9];
+            fm1.op1gain.gain.value = parameters[10];
+            fm1.op2gain.gain.value = parameters[11];
+            fm1.op3gain.gain.value = parameters[12];
             fm1.trigger(now, parameters[13]);
         }
         else if (instrument === 'snare' && snare) {
-            $params.snare.frequency = parameters[0];
-            $params.snare.attack = parameters[1];
-            $params.snare.decay = parameters[2];
-            $params.snare.sustain = parameters[3];
-            $params.snare.release = parameters[4];
-            $params.snare.order = parameters[5];
-            $params.snare.membraneFreq = parameters[6];
+            snare.filter.frequency.value = parameters[0];
+            snare.env.attack = parameters[1];
+            snare.env.decay = parameters[2];
+            snare.env.release = parameters[3];
+            snare.env.sustain = parameters[4];
+            snare.waveshaper.order = parameters[5];
+            snare.membrane.frequency.value = parameters[6];
             snare.trigger(now, parameters[7], $length);
         }
     })
@@ -98,13 +96,6 @@ function parseError(e) {
 {#if error !== ''}
 <p class='error'>Error encountered, please refresh</p>
 <p class='error-message'>{ error }</p>
-{/if}
-
-{#if browser}
-<Kick />
-<Snare />
-<Metal id={'metal1'} instrument={metal1}/>
-<FM id={'fm1'} instrument={fm1} />
 {/if}
 
 <style>
