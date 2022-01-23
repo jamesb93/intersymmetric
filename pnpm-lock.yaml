@@ -16,9 +16,9 @@ dependencies:
   socket.io-client: 4.4.1
 
 devDependencies:
-  '@sveltejs/adapter-node': 1.0.0-next.62
+  '@sveltejs/adapter-node': 1.0.0-next.66
   '@sveltejs/adapter-static': 1.0.0-next.26
-  '@sveltejs/kit': 1.0.0-next.232_svelte@3.46.2
+  '@sveltejs/kit': 1.0.0-next.240_svelte@3.46.2
   d3: 6.7.0
   svelte: 3.46.2
   tone: 14.7.77
@@ -50,8 +50,8 @@ packages:
     resolution: {integrity: sha512-2pTGuibAXJswAPJjaKisthqS/NOK5ypG4LYT6tEAV0S/mxW0zOIvYvGK0V8w8+SHxAm6vRMSjqSalFXeBAqs+Q==}
     dev: false
 
-  /@sveltejs/adapter-node/1.0.0-next.62:
-    resolution: {integrity: sha512-mq/IOgQos0ps3efi4JTuEXdhQaoUwdWZ4RTgP2DeVL5VsWqm0T+GZJod/RDSwzwDdq4QqUHjfnpk+mKuO5QnWQ==}
+  /@sveltejs/adapter-node/1.0.0-next.66:
+    resolution: {integrity: sha512-CtBRv7TAo0tuPm+noYXMYHz7jeUSZlT3+eAmsBMeM+B0oB5yEyZGycAyLbMykrp1PlWgN3jg1oK6gpwHIbxrJA==}
     dependencies:
       tiny-glob: 0.2.9
     dev: true
@@ -62,8 +62,8 @@ packages:
       tiny-glob: 0.2.9
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.232_svelte@3.46.2:
-    resolution: {integrity: sha512-STQ0hnJozIop8k9I313nwVasBIQ45Z2K1pUOkDVjCSOGijgsj+De5q0prQBtL1ZlqqisfkYlOf8W9gvDSyTLEA==}
+  /@sveltejs/kit/1.0.0-next.240_svelte@3.46.2:
+    resolution: {integrity: sha512-cHdxdSKAdCuty2lYlRHXE4rJZuKd4wur9U63JtPwysTaReMEJl+s9J/LVvyBzaLW/13x8vm/kKqx+DDcI0udlA==}
     engines: {node: '>=14.13'}
     hasBin: true
     peerDependencies:
