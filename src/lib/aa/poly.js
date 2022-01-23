@@ -1,10 +1,6 @@
-import { Queue } from './queue';
+import { Queue } from './queue.js';
 
 class Poly {
-    voices: any[];
-    index: number;
-    queue: Queue;
-
     constructor(synth, numVoices) {
         this.voices = new Array(numVoices).fill(null);
         this.voices = this.voices.map(s => new synth);

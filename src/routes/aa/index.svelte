@@ -1,11 +1,11 @@
 <script>
     import * as Tone from 'tone';
     import { onMount } from 'svelte';
-    import { KickSynth } from '$lib/components/AA/instruments/kick';
-    import { MetalSynth } from '$lib/components/AA/instruments/metal';
-    import { FMSynth } from '$lib/components/AA/instruments/fm';
-    import { SnareSynth } from '$lib/components/AA/instruments/snare';
-    import { Poly } from '$lib/components/AA/poly';
+    import { KickSynth } from '$lib/AA/instruments/kick';
+    import { MetalSynth } from '$lib/AA/instruments/metal';
+    import { FMSynth } from '$lib/AA/instruments/fm';
+    import { SnareSynth } from '$lib/AA/instruments/snare';
+    import { Poly } from '$lib/aa/poly';
     import { socket, length } from '$lib/app';
     
     let error = '';
