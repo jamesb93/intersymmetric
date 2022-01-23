@@ -4,10 +4,8 @@ class Env {
     constructor(attack, release) {
         this.attack = attack;
         this.release = release;
-        this.meter = new Tone.Meter({ normalRange: 1 });
         this.out = new Tone.Multiply(0.0);
-        this.lp = new Tone.OnePoleFilter(50, 'lowpass').fan(this.out.factor, this.meter);
-        this.line = new Tone.Signal(0, { minValue: 0, maxValue: 1 }).connect(this.lp);
+        this.line = new Tone.Signal(0, { minValue: 0, maxValue: 1 }).connect(this.out.factor);
     }
 
     trigger(time, velocity) {
