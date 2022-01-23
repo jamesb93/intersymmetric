@@ -1,5 +1,5 @@
 import * as Tone from "tone";
-import { clip } from '$lib/utility.js';
+
 class SnareSynth {
     constructor() {
         this.out = new Tone.Limiter(-0.1)
@@ -24,8 +24,14 @@ class SnareSynth {
         this.source = new Tone.Noise()
             .connect(this.filter)
             .start();
+        
+        this.busy = false;
+        this.membrane.onsilence = () => {
+            this.busy = false;
+        }
     }
     trigger(time, duration, parameters) {
+        this.busy = true;
         this.filter.frequency.value = parameters[0];
         this.env.attack = parameters[1];
         this.env.decay = parameters[2];

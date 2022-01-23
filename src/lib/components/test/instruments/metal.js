@@ -6,9 +6,15 @@ class MetalSynth {
         this.limiter = new Tone.Limiter(-1.0).connect(this.out);
         this.comp = new Tone.Compressor(-12, 3).connect(this.limiter);
         this.source = new Tone.MetalSynth().connect(this.comp);
-    }
+        
+        this.busy = false;
+        this.source.onsilence = () => {
+            this.busy = false;
+        }
+    }   
 
     trigger(time, duration, parameters) {
+        this.busy = true;
         this.source.frequency.value = parameters[0];
         this.source.harmonicity = parameters[1];
         this.source.modulationIndex = parameters[2];
