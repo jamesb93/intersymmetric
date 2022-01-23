@@ -9,22 +9,17 @@
     import { socket, length } from '$lib/app';
     
     let error = '';
+    let kick, fm, metal, snare;
     
     socket.emit('roomJoin', 'test');
     
-    function init() {
-        Tone.start();
-    }
-    
-    let kick, fm, metal, snare;
-    
     onMount(async() => {
-        kick = new Poly(KickSynth, 4);
+        kick = new Poly(KickSynth, 2);
         fm = new Poly(FMSynth, 4);
-        metal = new Poly(MetalSynth, 4);
-        snare = new Poly(SnareSynth, 4);
+        metal = new Poly(MetalSynth, 2);
+        snare = new Poly(SnareSynth, 2);
         socket.on('send', (instrument, parameters) => {
-            const now = Tone.now();
+        const now = Tone.now();
             if (instrument === 'kick' && kick) {
                 kick.trigger(now, $length, parameters);
             } 
@@ -39,6 +34,10 @@
             }
         })
     })
+
+    function init() {
+        Tone.start();
+    }
     
     function parseError(e) {
         error = e.message;
