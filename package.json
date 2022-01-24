@@ -4,13 +4,16 @@
   "scripts": {
     "dev": "svelte-kit dev --host",
     "build": "svelte-kit build",
-    "preview": "svelte-kit preview"
+    "preview": "svelte-kit preview",
+    "test" : "mocha 'src/**/*.test.js'"
   },
   "devDependencies": {
     "@sveltejs/adapter-node": "next",
     "@sveltejs/adapter-static": "next",
     "@sveltejs/kit": "next",
+    "chai": "^4.3.4",
     "d3": "^6.7.0",
+    "mocha": "^9.1.4",
     "svelte": "^3.46.2",
     "tone": "^14.7.77",
     "vite": "^2.7.12"
