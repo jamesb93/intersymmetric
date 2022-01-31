@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "Space Mono";
+    src: url("/fonts/SpaceMono-Regular.ttf") format("truetype");
+}
+
+html {
+    background-color: rgb(216, 216, 216);
+}
+
+text {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: var(--font);
+}

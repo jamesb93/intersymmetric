@@ -16,6 +16,10 @@ export const mapRange = (i, iMin, iMax, oMin, oMax) => {
     return (i - iMin) * (oMax - oMin) / (iMax - iMin) + oMin;
 }
 
+export const scale = (i, iMin, iMax, oMin, oMax) => {
+    return mapRange(i, iMin, iMax, oMin, oMax);
+}
+
 export const wrap = (i, min, max) => {
     let retVal;
     let range = max - min; 
