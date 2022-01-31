@@ -2,7 +2,7 @@
     import * as Tone from 'tone';
     import { onMount } from 'svelte';
     import { KickSynth } from '$lib/aa/instruments/kick';
-    import { MetalSynth } from '$lib/a/instruments/metal';
+    import { MetalSynth } from '$lib/aa/instruments/metal';
     import { FMSynth } from '$lib/aa/instruments/fm';
     import { SnareSynth } from '$lib/aa/instruments/snare';
     import { Poly } from '$lib/aa/poly';
