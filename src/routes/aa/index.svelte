@@ -15,7 +15,7 @@
     
     onMount(async() => {
         kick = new Poly(KickSynth, 2);
-        fm = new Poly(FMSynth, 4);
+        fm = new Poly(FMSynth, 32);
         metal = new Poly(MetalSynth, 2);
         snare = new Poly(SnareSynth, 2);
         socket.on('send', (instrument, parameters) => {
