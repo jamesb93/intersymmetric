@@ -1,44 +1,27 @@
 <script>
     import * as Tone from 'tone';
-    import { onMount } from 'svelte';
-    import { Tala } from '$lib/aa/tala';
     import MultiSlider from '$lib/aa/MultiSlider.svelte';
+    import { main_loop, sub_loop, tala, ptn, time1, time2 } from '$lib/aa/loop';
 
-    const tala = new Tala([2, 3, 4]);
-    let ptn = "";
-
-    let bpm = 120;
-    let mainLoop, subLoop;
+    let bpm = 900;
     let mainLoopInterval = 1;
     let subLoopRatio = 2;
+
     $: subLoopInterval = mainLoopInterval / subLoopRatio;
-    $: if (subLoop) subLoop.interval = subLoopInterval;
-    $: if (mainLoop) mainLoop.interval = mainLoopInterval;
-    $: if (Tone.Transport.bpm.value) Tone.Transport.bpm.value = bpm;
-
-    let time1 =0, 
-        time2 =0;
-
-    onMount(async() => {
-        mainLoop = new Tone.Loop(time => {
-            time1 = time;
-            ptn = tala.next();
-        }, 1)
-
-        subLoop = new Tone.Loop(time => {
-            time2 = time;
-        }, 0.25)
-
-    })
+    $: if (sub_loop) sub_loop.interval = subLoopInterval;
+    $: if (main_loop) main_loop.interval = mainLoopInterval;
 </script>
-<MultiSlider />
+
+
+<!-- <MultiSlider /> -->
 {bpm}
-<input type="range" min={5} max={9000} step={1} bind:value={bpm}>
+<input type="range" min={5} max={50000} step={1} bind:value={bpm} on:input={ () => { Tone.Transport.bpm.value = bpm }}>
 
 <button on:click={ () => {
     Tone.start();
     Tone.Transport.start();
-    mainLoop.start(0); subLoop.start(0);
+    main_loop.start(0); 
+    sub_loop.start(0);
 }}>start</button>
 
 <button on:click={ () => { subLoopRatio = 2} }>2</button>
@@ -46,17 +29,18 @@
 <button on:click={ () => { subLoopRatio = 4} }>4</button>
 <button on:click={ () => { tala.pattern = [5, 2, 3]} }>change pattern</button>
 
-{#if subLoop}
-{ subLoop.interval }
+{#if sub_loop}
+{ sub_loop.interval }
 {/if}
+
 <p>
-    {time1.toFixed(2)}
+    { $time1.toFixed(2) }
 </p>
 
 <p>
-    {time2.toFixed(2)}
+    { $time2.toFixed(2) }
 </p>
 
 <p>
-    {ptn}
+    {$ptn}
 </p>
