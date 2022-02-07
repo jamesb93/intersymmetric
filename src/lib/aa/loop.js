@@ -4,31 +4,71 @@ import { Tala } from '$lib/aa/tala';
 import { writable, get } from 'svelte/store';
 import { Poly } from '$lib/aa/poly';
 import { FMSynth } from '$lib/aa/instruments/fm';
+import { MetalSynth } from '$lib/aa/instruments/metal';
+import { Pattern } from '$lib/aa/pattern';
 
-
-let main_loop, sub_loop;
+let duration_loop, subdiv_loop;
 const ptn =  writable([]);
 const time1 = writable(0);
 const time2 = writable(1);
-const tala = new Tala([2, 3, 4])
+
+const tala = new Tala([5, 2, 3]);
+
+const subdiv_pattern = new Pattern([2, 8]);
+const subdiv_ratio = writable(2);
+
+const duration_pattern = new Pattern(["16n", "16n"]);
+const duration_interval = writable(1);
+
+const base_speed = writable(1);
+
 
 if (browser) {
+    // const fm1 = new Poly(FMSynth, 32);
+    const fm1 = new FMSynth();
+    fm1.out.toDestination();
+    const fm1_listener = writable(0); // 0 - top | 1 - durations | 2 - subdivisions
+
+    // const fm2 = new Poly(FMSynth, 32);
+    const fm2 = new FMSynth();
+    fm2.out.toDestination();
+    const fm2_listener = writable(1);
+
+    const kick = new MetalSynth();
+    kick.out.toDestination();
+
     // Instruments
-    const fm = new Poly(FMSynth, 16);
-
-    main_loop = new Tone.Loop(time => {
+    duration_loop = new Tone.Loop(time => {
         ptn.set( tala.next() );
-        if (get(ptn)[1] === 0) {
-            fm.trigger(time, null, [
-                50, 1, 709, 363, 133520, 2240, 128291, 5, 2.933, 3.438, 1, 1, 0, 1.0
-            ])
-        }
         time1.set( time );
-    }, 1)
+        
+        const b = get(ptn)[1];
+        if (get(fm1_listener) === 0 && b === 0 || get(fm1_listener) === 1) {
+            console.log('bass trig')
+            const p = [50, 1, 1, 473, 500, 0, 0, 0.5, 0.5, 0.5, 1, 1, 0, 1];
+            fm1.trigger(time, null, p);
+        };
+        
+        if (get(fm2_listener) === 0 && a === 0 || get(fm2_listener) === 1) {
+            const p = [50, 2, 12, 120, 2500, 28304, 5575, 0.5, 0.5, 0.5, 0.3, 0.3, 0.322, 1]
+            fm2.trigger(time, null, p);
+        }
+        const n = duration_pattern.next();
+        duration_loop.interval = n;
+        console.log(n)
+    }, "16n");
 
-    sub_loop = new Tone.Loop(time => {
-        time2.set( time )
-    }, 0.25)
+    subdiv_loop = new Tone.Loop(time => {
+        kick.trigger(time, 0.01, [3000, 0.3, 31.91, 1, 0.1, 1, 0.001, 1.884, 1])      
+        subdiv_ratio.set( subdiv_pattern.next() );
+        subdiv_loop.interval = duration_loop.interval / get(subdiv_ratio);
+    }, "32n");
 }
 
-export { main_loop, sub_loop, tala, ptn, time1, time2 };
+export { 
+    duration_loop, subdiv_loop,
+    tala, ptn, 
+    time1, time2,
+    subdiv_ratio, duration_interval,
+    base_speed
+};
