@@ -1,11 +1,11 @@
 import * as Tone from 'tone';
 import { browser } from '$app/env';
-import { Tala } from '$lib/aa/tala';
+import { Tala } from '$lib/aaa/talaa';
 import { writable, get } from 'svelte/store';
-import { Poly } from '$lib/aa/poly';
-import { FMSynth } from '$lib/aa/instruments/fm';
-import { MetalSynth } from '$lib/aa/instruments/metal';
-import { Pattern } from '$lib/aa/pattern';
+import { Poly } from '$lib/aaa/polyy';
+import { FMSynth } from '$lib/aaa/instruments/fmm';
+import { MetalSynth } from '$lib/aaa/instruments/metall';
+import { Pattern } from '$lib/aaa/patternn';
 
 let duration_loop, subdiv_loop;
 const ptn =  writable([]);
