@@ -107,7 +107,7 @@
         prevTouch = touch;
     }
     
-    const upHandler = (e) => {
+    const handleUp = (e) => {
         if (enabled) down=false
     }
 
@@ -140,7 +140,7 @@
 <svelte:window 
 on:mousemove={mouseMoveHandler} 
 on:touchmove={touchMoveHandler}
-on:mouseup={upHandler} 
+on:mouseup={handleUp} 
 />
 
 <div 
@@ -196,8 +196,6 @@ on:mouseup={upHandler}
         {/if}
     </svg>
 </div>
-
-{ down } { enabled }
 
 <style>
     .knob-control {
