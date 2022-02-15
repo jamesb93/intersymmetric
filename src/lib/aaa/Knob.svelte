@@ -84,11 +84,10 @@
             pv = internal
     }
     
-    let anchor = null;
     let down = false;
 
     const move = (posUpdate) => {
-        if (enabled && anchor && down) {
+        if (enabled && down) {
             console.log(posUpdate)
             updatePosition(posUpdate)
         }
@@ -100,11 +99,10 @@
 
     let prevTouch;
     const touchMoveHandler = (e) => { 
-        console.log(e)
         const touch = e.touches[0];
         if (prevTouch) {
             const movementY = touch.pageY - prevTouch.pageY;
-            move(movementY)
+            move(movementY * -1)
         }
         prevTouch = touch;
     }
@@ -113,8 +111,10 @@
         if (enabled) down=false
     }
 
-    const handleMouseDown = (e) => {
-        if (enabled) down = true
+    const handleDown = (e) => {
+        if (enabled) { 
+            down = true;
+        }
     }
     
     function dashLength() {
@@ -148,7 +148,8 @@ on:mouseup={upHandler}
     class="knob-control" 
     style:height={`${HEIGHT}px`}
     style:width={`${WIDTH}px`}
-    on:mousedown={handleMouseDown}
+    on:mousedown={handleDown}
+    on:touchstart={handleDown}
     on:dblclick={resetHandler}
     >
     {#if showTitle}
@@ -196,7 +197,7 @@ on:mouseup={upHandler}
     </svg>
 </div>
 
-{ down } { enabled } { anchor }
+{ down } { enabled }
 
 <style>
     .knob-control {
