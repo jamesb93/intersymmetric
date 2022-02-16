@@ -27,8 +27,8 @@
     header {
         display: grid;
         grid-template-columns: auto auto auto;
-        justify-content: space-around;
-        max-width: 50%;
+        justify-content: space-between;
+        max-width: 960px;
         margin: 0 auto;
         font-size: 10px;
         min-height: var(--h);
