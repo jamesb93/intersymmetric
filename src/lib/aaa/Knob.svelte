@@ -4,9 +4,23 @@
     const clip = (i, low, high) => {
         return Math.min(Math.max(i, low), high)
     }
-    
+
+    export let title = "";
+    export let min = 0;
+    export let max = 100;
+    export let step = 1;
+    export let resetValue = 0;
+    export let scale = 1.0;
     export let WIDTH = 80;
     export let HEIGHT = 60;
+    export let showTitle = true;
+    export let showValue = true;
+    export let altValue = null;
+    export let value;
+    export let secondaryColor = 'rgba(104,104,172,1)';
+    export let strokeWidth = 1;
+    export let enabled = true;
+
     const RADIUS = 21;
     const MID_X = WIDTH/2;
     const MID_Y = HEIGHT/2;
@@ -19,21 +33,6 @@
     
     let length = 0;
     let interval = null;
-    
-    export let resetValue = null;
-    export let showTitle = true;
-    export let title = "";
-    export let value;
-    export let max = 100;
-    export let min = 0;
-    export let showValue = true;
-    export let altValue = null;
-    export let scale = 1.0;
-    
-    export let enabled = true;
-    export let step = 1;
-    export let secondaryColor = 'rgba(104,104,172,1)';
-    export let strokeWidth = 1;
 
     $: primaryColor = enabled ? 'rgba(104,104,172,255)' : secondaryColor;
     $: textColor = enabled ? '#000000' : secondaryColor;
@@ -70,7 +69,6 @@
     let internal = null;
     let pv = null;
     const updatePosition = (change) => {
-        console.log(change)
         // This way it always forces it to match the bound value when it is first moved.
         if (internal === null) {
             internal = value
@@ -88,7 +86,6 @@
 
     const move = (posUpdate) => {
         if (enabled && down) {
-            console.log(posUpdate)
             updatePosition(posUpdate)
         }
     }
@@ -98,7 +95,7 @@
     };
 
     let prevTouch;
-    const touchMoveHandler = (e) => { 
+    const touchMoveHandler = (e) => {
         const touch = e.touches[0];
         if (prevTouch) {
             const movementY = touch.pageY - prevTouch.pageY;
@@ -108,10 +105,13 @@
     }
     
     const handleUp = (e) => {
-        if (enabled) down=false
+        if (enabled) {
+            down=false
+        }
     }
 
     const handleDown = (e) => {
+        console.log(e)
         if (enabled) { 
             down = true;
         }
