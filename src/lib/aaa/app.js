@@ -2,7 +2,7 @@ import { io } from "socket.io-client";
 import { writable } from 'svelte/store';
 
 // Sockets
-let socketAddr = import.meta.env.PROD ? "wss://aaabackend.xyz:6000" : "ws://localhost:6000"
+let socketAddr = import.meta.env.PROD ? "wss://aaabackend.xyz:49123" : "ws://localhost:49123"
 
 export const socket = io(socketAddr);
 
@@ -10,8 +10,8 @@ socket.on('connect', () => { console.log('connected to AAA websocket') });
 
 // Room Management
 export const room = writable('')
-export const numUsers = writable(0);
-socket.on('numUsers', x => numUsers.set(x));
+export const num_users = writable(0);
+socket.on('num_users', x => num_users.set(x));
 
 export const speed = writable(1);
 
@@ -40,6 +40,4 @@ export const perc_sound_preset = writable(0);
 export const perc_transpose_preset = writable(0);
 export const perc_shape_preset = writable(0);
 
-export const fm1_listener = writable(0);
-export const fm2_listener = writable(0);
-export const perc_listener = writable(0);
+export const primary = '#ff44b4';

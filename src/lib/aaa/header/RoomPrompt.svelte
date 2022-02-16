@@ -1,0 +1,53 @@
+<script>
+    import { socket, room } from "$lib/aaa/app.js"
+    import { goto } from '$app/navigation';
+	let ever_used = false;
+    let code = ""
+    
+    function change_handler() {
+        ever_used = true;
+        socket.emit('room_join', createRoomID('aaa', code));
+        $room = code;
+        code = ""
+    }
+</script>
+<div class="prompt" >
+    <span id='title'>Room Code:</span>
+    <input type="text" 
+    class:init={!ever_used} 
+    bind:value={code} 
+    on:change={change_handler} 
+    placeholder={ ever_used === false && $room === '' ? "enter room code" : $room }
+    id='room-input'
+    class={$$props.class}
+    />
+</div>
+
+<style>
+    #title {
+        text-align: left;
+    }
+    .prompt {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .init {
+        border:1px solid rgb(204, 204, 204);
+    }
+
+    #room-input {
+        font-family: var(--font);
+        font-size: var(--font-size);
+        padding: none;
+        background: white;
+        border: none;
+        width: 100px;
+        padding-top: 1px;
+    }
+
+    #room-input:focus, #room-input:active {
+        outline: none !important;
+        border:1px solid rgb(204, 204, 204);
+    }
+</style>

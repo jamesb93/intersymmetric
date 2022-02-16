@@ -3,11 +3,16 @@
     src: url("/fonts/SpaceMono-Regular.ttf") format("truetype");
 }
 
-html {
-    background-color: rgb(216, 216, 216);
+:root {
+    --primary: #ff44b4;
 }
 
-text {
+html {
+    font-size: 10px;
+    background-color: white;
+}
+
+.no_hover {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;

@@ -5,6 +5,13 @@
     export let steps = 1;
     export let min = 1;
     export let max = 5;
+    export let selected = false;
+
+    // const x = d3.scaleQuantize()
+    //     .domain([0, 1])
+    //     .range(d3.range(1, 10))
+
+    // console.log(x(0.999))
 
     let mouseIsDown = false;
     let bar, rect;
@@ -16,8 +23,8 @@
         const step = 1 / (steps-1);
         let ratio = 1 - (y / rect.height);
         ratio = clip(ratio, 0, 1);
-        ratio = Math.round((ratio) / step) * step;
-        value = scale(ratio, 0, 1, min, max);
+        ratio = Math.round((ratio - min) / step) * step + min;
+        value = scale(ratio, 0, 1, min, max).toFixed();
         ratio *= 100;
         calculatedHeight = `${ratio}%`
     }
@@ -38,6 +45,7 @@
 
 <div 
 class="container"
+class:selected={selected}
 bind:this={bar}
 on:mousedown={ mouseDown }
 >
@@ -46,22 +54,26 @@ on:mousedown={ mouseDown }
 
 <style>
     :root {
-        --colour: tomato;
+        --colour: rgba(104,104,172,255);
     }
     .progress {
         height: 100%;
         width: 100%;
         margin: 0 auto;
-        background-color: var(--colour)
+        background-color: var(--primary);
 
     }
 
     .container {
         transform: rotate(180deg);
-        width: 20px;
+        width: 53px;
         height: 200px;
         background-color: white;
+        outline: 1px solid black;
+    }
 
+    .selected {
+        background-color: #e8e4e4
     }
 
 </style>

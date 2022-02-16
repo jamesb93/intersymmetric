@@ -1,5 +1,6 @@
 <script>
     import { onMount } from 'svelte';
+    import { primary } from '$lib/aaa/app';
 
     const clip = (i, low, high) => {
         return Math.min(Math.max(i, low), high)
@@ -13,11 +14,10 @@
     export let scale = 1.0;
     export let WIDTH = 80;
     export let HEIGHT = 60;
-    export let showTitle = true;
     export let showValue = true;
     export let altValue = null;
     export let value;
-    export let secondaryColor = 'rgba(104,104,172,1)';
+    export let secondaryColor = primary;
     export let strokeWidth = 1;
     export let enabled = true;
 
@@ -34,7 +34,7 @@
     let length = 0;
     let interval = null;
 
-    $: primaryColor = enabled ? 'rgba(104,104,172,255)' : secondaryColor;
+    $: primaryColor = enabled ? primary : secondaryColor;
     $: textColor = enabled ? '#000000' : secondaryColor;
     
     export let func = () => {};
@@ -77,9 +77,10 @@
         internal = clip(internal, min, max);
         value = internal
         value = Math.round((value - min) / step) * step + min;
-        if (pv !== value) 
+        if (pv !== value) {
             func()
             pv = internal
+        }
     }
     
     let down = false;
@@ -152,9 +153,7 @@ on:mouseup={handleUp}
     on:touchstart={handleDown}
     on:dblclick={resetHandler}
     >
-    {#if showTitle}
-    <div id='title'>{title}</div>
-    {/if}
+    <div id='title' class='no_hover'>{title}</div>
     <svg width='{WIDTH}px' height='{HEIGHT}px' >
         <path
             d={rangePath}

@@ -1,0 +1,13 @@
+.panel {
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    place-items: center;
+    gap: 1em;
+}
+
+.area {
+    padding: 1em;
+}
+.label {
+    color: var(--primary);
+}
