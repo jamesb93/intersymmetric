@@ -14,30 +14,49 @@ export const num_users = writable(0);
 socket.on('num_users', x => num_users.set(x));
 
 export const speed = writable(1);
+socket.on('speed', x => speed.set(x));
 
 export const fm1_listener = writable(0);
+socket.on('fm1_listener', x => fm1_listener.set(x));
 export const fm2_listener = writable(0);
+socket.on('fm2_listener', x => fm2_listener.set(x))
 export const perc_listener = writable(0);
+socket.on('perc_listener', x => perc_listener.set(x));
 
 // Modes/Direction
 export const a_mode = writable(0);
+socket.on('a_mode', x => a_mode.set(x));
 export const b_mode = writable(0);
+socket.on('b_mode', x => b_mode.set(x));
 export const c_mode = writable(0);
+socket.on('c_mode', x => c_mode.set(x));
 
 // Duration/Pattern
 export const a_steps = writable([5, 2, 3]);
+socket.on('a_steps', x => a_steps.set(x));
 export const b_steps = writable([1000, 1000, 1000]);
+socket.on('b_steps', x => b_steps.set(x));
 export const c_steps = writable([1, 2, 3]);
+socket.on('c_steps', x => c_steps.set(x));
 
 // Synth Interface
 export const fm1_freq_preset = writable(0);
+socket.on('fm1_freq_preset', x => fm1_freq_preset.set(x));
 export const fm1_mod_preset = writable(0);
+socket.on('fm1_mod_preset', x => fm1_mod_preset.set(x));
 export const fm1_shape_preset = writable(0);
+socket.on('fm1_shape_preset', x => fm1_shape_preset.set(x));
 export const fm2_freq_preset = writable(0);
+socket.on('fm2_freq_preset', x => fm2_freq_preset.set(x));
 export const fm2_mod_preset = writable(0);
+socket.on('fm2_mod_preset', x => fm2_mod_preset.set(x));
 export const fm2_shape_preset = writable(0);
+socket.on('fm2_shape_preset', x => fm2_shape_preset.set(x));
 export const perc_sound_preset = writable(0);
+socket.on('perc_sound_preset', x => perc_sound_preset.set(x));
 export const perc_transpose_preset = writable(0);
+socket.on('perc_transpose_preset', x => perc_transpose_preset.set(x));
 export const perc_shape_preset = writable(0);
+socket.on('perc_shape_preset', x => perc_shape_preset.set(x));
 
 export const primary = '#ff44b4';
