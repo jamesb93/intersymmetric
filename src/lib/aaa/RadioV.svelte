@@ -1,9 +1,11 @@
 <script>
     export let options = ['off', 'a', 'b', 'c'];
     export let value = 0;
+    export let func = () => {};
     
     const set = (i) => {
         value = i;
+        func();
     }
 </script>
 
