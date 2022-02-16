@@ -20,6 +20,7 @@
     export let secondaryColor = primary;
     export let strokeWidth = 1;
     export let enabled = true;
+    export let func = () => {};
 
     const RADIUS = 21;
     const MID_X = WIDTH/2;
@@ -37,7 +38,6 @@
     $: primaryColor = enabled ? primary : secondaryColor;
     $: textColor = enabled ? '#000000' : secondaryColor;
     
-    export let func = () => {};
     
     onMount(() => {
         dashLength();
