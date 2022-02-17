@@ -19,7 +19,7 @@
     const move = (e) => {
         rect = bar.getBoundingClientRect();
         if (down) {
-            const y = e.pageY - rect.top;
+            const y = (e.pageY - rect.top) - window.scrollY;
             const ratio = y / bar_height;
             let scaled = scale(ratio, 0, 1, max, min);
             value = Math.round((scaled - min) / step) * step + min;
