@@ -85,6 +85,6 @@ class:active={active}
     }
 
     .active {
-        background-color: grey;
+        background-color: var(--grey);
     }
 </style>
