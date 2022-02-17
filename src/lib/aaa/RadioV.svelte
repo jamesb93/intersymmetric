@@ -40,12 +40,12 @@
         text-align: center;
     }
     
-    button:hover {
-        background-color: #ededed;
+    button:hover:not(.selected) {
+        background-color: var(--grey);
         color: black;
     }
     
-    button:hover, .selected {
+    .selected {
         background-color: var(--primary);
         color: white;
     }
