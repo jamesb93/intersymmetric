@@ -1,6 +1,6 @@
 <footer>
     <span>
-        <a target="_blank" href="http://www.markfell.com/wiki/">Mark Fell</a> and <a target="_blank" href="https://riantreanor.bandcamp.com/">Rian Treanor</a>
+        <a target="_blank" href="http://www.markfell.com/wiki/">Mark Fell</a> and <a target="_blank" href="http://www.riantreanor.com/">Rian Treanor</a>
     </span>
     <span>
         Programming by <a target="_blank" href="https://www.jamesbradbury.net">James Bradbury</a>
@@ -24,7 +24,11 @@
         color: var(--primary);
     }
 
-    a:hover {
+    a:link, a:visited {
+        color: var(--primary);
+    }
+
+    a:hover, a:visited:hover {
         background-color: var(--primary);
         color: white;
     }
