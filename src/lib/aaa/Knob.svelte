@@ -33,7 +33,6 @@
     let knob;
     
     let length = 0;
-    let interval = null;
 
     $: primaryColor = enabled ? primary : secondaryColor;
     $: textColor = enabled ? '#000000' : secondaryColor;
@@ -41,8 +40,6 @@
     
     onMount(() => {
         dashLength();
-        clearInterval(interval);
-        interval = null;
     });
     
     $: dashStyle = {
@@ -112,7 +109,6 @@
     }
 
     const handleDown = (e) => {
-        console.log(e)
         if (enabled) { 
             down = true;
         }
@@ -142,6 +138,7 @@
 on:mousemove={mouseMoveHandler} 
 on:touchmove={touchMoveHandler}
 on:mouseup={handleUp} 
+on:touchend={handleUp}
 />
 
 <div 
