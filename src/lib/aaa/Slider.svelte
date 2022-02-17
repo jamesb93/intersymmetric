@@ -16,9 +16,8 @@
     
     $: thumb_y = clip(scale(value, max, min, 0, bar_height), 0, bar_height - thumb_height);
 
-    $: if (bar) rect = bar.getBoundingClientRect();
-
     const move = (e) => {
+        rect = bar.getBoundingClientRect();
         if (down) {
             const y = e.pageY - rect.top;
             const ratio = y / bar_height;
