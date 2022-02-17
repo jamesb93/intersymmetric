@@ -3,6 +3,7 @@
     import Interface from './interface/Interface.svelte';
 
     let ctx, d, patcher, context;
+    let samples_loaded = false;
 
     function loadSample(buffer, path) {
         return fetch(path)
@@ -53,25 +54,14 @@
                 loadAllSamples();
             })
             .then(x => { 
-                samplesLoaded = true;
+                samples_loaded = true;
             })
             .catch(err => { console.error(err) })
     }
-
-    function sendMessage(time, key, data) {
-        if (d && RNBO) {
-            d.scheduleEvent( new RNBO.MessageEvent(time, key, data) );
-        }
-    }
 </script>
 
-<Interface />
 
-<div class="top">
-    <button on:click={start} disabled={d}>start</button>
-    <button on:click={ () => { 
-        sendMessage(RNBO.TimeNow, 'state', [1]);
-    }}>go</button>
-</div>
+<Interface bind:patch={d} />
+<button on:click={start} disabled={d}>start</button>
 
-<a href='https://www.dropbox.com/sh/w7uso18978mbcu5/AAA9g_0PD4BaO-L1rnbvHb2Ha?dl=0'>presets</a>
+<!-- <a href='https://www.dropbox.com/sh/w7uso18978mbcu5/AAA9g_0PD4BaO-L1rnbvHb2Ha?dl=0'>presets</a> -->

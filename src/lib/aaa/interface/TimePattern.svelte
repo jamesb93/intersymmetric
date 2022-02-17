@@ -1,14 +1,17 @@
 <script>
     import './interface.css';
-    import { socket } from '../app';
     import RadioH from '../RadioH.svelte';
     import Slider from '../Slider.svelte';
+    import { socket } from '../app';
+    import { send_message } from '$lib/aaa/patch_helpers'
     import { 
         a_mode, b_mode, c_mode,
         a_steps_0, a_steps_1, a_steps_2, 
         b_steps_0, b_steps_1, b_steps_2,
         c_steps_0, c_steps_1, c_steps_2
     } from '../app';
+
+    export let patch;
 
     const a_steps_0_slider = {
         min: 1, max: 12, step: 1,
@@ -55,7 +58,12 @@
         func: () => { socket.emit('a_steps_2', $c_steps_2) }
     }
 
-
+    $: send_message(patch, 'a_steps', [$a_steps_0, $a_steps_1, $a_steps_2]);
+    $: send_message(patch, 'b_steps', [$b_steps_0, $b_steps_1, $b_steps_2]);
+    $: send_message(patch, 'c_steps', [$c_steps_0, $c_steps_1, $c_steps_2]);
+    $: send_message(patch, 'a_mode', [$a_mode]);
+    $: send_message(patch, 'b_mode', [$b_mode]);
+    $: send_message(patch, 'c_mode', [$c_mode]);
 </script>
 
 

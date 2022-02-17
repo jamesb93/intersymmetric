@@ -67,16 +67,12 @@
     let pv = null;
     const updatePosition = (change) => {
         // This way it always forces it to match the bound value when it is first moved.
-        if (internal === null) {
-            internal = value
-        }
-        internal += change * scale;
-        internal = clip(internal, min, max);
-        value = internal
-        value = Math.round((value - min) / step) * step + min;
+        if (!internal) { internal = value };
+        internal = clip(internal + change * scale, min, max);
+        value = Math.round((internal - min) / step) * step + min;
         if (pv !== value) {
             func()
-            pv = internal
+            pv = value
         }
     }
     

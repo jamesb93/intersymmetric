@@ -3,12 +3,13 @@
     import TimePattern from './TimePattern.svelte';
     import SoundPattern from './SoundPattern.svelte';
 
+    export let patch;
 </script>
 
 <div class="container">
-    <Clock />
-    <TimePattern />
-    <SoundPattern />
+    <Clock bind:patch={patch} />
+    <TimePattern bind:patch={patch} />
+    <SoundPattern bind:patch={patch} />
 </div>
 
 <style>
