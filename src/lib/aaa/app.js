@@ -10,6 +10,7 @@ socket.on('connect', () => { console.log('connected to AAA websocket') });
 
 // Room Management
 export const room = writable('')
+
 export const num_users = writable(0);
 socket.on('num_users', x => num_users.set(x));
 
@@ -32,12 +33,28 @@ export const c_mode = writable(0);
 socket.on('c_mode', x => c_mode.set(x));
 
 // Duration/Pattern
-export const a_steps = writable([5, 2, 3]);
-socket.on('a_steps', x => a_steps.set(x));
-export const b_steps = writable([1000, 1000, 1000]);
-socket.on('b_steps', x => b_steps.set(x));
-export const c_steps = writable([1, 2, 3]);
-socket.on('c_steps', x => c_steps.set(x));
+export const a_steps_0 = writable(5);
+socket.on('a_steps_0', x => {
+    a_steps_0.set(x);
+});
+export const a_steps_1 = writable(2);
+socket.on('a_steps_1', x => a_steps_1.set(x));
+export const a_steps_2 = writable(3);
+socket.on('a_steps_2', x => a_steps_2.set(x));
+
+export const b_steps_0 = writable(1000);
+socket.on('b_steps_0', x => b_steps_0.set(x));
+export const b_steps_1 = writable(1000);
+socket.on('b_steps_1', x => b_steps_1.set(x));
+export const b_steps_2 = writable(1000);
+socket.on('b_steps_2', x => b_steps_2.set(x));
+
+export const c_steps_0 = writable(2);
+socket.on('c_steps_0', x => c_steps_0.set(x));
+export const c_steps_1 = writable(4);
+socket.on('c_steps_1', x => c_steps_1.set(x));
+export const c_steps_2 = writable(8);
+socket.on('c_steps_2', x => c_steps_2.set(x));
 
 // Synth Interface
 export const fm1_freq_preset = writable(0);
