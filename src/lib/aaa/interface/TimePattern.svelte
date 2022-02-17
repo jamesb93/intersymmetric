@@ -2,7 +2,6 @@
     import './interface.css';
     import { socket } from '../app';
     import RadioH from '../RadioH.svelte';
-    import TriSlider from '../TriSlider.svelte';
     import Slider from '../Slider.svelte';
     import { 
         a_mode, b_mode, c_mode,
