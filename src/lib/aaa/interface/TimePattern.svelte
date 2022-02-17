@@ -1,35 +1,62 @@
 <script>
     import './interface.css';
+    import { socket } from '../app';
     import RadioH from '../RadioH.svelte';
     import TriSlider from '../TriSlider.svelte';
+    import Slider from '../Slider.svelte';
     import { 
         a_mode, b_mode, c_mode,
-        a_steps, b_steps, c_steps,
+        a_steps_0, a_steps_1, a_steps_2, 
+        b_steps_0, b_steps_1, b_steps_2,
+        c_steps_0, c_steps_1, c_steps_2
     } from '../app';
-    
-    const a_steps_slider = {
-        min: 10,
-        max: 5000,
-        step: 1,
-        bindings: [$a_steps, $b_steps, $c_steps],
-        sends: []
+
+    const a_steps_0_slider = {
+        min: 1, max: 12, step: 1,
+        func: () => { socket.emit('a_steps_0', $a_steps_0) }
     }
-    
-    const b_steps_slider = {
-        min: 10,
-        max: 5000,
-        step: 1,
-        bindings: [$a_steps, $b_steps, $c_steps],
-        sends: []
+
+    const a_steps_1_slider = {
+        min: 1, max: 12, step: 1,
+        func: () => { socket.emit('a_steps_1', $a_steps_1) }
     }
-    
-    const c_steps_slider = {
-        min: 10,
-        max: 5000,
-        step: 1,
-        bindings: [$a_steps, $b_steps, $c_steps],
-        sends: []
+
+    const a_steps_2_slider = {
+        min: 1, max: 12, step: 1,
+        func: () => { socket.emit('a_steps_2', $a_steps_2) }
     }
+
+    const b_steps_0_slider = {
+        min: 10, max: 2000, step: 1,
+        func: () => { socket.emit('a_steps_0', $b_steps_0) }
+    }
+
+    const b_steps_1_slider = {
+        min: 10, max: 2000, step: 1,
+        func: () => { socket.emit('a_steps_1', $b_steps_1) }
+    }
+
+    const b_steps_2_slider = {
+        min: 10, max: 2000, step: 1,
+        func: () => { socket.emit('a_steps_2', $b_steps_2) }
+    }
+
+    const c_steps_0_slider = {
+        min: 1, max: 15, step: 1,
+        func: () => { socket.emit('a_steps_0', $c_steps_0) }
+    }
+
+    const c_steps_1_slider = {
+        min: 1, max: 15, step: 1,
+        func: () => { socket.emit('a_steps_1', $c_steps_1) }
+    }
+
+    const c_steps_2_slider = {
+        min: 1, max: 15, step: 1,
+        func: () => { socket.emit('a_steps_2', $c_steps_2) }
+    }
+
+
 </script>
 
 
@@ -38,24 +65,35 @@
     <div class="controls">
         <div class="a time_unit">
             <div class='no_hover'>steps</div>
-            <RadioH bind:value={$a_mode}/>
-            <TriSlider {...a_steps_slider} />
+            <RadioH func={ () => { socket.emit('a_mode', $a_mode) }} bind:value={$a_mode}/>
+            <div class="slider-group">
+                <Slider {...a_steps_0_slider} bind:value={$a_steps_0} />
+                <Slider {...a_steps_1_slider} bind:value={$a_steps_1} />
+                <Slider {...a_steps_2_slider} bind:value={$a_steps_2} />
+            </div>
         </div>
         <div class="b time_unit">
             <div class='no_hover'>durations</div>
-            <RadioH bind:value={$b_mode}/>
-            <TriSlider {...b_steps_slider} />
+            <RadioH func={ () => { socket.emit('b_mode', $b_mode) }} bind:value={$b_mode}/>
+            <div class="slider-group">
+                <Slider {...b_steps_0_slider} bind:value={$b_steps_0} />
+                <Slider {...b_steps_1_slider} bind:value={$b_steps_1} />
+                <Slider {...b_steps_2_slider} bind:value={$b_steps_2} />
+            </div>
         </div>
         <div class="c time_unit">
             <div class='no_hover'>subdivisions</div>
-            <RadioH bind:value={$c_mode}/>
-            <TriSlider {...c_steps_slider} />
+            <RadioH func={ () => { socket.emit('c_mode', $c_mode) }} bind:value={$c_mode}/>
+            <div class="slider-group">
+                <Slider {...c_steps_0_slider} bind:value={$c_steps_0} />
+                <Slider {...c_steps_1_slider} bind:value={$c_steps_1} />
+                <Slider {...c_steps_2_slider} bind:value={$c_steps_2} />
+            </div>
         </div>
     </div>
 </div>
 
 <style>
-    
     .time_pattern {
         display: flex;
         flex-direction: column;
@@ -63,11 +101,12 @@
         border-left: 1px dashed var(--primary);
         place-items: center;
     }
+
     
     .time_pattern > .controls {
         display: flex;
         flex-direction: row;
-        gap: 1em;
+        gap: 3em;
         place-items: center;
     }
     
@@ -84,6 +123,12 @@
         display: grid;
         grid-template-rows: auto auto auto;
         gap: 1em;
+    }
+
+    .slider-group {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        place-items: center;
     }
 </style>
 
