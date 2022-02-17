@@ -1,79 +1,91 @@
 <script>
-    import { clip, scale } from '$lib/utility.js';
+    import { scale, clip } from '$lib/utility.js';
 
-    export let value = 1;
-    export let steps = 1;
-    export let min = 1;
-    export let max = 5;
-    export let selected = false;
+    export let value = 0; // value always comes in true
+    export let min = 0, max = 2, step = 1;
+    export let width = 40;
+    export let bar_height = 200;
+    export let thumb_height = 3;
+    export let active = false;
+    export let func = () => {};
 
-    // const x = d3.scaleQuantize()
-    //     .domain([0, 1])
-    //     .range(d3.range(1, 10))
+    let thumb, bar, rect;
+    let down = false;
+    let prev_touch = false;
+    let prev_value = null;
+    
+    $: thumb_y = clip(scale(value, max, min, 0, bar_height), 0, bar_height - thumb_height);
 
-    // console.log(x(0.999))
-
-    let mouseIsDown = false;
-    let bar, rect;
-    let calculatedHeight = '100%'
     $: if (bar) rect = bar.getBoundingClientRect();
 
-    function update(e) {
-        const y = e.clientY - rect.top;
-        const step = 1 / (steps-1);
-        let ratio = 1 - (y / rect.height);
-        ratio = clip(ratio, 0, 1);
-        ratio = Math.round((ratio - min) / step) * step + min;
-        value = scale(ratio, 0, 1, min, max).toFixed();
-        ratio *= 100;
-        calculatedHeight = `${ratio}%`
+    const move = (e) => {
+        if (down) {
+            const y = e.pageY - rect.top;
+            const ratio = y / bar_height;
+            let scaled = scale(ratio, 0, 1, max, min);
+            value = Math.round((scaled - min) / step) * step + min;
+            value = clip(value, min, max);
+            if (prev_value !== value) {
+                func()
+            }
+            prev_value = value;
+        }
     }
 
-    function mouseDown(e) {
-        mouseIsDown = true;
-        update(e);
-    }
-
-    function mouseUp() { mouseIsDown = false }
-
-    function mouseMove(e) {
-        if (mouseIsDown) update(e)
-    }
+    const handle_click = (e) => { move(e) };
+    const handle_mousedown = () => { down = true };
+    const handle_touchstart = () => { down = true };
+    const handle_mouseup = () => { down = false };
+    const handle_touchend = () => { down = false };
+    const handle_mousemove = (e) => { { move(e) }}
+    const handle_touchmove = (e) => {
+        const touch = e.touches[0];
+        if (prev_touch) {
+            move(touch)
+        }
+        prev_touch = touch;
+    };
 </script>
 
-<svelte:window on:mousemove={mouseMove} on:mouseup={mouseUp} />
+<svelte:window 
+on:mousemove={ handle_mousemove } 
+on:touchmove={ handle_touchmove }
+on:mouseup={ handle_mouseup }
+on:touchend={ handle_touchend }
+/>
 
-<div 
-class="container"
-class:selected={selected}
-bind:this={bar}
-on:mousedown={ mouseDown }
+<svg
+on:mousedown={ handle_mousedown }
+on:touchstart={ handle_touchstart }
+on:click={ handle_click }
+width={ width } 
+height={ bar_height } 
+bind:this={ bar}
+class:active={active}
 >
-    <div class="progress" style:height={calculatedHeight} />
-</div>
+    <rect 
+    y={thumb_y} 
+    bind:this={thumb} 
+    width={width} height={thumb_height}
+    />
+</svg>
+
 
 <style>
-    :root {
-        --colour: rgba(104,104,172,255);
-    }
-    .progress {
-        height: 100%;
-        width: 100%;
-        margin: 0 auto;
-        background-color: var(--primary);
-
-    }
-
-    .container {
-        transform: rotate(180deg);
-        width: 53px;
-        height: 200px;
+    svg { 
+        touch-action: none;
         background-color: white;
-        outline: 1px solid black;
+        stroke-width: 1px;
+        stroke: black;
+        outline: 1px solid rgb(136, 136, 136);
     }
 
-    .selected {
-        background-color: #e8e4e4
+    rect {
+        fill: var(--primary);
+        stroke: var(--primary);
     }
 
+    .active {
+        background-color: grey;
+    }
 </style>
