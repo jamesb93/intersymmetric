@@ -13,8 +13,7 @@
     {#each options as o, i}
     <button
     class='no_hover'
-    on:mousedown={ () => set(i) }
-    on:touchstart={ () => set(i) }
+    on:click={ () => set(i) }
     class:selected={ value===i }
     >
     { o }
