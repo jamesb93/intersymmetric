@@ -31,9 +31,10 @@
         }
     }
 
-    const handle_click = (e) => { move(e) };
-    const handle_mousedown = () => { down = true };
-    const handle_touchstart = () => { down = true };
+    const handle_controldown = (e) => { 
+        down = true 
+        move(e);
+    };
     const handle_mouseup = () => { down = false };
     const handle_touchend = () => { down = false };
     const handle_mousemove = (e) => { { move(e) }}
@@ -53,12 +54,11 @@ on:mouseup={ handle_mouseup }
 on:touchend={ handle_touchend }
 />
 
-<div class="container">
-
+<div 
+class="container">
     <svg
-    on:mousedown={ handle_mousedown }
-    on:touchstart={ handle_touchstart }
-    on:click={ handle_click }
+    on:mousedown={ handle_controldown }
+    on:touchstart={ handle_controldown }
     width={ width } 
     height={ bar_height } 
     bind:this={ bar}
@@ -72,7 +72,6 @@ on:touchend={ handle_touchend }
 
     </svg>
     <div class='no_hover'>{ value }</div>
-    
 </div>
 
 
