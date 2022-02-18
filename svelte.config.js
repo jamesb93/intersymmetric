@@ -8,11 +8,6 @@ const config = {
         // hydrate the <div id="svelte"> element in src/app.html
         adapter: adapter(),
         trailingSlash: 'always',
-        vite: {
-            rollupOptions: {
-                treeshake: false
-            }
-        }
     },
     
     preprocess: [
