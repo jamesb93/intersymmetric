@@ -169,7 +169,6 @@
             const data = presets.perc_sound[$perc_sound_preset].data;
             for (const [k, v] of Object.entries(data)) {
                 send_message(patch, k, v)
-                console.log(patch, k, v)
             }
         } catch (e) {
             console.log('perc_sound_preset', $perc_sound_preset, e);
