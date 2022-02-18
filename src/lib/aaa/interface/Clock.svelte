@@ -36,7 +36,11 @@
         <Play bind:state={state}/>
     </div>
     
-    <div class='no_hover'>{ $tala }</div>
+    <div class='tala no_hover'>
+        {#each $tala as t}
+            <div class="">{ t }</div>
+        {/each}
+    </div>
 </div>
 
 <style>
@@ -50,5 +54,14 @@
     .clock > .controls {
         display: flex;
         flex-direction: row;
+    }
+
+    .tala {
+        margin-top: 1em;
+        display: grid;
+        grid-template-columns: auto auto auto;
+        justify-content: center;
+        gap: 0.5em;
+        font-size: 40px;
     }
 </style>
