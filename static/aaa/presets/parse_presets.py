@@ -14,7 +14,7 @@ for j in jsons:
         d = d['pattrstorage']['slots']
         presets[j.stem] = []
         for k, v in d.items():
-            presets[j.stem].append(v)
+            presets[j.stem].append(v['data'])
         
 with open('../presets.json', 'w') as f:
     json.dump(presets, f, indent=2)
