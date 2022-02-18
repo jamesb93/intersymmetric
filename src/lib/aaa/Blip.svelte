@@ -1,10 +1,10 @@
 <script>
     let active = false;
-    const blink = () => {
+    export const blink = () => {
         active = true;
         setTimeout(() => {
             active = false
-        }, 100)
+        }, 50)
     }
 </script>
 

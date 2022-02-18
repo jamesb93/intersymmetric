@@ -1,6 +1,8 @@
 <script>
     import RNBO from '@rnbo/js';
     import Interface from './interface/Interface.svelte';
+    import Button from './Button.svelte';
+    import { tala } from './app';
 
     let ctx, d, patcher, context;
     let samples_loaded = false;
@@ -43,14 +45,6 @@
             .then(device => {
                 device.node.connect(outputNode);
                 d = device;
-
-                device.messageEvent.subscribe(e => {
-                    console.log(e.tag, e.payload);
-                    if (e.tag === 'pattern') {
-                        pattern = e.payload
-                    }
-                })
-
                 loadAllSamples();
             })
             .then(x => { 
@@ -60,8 +54,25 @@
     }
 </script>
 
-
+{#if d && samples_loaded}
 <Interface bind:patch={d} />
-<button on:click={start} disabled={d}>start</button>
+{:else}
+<div class="loading">
+    <Button 
+    on:click={start}
+    height={'60px'}
+    width={'100px'}
+    font_size={'24px'}
+    >
+    load
+    </Button>
+</div>
+{/if}
+
+<style>
+    .loading {
+        margin: 10em;
+    }
+</style>
 
 <!-- <a href='https://www.dropbox.com/sh/w7uso18978mbcu5/AAA9g_0PD4BaO-L1rnbvHb2Ha?dl=0'>presets</a> -->

@@ -14,7 +14,7 @@ export const room = writable('')
 export const num_users = writable(0);
 socket.on('num_users', x => num_users.set(x));
 
-export const speed = writable(1);
+export const speed = writable(0.1);
 socket.on('speed', x => speed.set(x));
 
 export const fm1_listener = writable(0);
@@ -34,9 +34,7 @@ socket.on('c_mode', x => c_mode.set(x));
 
 // Duration/Pattern
 export const a_steps_0 = writable(5);
-socket.on('a_steps_0', x => {
-    a_steps_0.set(x);
-});
+socket.on('a_steps_0', x => { a_steps_0.set(x)});
 export const a_steps_1 = writable(2);
 socket.on('a_steps_1', x => a_steps_1.set(x));
 export const a_steps_2 = writable(3);
@@ -76,4 +74,5 @@ socket.on('perc_transpose_preset', x => perc_transpose_preset.set(x));
 export const perc_shape_preset = writable(0);
 socket.on('perc_shape_preset', x => perc_shape_preset.set(x));
 
+export const tala = writable([0, 0, 0]);
 export const primary = '#ff44b4';

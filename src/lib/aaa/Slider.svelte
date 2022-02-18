@@ -53,21 +53,28 @@ on:mouseup={ handle_mouseup }
 on:touchend={ handle_touchend }
 />
 
-<svg
-on:mousedown={ handle_mousedown }
-on:touchstart={ handle_touchstart }
-on:click={ handle_click }
-width={ width } 
-height={ bar_height } 
-bind:this={ bar}
-class:active={active}
->
-    <rect 
-    y={thumb_y} 
-    bind:this={thumb} 
-    width={width} height={thumb_height}
-    />
-</svg>
+<div class="container">
+
+    <svg
+    on:mousedown={ handle_mousedown }
+    on:touchstart={ handle_touchstart }
+    on:click={ handle_click }
+    width={ width } 
+    height={ bar_height } 
+    bind:this={ bar}
+    class:active={active}
+    >
+        <rect 
+        y={thumb_y} 
+        bind:this={thumb} 
+        width={width} height={thumb_height}
+        />
+
+    </svg>
+    <div>{ value }</div>
+    
+</div>
+
 
 
 <style>

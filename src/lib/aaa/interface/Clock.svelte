@@ -1,7 +1,7 @@
 <script>
     import Knob from '../Knob.svelte';
     import Play from '../Play.svelte';
-    import { speed, socket } from '../app';
+    import { speed, socket, tala } from '../app';
     import { send_message } from '$lib/aaa/patch_helpers'
 
     export let patch;
@@ -13,17 +13,30 @@
         resetValue: 0.5
     }
 
+    let state = 0;
+
+    patch.messageEvent.subscribe(e => {
+        if (e.tag === 'pattern') {
+            $tala[0] = e.payload[0]
+        } else if (e.tag === 'b_index') {
+            $tala[1] = e.payload
+        } else if (e.tag === 'c_index') {
+            $tala[2] = e.payload
+        }
+    })
+
     $: send_message(patch, 'speed', [$speed]);
+    $: send_message(patch, 'state', [state]);
 </script>
 
 <div class="clock area">
     <div class="label">clock</div>
     <div class="controls">
         <Knob {...speed_knob} bind:value={ $speed } func={ () => { socket.emit('speed', $speed) }} />
-        <Play />
+        <Play bind:state={state}/>
     </div>
     
-    <div>pattern thing</div>
+    <div class='no_hover'>{ $tala }</div>
 </div>
 
 <style>

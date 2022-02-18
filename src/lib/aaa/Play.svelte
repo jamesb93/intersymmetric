@@ -1,33 +1,26 @@
 <script>
     export let WIDTH = 80;
     export let HEIGHT = 60;
-    $: style = `height: ${HEIGHT}; width: ${WIDTH};`
+    export let state = false;
 
     const offsetX = 25
     const offsetY = 15
+    const triangle = `${offsetX},${offsetY} ${offsetX},${HEIGHT-offsetY}, ${WIDTH-30},${HEIGHT/2}`;
 
-    const triangle = `${offsetX},${offsetY} ${offsetX},${HEIGHT-offsetY}, ${WIDTH-30},${HEIGHT/2}`
-
-    export let playing;
-
-    function clickHandler() {
-        playing = !playing;
-        if (!playing) {
-            pause();
+    const click = () => {
+        if (state === 0) {
+            state = 1
         } else {
-            start();
+            state = 0
         }
     }
-
-    export let start = () => {};
-    export let pause = () => {};
 </script>
 
-<div class="container" style={style}>
+<div class="container" style:height={HEIGHT} style:width={WIDTH}>
     <div class="text no_hover">play/pause</div>
 
-    <svg width={WIDTH} height={HEIGHT} on:click={clickHandler}>
-        {#if !playing}
+    <svg width={WIDTH} height={HEIGHT} on:click={click}>
+        {#if state === 0}
         <polygon class='tri' points={triangle} />
         {:else}
         <g class='tri'>

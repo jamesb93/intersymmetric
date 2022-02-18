@@ -160,6 +160,28 @@
         }
     }
 
+    $: send_message(patch, 'perc_listener', [$perc_listener]);
+    $: send_message(patch, 'fm1_listener', [$fm1_listener]);
+    $: send_message(patch, 'fm2_listener', [$fm2_listener]);
+
+    let blip_1, blip_2, blip_3;
+
+    patch.messageEvent.subscribe(e => {
+        if (e.tag === 'a_event') {
+            console.log('a')
+            if ($perc_listener === 1) blip_1.blink();
+            if ($fm1_listener === 1) blip_2.blink();
+            if ($fm2_listener === 1) blip_3.blink();
+        } else if (e.tag === 'b_event') {
+            if ($perc_listener === 2) blip_1.blink();
+            if ($fm1_listener === 2) blip_2.blink();
+            if ($fm2_listener === 2) blip_3.blink();
+        } else if (e.tag === 'c_event') {
+            if ($perc_listener === 3) blip_1.blink();
+            if ($fm1_listener === 3) blip_2.blink();
+            if ($fm2_listener === 3) blip_3.blink();
+        }
+    })
 </script>
 
 <div class="sound_pattern area">
@@ -167,7 +189,7 @@
     <div class="controls">
         <div class='panel'>
             <RadioV func={ () => { socket.emit('perc_listener', $perc_listener) }} bind:value={$perc_listener} />
-            <Blip />
+            <Blip bind:this={blip_1} />
             <Knob {...perc_sound_knob}  bind:value={$perc_sound_preset} />
             <Knob {...perc_transpose_knob}   bind:value={$perc_transpose_preset} />
             <Knob {...perc_shape_knob} bind:value={$perc_shape_preset} />
@@ -175,7 +197,7 @@
 
         <div class='panel'>
             <RadioV func={ () => { socket.emit('fm1_listener', $fm1_listener) }} bind:value={$fm1_listener} />
-            <Blip />
+            <Blip bind:this={blip_2} />
             <Knob {...fm1_freq_knob}  bind:value={$fm1_freq_preset} />
             <Knob {...fm1_mod_knob}   bind:value={$fm1_mod_preset} />
             <Knob {...fm1_shape_knob} bind:value={$fm1_shape_preset} />
@@ -183,7 +205,7 @@
 
         <div class='panel'>
             <RadioV func={ () => { socket.emit('fm2_listener', $fm2_listener) }} bind:value={$fm2_listener} />
-            <Blip />
+            <Blip bind:this={blip_3} />
             <Knob {...fm2_freq_knob}  bind:value={$fm2_freq_preset} />
             <Knob {...fm2_mod_knob}   bind:value={$fm2_mod_preset} />
             <Knob {...fm2_shape_knob} bind:value={$fm2_shape_preset} />

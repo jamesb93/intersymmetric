@@ -30,32 +30,32 @@
 
     const b_steps_0_slider = {
         min: 10, max: 2000, step: 1,
-        func: () => { socket.emit('a_steps_0', $b_steps_0) }
+        func: () => { socket.emit('b_steps_0', $b_steps_0) }
     }
 
     const b_steps_1_slider = {
         min: 10, max: 2000, step: 1,
-        func: () => { socket.emit('a_steps_1', $b_steps_1) }
+        func: () => { socket.emit('b_steps_1', $b_steps_1) }
     }
 
     const b_steps_2_slider = {
         min: 10, max: 2000, step: 1,
-        func: () => { socket.emit('a_steps_2', $b_steps_2) }
+        func: () => { socket.emit('b_steps_2', $b_steps_2) }
     }
 
     const c_steps_0_slider = {
         min: 1, max: 15, step: 1,
-        func: () => { socket.emit('a_steps_0', $c_steps_0) }
+        func: () => { socket.emit('c_steps_0', $c_steps_0) }
     }
 
     const c_steps_1_slider = {
         min: 1, max: 15, step: 1,
-        func: () => { socket.emit('a_steps_1', $c_steps_1) }
+        func: () => { socket.emit('c_steps_1', $c_steps_1) }
     }
 
     const c_steps_2_slider = {
         min: 1, max: 15, step: 1,
-        func: () => { socket.emit('a_steps_2', $c_steps_2) }
+        func: () => { socket.emit('c_steps_2', $c_steps_2) }
     }
 
     $: send_message(patch, 'a_steps', [$a_steps_0, $a_steps_1, $a_steps_2]);
@@ -64,6 +64,17 @@
     $: send_message(patch, 'a_mode', [$a_mode]);
     $: send_message(patch, 'b_mode', [$b_mode]);
     $: send_message(patch, 'c_mode', [$c_mode]);
+
+    let a_current_step = 0;
+    let b_current_step = 0;
+    let c_current_step = 0;
+    patch.messageEvent.subscribe(e => {
+        if (e.tag === 'pattern') {
+            a_current_step = e.payload[0];
+            b_current_step = e.payload[1];
+            c_current_step = e.payload[2];
+        }
+    })
 </script>
 
 
@@ -74,27 +85,27 @@
             <div class='no_hover'>steps</div>
             <RadioH func={ () => { socket.emit('a_mode', $a_mode) }} bind:value={$a_mode}/>
             <div class="slider-group">
-                <Slider {...a_steps_0_slider} bind:value={$a_steps_0} />
-                <Slider {...a_steps_1_slider} bind:value={$a_steps_1} />
-                <Slider {...a_steps_2_slider} bind:value={$a_steps_2} />
+                <Slider {...a_steps_0_slider} bind:value={$a_steps_0} active={a_current_step === 0}/>
+                <Slider {...a_steps_1_slider} bind:value={$a_steps_1} active={a_current_step === 1}/>
+                <Slider {...a_steps_2_slider} bind:value={$a_steps_2} active={a_current_step === 2}/>
             </div>
         </div>
         <div class="b time_unit">
             <div class='no_hover'>durations</div>
             <RadioH func={ () => { socket.emit('b_mode', $b_mode) }} bind:value={$b_mode}/>
             <div class="slider-group">
-                <Slider {...b_steps_0_slider} bind:value={$b_steps_0} />
-                <Slider {...b_steps_1_slider} bind:value={$b_steps_1} />
-                <Slider {...b_steps_2_slider} bind:value={$b_steps_2} />
+                <Slider {...b_steps_0_slider} bind:value={$b_steps_0} active={b_current_step === 0}/>
+                <Slider {...b_steps_1_slider} bind:value={$b_steps_1} active={b_current_step === 1}/>
+                <Slider {...b_steps_2_slider} bind:value={$b_steps_2} active={b_current_step === 2}/>
             </div>
         </div>
         <div class="c time_unit">
             <div class='no_hover'>subdivisions</div>
             <RadioH func={ () => { socket.emit('c_mode', $c_mode) }} bind:value={$c_mode}/>
             <div class="slider-group">
-                <Slider {...c_steps_0_slider} bind:value={$c_steps_0} />
-                <Slider {...c_steps_1_slider} bind:value={$c_steps_1} />
-                <Slider {...c_steps_2_slider} bind:value={$c_steps_2} />
+                <Slider {...c_steps_0_slider} bind:value={$c_steps_0} active={c_current_step === 0}/>
+                <Slider {...c_steps_1_slider} bind:value={$c_steps_1} active={c_current_step === 1}/>
+                <Slider {...c_steps_2_slider} bind:value={$c_steps_2} active={c_current_step === 2}/>
             </div>
         </div>
     </div>
