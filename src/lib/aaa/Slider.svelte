@@ -71,7 +71,7 @@ on:touchend={ handle_touchend }
         />
 
     </svg>
-    <div>{ value }</div>
+    <div class='no_hover'>{ value }</div>
     
 </div>
 

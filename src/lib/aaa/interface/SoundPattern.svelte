@@ -223,7 +223,7 @@
 </script>
 
 <div class="sound_pattern area">
-    <div class="label">sound pattern</div>
+    <div class="label no_hover">sound pattern</div>
     <div class="controls">
         <div class='panel'>
             <RadioV func={ () => { socket.emit('perc_listener', $perc_listener) }} bind:value={$perc_listener} />

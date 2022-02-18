@@ -1,11 +1,11 @@
 <footer>
-    <span>
+    <span class='no_hover'>
         <a target="_blank" href="http://www.markfell.com/wiki/">Mark Fell</a> and <a target="_blank" href="http://www.riantreanor.com/">Rian Treanor</a>
     </span>
-    <span>
+    <span class='no_hover'>
         Programming by <a target="_blank" href="https://www.jamesbradbury.net">James Bradbury</a>
     </span>
-    <span>
+    <span class='no_hover'>
         Comissioned by <a target="_blank" href="https://www.aaassembly.org/">Algorithmic Art Assembly</a>
     </span>
 </footer>

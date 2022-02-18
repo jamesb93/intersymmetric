@@ -14,7 +14,7 @@
     }
 </script>
 <div class="prompt" >
-    <span id='title'>Room Code:</span>
+    <span id='title no_hover'>Room Code:</span>
     <input type="text" 
     class:init={!ever_used} 
     bind:value={code} 

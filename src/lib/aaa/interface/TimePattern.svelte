@@ -79,7 +79,7 @@
 
 
 <div class="time_pattern area">
-    <div class="label">time pattern</div>
+    <div class="label no_hover">time pattern</div>
     <div class="controls">
         <div class="a time_unit">
             <div class='no_hover'>steps</div>
