@@ -99,66 +99,105 @@
     }
 
     $: {
-        const data = presets.fm1_freq[$fm1_freq_preset].data;
-        for (const [k, v] of Object.entries(data)) {
-            send_message(patch, k, v)
+        try {
+            const data = presets.fm1_freq[$fm1_freq_preset].data;
+            for (const [k, v] of Object.entries(data)) {
+                send_message(patch, k, v)
+            }
+        } catch (e) {
+            console.log('fm1_freq_preset err', $fm1_freq_preset, e);
         }
     }
 
     $: {
-        const data = presets.fm1_mod[$fm1_mod_preset].data;
-        for (const [k, v] of Object.entries(data)) {
-            send_message(patch, k, v)
+        try {
+            const data = presets.fm1_mod[$fm1_mod_preset].data;
+            for (const [k, v] of Object.entries(data)) {
+                send_message(patch, k, v)
+            }
+        } catch (e) {
+            console.log('fm1_mod_preset', $fm1_mod_preset, e);
         }
     }
 
     $: {
-        const data = presets.fm1_shape[$fm1_shape_preset].data;
-        for (const [k, v] of Object.entries(data)) {
-            send_message(patch, k, v)
+        try {
+            const data = presets.fm1_shape[$fm1_shape_preset].data;
+            for (const [k, v] of Object.entries(data)) {
+                send_message(patch, k, v)
+            }
+        } catch(e) {
+            console.log('fm1_shape_preset', $fm1_shape_preset, e);
         }
     }
     ///////////
     $: {
-        const data = presets.fm2_freq[$fm2_freq_preset].data;
-        for (const [k, v] of Object.entries(data)) {
-            send_message(patch, k, v)
+        try {
+            const data = presets.fm2_freq[$fm2_freq_preset].data;
+            for (const [k, v] of Object.entries(data)) {
+                send_message(patch, k, v)
+            }
+        } catch (e) {
+            console.log('fm2_freq_preset', $fm2_freq_preset, e);
         }
     }
 
     $: {
-        const data = presets.fm2_mod[$fm2_mod_preset].data;
-        for (const [k, v] of Object.entries(data)) {
-            send_message(patch, k, v)
+        try {
+            const data = presets.fm2_mod[$fm2_mod_preset].data;
+            for (const [k, v] of Object.entries(data)) {
+                send_message(patch, k, v)
+            }
+        } catch (e) {
+            console.log('fm2_mod_preset', $fm2_mod_preset, e);
         }
     }
 
     $: {
-        const data = presets.fm2_shape[$fm2_shape_preset].data;
-        for (const [k, v] of Object.entries(data)) {
-            send_message(patch, k, v)
+        try {
+            const data = presets.fm2_shape[$fm2_shape_preset].data;
+            for (const [k, v] of Object.entries(data)) {
+                send_message(patch, k, v)
+            } 
+        } catch (e) {
+            console.log('fm1_shape_preset', $fm2_shape_preset, e);
         }
     }
     ///////////
     $: {
-        const data = presets.perc_sound[$perc_sound_preset].data;
-        for (const [k, v] of Object.entries(data)) {
-            send_message(patch, k, v)
+        try {
+            const data = presets.perc_sound[$perc_sound_preset].data;
+            for (const [k, v] of Object.entries(data)) {
+                send_message(patch, k, v)
+                console.log(patch, k, v)
+            }
+        } catch (e) {
+            console.log('perc_sound_preset', $perc_sound_preset, e);
+        }
+
+    }
+
+    $: {
+        try {
+            const data = presets.perc_transpose[$perc_transpose_preset].data;
+            for (const [k, v] of Object.entries(data)) {
+                send_message(patch, k, v)
+            }
+        } catch (e) {
+            console.log('perc_transpose_preset', $perc_transpose_preset, e)
         }
     }
 
     $: {
-        const data = presets.perc_transpose[$perc_transpose_preset].data;
-        for (const [k, v] of Object.entries(data)) {
-            send_message(patch, k, v)
+        try {
+            const data = presets.perc_shape[$perc_shape_preset].data;
+            for (const [k, v] of Object.entries(data)) {
+                send_message(patch, k, v)
+            }
+        } catch (e) {
+            console.log('perc_shape_preset', $perc_shape_preset, e)
         }
-    }
 
-    $: {
-        const data = presets.perc_shape[$perc_shape_preset].data;
-        for (const [k, v] of Object.entries(data)) {
-            send_message(patch, k, v)
-        }
     }
 
     $: send_message(patch, 'perc_listener', [$perc_listener]);
@@ -169,7 +208,6 @@
 
     patch.messageEvent.subscribe(e => {
         if (e.tag === 'a_event') {
-            console.log('a')
             if ($perc_listener === 1) blip_1.blink();
             if ($fm1_listener === 1) blip_2.blink();
             if ($fm2_listener === 1) blip_3.blink();
