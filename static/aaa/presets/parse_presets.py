@@ -17,4 +17,4 @@ for j in jsons:
             presets[j.stem].append(v['data'])
         
 with open('../presets.json', 'w') as f:
-    json.dump(presets, f, indent=2)
+    json.dump(presets, f, indent=4)
