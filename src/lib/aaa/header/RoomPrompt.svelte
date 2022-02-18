@@ -5,10 +5,12 @@
     let code = ""
     
     function change_handler() {
+        console.log('ever used')
         ever_used = true;
-        socket.emit('room_join', createRoomID('aaa', code));
+        socket.emit('room_join', `aaa.${code}`);
         $room = code;
         code = ""
+        goto(`/aaa/${$room}`)
     }
 </script>
 <div class="prompt" >
