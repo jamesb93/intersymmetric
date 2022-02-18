@@ -59,7 +59,7 @@
     .tala {
         margin-top: 1em;
         display: grid;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: 1.5ch 1.5ch 1.5ch;
         justify-content: center;
         gap: 0.5em;
         font-size: 40px;
