@@ -1,7 +1,6 @@
 <script>
     import './interface.css';
-    // import presets from '../../../../static/aaa/presets.json';
-    import { presets } from '../presets';
+    import presets from '../../../../static/aaa/presets';
     import Knob from '../Knob.svelte';
     import Blip from '../Blip.svelte';
     import RadioV from '../RadioV.svelte';
@@ -100,7 +99,7 @@
 
     $: {
         try {
-            const data = presets.fm1_freq[$fm1_freq_preset].data;
+            const data = presets.fm1_freq[$fm1_freq_preset];
             for (const [k, v] of Object.entries(data)) {
                 send_message(patch, k, v)
             }
@@ -111,7 +110,7 @@
 
     $: {
         try {
-            const data = presets.fm1_mod[$fm1_mod_preset].data;
+            const data = presets.fm1_mod[$fm1_mod_preset];
             for (const [k, v] of Object.entries(data)) {
                 send_message(patch, k, v)
             }
@@ -122,7 +121,7 @@
 
     $: {
         try {
-            const data = presets.fm1_shape[$fm1_shape_preset].data;
+            const data = presets.fm1_shape[$fm1_shape_preset];
             for (const [k, v] of Object.entries(data)) {
                 send_message(patch, k, v)
             }
@@ -133,7 +132,7 @@
     ///////////
     $: {
         try {
-            const data = presets.fm2_freq[$fm2_freq_preset].data;
+            const data = presets.fm2_freq[$fm2_freq_preset];
             for (const [k, v] of Object.entries(data)) {
                 send_message(patch, k, v)
             }
@@ -144,7 +143,7 @@
 
     $: {
         try {
-            const data = presets.fm2_mod[$fm2_mod_preset].data;
+            const data = presets.fm2_mod[$fm2_mod_preset];
             for (const [k, v] of Object.entries(data)) {
                 send_message(patch, k, v)
             }
@@ -155,7 +154,7 @@
 
     $: {
         try {
-            const data = presets.fm2_shape[$fm2_shape_preset].data;
+            const data = presets.fm2_shape[$fm2_shape_preset];
             for (const [k, v] of Object.entries(data)) {
                 send_message(patch, k, v)
             } 
@@ -166,7 +165,7 @@
     ///////////
     $: {
         try {
-            const data = presets.perc_sound[$perc_sound_preset].data;
+            const data = presets.perc_sound[$perc_sound_preset];
             for (const [k, v] of Object.entries(data)) {
                 send_message(patch, k, v)
             }
@@ -178,7 +177,7 @@
 
     $: {
         try {
-            const data = presets.perc_transpose[$perc_transpose_preset].data;
+            const data = presets.perc_transpose[$perc_transpose_preset];
             for (const [k, v] of Object.entries(data)) {
                 send_message(patch, k, v)
             }
@@ -189,14 +188,13 @@
 
     $: {
         try {
-            const data = presets.perc_shape[$perc_shape_preset].data;
+            const data = presets.perc_shape[$perc_shape_preset];
             for (const [k, v] of Object.entries(data)) {
                 send_message(patch, k, v)
             }
         } catch (e) {
             console.log('perc_shape_preset', $perc_shape_preset, e)
         }
-
     }
 
     $: send_message(patch, 'perc_listener', [$perc_listener]);
