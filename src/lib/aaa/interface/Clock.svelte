@@ -8,9 +8,9 @@
     
     const speed_knob = { 
         title: "rate", 
-        min: 0.05, max: 10.0, step: 0.1, 
+        min: 0.05, max: 10, step: 0.05, 
         scale: 0.1,
-        resetValue: 0.5
+        resetValue: 1
     }
 
     let state = 0;
