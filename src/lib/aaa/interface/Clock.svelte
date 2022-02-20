@@ -32,8 +32,8 @@
 <div class="clock area">
     <div class="label no_hover">clock</div>
     <div class="controls">
-        <Knob {...speed_knob} bind:value={ $speed } func={ () => { socket.emit('speed', $speed) }} />
         <Play bind:state={state}/>
+        <Knob {...speed_knob} bind:value={ $speed } func={ () => { socket.emit('speed', $speed) }} />
     </div>
     
     <div class='tala no_hover'>
