@@ -21,7 +21,7 @@
         max: presets.fm1_freq.length - 1,
         step: 1,
         scale: 0.1,
-        resetValue: 0,
+        reset_value: 0,
         func: () => { socket.emit('fm1_freq_preset', $fm1_freq_preset) }
     }
     const fm1_mod_knob = {
@@ -30,7 +30,7 @@
         max: presets.fm1_mod.length - 1,
         step: 1,
         scale: 0.1,
-        resetValue: 0,
+        reset_value: 0,
         func: () => { socket.emit('fm1_mod_preset', $fm1_mod_preset) }    
     }
     const fm1_shape_knob = {
@@ -39,7 +39,7 @@
         max: presets.fm1_shape.length - 1,
         step: 1,
         scale: 0.1,
-        resetValue: 0,
+        reset_value: 0,
         func: () => { socket.emit('fm1_shape_preset', $fm1_shape_preset) }    
     }
     const fm2_freq_knob = {
@@ -48,7 +48,7 @@
         max: presets.fm2_freq.length - 1,
         step: 1,
         scale: 0.1,
-        resetValue: 0,
+        reset_value: 0,
         func: () => { socket.emit('fm2_freq_preset', $fm2_freq_preset) }    
     }
     const fm2_mod_knob = {
@@ -57,7 +57,7 @@
         max: presets.fm2_mod.length - 1,
         step: 1,
         scale: 0.1,
-        resetValue: 0,
+        reset_value: 0,
         func: () => { socket.emit('fm2_mod_preset', $fm2_mod_preset) }  
     }
     const fm2_shape_knob = {
@@ -66,7 +66,7 @@
         max: presets.fm2_shape.length - 1,
         step: 1,
         scale: 0.1,
-        resetValue: 0,
+        reset_value: 0,
         func: () => { socket.emit('fm2_shape_preset', $fm2_shape_preset) }  
     }
     const perc_sound_knob = {
@@ -75,7 +75,7 @@
         max: presets.perc_sound.length - 1,
         step: 1,
         scale: 0.1,
-        resetValue: 0,
+        reset_value: 0,
         func: () => { socket.emit('perc_sound_preset', $perc_sound_preset) }  
     }
     const perc_transpose_knob = {
@@ -84,7 +84,7 @@
         max: presets.perc_sound.length - 1,
         step: 1,
         scale: 0.1,
-        resetValue: 0,
+        reset_value: 0,
         func: () => { socket.emit('perc_transpose_preset', $perc_transpose_preset) }  
     }
     const perc_shape_knob = {
@@ -93,7 +93,7 @@
         max: presets.perc_shape.length - 1,
         step: 1,
         scale: 0.1,
-        resetValue: 0,
+        reset_value: 0,
         func: () => { socket.emit('perc_shape_preset', $perc_shape_preset) }
     }
 
