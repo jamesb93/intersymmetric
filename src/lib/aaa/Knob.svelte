@@ -16,11 +16,12 @@
     export let HEIGHT = 60;
     export let show_value = false;
     export let display_value = null;
-    export let value;
     export let secondary_color = primary;
     export let stroke_width = 1;
     export let enabled = true;
     export let func = () => {};
+    export let value;
+    export let internal = value;
 
     const RADIUS = 21;
     const MID_X = WIDTH/2;
@@ -29,10 +30,9 @@
     const MIN_RADIANS = 4 * Math.PI / 3;
     const MAX_RADIANS = -Math.PI / 3;
     
+    let length = 0;
     let pathValue;
     let knob;
-    
-    let length = 0;
 
     $: primary_color = enabled ? primary : secondary_color;
     $: text_color = enabled ? '#000000' : secondary_color;
@@ -63,13 +63,12 @@
     $: large_arc = Math.abs(zero_radians - value_radians) < Math.PI ? 0 : 1;
     $: sweep = value_radians > zero_radians ? 0 : 1;
     
-    let internal = null;
     let pv = null;
+    $: value = Math.round((internal-min) / step) * step + min;
     const updatePosition = (change) => {
         // This way it always forces it to match the bound value when it is first moved.
         if (!internal) { internal = value };
         internal = clip(internal + change * scale, min, max);
-        value = Math.round((internal - min) / step) * step + min;
         if (pv !== value) {
             func()
             pv = value
@@ -83,9 +82,8 @@
             updatePosition(posUpdate)
         }
     }
-
     const mouseMoveHandler = (e) => {
-        move(e.movementY * -1) 
+         move(e.movementY * -1) 
     };
 
     let prev_touch;
@@ -97,16 +95,16 @@
         }
         prev_touch = touch;
     }
-    
-    const handleUp = (e) => {
-        if (enabled) {
-            down=false
-        }
-    }
 
     const handleDown = (e) => {
         if (enabled) { 
             down = true;
+        }
+    }
+    
+    const handleUp = (e) => {
+        if (enabled) {
+            down=false
         }
     }
     
