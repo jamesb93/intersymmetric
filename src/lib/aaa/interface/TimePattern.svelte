@@ -30,19 +30,19 @@
 
     $: calculated_b_0 = ($b_steps_0 * 1 / $speed).toFixed(0);
     const b_steps_0_slider = {
-        min: 10, max: 2000, step: 1, invert: true,
+        min: 25, max: 2000, step: 1, invert: true,
         func: () => { socket.emit('b_steps_0', $b_steps_0) }
     }
 
     $: calculated_b_1 = ($b_steps_1 *  1/ $speed).toFixed(0);
     const b_steps_1_slider = {
-        min: 10, max: 2000, step: 1, invert: true,
+        min: 25, max: 2000, step: 1, invert: true,
         func: () => { socket.emit('b_steps_1', $b_steps_1) }
     }
 
     $: calculated_b_2 = ($b_steps_2 * 1 / $speed).toFixed(0);
     const b_steps_2_slider = {
-        min: 10, max: 2000, step: 1, invert: true,
+        min: 25, max: 2000, step: 1, invert: true,
         func: () => { socket.emit('b_steps_2', $b_steps_2) }
     }
 
