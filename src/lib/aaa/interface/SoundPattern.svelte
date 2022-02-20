@@ -16,7 +16,7 @@
     export let patch;
 
     const fm1_freq_knob = {
-        title: "freq",
+        title: "sound",
         min: 0,
         max: presets.fm1_freq.length - 1,
         step: 1,
@@ -43,7 +43,7 @@
         func: () => { socket.emit('fm1_shape_preset', $fm1_shape_preset) }    
     }
     const fm2_freq_knob = {
-        title: "freq",
+        title: "sound",
         min: 0,
         max: presets.fm2_freq.length - 1,
         step: 1,
@@ -79,7 +79,7 @@
         func: () => { socket.emit('perc_sound_preset', $perc_sound_preset) }  
     }
     const perc_transpose_knob = {
-        title: "transpose",
+        title: "mod",
         min: 0,
         max: presets.perc_sound.length - 1,
         step: 1,
