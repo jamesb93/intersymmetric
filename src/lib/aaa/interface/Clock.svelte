@@ -7,14 +7,15 @@
 
     export let patch;
     
-    $: display_speed = (clip(max_scale($speed, 0.5, 10.0, 0.5, 10.0, 5).toFixed(2), 0.5, 10));
+    let _speed = $speed;
     const speed_knob = { 
         title: "rate", 
-        min: 0.05, max: 10, step: 0.05, 
+        min: 0.2, max: 10, step: 0.05, 
         scale: 0.1,
         reset_value: 1,
         show_value: true
     }
+    $: display_speed = clip(max_scale(_speed, speed_knob.min, speed_knob.max, speed_knob.min, speed_knob.max, 3.5).toFixed(2), speed_knob.min, 10);
 
     let state = 0;
 
@@ -28,7 +29,7 @@
         }
     })
 
-    $: send_message(patch, 'speed', [ 1/ $speed ]);
+    $: send_message(patch, 'speed', [ 1 / display_speed ]);
     $: send_message(patch, 'state', [ state ]);
 </script>
 
@@ -36,7 +37,13 @@
     <div class="label no_hover">clock</div>
     <div class="controls">
         <Play bind:state={state}/>
-        <Knob {...speed_knob} bind:display_value={ display_speed } bind:value={ $speed } func={ () => { socket.emit('speed', $speed ) }} />
+        <Knob 
+        {...speed_knob} 
+        bind:internal={ $speed }
+        bind:value={ _speed } 
+        bind:display_value={ display_speed } 
+        func={ () => { socket.emit('speed', $speed ) }} 
+        />
     </div>
     
     <div class='tala no_hover'>

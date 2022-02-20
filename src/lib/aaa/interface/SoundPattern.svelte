@@ -15,6 +15,18 @@
 
     export let patch;
 
+
+    let _fm1_freq_preset = $fm1_freq_preset,
+        _fm1_mod_preset = $fm1_mod_preset, 
+        _fm1_shape_preset = $fm1_shape_preset,
+        _fm2_freq_preset = $fm2_freq_preset, 
+        _fm2_mod_preset = $fm2_mod_preset, 
+        _fm2_shape_preset = $fm2_shape_preset,
+        _perc_sound_preset = $perc_sound_preset, 
+        _perc_transpose_preset = $perc_transpose_preset, 
+        _perc_shape_preset = $perc_shape_preset;
+
+    let step = 1; let min = 0; 
     const fm1_freq_knob = {
         title: "sound",
         min: 0,
@@ -24,6 +36,7 @@
         reset_value: 0,
         func: () => { socket.emit('fm1_freq_preset', $fm1_freq_preset) }
     }
+
     const fm1_mod_knob = {
         title: "mod",
         min: 0,
@@ -33,6 +46,7 @@
         reset_value: 0,
         func: () => { socket.emit('fm1_mod_preset', $fm1_mod_preset) }    
     }
+
     const fm1_shape_knob = {
         title: "shape",
         min: 0,
@@ -42,6 +56,8 @@
         reset_value: 0,
         func: () => { socket.emit('fm1_shape_preset', $fm1_shape_preset) }    
     }
+    $: _fm1_mod_preset = Math.round(($fm1_mod_preset - min) / step) * step + min;
+
     const fm2_freq_knob = {
         title: "sound",
         min: 0,
@@ -99,101 +115,120 @@
 
     $: {
         try {
-            const data = presets.fm1_freq[$fm1_freq_preset];
-            for (const [k, v] of Object.entries(data)) {
-                send_message(patch, k, v)
+            if (Number.isInteger(_fm1_freq_preset)) {
+                const data = presets.fm1_freq[_fm1_freq_preset];
+                for (const [k, v] of Object.entries(data)) {
+                    send_message(patch, k, v)
+                }
             }
         } catch (e) {
-            console.log('fm1_freq_preset err', $fm1_freq_preset, e);
+            console.log('fm1_freq_preset err', _fm1_freq_preset, e);
         }
     }
 
     $: {
         try {
-            const data = presets.fm1_mod[$fm1_mod_preset];
-            for (const [k, v] of Object.entries(data)) {
-                send_message(patch, k, v)
+            if (Number.isInteger(_fm1_mod_preset)) {
+                const data = presets.fm1_mod[_fm1_mod_preset];
+                for (const [k, v] of Object.entries(data)) {
+                    send_message(patch, k, v)
+                }
             }
         } catch (e) {
-            console.log('fm1_mod_preset', $fm1_mod_preset, e);
+            console.log('fm1_mod_preset', _fm1_mod_preset, e);
         }
     }
 
     $: {
         try {
-            const data = presets.fm1_shape[$fm1_shape_preset];
-            for (const [k, v] of Object.entries(data)) {
-                send_message(patch, k, v)
+            if (Number.isInteger(_fm1_shape_preset)) {
+                const data = presets.fm1_shape[_fm1_shape_preset];
+                for (const [k, v] of Object.entries(data)) {
+                    send_message(patch, k, v)
+                }
             }
         } catch(e) {
-            console.log('fm1_shape_preset', $fm1_shape_preset, e);
+            console.log('fm1_shape_preset', _fm1_shape_preset, e);
         }
     }
     ///////////
     $: {
         try {
-            const data = presets.fm2_freq[$fm2_freq_preset];
-            for (const [k, v] of Object.entries(data)) {
-                send_message(patch, k, v)
+            if (Number.isInteger(_fm2_freq_preset)) {
+                const data = presets.fm2_freq[_fm2_freq_preset];
+                for (const [k, v] of Object.entries(data)) {
+                    send_message(patch, k, v)
+                }
             }
         } catch (e) {
-            console.log('fm2_freq_preset', $fm2_freq_preset, e);
+            console.log('fm2_freq_preset', _fm2_freq_preset, e);
         }
     }
 
     $: {
         try {
-            const data = presets.fm2_mod[$fm2_mod_preset];
-            for (const [k, v] of Object.entries(data)) {
-                send_message(patch, k, v)
+            if (Number.isInteger(_fm2_mod_preset)) {
+                console.log(_fm2_mod_preset, _fm2_mod_preset)
+                const data = presets.fm2_mod[_fm2_mod_preset];
+                for (const [k, v] of Object.entries(data)) {
+                    send_message(patch, k, v)
+                }
             }
         } catch (e) {
-            console.log('fm2_mod_preset', $fm2_mod_preset, e);
+            console.log('fm2_mod_preset', _fm2_mod_preset, e);
         }
     }
 
     $: {
         try {
-            const data = presets.fm2_shape[$fm2_shape_preset];
-            for (const [k, v] of Object.entries(data)) {
-                send_message(patch, k, v)
-            } 
+            if (Number.isInteger(_fm2_shape_preset)) {
+                const data = presets.fm2_shape[_fm2_shape_preset];
+                for (const [k, v] of Object.entries(data)) {
+                    send_message(patch, k, v)
+                }
+                } 
         } catch (e) {
-            console.log('fm1_shape_preset', $fm2_shape_preset, e);
+            console.log('fm1_shape_preset', _fm2_shape_preset, e);
         }
     }
     ///////////
     $: {
         try {
-            const data = presets.perc_sound[$perc_sound_preset];
-            for (const [k, v] of Object.entries(data)) {
-                send_message(patch, k, v)
+            if (Number.isInteger(_perc_sound_preset)) {
+                const data = presets.perc_sound[_perc_sound_preset];
+                for (const [k, v] of Object.entries(data)) {
+                    send_message(patch, k, v)
+                }
             }
         } catch (e) {
-            console.log('perc_sound_preset', $perc_sound_preset, e);
+            console.log('perc_sound_preset', _perc_sound_preset, e);
         }
 
     }
 
     $: {
         try {
-            const data = presets.perc_transpose[$perc_transpose_preset];
-            for (const [k, v] of Object.entries(data)) {
-                send_message(patch, k, v)
+            if (Number.isInteger(_perc_transpose_preset)) {
+                const data = presets.perc_transpose[_perc_transpose_preset];
+                for (const [k, v] of Object.entries(data)) {
+                    send_message(patch, k, v)
+                }
             }
         } catch (e) {
-            console.log('perc_transpose_preset', $perc_transpose_preset, e)
+            console.log('perc_transpose_preset', _perc_transpose_preset, e)
         }
     }
 
     $: {
         try {
-            const data = presets.perc_shape[$perc_shape_preset];
-            for (const [k, v] of Object.entries(data)) {
-                send_message(patch, k, v)
+            if (Number.isInteger(_perc_shape_preset)) {
+                const data = presets.perc_shape[_perc_shape_preset];
+                for (const [k, v] of Object.entries(data)) {
+                    send_message(patch, k, v)
+                }
             }
         } catch (e) {
-            console.log('perc_shape_preset', $perc_shape_preset, e)
+            console.log('perc_shape_preset', _perc_shape_preset, e)
         }
     }
 
@@ -226,25 +261,25 @@
         <div class='panel'>
             <RadioV func={ () => { socket.emit('perc_listener', $perc_listener) }} bind:value={$perc_listener} />
             <Blip bind:this={blip_1} />
-            <Knob {...perc_sound_knob}  bind:value={$perc_sound_preset} />
-            <Knob {...perc_transpose_knob}   bind:value={$perc_transpose_preset} />
-            <Knob {...perc_shape_knob} bind:value={$perc_shape_preset} />
+            <Knob {...perc_sound_knob}     bind:internal={$perc_sound_preset}     bind:value={_perc_sound_preset} />
+            <Knob {...perc_transpose_knob} bind:internal={$perc_transpose_preset} bind:value={_perc_transpose_preset} />
+            <Knob {...perc_shape_knob}     bind:internal={$perc_shape_preset}     bind:value={_perc_shape_preset} />
         </div>
 
         <div class='panel'>
             <RadioV func={ () => { socket.emit('fm1_listener', $fm1_listener) }} bind:value={$fm1_listener} />
             <Blip bind:this={blip_2} />
-            <Knob {...fm1_freq_knob}  bind:value={$fm1_freq_preset} />
-            <Knob {...fm1_mod_knob}   bind:value={$fm1_mod_preset} />
-            <Knob {...fm1_shape_knob} bind:value={$fm1_shape_preset} />
+            <Knob {...fm1_freq_knob}  bind:internal={$fm1_freq_preset}  bind:value={_fm1_freq_preset} />
+            <Knob {...fm1_mod_knob}   bind:internal={$fm1_mod_preset}   bind:value={_fm1_mod_preset}/>
+            <Knob {...fm1_shape_knob} bind:internal={$fm1_shape_preset} bind:value={_fm1_shape_preset}/>
         </div>
 
         <div class='panel'>
             <RadioV func={ () => { socket.emit('fm2_listener', $fm2_listener) }} bind:value={$fm2_listener} />
             <Blip bind:this={blip_3} />
-            <Knob {...fm2_freq_knob}  bind:value={$fm2_freq_preset} />
-            <Knob {...fm2_mod_knob}   bind:value={$fm2_mod_preset} />
-            <Knob {...fm2_shape_knob} bind:value={$fm2_shape_preset} />
+            <Knob {...fm2_freq_knob}  bind:internal={$fm2_freq_preset}  bind:value={_fm2_freq_preset}/>
+            <Knob {...fm2_mod_knob}   bind:internal={$fm2_mod_preset}   bind:value={_fm2_mod_preset}/>
+            <Knob {...fm2_shape_knob} bind:internal={$fm2_shape_preset} bind:value={_fm2_shape_preset}/>
         </div>
     </div>
 </div>
