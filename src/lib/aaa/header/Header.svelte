@@ -13,7 +13,7 @@
         <RoomPrompt />
     </div>
     <div id='participants'>
-        <span class='no_hover'>Users:</span>
+        <span class='no_hover'>Players:</span>
         <span class='no_hover'>{$num_users}</span>
     </div>
 </header>
