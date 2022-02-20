@@ -75,4 +75,5 @@ export const perc_shape_preset = writable(0);
 socket.on('perc_shape_preset', x => perc_shape_preset.set(x));
 
 export const tala = writable([0, 0, 0]);
-export const primary = '#ff44b4';
+export const primary = 'hsl(324, 100%, 63%)'
+export const primary_darker = 'hsl(324, 50%, 50%)'

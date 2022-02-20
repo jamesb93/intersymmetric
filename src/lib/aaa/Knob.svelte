@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    import { primary } from '$lib/aaa/app';
+    import { primary, primary_darker } from '$lib/aaa/app';
 
     const clip = (i, low, high) => {
         return Math.min(Math.max(i, low), high)
@@ -35,7 +35,6 @@
     let knob;
 
     $: primary_color = enabled ? primary : secondary_color;
-    $: text_color = enabled ? '#000000' : secondary_color;
     
     
     onMount(() => {
@@ -143,21 +142,21 @@ on:touchend={handleUp}
     on:dblclick={resetHandler}
     >
     <div id='title' class='no_hover'>{title}</div>
-    <svg width='{WIDTH}px' height='{HEIGHT}px' >
+    <svg width={WIDTH} height={HEIGHT}>
         <path
             d={range_path}
             stroke-width={stroke_width}
-            stroke={secondary_color}
+            stroke={down ? primary_darker : primary_color}
             class="knob-control__range"
         />
         <!-- Arc Fill -->
         <path
             d={value_path}
             stroke-width={stroke_width}
-            stroke={primary_color}
+            stroke={down ? primary_darker : primary_color}
+            style={dash_style}
             bind:this={pathValue}
             data-dash={length}
-            style={dash_style}
             class="knob-control__value"
         />
         <!-- Line Value -->
@@ -172,7 +171,7 @@ on:touchend={handleUp}
             x={MID_X}
             y={HEIGHT}
             text-anchor="middle"
-            fill="{text_color}"
+            fill={'black'}
             class="value"
         >
         {#if !display_value}
@@ -194,17 +193,18 @@ on:touchend={handleUp}
     
     .knob-control__range {
         fill: none;
-        transition: stroke .1s ease-in;
+        /* transition: stroke .1s ease-in; */
     }
     
     .knob-control__value {
         animation-name: dash-frame;
-        animation-fill-mode: forwards;
+        /* animation-fill-mode: forwards; */
         fill: none;
     }
 
     #title {
         text-align: center;
+        color: black;
         font-size: var(--font-size);
     }
 

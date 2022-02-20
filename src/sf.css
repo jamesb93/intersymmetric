@@ -5,6 +5,7 @@
 
 :root {
     --primary: #ff44b4;
+    --primary-darker: hsl(324, 100%, 40%);
     --grey: #e4e4e3;
 }
 

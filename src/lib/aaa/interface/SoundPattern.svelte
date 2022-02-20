@@ -292,6 +292,7 @@
         border-left: 1px dashed var(--primary);
         border-right: 1px dashed var(--primary);
         place-items: center;
+        color: hsl(324, 100%, 63%);
     }
 
     .sound_pattern > .controls {
