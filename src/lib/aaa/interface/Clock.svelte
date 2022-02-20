@@ -37,8 +37,15 @@
     </div>
     
     <div class='tala no_hover'>
-        {#each $tala as t}
-            <div class="">{ t }</div>
+        {#each $tala as t, i}
+        <div class="col">
+            <div class="letter">
+                { ['a', 'b', 'c'][i]}
+            </div>
+            <div class="number">
+                { t }
+            </div>
+        </div>
         {/each}
     </div>
 </div>
@@ -63,5 +70,14 @@
         justify-content: center;
         gap: 0.5em;
         font-size: 40px;
+    }
+
+    .tala > .col {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tala > .col > .letter {
+        font-size: 1.5rem;
     }
 </style>
