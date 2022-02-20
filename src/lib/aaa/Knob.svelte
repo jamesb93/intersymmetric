@@ -15,7 +15,7 @@
     export let WIDTH = 80;
     export let HEIGHT = 60;
     export let show_value = false;
-    export let alt_value = null;
+    export let display_value = null;
     export let value;
     export let secondary_color = primary;
     export let stroke_width = 1;
@@ -118,11 +118,9 @@
     };
 
     function resetHandler() {
-        if (reset_value !== null) {
-            value = reset_value;
-            internal = value;
-            func()
-        }
+        value = reset_value;
+        internal = value;
+        func()
     }
     
     function mapRange(x, inMin, inMax, outMin, outMax)  {
@@ -179,10 +177,10 @@ on:touchend={handleUp}
             fill="{text_color}"
             class="value"
         >
-        {#if !alt_value}
+        {#if !display_value}
             { parseFloat(value.toFixed(1)) }
         {:else}
-            { alt_value }
+            { display_value }
         {/if}
         </text>
         {/if}

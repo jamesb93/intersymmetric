@@ -8,19 +8,25 @@
     export let thumb_height = 3;
     export let active = false;
     export let func = () => {};
+    export let display_value = null;
+    export let invert = false;
 
     let thumb, bar, rect;
     let down = false;
     let prev_touch = false;
     let prev_value = null;
     
-    $: thumb_y = clip(scale(value, max, min, 0, bar_height), 0, bar_height - thumb_height);
+    $: thumb_y = (
+        invert ?
+        clip(scale(value, min, max, 0, bar_height), 0, bar_height - thumb_height) :
+        clip(scale(value, max, min, 0, bar_height), 0, bar_height - thumb_height)
+    )
 
     const move = (e) => {
         rect = bar.getBoundingClientRect();
         if (down) {
             const y = (e.pageY - rect.top) - window.scrollY;
-            const ratio = y / bar_height;
+            const ratio = invert ? 1 - (y / bar_height) : y / bar_height;
             let scaled = scale(ratio, 0, 1, max, min);
             value = Math.round((scaled - min) / step) * step + min;
             value = clip(value, min, max);
@@ -71,10 +77,14 @@ class="container">
         />
 
     </svg>
-    <div class='no_hover'>{ value }</div>
+    <div class='no_hover'>
+        {#if display_value !== null}
+        { display_value }
+        {:else}
+        { value }
+        {/if}
+    </div>
 </div>
-
-
 
 <style>
     svg { 

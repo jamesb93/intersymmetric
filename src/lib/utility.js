@@ -1,3 +1,10 @@
+export const max_scale = (x, imin, imax, omin, omax, exp) => {
+    // duped from https://docs.cycling74.com/max8/refpages/scale
+    return ((x-imin)/(imax-imin) == 0) ? omin : (((x-imin)/(imax-imin)) > 0) ? (omin + (omax-omin) * Math.pow(((x-imin)/(imax-imin)), exp)) : (omin + (omax-omin) * -Math.pow(((-x+imin)/(imax-imin)), exp))
+}
+
+// return ((x-imin)/(imax-imin) == 0) ? omin : (((x-imin)/(imax-imin)) > 0) ? (omin + (omax-omin) * ((x-imin)/(imax-imin))^exp) : ( omin + (omax-omin) * -((((-x+imin)/(imax-imin)))^(exp))) 
+
 export const createRoomID = (prefix, code) => `${prefix}.${code}`
 
 export const freqMap = (midi) => {

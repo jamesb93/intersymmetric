@@ -2,15 +2,18 @@
     import Knob from '../Knob.svelte';
     import Play from '../Play.svelte';
     import { speed, socket, tala } from '../app';
+    import { max_scale, clip } from '$lib/utility';
     import { send_message } from '$lib/aaa/patch_helpers'
 
     export let patch;
     
+    $: display_speed = (clip(max_scale($speed, 0.5, 10.0, 0.5, 10.0, 5).toFixed(2), 0.5, 10));
     const speed_knob = { 
         title: "rate", 
         min: 0.05, max: 10, step: 0.05, 
         scale: 0.1,
-        resetValue: 1
+        reset_value: 1,
+        show_value: true
     }
 
     let state = 0;
@@ -25,15 +28,15 @@
         }
     })
 
-    $: send_message(patch, 'speed', [$speed]);
-    $: send_message(patch, 'state', [state]);
+    $: send_message(patch, 'speed', [ 1/ $speed ]);
+    $: send_message(patch, 'state', [ state ]);
 </script>
 
 <div class="clock area">
     <div class="label no_hover">clock</div>
     <div class="controls">
         <Play bind:state={state}/>
-        <Knob {...speed_knob} bind:value={ $speed } func={ () => { socket.emit('speed', $speed) }} />
+        <Knob {...speed_knob} bind:display_value={ display_speed } bind:value={ $speed } func={ () => { socket.emit('speed', 1 / display_speed ) }} />
     </div>
     
     <div class='tala no_hover'>

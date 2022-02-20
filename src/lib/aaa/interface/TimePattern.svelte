@@ -2,7 +2,7 @@
     import './interface.css';
     import RadioH from '../RadioH.svelte';
     import Slider from '../Slider.svelte';
-    import { socket } from '../app';
+    import { socket, speed } from '../app';
     import { send_message } from '$lib/aaa/patch_helpers'
     import { 
         a_mode, b_mode, c_mode,
@@ -28,18 +28,21 @@
         func: () => { socket.emit('a_steps_2', $a_steps_2) }
     }
 
+    $: calculated_b_0 = ($b_steps_0 * 1 / $speed).toFixed(0);
     const b_steps_0_slider = {
-        min: 10, max: 2000, step: 1,
+        min: 10, max: 2000, step: 1, invert: true,
         func: () => { socket.emit('b_steps_0', $b_steps_0) }
     }
 
+    $: calculated_b_1 = ($b_steps_1 *  1/ $speed).toFixed(0);
     const b_steps_1_slider = {
-        min: 10, max: 2000, step: 1,
+        min: 10, max: 2000, step: 1, invert: true,
         func: () => { socket.emit('b_steps_1', $b_steps_1) }
     }
 
+    $: calculated_b_2 = ($b_steps_2 * 1 / $speed).toFixed(0);
     const b_steps_2_slider = {
-        min: 10, max: 2000, step: 1,
+        min: 10, max: 2000, step: 1, invert: true,
         func: () => { socket.emit('b_steps_2', $b_steps_2) }
     }
 
@@ -94,9 +97,9 @@
             <div class='no_hover'>durations</div>
             <RadioH func={ () => { socket.emit('b_mode', $b_mode) }} bind:value={$b_mode}/>
             <div class="slider-group">
-                <Slider {...b_steps_0_slider} bind:value={$b_steps_0} active={b_current_step === 0}/>
-                <Slider {...b_steps_1_slider} bind:value={$b_steps_1} active={b_current_step === 1}/>
-                <Slider {...b_steps_2_slider} bind:value={$b_steps_2} active={b_current_step === 2}/>
+                <Slider {...b_steps_0_slider} bind:display_value={calculated_b_0} bind:value={$b_steps_0} active={b_current_step === 0}/>
+                <Slider {...b_steps_1_slider} bind:display_value={calculated_b_1} bind:value={$b_steps_1} active={b_current_step === 1}/>
+                <Slider {...b_steps_2_slider} bind:display_value={calculated_b_2} bind:value={$b_steps_2} active={b_current_step === 2}/>
             </div>
         </div>
         <div class="c time_unit">
