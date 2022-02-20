@@ -14,7 +14,7 @@
     export let scale = 1.0;
     export let WIDTH = 80;
     export let HEIGHT = 60;
-    export let show_value = true;
+    export let show_value = false;
     export let alt_value = null;
     export let value;
     export let secondary_color = primary;
