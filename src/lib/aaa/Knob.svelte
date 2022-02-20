@@ -10,15 +10,15 @@
     export let min = 0;
     export let max = 100;
     export let step = 1;
-    export let resetValue = 0;
+    export let reset_value = 0;
     export let scale = 1.0;
     export let WIDTH = 80;
     export let HEIGHT = 60;
-    export let showValue = true;
-    export let altValue = null;
+    export let show_value = true;
+    export let alt_value = null;
     export let value;
-    export let secondaryColor = primary;
-    export let strokeWidth = 1;
+    export let secondary_color = primary;
+    export let stroke_width = 1;
     export let enabled = true;
     export let func = () => {};
 
@@ -34,34 +34,34 @@
     
     let length = 0;
 
-    $: primaryColor = enabled ? primary : secondaryColor;
-    $: textColor = enabled ? '#000000' : secondaryColor;
+    $: primary_color = enabled ? primary : secondary_color;
+    $: text_color = enabled ? '#000000' : secondary_color;
     
     
     onMount(() => {
         dashLength();
     });
     
-    $: dashStyle = {
+    $: dash_style = {
         strokeDasharray: length,
         strokeDashoffset: length
     }
     
-    $: rangePath = `M ${minX} ${minY} A ${RADIUS} ${RADIUS} 0 1 1 ${maxX} ${maxY}`;
-    $: valuePath = `M ${zeroX} ${zeroY} A ${RADIUS} ${RADIUS} 0 ${largeArc} ${sweep} ${valueX} ${valueY}`;
-    $: pointerPath = `M ${MID_X} ${MID_Y*SHIFT} L ${valueX} ${valueY}`;
-    $: zeroRadians = (min > 0 && max > 0) ?mapRange(min, min, max, MIN_RADIANS, MAX_RADIANS):mapRange(0, min, max, MIN_RADIANS, MAX_RADIANS);
-    $: valueRadians = mapRange(value, min, max, MIN_RADIANS, MAX_RADIANS);
-    $: minX = MID_X + Math.cos(MIN_RADIANS) * RADIUS;
-    $: minY = SHIFT * MID_Y - Math.sin(MIN_RADIANS) * RADIUS;
-    $: maxX = MID_X + Math.cos(MAX_RADIANS) * RADIUS;
-    $: maxY = SHIFT * MID_Y - Math.sin(MAX_RADIANS) * RADIUS;
-    $: zeroX = MID_X + Math.cos(zeroRadians) * RADIUS;
-    $: zeroY = SHIFT * MID_Y - Math.sin(zeroRadians) * RADIUS;
-    $: valueX = MID_X + Math.cos(valueRadians) * RADIUS;
-    $: valueY = SHIFT * MID_Y - Math.sin(valueRadians) * RADIUS;
-    $: largeArc = Math.abs(zeroRadians - valueRadians) < Math.PI ? 0 : 1;
-    $: sweep = valueRadians > zeroRadians ? 0 : 1;
+    $: range_path = `M ${min_x} ${min_y} A ${RADIUS} ${RADIUS} 0 1 1 ${max_x} ${max_y}`;
+    $: value_path = `M ${zero_x} ${zero_y} A ${RADIUS} ${RADIUS} 0 ${large_arc} ${sweep} ${value_x} ${value_y}`;
+    $: pointer_path = `M ${MID_X} ${MID_Y*SHIFT} L ${value_x} ${value_y}`;
+    $: zero_radians = (min > 0 && max > 0) ?mapRange(min, min, max, MIN_RADIANS, MAX_RADIANS):mapRange(0, min, max, MIN_RADIANS, MAX_RADIANS);
+    $: value_radians = mapRange(value, min, max, MIN_RADIANS, MAX_RADIANS);
+    $: min_x = MID_X + Math.cos(MIN_RADIANS) * RADIUS;
+    $: min_y = SHIFT * MID_Y - Math.sin(MIN_RADIANS) * RADIUS;
+    $: max_x = MID_X + Math.cos(MAX_RADIANS) * RADIUS;
+    $: max_y = SHIFT * MID_Y - Math.sin(MAX_RADIANS) * RADIUS;
+    $: zero_x = MID_X + Math.cos(zero_radians) * RADIUS;
+    $: zero_y = SHIFT * MID_Y - Math.sin(zero_radians) * RADIUS;
+    $: value_x = MID_X + Math.cos(value_radians) * RADIUS;
+    $: value_y = SHIFT * MID_Y - Math.sin(value_radians) * RADIUS;
+    $: large_arc = Math.abs(zero_radians - value_radians) < Math.PI ? 0 : 1;
+    $: sweep = value_radians > zero_radians ? 0 : 1;
     
     let internal = null;
     let pv = null;
@@ -88,14 +88,14 @@
         move(e.movementY * -1) 
     };
 
-    let prevTouch;
+    let prev_touch;
     const touchMoveHandler = (e) => {
         const touch = e.touches[0];
-        if (prevTouch) {
-            const movementY = touch.pageY - prevTouch.pageY;
+        if (prev_touch) {
+            const movementY = touch.pageY - prev_touch.pageY;
             move(movementY * -1)
         }
-        prevTouch = touch;
+        prev_touch = touch;
     }
     
     const handleUp = (e) => {
@@ -118,8 +118,8 @@
     };
 
     function resetHandler() {
-        if (resetValue !== null) {
-            value = resetValue;
+        if (reset_value !== null) {
+            value = reset_value;
             internal = value;
             func()
         }
@@ -149,40 +149,40 @@ on:touchend={handleUp}
     <div id='title' class='no_hover'>{title}</div>
     <svg width='{WIDTH}px' height='{HEIGHT}px' >
         <path
-            d={rangePath}
-            stroke-width={strokeWidth}
-            stroke={secondaryColor}
+            d={range_path}
+            stroke-width={stroke_width}
+            stroke={secondary_color}
             class="knob-control__range"
         />
         <!-- Arc Fill -->
         <path
-            d={valuePath}
-            stroke-width={strokeWidth}
-            stroke={primaryColor}
+            d={value_path}
+            stroke-width={stroke_width}
+            stroke={primary_color}
             bind:this={pathValue}
             data-dash={length}
-            style={dashStyle}
+            style={dash_style}
             class="knob-control__value"
         />
         <!-- Line Value -->
         <path
-            d={pointerPath}
+            d={pointer_path}
             stroke-width=1
             stroke="black"
         />
 
-        {#if showValue}
+        {#if show_value}
         <text
             x={MID_X}
             y={HEIGHT}
             text-anchor="middle"
-            fill="{textColor}"
+            fill="{text_color}"
             class="value"
         >
-        {#if altValue === null}
+        {#if !alt_value}
             { parseFloat(value.toFixed(1)) }
         {:else}
-            { altValue }
+            { alt_value }
         {/if}
         </text>
         {/if}
