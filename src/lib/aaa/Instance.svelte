@@ -46,6 +46,12 @@
                 device.node.connect(outputNode);
                 d = device;
                 loadAllSamples();
+
+                d.messageEvent.subscribe(e => {
+                    if (e.tag.includes('debug')) {
+                        console.log(e.tag, e.payload)
+                    }
+                })
             })
             .then(x => { 
                 samples_loaded = true;
