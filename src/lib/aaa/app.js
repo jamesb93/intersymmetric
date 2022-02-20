@@ -14,7 +14,7 @@ export const room = writable('')
 export const num_users = writable(0);
 socket.on('num_users', x => num_users.set(x));
 
-export const speed = writable(0.1);
+export const speed = writable(1.0);
 socket.on('speed', x => speed.set(x));
 
 export const fm1_listener = writable(0);
