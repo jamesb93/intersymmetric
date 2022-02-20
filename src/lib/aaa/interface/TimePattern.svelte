@@ -47,17 +47,17 @@
     }
 
     const c_steps_0_slider = {
-        min: 1, max: 15, step: 1,
+        min: 1, max: 9, step: 1,
         func: () => { socket.emit('c_steps_0', $c_steps_0) }
     }
 
     const c_steps_1_slider = {
-        min: 1, max: 15, step: 1,
+        min: 1, max: 9, step: 1,
         func: () => { socket.emit('c_steps_1', $c_steps_1) }
     }
 
     const c_steps_2_slider = {
-        min: 1, max: 15, step: 1,
+        min: 1, max: 9, step: 1,
         func: () => { socket.emit('c_steps_2', $c_steps_2) }
     }
 
