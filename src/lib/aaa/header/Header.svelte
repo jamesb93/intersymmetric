@@ -28,12 +28,18 @@
         display: grid;
         grid-template-columns: auto auto auto;
         justify-content: space-between;
-        max-width: 960px;
+        max-width: 1005px;
         margin: 0 auto;
         font-size: 10px;
         min-height: var(--h);
         max-height: var(--h);
         padding-top: 10px;
+    }
+
+    @media only screen and (max-width: 1005px) {
+        header {
+            justify-content: space-around;
+        }
     }
 
     #title {

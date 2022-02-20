@@ -14,10 +14,19 @@
     footer {    
         display: flex;
         flex-direction: column;
+        margin-top: 2em;
         color: var(--primary);
         font-size: 10px;
         text-align: left;
         gap: 0.1em;
+    }
+
+    @media only screen and (max-width: 1005px) {
+        footer {
+            justify-content: space-around;
+            margin-bottom: 2em;
+            margin-left: 2em;
+        }
     }
 
     a {

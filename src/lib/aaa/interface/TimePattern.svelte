@@ -128,7 +128,7 @@
         place-items: center;
     }
     
-    @media only screen and (max-width: 980px) {
+    @media only screen and (max-width: 1005px) {
         .time_pattern {
             border-right: 1px dashed var(--primary);
         }

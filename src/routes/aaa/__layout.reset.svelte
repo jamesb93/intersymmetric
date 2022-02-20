@@ -13,7 +13,7 @@
 
 <style>
     .container {
-        max-width: 960px;
+        max-width: 1005px;
         margin: 0 auto;
     }
 </style>
