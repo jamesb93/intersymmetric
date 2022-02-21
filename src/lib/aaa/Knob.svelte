@@ -189,6 +189,11 @@ on:touchend={handleUp}
         display: grid;
         grid-template-rows: 7px 60px;
         touch-action: none;
+        cursor: grab;
+    }
+
+    .knob-control:active {
+        cursor: grabbing;
     }
     
     .knob-control__range {
