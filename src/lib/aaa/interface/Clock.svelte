@@ -12,7 +12,7 @@
         title: "rate", 
         min: 0.2, max: 10, step: 0.05, 
         scale: 0.1,
-        reset_value: 1,
+        reset_value: 6,
         show_value: true
     }
     $: display_speed = clip(max_scale(_speed, speed_knob.min, speed_knob.max, speed_knob.min, speed_knob.max, 3.5).toFixed(2), speed_knob.min, 10);
