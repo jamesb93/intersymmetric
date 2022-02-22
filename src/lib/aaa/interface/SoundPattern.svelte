@@ -168,7 +168,6 @@
     $: {
         try {
             if (Number.isInteger(_fm2_mod_preset)) {
-                console.log(_fm2_mod_preset, _fm2_mod_preset)
                 const data = presets.fm2_mod[_fm2_mod_preset];
                 for (const [k, v] of Object.entries(data)) {
                     send_message(patch, k, v)

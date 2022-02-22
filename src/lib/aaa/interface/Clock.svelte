@@ -1,7 +1,7 @@
 <script>
     import Knob from '../Knob.svelte';
     import Play from '../Play.svelte';
-    import { speed, socket, tala } from '../app';
+    import { speed, socket, tala, calculated_speed } from '../app';
     import { max_scale, clip } from '$lib/utility';
     import { send_message } from '$lib/aaa/patch_helpers'
 
@@ -15,7 +15,8 @@
         reset_value: 6,
         show_value: true
     }
-    $: display_speed = clip(max_scale(_speed, speed_knob.min, speed_knob.max, speed_knob.min, speed_knob.max, 3.5).toFixed(2), speed_knob.min, 10);
+
+    $: $calculated_speed = clip(max_scale(_speed, speed_knob.min, speed_knob.max, speed_knob.min, speed_knob.max, 3.5).toFixed(2), speed_knob.min, 10);
 
     let state = 0;
 
@@ -29,7 +30,7 @@
         }
     })
 
-    $: send_message(patch, 'speed', [ 1 / display_speed ]);
+    $: send_message(patch, 'speed', [ 1 / $calculated_speed ]);
     $: send_message(patch, 'state', [ state ]);
 </script>
 
@@ -41,7 +42,7 @@
         {...speed_knob} 
         bind:internal={ $speed }
         bind:value={ _speed } 
-        bind:display_value={ display_speed } 
+        bind:display_value={ $calculated_speed } 
         func={ () => { socket.emit('speed', $speed ) }} 
         />
     </div>

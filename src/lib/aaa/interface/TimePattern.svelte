@@ -2,7 +2,7 @@
     import './interface.css';
     import RadioH from '../RadioH.svelte';
     import Slider from '../Slider.svelte';
-    import { socket, speed } from '../app';
+    import { socket, speed, calculated_speed } from '../app';
     import { send_message } from '$lib/aaa/patch_helpers'
     import { 
         a_mode, b_mode, c_mode,
@@ -28,21 +28,18 @@
         func: () => { socket.emit('a_steps_2', $a_steps_2) }
     }
 
-    $: calculated_b_0 = ($b_steps_0 * 1 / $speed).toFixed(0);
     const b_steps_0_slider = {
-        min: 25, max: 2000, step: 1, invert: true,
+        min: 100, max: 800, step: 1, invert: true,
         func: () => { socket.emit('b_steps_0', $b_steps_0) }
     }
 
-    $: calculated_b_1 = ($b_steps_1 *  1/ $speed).toFixed(0);
     const b_steps_1_slider = {
-        min: 25, max: 2000, step: 1, invert: true,
+        min: 100, max: 800, step: 1, invert: true,
         func: () => { socket.emit('b_steps_1', $b_steps_1) }
     }
 
-    $: calculated_b_2 = ($b_steps_2 * 1 / $speed).toFixed(0);
     const b_steps_2_slider = {
-        min: 25, max: 2000, step: 1, invert: true,
+        min: 100, max: 800, step: 1, invert: true,
         func: () => { socket.emit('b_steps_2', $b_steps_2) }
     }
 
@@ -60,6 +57,10 @@
         min: 1, max: 9, step: 1,
         func: () => { socket.emit('c_steps_2', $c_steps_2) }
     }
+    
+    $: calculated_b_0 = ($b_steps_0 * 1 / $calculated_speed).toFixed(0);
+    $: calculated_b_1 = ($b_steps_1 * 1 / $calculated_speed).toFixed(0);
+    $: calculated_b_2 = ($b_steps_2 * 1 / $calculated_speed).toFixed(0);
 
     $: send_message(patch, 'a_steps', [$a_steps_0, $a_steps_1, $a_steps_2]);
     $: send_message(patch, 'b_steps', [$b_steps_0, $b_steps_1, $b_steps_2]);
