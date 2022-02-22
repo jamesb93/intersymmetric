@@ -10,9 +10,9 @@
     let _speed = $speed;
     const speed_knob = { 
         title: "rate", 
-        min: 0.2, max: 10, step: 0.05, 
+        min: 0.2, max: 4, step: 0.05, 
         scale: 0.03,
-        reset_value: 6,
+        reset_value: 4,
         show_value: true
     }
 
