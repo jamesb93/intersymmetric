@@ -11,7 +11,7 @@
     const speed_knob = { 
         title: "rate", 
         min: 0.2, max: 10, step: 0.05, 
-        scale: 0.1,
+        scale: 0.03,
         reset_value: 6,
         show_value: true
     }
