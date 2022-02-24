@@ -3,6 +3,7 @@
     import RadioH from '../RadioH.svelte';
     import Slider from '../Slider.svelte';
     import { socket, speed, calculated_speed } from '../app';
+    import { max_scale } from '$lib/utility';
     import { send_message } from '$lib/aaa/patch_helpers'
     import { 
         a_mode, b_mode, c_mode,
@@ -29,17 +30,17 @@
     }
 
     const b_steps_0_slider = {
-        min: 100, max: 800, step: 1, invert: true,
+        min: 0, max: 1, step: 0.01, invert: true,
         func: () => { socket.emit('b_steps_0', $b_steps_0) }
     }
 
     const b_steps_1_slider = {
-        min: 100, max: 800, step: 1, invert: true,
+        min: 0, max: 1, step: 0.01, invert: true,
         func: () => { socket.emit('b_steps_1', $b_steps_1) }
     }
 
     const b_steps_2_slider = {
-        min: 100, max: 800, step: 1, invert: true,
+        min: 0, max: 1, step: 0.01, invert: true,
         func: () => { socket.emit('b_steps_2', $b_steps_2) }
     }
 
@@ -58,12 +59,15 @@
         func: () => { socket.emit('c_steps_2', $c_steps_2) }
     }
     
-    $: calculated_b_0 = ($b_steps_0 * 1 / $calculated_speed).toFixed(0);
-    $: calculated_b_1 = ($b_steps_1 * 1 / $calculated_speed).toFixed(0);
-    $: calculated_b_2 = ($b_steps_2 * 1 / $calculated_speed).toFixed(0);
+    $: b0_map = max_scale($b_steps_0, 0, 1, 100, 1000, 2);
+    $: b1_map = max_scale($b_steps_1, 0, 1, 100, 1000, 2);
+    $: b2_map = max_scale($b_steps_2, 0, 1, 100, 1000, 2);
+    $: calculated_b_0 = (b0_map * 1 / $calculated_speed).toFixed(0);
+    $: calculated_b_1 = (b1_map * 1 / $calculated_speed).toFixed(0);
+    $: calculated_b_2 = (b2_map * 1 / $calculated_speed).toFixed(0);
 
     $: send_message(patch, 'a_steps', [$a_steps_0, $a_steps_1, $a_steps_2]);
-    $: send_message(patch, 'b_steps', [$b_steps_0, $b_steps_1, $b_steps_2]);
+    $: send_message(patch, 'b_steps', [b0_map, b1_map, b2_map]);
     $: send_message(patch, 'c_steps', [$c_steps_0, $c_steps_1, $c_steps_2]);
     $: send_message(patch, 'a_mode', [$a_mode]);
     $: send_message(patch, 'b_mode', [$b_mode]);
@@ -80,7 +84,6 @@
         }
     })
 </script>
-
 
 <div class="time_pattern area">
     <div class="label no_hover">time pattern</div>
