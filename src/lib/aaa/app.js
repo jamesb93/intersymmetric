@@ -40,11 +40,11 @@ socket.on('a_steps_1', x => a_steps_1.set(x));
 export const a_steps_2 = writable(3);
 socket.on('a_steps_2', x => a_steps_2.set(x));
 
-export const b_steps_0 = writable(0.5);
+export const b_steps_0 = writable(2);
 socket.on('b_steps_0', x => b_steps_0.set(x));
-export const b_steps_1 = writable(0.5);
+export const b_steps_1 = writable(2);
 socket.on('b_steps_1', x => b_steps_1.set(x));
-export const b_steps_2 = writable(0.5);
+export const b_steps_2 = writable(2);
 socket.on('b_steps_2', x => b_steps_2.set(x));
 
 export const c_steps_0 = writable(2);

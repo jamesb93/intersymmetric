@@ -30,17 +30,17 @@
     }
 
     const b_steps_0_slider = {
-        min: 0, max: 1, step: 0.01, invert: true,
+        min: 0, max: 8, step: 1, invert: true,
         func: () => { socket.emit('b_steps_0', $b_steps_0) }
     }
 
     const b_steps_1_slider = {
-        min: 0, max: 1, step: 0.01, invert: true,
+        min: 0, max: 8, step: 1, invert: true,
         func: () => { socket.emit('b_steps_1', $b_steps_1) }
     }
 
     const b_steps_2_slider = {
-        min: 0, max: 1, step: 0.01, invert: true,
+        min: 0, max: 8, step: 1, invert: true,
         func: () => { socket.emit('b_steps_2', $b_steps_2) }
     }
 
@@ -59,9 +59,13 @@
         func: () => { socket.emit('c_steps_2', $c_steps_2) }
     }
     
-    $: b0_map = max_scale($b_steps_0, 0, 1, 100, 1000, 2);
-    $: b1_map = max_scale($b_steps_1, 0, 1, 100, 1000, 2);
-    $: b2_map = max_scale($b_steps_2, 0, 1, 100, 1000, 2);
+    // $: b0_map = max_scale($b_steps_0, 0, 1, 100, 1000, 2);
+    // $: b1_map = max_scale($b_steps_1, 0, 1, 100, 1000, 2);
+    // $: b2_map = max_scale($b_steps_2, 0, 1, 100, 1000, 2);
+    const duration_lookup = [1, 2, 3, 4, 6, 8, 12, 16, 32];
+    $: b0_map = duration_lookup[$b_steps_0] * 25;
+    $: b1_map = duration_lookup[$b_steps_1] * 25;
+    $: b2_map = duration_lookup[$b_steps_2] * 25;
     $: calculated_b_0 = (b0_map * 1 / $calculated_speed).toFixed(0);
     $: calculated_b_1 = (b1_map * 1 / $calculated_speed).toFixed(0);
     $: calculated_b_2 = (b2_map * 1 / $calculated_speed).toFixed(0);
