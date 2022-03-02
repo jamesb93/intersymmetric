@@ -2,7 +2,7 @@
     import './interface.css';
     import RadioH from '../RadioH.svelte';
     import Slider from '../Slider.svelte';
-    import { socket, speed, calculated_speed } from '../app';
+    import { socket, calculated_speed } from '../app';
     import { max_scale } from '$lib/utility';
     import { send_message } from '$lib/aaa/patch_helpers'
     import { 
