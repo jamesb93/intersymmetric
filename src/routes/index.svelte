@@ -20,7 +20,7 @@
         font-size: 2rem;
     }
 
-    .aaa {
+    .aaa, .aaa:visited {
         color: #ff44b4;
     }
 
