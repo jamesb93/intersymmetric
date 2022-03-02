@@ -1,6 +1,6 @@
 <script>
     import './interface.css';
-    import presets from '../../../../static/aaa/presets';
+    import presets from '../../../../static/aaa/presets.json';
     import Knob from '../Knob.svelte';
     import Blip from '../Blip.svelte';
     import RadioV from '../RadioV.svelte';
