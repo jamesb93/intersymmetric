@@ -3,6 +3,6 @@
     import { goto } from '$app/navigation';
 
     onMount(async() => {
-        goto('c02n87h3')
+        goto('room1')
     })
 </script>
