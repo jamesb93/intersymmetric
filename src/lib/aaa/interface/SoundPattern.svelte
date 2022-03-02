@@ -15,7 +15,6 @@
 
     export let patch;
 
-
     let _fm1_freq_preset = $fm1_freq_preset,
         _fm1_mod_preset = $fm1_mod_preset, 
         _fm1_shape_preset = $fm1_shape_preset,
