@@ -7,9 +7,9 @@
     function change_handler() {
         console.log('ever used')
         ever_used = true;
-        socket.emit('room_join', `aaa.${code}`);
+        socket.emit('join_room', `aaa.${code}`);
         $room = code;
-        code = ""
+        code = "";
         goto(`/aaa/${$room}`)
     }
 </script>
@@ -21,7 +21,6 @@
     on:change={change_handler} 
     placeholder={ ever_used === false && $room === '' ? "enter room code" : $room }
     id='room-input'
-    class={$$props.class}
     />
 </div>
 
