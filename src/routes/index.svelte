@@ -3,8 +3,8 @@
 </script>
 
 <div class="links" transition:fade>
-    <a href='seq-1/idx'>Sequencer 1</a>
-    <a class='aaa' href='aaa/room1'>Algorithmic Art Assembly (AAA)</a>
+    <a href='seq-1/idx'>sequencer 01</a>
+    <a class='aaa' href='aaa/room1'>AAA</a>
 </div>
 
 <style>
