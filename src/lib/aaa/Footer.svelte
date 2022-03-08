@@ -6,7 +6,7 @@
         Programming by <a target="_blank" href="https://www.jamesbradbury.net">James Bradbury</a>
     </span>
     <span class='no_hover'>
-        Comissioned by <a target="_blank" href="https://www.aaassembly.org/">Algorithmic Art Assembly</a>
+        Comissioned by <a target="_blank" href="https://www.aaassembly.org/">Algorithmic Art Assembly 2022</a>
     </span>
 </footer>
 
