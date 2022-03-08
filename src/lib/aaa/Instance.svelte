@@ -2,7 +2,6 @@
     import RNBO from '@rnbo/js';
     import Interface from './interface/Interface.svelte';
     import Button from './Button.svelte';
-    import { tala } from './app';
 
     let ctx, d, patcher, context;
     let samples_loaded = false;
