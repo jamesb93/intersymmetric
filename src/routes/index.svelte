@@ -1,17 +1,11 @@
 <script>
     import { fade } from 'svelte/transition';
-    import { goto } from '$app/navigation';
-    import { onMount } from 'svelte';
-
-    onMount(async() => {
-        goto('seq-1/idx')
-    })
 </script>
 
-<!-- <div class="links" transition:fade>
+<div class="links" transition:fade>
     <a href='seq-1/idx'>sequencer 01</a>
     <a class='aaa' href='aaa/room1'>AAA</a>
-</div> -->
+</div>
 
 <style>
     .links {
