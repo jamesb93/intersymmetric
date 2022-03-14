@@ -8,7 +8,7 @@
             <a target="_blank" href="http://www.markfell.com/wiki/">Mark Fell</a> and <a target="_blank" href="https://riantreanor.bandcamp.com/">Rian Treanor</a>
         </span>
         <span>
-            Programming by <a target="_blank" href="https://www.jamesbradbury.xyz">James Bradbury</a>
+            Programming by <a target="_blank" href="https://www.jamesbradbury.net">James Bradbury</a>
         </span>
         <span>
             Graphic Design by <a target="_blank" href="https://qubik.com/">Joe Gilmore</a>
