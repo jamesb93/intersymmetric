@@ -17,7 +17,7 @@
     socket.on('slider2', x => slider2 = x);
     socket.on('slider3', x => slider3 = x);
 
-    const sliderConfig = { min: 0, max: 1, step: 0.01, thumb_height: 2 };
+    const sliderConfig = { min: 0, max: 1, step: 0.01, thumb_height: 2, bar_height: 600 };
 </script>
 
 <div class="container">
@@ -32,7 +32,7 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
-		gap: 3em;
+		gap: 1.5em;
 		margin-top: 5em;
         user-select: none;
         -webkit-user-drag: none;
