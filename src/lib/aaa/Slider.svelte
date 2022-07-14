@@ -81,7 +81,7 @@ class="container">
         {#if display_value !== null}
         { display_value }
         {:else}
-        { value }
+        { value.toFixed(2) }
         {/if}
     </div>
 </div>
