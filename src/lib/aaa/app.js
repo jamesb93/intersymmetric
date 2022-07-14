@@ -2,7 +2,7 @@ import { io } from "socket.io-client";
 import { writable } from 'svelte/store';
 
 // Sockets
-let socketAddr = import.meta.env.PROD ? "wss://aaabackend.xyz:49123" : "ws://localhost:49123"
+let socketAddr = import.meta.env.PROD ? "wss://aaa.intersymmetric.xyz:49123" : "ws://localhost:49123"
 
 export const socket = io(socketAddr);
 
