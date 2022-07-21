@@ -14,5 +14,11 @@ export const room = writable('')
 export const num_users = writable(0);
 socket.on('num_users', x => num_users.set(x));
 
-export const primary = 'hsl(324, 100%, 63%)'
-export const primary_darker = 'hsl(324, 50%, 50%)'
+export const palette = {
+	gold : 'rgb(148,108,53)',
+	blue : 'rgb(148,108,53)',
+	green : 'rgb(59,136,81)'
+}
+
+export const primary = palette.gold;
+export const primary_darker = palette.blue;
