@@ -1,12 +1,12 @@
 <script>
     import { browser } from '$app/env';
-    import { room } from '$lib/app.js';
-    import SeqCtrlSynth from '$lib/components/SeqCtrlSynth.svelte';
-    import SeqCtrlSample from '$lib/components/SeqCtrlSample.svelte';
-    import SeqSynth from '$lib/components/SeqSynth.svelte';
-    import SeqSample from '$lib/components/SeqSample.svelte';
-    import Footer from '$lib/components/Footer.svelte';
-    import Header from '$lib/components/Header.svelte';
+    import { room } from '$lib/nobounds/app';
+    import SeqCtrlSynth from '$lib/nobounds/components/SeqCtrlSynth.svelte';
+    import SeqCtrlSample from '$lib/nobounds/components/SeqCtrlSample.svelte';
+    import SeqSynth from '$lib/nobounds/components/SeqSynth.svelte';
+    import SeqSample from '$lib/nobounds/components/SeqSample.svelte';
+    import Footer from '$lib/nobounds/components/Footer.svelte';
+    import Header from '$lib/nobounds/components/Header.svelte';
 
     export let mode = ''
     export let context = ''

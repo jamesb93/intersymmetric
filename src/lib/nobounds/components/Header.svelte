@@ -3,8 +3,8 @@
         numUsers, 
         recentParamValue,
         recentParamName,
-        userMessage } from "$lib/app.js";
-    import RoomPrompt from "$lib/components/RoomPrompt.svelte";
+        userMessage } from "$lib/nobounds/app.js";
+    import RoomPrompt from "$lib/nobounds/components/RoomPrompt.svelte";
 
     export let context = '';
 

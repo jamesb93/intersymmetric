@@ -1,11 +1,7 @@
 <script>
     import {
         numLoadedSamples,
-        totalNumSamples } from '$lib/samplerConfig';
-
-    $: percent = (
-        $numLoadedSamples / $totalNumSamples
-    ) * 100.0
+        totalNumSamples } from '$lib/nobounds/samplerConfig';
 </script>
 
 <div>

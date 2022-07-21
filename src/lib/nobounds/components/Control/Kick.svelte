@@ -1,6 +1,6 @@
 <script>
-    import { socket, params, length, pitchOffset, trackPitch, trackShape } from '$lib/app.js';
-    import { kick } from '$lib/instruments/ensemble.js';
+    import { socket, params, length, pitchOffset, trackPitch, trackShape } from '$lib/nobounds/app';
+    import { kick } from '$lib/nobounds/instruments/ensemble.js';
     import { freqMap, clip } from "$lib/utility.js";
 
     $: kick.membrane.octaves = clip($params.kick.octaves, 0, 999);

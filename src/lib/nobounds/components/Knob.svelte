@@ -56,7 +56,7 @@
 
 <script>
     import { onMount } from 'svelte';
-    import { recentParamName, recentParamValue } from '$lib/app.js';
+    import { recentParamName, recentParamValue } from '$lib/nobounds/app.js';
 
     const clip = (i, low, high) => {
         return Math.min(Math.max(i, low), high)

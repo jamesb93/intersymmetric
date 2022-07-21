@@ -2,7 +2,7 @@
     import { 
         socket, params, length,
         pitchOffset, trackPitch, trackShape
-    } from '$lib/app.js';
+    } from '$lib/nobounds/app';
     import { freqMap } from "$lib/utility.js";
 
     export let instrument;

@@ -7,9 +7,9 @@
 </script>
 
 <script>
-	import { workshopID, room, socket } from '$lib/app.js';
+	import { workshopID, room, socket } from '$lib/nobounds/app';
 	import { createRoomID } from '$lib/utility.js';
-	import Grid from '$lib/components/Grid.svelte';
+	import Grid from '$lib/nobounds/components/Grid.svelte';
     export let id;
 
 	$workshopID = 'workshop';

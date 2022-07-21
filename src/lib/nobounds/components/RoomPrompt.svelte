@@ -1,5 +1,5 @@
 <script>
-    import { socket, room, workshopID } from "$lib/app.js"
+    import { socket, room, workshopID } from "$lib/nobounds/app"
     import { goto } from '$app/navigation';
     import { createRoomID } from '$lib/utility.js'
 	let everUsed = false;

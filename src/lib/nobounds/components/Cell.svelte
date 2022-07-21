@@ -1,5 +1,5 @@
 <script>
-    import { grid, maxCells, prevInsertions, socket } from "$lib/app.js";
+    import { grid, maxCells, prevInsertions, socket } from "$lib/nobounds/app";
     export let y;
     export let x;
     export let func;

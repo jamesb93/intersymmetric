@@ -1,9 +1,9 @@
-<script type="ts">
+<script>
     export let value;
-    export let min: string = "0";
-    export let max: string = "100";
-    export let title: string = "";
-    export let step: string = "any";
+    export let min = "0";
+    export let max= "100";
+    export let title = "";
+    export let step = "any";
     export let func;
     export let showValue = true;
 </script>

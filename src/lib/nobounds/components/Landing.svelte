@@ -1,5 +1,5 @@
 <script>
-    import { room } from "$lib/app.js"
+    import { room } from "$lib/nobounds/app"
     import { goto } from '$app/navigation';
     import { fade } from 'svelte/transition';
 

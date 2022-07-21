@@ -1,5 +1,5 @@
 <script>
-    import Editor from '$lib/components/Editor.svelte';
+    import Editor from '$lib/nobounds/components/Editor.svelte';
 </script>
 
 <div id="bottom-panel">

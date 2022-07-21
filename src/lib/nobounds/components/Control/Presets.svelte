@@ -1,5 +1,5 @@
 <script>
-    import { socket } from '$lib/app.js';
+    import { socket } from '$lib/nobounds/app';
     export let data;
     export let key;
 

@@ -1,7 +1,6 @@
 <!-- https://codepen.io/thebabydino/pen/NWWerZG -->
 
 <script>
-    import { onMount } from 'svelte';
     let mouseDown = false;
     let selected = 'one';
     let svg;

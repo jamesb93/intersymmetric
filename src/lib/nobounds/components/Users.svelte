@@ -1,5 +1,5 @@
 <script>
-    import { users, socket } from "$lib/app.js"
+    import { users, socket } from "$lib/nobounds/app"
 
     let name = 'anon';
 

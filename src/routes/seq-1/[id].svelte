@@ -8,13 +8,13 @@
 
 <script>
     import { browser } from '$app/env';
-	import Grid from '$lib/components/Grid.svelte';
-	import Snare from '$lib/components/Control/Snare.svelte';
-	import Kick from "$lib/components/Control/Kick.svelte";
-	import Metal from "$lib/components/Control/Metal.svelte";
-	import FM from "$lib/components/Control/FM.svelte";
-	import { metal1, metal2, fm1, fm2 } from '$lib/instruments/ensemble.js';
-	import { workshopID, room, socket } from '$lib/app.js';
+	import Grid from '$lib/nobounds/components/Grid.svelte';
+	import Snare from '$lib/nobounds/components/Control/Snare.svelte';
+	import Kick from "$lib/nobounds/components/Control/Kick.svelte";
+	import Metal from "$lib/nobounds/components/Control/Metal.svelte";
+	import FM from "$lib/nobounds/components/Control/FM.svelte";
+	import { metal1, metal2, fm1, fm2 } from '$lib/nobounds/instruments/ensemble.js';
+	import { workshopID, room, socket } from '$lib/nobounds/app.js';
 	import { createRoomID } from '$lib/utility.js';
     export let id;
 

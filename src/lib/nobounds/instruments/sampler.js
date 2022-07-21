@@ -1,5 +1,5 @@
 import * as Tone from "tone";
-import { Env } from '$lib/instruments/envelope.js';
+import { Env } from '$lib/nobounds/instruments/envelope.js';
 
 class Sampler {
     // A Sampler instance is a collection of Tone.Players
