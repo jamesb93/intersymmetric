@@ -1,5 +1,5 @@
 <script>
-    import Landing from '$lib/nobounds/components/Landing.svelte'
+	import Landing from '$lib/nobounds/components/Landing.svelte';
 </script>
 
-<Landing route='/seq-1/' />
+<Landing route="/seq-1/" />

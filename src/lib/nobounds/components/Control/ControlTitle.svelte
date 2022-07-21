@@ -1,11 +1,11 @@
 <script>
-    export let title = "placeholder title text"
+	export let title = 'placeholder title text';
 </script>
 
 <span class="title">{title}</span>
 
 <style>
-    .title {
-        color: grey;
-    }
+	.title {
+		color: grey;
+	}
 </style>

@@ -1,76 +1,75 @@
 /* Write your global styles here, in PostCSS syntax */
 
 @font-face {
-  font-family: "Space Mono";
-  src: url("/fonts/SpaceMono-Regular.ttf") format("truetype");
+	font-family: 'Space Mono';
+	src: url('/fonts/SpaceMono-Regular.ttf') format('truetype');
 }
 
 :root {
-  --font: "Space Mono", "Courier New", Courier, monospace;
-  --font-size: 10px;
-  --primary-color: #40ac47;
-  --primary-color-lighter: #5dee67;
-  --primary-color-darker: #338b39;
-  --grey: #e4e4e3;
+	--font: 'Space Mono', 'Courier New', Courier, monospace;
+	--font-size: 10px;
+	--primary-color: #40ac47;
+	--primary-color-lighter: #5dee67;
+	--primary-color-darker: #338b39;
+	--grey: #e4e4e3;
 }
 
 h1,
 h2,
 h3 {
-  margin: 0;
+	margin: 0;
 }
 
 p {
-  margin: 0.1em;
+	margin: 0.1em;
 }
 
 text {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font-family: var(--font);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	font-family: var(--font);
 }
 
 html,
 body {
-  height: 100%;
-  text-align: center;
+	height: 100%;
+	text-align: center;
 }
 
 body {
-  margin: 0;
-  font-family: var(--font);
+	margin: 0;
+	font-family: var(--font);
 }
 
 a {
-  color: var(--primary-color);
-  text-decoration: none;
+	color: var(--primary-color);
+	text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
-  background-color: var(--primary-color);
-  color: white;
+	text-decoration: underline;
+	background-color: var(--primary-color);
+	color: white;
 }
 
 a:visited {
-  color: var(--primary-color);
+	color: var(--primary-color);
 }
 
 a:visited:hover {
-  color: white;
+	color: white;
 }
 
-
 .no_hover {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font-family: var(--font);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	font-family: var(--font);
 }

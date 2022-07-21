@@ -1,74 +1,74 @@
 {
-    "0" : {
-        "frequency": 40,
-        "octaves": 5.5,
-        "attack": 0,
-        "decay": 0.75,
-        "sustain": 0.8,
-        "release": 1.4,
-        "distortion": 0
-    },
-    "1" : {
-        "frequency": 40,
-        "octaves": 5.5,
-        "attack": 0.003,
-        "decay": 0.75,
-        "sustain": 0,
-        "release": 0.05,
-        "distortion": 0.125
-    },
-    "2" : {
-        "frequency": 40,
-        "octaves": 6.5,
-        "attack": 0,
-        "decay": 1,
-        "sustain": 0,
-        "release": 0.25,
-        "distortion": 0.125
-    },
-    "3" : {
-        "frequency": 40,
-        "octaves": 7,
-        "attack": 0,
-        "decay": 1,
-        "sustain": 0,
-        "release": 0.25,
-        "distortion": 0.25
-    },
-    "4" : {
-        "frequency": 40,
-        "octaves": 3,
-        "attack": 0.045,
-        "decay": 1,
-        "sustain": 0.15,
-        "release": 0.25,
-        "distortion": 0.16
-    },
-    "5" : {
-        "frequency": 40,
-        "octaves": 2,
-        "attack": 0.045,
-        "decay": 0.9,
-        "sustain": 0.15,
-        "release": 0.55,
-        "distortion": 0.57
-    },
-    "6" : {
-        "frequency": 40,
-        "octaves": 5,
-        "attack": 0,
-        "decay": 1,
-        "sustain": 0.7,
-        "release": 1.4,
-        "distortion": 0.6
-    },
-    "7" : {
-        "frequency": 40,
-        "octaves": 8,
-        "attack": 0,
-        "decay": 0.8,
-        "sustain": 0.75,
-        "release": 1.4,
-        "distortion": 1
-    }
+	"0": {
+		"frequency": 40,
+		"octaves": 5.5,
+		"attack": 0,
+		"decay": 0.75,
+		"sustain": 0.8,
+		"release": 1.4,
+		"distortion": 0
+	},
+	"1": {
+		"frequency": 40,
+		"octaves": 5.5,
+		"attack": 0.003,
+		"decay": 0.75,
+		"sustain": 0,
+		"release": 0.05,
+		"distortion": 0.125
+	},
+	"2": {
+		"frequency": 40,
+		"octaves": 6.5,
+		"attack": 0,
+		"decay": 1,
+		"sustain": 0,
+		"release": 0.25,
+		"distortion": 0.125
+	},
+	"3": {
+		"frequency": 40,
+		"octaves": 7,
+		"attack": 0,
+		"decay": 1,
+		"sustain": 0,
+		"release": 0.25,
+		"distortion": 0.25
+	},
+	"4": {
+		"frequency": 40,
+		"octaves": 3,
+		"attack": 0.045,
+		"decay": 1,
+		"sustain": 0.15,
+		"release": 0.25,
+		"distortion": 0.16
+	},
+	"5": {
+		"frequency": 40,
+		"octaves": 2,
+		"attack": 0.045,
+		"decay": 0.9,
+		"sustain": 0.15,
+		"release": 0.55,
+		"distortion": 0.57
+	},
+	"6": {
+		"frequency": 40,
+		"octaves": 5,
+		"attack": 0,
+		"decay": 1,
+		"sustain": 0.7,
+		"release": 1.4,
+		"distortion": 0.6
+	},
+	"7": {
+		"frequency": 40,
+		"octaves": 8,
+		"attack": 0,
+		"decay": 0.8,
+		"sustain": 0.75,
+		"release": 1.4,
+		"distortion": 1
+	}
 }

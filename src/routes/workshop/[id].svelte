@@ -1,8 +1,8 @@
 <script context="module">
 	export async function load({ params }) {
-        return { 
-            props: {id: params.id}
-        };
+		return {
+			props: { id: params.id }
+		};
 	}
 </script>
 
@@ -10,17 +10,17 @@
 	import { workshopID, room, socket } from '$lib/nobounds/app';
 	import { createRoomID } from '$lib/utility.js';
 	import Grid from '$lib/nobounds/components/Grid.svelte';
-    export let id;
+	export let id;
 
 	$workshopID = 'workshop';
 	$room = id;
-    socket.emit('roomJoin', createRoomID($workshopID, id));
+	socket.emit('roomJoin', createRoomID($workshopID, id));
 </script>
 
 <div class="main-layout">
 	<Grid mode={'sample'} context={'workshop'} />
 </div>
-	
+
 <style>
 	.main-layout {
 		display: flex;

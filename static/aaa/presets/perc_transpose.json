@@ -1,137 +1,103 @@
 {
-	"pattrstorage" : 	{
-		"name" : "AAA_perc_transpose",
-		"slots" : 		{
-			"1" : 			{
-				"id" : 1,
-				"data" : 				{
-					"perc_transpose" : [ -12, -7, 0 ]
+	"pattrstorage": {
+		"name": "AAA_perc_transpose",
+		"slots": {
+			"1": {
+				"id": 1,
+				"data": {
+					"perc_transpose": [-12, -7, 0]
 				}
-
-			}
-,
-			"2" : 			{
-				"id" : 2,
-				"data" : 				{
-					"perc_transpose" : [ -12, -7, 0, 0, 0, 0 ]
+			},
+			"2": {
+				"id": 2,
+				"data": {
+					"perc_transpose": [-12, -7, 0, 0, 0, 0]
 				}
-
-			}
-,
-			"3" : 			{
-				"id" : 3,
-				"data" : 				{
-					"perc_transpose" : [ -12, -7, 0, 0, 0, 0, 0, 0 ]
+			},
+			"3": {
+				"id": 3,
+				"data": {
+					"perc_transpose": [-12, -7, 0, 0, 0, 0, 0, 0]
 				}
-
-			}
-,
-			"4" : 			{
-				"id" : 4,
-				"data" : 				{
-					"perc_transpose" : [ -7, 0, -12, 0, 0, 0, 0 ]
+			},
+			"4": {
+				"id": 4,
+				"data": {
+					"perc_transpose": [-7, 0, -12, 0, 0, 0, 0]
 				}
-
-			}
-,
-			"5" : 			{
-				"id" : 5,
-				"data" : 				{
-					"perc_transpose" : [ 0, -7, 0, 0 ]
+			},
+			"5": {
+				"id": 5,
+				"data": {
+					"perc_transpose": [0, -7, 0, 0]
 				}
-
-			}
-,
-			"6" : 			{
-				"id" : 6,
-				"data" : 				{
-					"perc_transpose" : [ 0, 0, 0, 0, 0, 0, -7 ]
+			},
+			"6": {
+				"id": 6,
+				"data": {
+					"perc_transpose": [0, 0, 0, 0, 0, 0, -7]
 				}
-
-			}
-,
-			"7" : 			{
-				"id" : 7,
-				"data" : 				{
-					"perc_transpose" : [ 0 ]
+			},
+			"7": {
+				"id": 7,
+				"data": {
+					"perc_transpose": [0]
 				}
-
-			}
-,
-			"8" : 			{
-				"id" : 8,
-				"data" : 				{
-					"perc_transpose" : [ 0 ]
+			},
+			"8": {
+				"id": 8,
+				"data": {
+					"perc_transpose": [0]
 				}
-
-			}
-,
-			"9" : 			{
-				"id" : 9,
-				"data" : 				{
-					"perc_transpose" : [ 0 ]
+			},
+			"9": {
+				"id": 9,
+				"data": {
+					"perc_transpose": [0]
 				}
-
-			}
-,
-			"10" : 			{
-				"id" : 10,
-				"data" : 				{
-					"perc_transpose" : [ 0, 7, 0, 0, 0, 0, 0, 0, 0 ]
+			},
+			"10": {
+				"id": 10,
+				"data": {
+					"perc_transpose": [0, 7, 0, 0, 0, 0, 0, 0, 0]
 				}
-
-			}
-,
-			"11" : 			{
-				"id" : 11,
-				"data" : 				{
-					"perc_transpose" : [ 0, 12, -7, 0, 0, 0, 0, 0 ]
+			},
+			"11": {
+				"id": 11,
+				"data": {
+					"perc_transpose": [0, 12, -7, 0, 0, 0, 0, 0]
 				}
-
-			}
-,
-			"12" : 			{
-				"id" : 12,
-				"data" : 				{
-					"perc_transpose" : [ 0, 7, 12, 0, 0 ]
+			},
+			"12": {
+				"id": 12,
+				"data": {
+					"perc_transpose": [0, 7, 12, 0, 0]
 				}
-
-			}
-,
-			"13" : 			{
-				"id" : 13,
-				"data" : 				{
-					"perc_transpose" : [ 12 ]
+			},
+			"13": {
+				"id": 13,
+				"data": {
+					"perc_transpose": [12]
 				}
-
-			}
-,
-			"14" : 			{
-				"id" : 14,
-				"data" : 				{
-					"perc_transpose" : [ 0, 48 ]
+			},
+			"14": {
+				"id": 14,
+				"data": {
+					"perc_transpose": [0, 48]
 				}
-
-			}
-,
-			"15" : 			{
-				"id" : 15,
-				"data" : 				{
-					"perc_transpose" : [ 24, 36, 12 ]
+			},
+			"15": {
+				"id": 15,
+				"data": {
+					"perc_transpose": [24, 36, 12]
 				}
-
-			}
-,
-			"16" : 			{
-				"id" : 16,
-				"data" : 				{
-					"perc_transpose" : [ 24, 36, 12 ]
+			},
+			"16": {
+				"id": 16,
+				"data": {
+					"perc_transpose": [24, 36, 12]
 				}
-
 			}
-
 		}
-
 	}
-
 }

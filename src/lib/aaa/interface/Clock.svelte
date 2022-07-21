@@ -1,94 +1,104 @@
 <script>
-    import Knob from '../Knob.svelte';
-    import Play from '../Play.svelte';
-    import { speed, socket, tala, calculated_speed } from '../app';
-    import { max_scale, clip } from '$lib/utility';
-    import { send_message } from '$lib/aaa/patch_helpers'
+	import Knob from '../Knob.svelte';
+	import Play from '../Play.svelte';
+	import { speed, socket, tala, calculated_speed } from '../app';
+	import { max_scale, clip } from '$lib/utility';
+	import { send_message } from '$lib/aaa/patch_helpers';
 
-    export let patch;
-    
-    let _speed = $speed;
-    const speed_knob = { 
-        title: "rate", 
-        min: 0.2, max: 4, step: 0.05, 
-        scale: 0.03,
-        reset_value: 4,
-        show_value: true
-    }
+	export let patch;
 
-    $: $calculated_speed = clip(max_scale(_speed, speed_knob.min, speed_knob.max, speed_knob.min, speed_knob.max, 3.5).toFixed(2), speed_knob.min, 10);
+	let _speed = $speed;
+	const speed_knob = {
+		title: 'rate',
+		min: 0.2,
+		max: 4,
+		step: 0.05,
+		scale: 0.03,
+		reset_value: 4,
+		show_value: true
+	};
 
-    let state = 0;
+	$: $calculated_speed = clip(
+		max_scale(_speed, speed_knob.min, speed_knob.max, speed_knob.min, speed_knob.max, 3.5).toFixed(
+			2
+		),
+		speed_knob.min,
+		10
+	);
 
-    patch.messageEvent.subscribe(e => {
-        if (e.tag === 'pattern') {
-            $tala[0] = e.payload[0]
-        } else if (e.tag === 'b_index') {
-            $tala[1] = e.payload
-        } else if (e.tag === 'c_index') {
-            $tala[2] = e.payload
-        }
-    })
+	let state = 0;
 
-    $: send_message(patch, 'speed', [ 1 / $calculated_speed ]);
-    $: send_message(patch, 'state', [ state ]);
+	patch.messageEvent.subscribe((e) => {
+		if (e.tag === 'pattern') {
+			$tala[0] = e.payload[0];
+		} else if (e.tag === 'b_index') {
+			$tala[1] = e.payload;
+		} else if (e.tag === 'c_index') {
+			$tala[2] = e.payload;
+		}
+	});
+
+	$: send_message(patch, 'speed', [1 / $calculated_speed]);
+	$: send_message(patch, 'state', [state]);
 </script>
 
 <div class="clock area">
-    <div class="label no_hover">clock</div>
-    <div class="controls">
-        <Play bind:state={state}/>
-        <Knob 
-        {...speed_knob} 
-        bind:internal={ $speed }
-        bind:value={ _speed } 
-        bind:display_value={ $calculated_speed } 
-        func={ () => { socket.emit('speed', $speed ) }} 
-        />
-    </div>
-    
-    <div class='tala no_hover'>
-        {#each $tala as t, i}
-        <div class="col">
-            <div class="letter">
-                { ['a', 'b', 'c'][i]}
-            </div>
-            <div class="number">
-                { t }
-            </div>
-        </div>
-        {/each}
-    </div>
+	<div class="label no_hover">clock</div>
+	<div class="controls">
+		<Play bind:state />
+		<Knob
+			{...speed_knob}
+			bind:internal={$speed}
+			bind:value={_speed}
+			bind:display_value={$calculated_speed}
+			func={() => {
+				socket.emit('speed', $speed);
+			}}
+		/>
+	</div>
+
+	<div class="tala no_hover">
+		{#each $tala as t, i}
+			<div class="col">
+				<div class="letter">
+					{['a', 'b', 'c'][i]}
+				</div>
+				<div class="number">
+					{t}
+				</div>
+			</div>
+		{/each}
+	</div>
 </div>
 
 <style>
-    .clock {
-        display: flex;
-        flex-direction: column;
-        gap: 1em;
-        border-left: 1px dashed var(--primary);
-    }
-    
-    .clock > .controls {
-        display: flex;
-        flex-direction: row;
-    }
+	.clock {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+		border-left: 1px dashed var(--primary);
+	}
 
-    .tala {
-        margin-top: 1em;
-        display: grid;
-        grid-template-columns: 1.5ch 1.5ch 1.5ch;
-        justify-content: center;
-        gap: 0.5em;
-        font-size: 40px;
-    }
+	.clock > .controls {
+		display: flex;
+		flex-direction: row;
+	}
 
-    .tala > .col {
-        display: flex;
-        flex-direction: column;
-    }
+	.tala {
+		margin-top: 1em;
+		display: grid;
+		grid-template-columns: 1.5ch 1.5ch 1.5ch;
+		justify-content: center;
+		gap: 0.5em;
+		font-size: 40px;
+	}
 
-    .tala > .col > .letter {
-        font-size: 1.5rem;
-    }
+	.tala > .col {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.tala > .col > .letter {
+		font-size: 1.5rem;
+	}
 </style>
