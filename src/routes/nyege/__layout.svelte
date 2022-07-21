@@ -1,8 +1,8 @@
 
 <script>
-    import '../../sf.css'
-    import Header from '$lib/aaa/header/Header.svelte';
-    import Footer from '$lib/aaa/Footer.svelte';
+    import './theme.css'
+    import Header from '$lib/nyege/Header.svelte';
+    import Footer from '$lib/nyege/Footer.svelte';
 </script>
 
 <div class="container">
@@ -15,7 +15,6 @@
     .container {
         max-width: 1005px;
         margin: 0 auto;
-        user-drag: none;
         -webkit-user-drag: none;
         user-select: none;
         -moz-user-select: none;

@@ -1,6 +1,6 @@
 
 <script>
-    import '../../sf.css'
+    import './theme.css'
     import Header from '$lib/aaa/header/Header.svelte';
     import Footer from '$lib/aaa/Footer.svelte';
 </script>
