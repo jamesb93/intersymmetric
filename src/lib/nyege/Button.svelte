@@ -14,17 +14,17 @@ style:height={height}
 style:width={width} 
 on:click={click}
 >
-    <slot />
+<slot />
 </button>
 
 <style>
     button {
-        border-radius: 30px;
-        background-color: #ffffff;
-        border: 1px solid var(--primary);
-        font-family: var(--font);
         color: black;
+        border: 1px solid var(--primary);
+        border-radius: 10px;
+        background-color: #ffffff;
         text-align: center;
+        font-family: var(--font);
     }
     
     button:hover {

@@ -1,10 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { primary, primary_darker } from '$lib/nyege/app';
-
-    const clip = (i, low, high) => {
-        return Math.min(Math.max(i, low), high)
-    }
+    import { clip } from '$lib/utility';
 
     export let title = "";
     export let min = 0;

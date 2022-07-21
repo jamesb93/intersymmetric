@@ -1,6 +1,6 @@
 <script>
     import RNBO from '@rnbo/js';
-    import Interface from './interface/Interface.svelte';
+    import Interface from './Interface.svelte';
     import Button from './Button.svelte';
 
     let ctx, d, patcher, context;
@@ -52,9 +52,7 @@
                     }
                 })
             })
-            .then(x => { 
-                samples_loaded = true;
-            })
+            .then(x => { samples_loaded = true })
             .catch(err => { console.error(err) })
     }
 </script>
@@ -66,11 +64,9 @@
     <Button 
     on:click={start}
     height={'60px'}
-    width={'100px'}
+    width={'150px'}
     font_size={'24px'}
-    >
-    load
-    </Button>
+    >load</Button>
 </div>
 {/if}
 
@@ -79,5 +75,3 @@
         margin: 10em;
     }
 </style>
-
-<!-- <a href='https://www.dropbox.com/sh/w7uso18978mbcu5/AAA9g_0PD4BaO-L1rnbvHb2Ha?dl=0'>presets</a> -->
