@@ -13,3 +13,6 @@ export const room = writable('')
 
 export const num_users = writable(0);
 socket.on('num_users', x => num_users.set(x));
+
+export const primary = 'hsl(324, 100%, 63%)'
+export const primary_darker = 'hsl(324, 50%, 50%)'
