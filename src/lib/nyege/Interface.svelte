@@ -3,7 +3,6 @@
 </script>
 
 <div class="container">
-	<!-- Put Stuff HERE -->
 </div>
 
 <style>

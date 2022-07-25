@@ -16,9 +16,9 @@
 	}
 
 	async function loadAllSamples() {
-		let samples = new Array(46).fill(0).map((x, i) => {
+		let samples = new Array(34).fill(0).map((x, i) => {
 			return {
-				buffer: `buf${i}`,
+				buffer: 'b' + i,
 				path: `/nyege/samples/${i}.mp3`
 			};
 		});
