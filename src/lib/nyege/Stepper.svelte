@@ -2,40 +2,41 @@
 	import { scale, clip } from '$lib/utility';
 
 	export let value = 0; // value always comes in true
-	export let min = 0,
+	export let 
+		min = 0,
 		max = 2,
 		step = 1;
 	export let width = 40;
-	export let bar_height = 200;
-	export let thumb_height = 3;
+	export let height = 200;
+	export let thumb_width = 2;
 	export let active = false;
 	export let func = () => {};
 	export let display_value = null;
-	export let invert = false;
+	export let subdivision = 16;
 
-	let thumb, bar, rect;
+	let thumb, fill, bar, rect;
 	let down = false;
 	let prev_touch = false;
 	let prev_value = null;
 
-	$: thumb_y = invert
-		? clip(scale(value, min, max, 0, bar_height), 0, bar_height - thumb_height)
-		: clip(scale(value, max, min, 0, bar_height), 0, bar_height - thumb_height);
+	$: thumb_x = clip(
+		scale(value, min, max, 0, width), 0, width
+	)
 
-	const move = (e) => {
+	const move = e => {
 		rect = bar.getBoundingClientRect();
 		if (down) {
-			const y = e.pageY - rect.top - window.scrollY;
-			const ratio = invert ? 1 - y / bar_height : y / bar_height;
-			let scaled = scale(ratio, 0, 1, max, min);
-			value = Math.round((scaled - min) / step) * step + min;
+			const x = e.pageX - rect.left;
+			const ratio = x / width;
+			let scaled = scale(ratio, 0, 1, min, max);
+			value = Math.round((scaled-min) / step) * step + min;
 			value = clip(value, min, max);
 			if (prev_value !== value) {
 				func();
 			}
 			prev_value = value;
 		}
-	};
+	}
 
 	const handle_controldown = (e) => {
 		down = true;
@@ -48,9 +49,7 @@
 		down = false;
 	};
 	const handle_mousemove = (e) => {
-		{
 			move(e);
-		}
 	};
 	const handle_touchmove = (e) => {
 		const touch = e.touches[0];
@@ -72,12 +71,23 @@
 	<svg
 		on:mousedown={handle_controldown}
 		on:touchstart={handle_controldown}
-		{width}
-		height={bar_height}
+		width={width}
+		height={height}
 		bind:this={bar}
 		class:active
 	>
-		<rect y={thumb_y} bind:this={thumb} {width} height={thumb_height} />
+		<!-- <rect class='thumb' x={thumb_x} bind:this={thumb} width={thumb_width} height={height} /> -->
+		<!-- Fill -->
+		<rect class='step-fill' x=0 width={thumb_x} height={height} />
+
+		{#each Array((subdivision-1)) as _, i}
+		<rect 
+		class='pip' 
+		x={ clip((width / (subdivision-1)) * i, 0, width-thumb_width)  } 
+		width={thumb_width} 
+		height={height} 
+		/>
+		{/each}
 	</svg>
 	<div class="no_hover">
 		{#if display_value !== null}
@@ -88,6 +98,7 @@
 	</div>
 </div>
 
+
 <style>
 	svg {
 		touch-action: none;
@@ -97,9 +108,18 @@
 		outline: 1px solid rgb(136, 136, 136);
 	}
 
-	rect {
+	.thumb {
 		fill: var(--primary);
 		stroke: var(--primary);
+	}
+
+	.step-fill {
+		fill: rgba(0.2, 0.9, 0, 0.2);
+		stroke: rgba(0.2 0.9, 0, 0.2);
+	}
+
+	.pip {
+		fill: rgba(24, 126, 24, 0.2);
 	}
 
 	.active {
