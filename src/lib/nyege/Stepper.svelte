@@ -68,44 +68,42 @@
 	on:touchend={handle_touchend}
 />
 
-<div class="container">
-	<svg
-		on:mousedown={handle_controldown}
-		on:touchstart={handle_controldown}
-		width={width}
-		height={height}
-		bind:this={bar}
-		class:active
-	>
-		<!-- <rect class='thumb' x={thumb_x} bind:this={thumb} width={thumb_width} height={height} /> -->
-		<!-- Fill -->
-		<rect class='step-fill' x=0 width={thumb_x} height={height} />
-		<rect 
-		x={ (thumb_x / (subdivision)) * pos } 
-		class='pos' 
-		width={thumb_width} 
-		height={height} 
-		/>
+<svg
+	on:mousedown={handle_controldown}
+	on:touchstart={handle_controldown}
+	width={width}
+	height={height}
+	bind:this={bar}
+	class:active
+>
+	<!-- <rect class='thumb' x={thumb_x} bind:this={thumb} width={thumb_width} height={height} /> -->
+	<!-- Fill -->
+	<rect class='step-fill' x=0 width={thumb_x} height={height} />
+	<rect 
+	x={ (thumb_x / (subdivision)) * pos } 
+	class='pos' 
+	width={thumb_width} 
+	height={height} 
+	/>
 
-		<!-- Step Pipss -->
-		{#each Array((subdivision)) as _, i}
-		<rect 
-		class='pip' 
-		x={ (thumb_x / (subdivision)) * i } 
-		width={thumb_width} 
-		height={height} 
-		/>
-		{/each}
+	<!-- Step Pipss -->
+	{#each Array((subdivision)) as _, i}
+	<rect 
+	class='pip' 
+	x={ (thumb_x / (subdivision)) * i } 
+	width={thumb_width} 
+	height={height} 
+	/>
+	{/each}
 
-		<text x={width - 50} y={height / 2 +3}>
-		{#if display_value !== null}
-			{display_value}
-		{:else}
-			{value.toFixed(2)}
-		{/if}
-		</text>
-	</svg>
-</div>
+	<text x={width - 50} y={height / 2 +3}>
+	{#if display_value !== null}
+		{display_value}
+	{:else}
+		{value.toFixed(2)}
+	{/if}
+	</text>
+</svg>
 
 
 <style>
