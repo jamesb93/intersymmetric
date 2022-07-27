@@ -61,8 +61,6 @@
 	};
 </script>
 
-{ pos }
-
 <svelte:window
 	on:mousemove={handle_mousemove}
 	on:touchmove={handle_touchmove}
@@ -98,14 +96,15 @@
 		height={height} 
 		/>
 		{/each}
-	</svg>
-	<div class="no_hover">
+
+		<text x={width - 50} y={height / 2 +3}>
 		{#if display_value !== null}
 			{display_value}
 		{:else}
 			{value.toFixed(2)}
 		{/if}
-	</div>
+		</text>
+	</svg>
 </div>
 
 
@@ -116,6 +115,13 @@
 		stroke-width: 1px;
 		stroke: black;
 		outline: 1px solid rgb(136, 136, 136);
+	}
+
+	text {
+		font: var(--font);
+		font-size: 10px;
+		color: black;
+		font-weight: 100;
 	}
 
 	.thumb {
