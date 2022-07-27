@@ -13,6 +13,7 @@
 	export let func = () => {};
 	export let display_value = null;
 	export let subdivision = 16;
+	export let pos = 0;
 
 	let thumb, fill, bar, rect;
 	let down = false;
@@ -22,6 +23,13 @@
 	$: thumb_x = clip(
 		scale(value, min, max, 0, width), 0, width
 	)
+
+	setInterval(() => {
+		pos += 1;
+		if (pos >= value) {
+			pos = 0;
+		}
+	}, 100)
 
 	const move = e => {
 		rect = bar.getBoundingClientRect();
@@ -60,6 +68,8 @@
 	};
 </script>
 
+{ pos }
+
 <svelte:window
 	on:mousemove={handle_mousemove}
 	on:touchmove={handle_touchmove}
@@ -79,11 +89,17 @@
 		<!-- <rect class='thumb' x={thumb_x} bind:this={thumb} width={thumb_width} height={height} /> -->
 		<!-- Fill -->
 		<rect class='step-fill' x=0 width={thumb_x} height={height} />
+		<rect 
+		x={ (width / (subdivision-1)) * pos } 
+		class='pos' 
+		width={thumb_width} 
+		height={height} 
+		/>
 
 		{#each Array((subdivision-1)) as _, i}
 		<rect 
 		class='pip' 
-		x={ clip((width / (subdivision-1)) * i, 0, width-thumb_width)  } 
+		x={ (width / (subdivision-1)) * i } 
 		width={thumb_width} 
 		height={height} 
 		/>
@@ -120,6 +136,10 @@
 
 	.pip {
 		fill: rgba(24, 126, 24, 0.2);
+	}
+
+	.pos {
+		fill: rgba(186, 99, 18, 0.8);
 	}
 
 	.active {
