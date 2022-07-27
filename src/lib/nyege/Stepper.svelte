@@ -22,14 +22,7 @@
 
 	$: thumb_x = clip(
 		scale(value, min, max, 0, width), 0, width
-	)
-
-	setInterval(() => {
-		pos += 1;
-		if (pos >= value) {
-			pos = 0;
-		}
-	}, 100)
+	) + thumb_width
 
 	const move = e => {
 		rect = bar.getBoundingClientRect();
@@ -90,16 +83,17 @@
 		<!-- Fill -->
 		<rect class='step-fill' x=0 width={thumb_x} height={height} />
 		<rect 
-		x={ (width / (subdivision-1)) * pos } 
+		x={ (thumb_x / (subdivision)) * pos } 
 		class='pos' 
 		width={thumb_width} 
 		height={height} 
 		/>
 
-		{#each Array((subdivision-1)) as _, i}
+		<!-- Step Pipss -->
+		{#each Array((subdivision)) as _, i}
 		<rect 
 		class='pip' 
-		x={ (width / (subdivision-1)) * i } 
+		x={ (thumb_x / (subdivision)) * i } 
 		width={thumb_width} 
 		height={height} 
 		/>
