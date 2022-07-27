@@ -122,11 +122,6 @@
 		font-weight: 100;
 	}
 
-	.thumb {
-		fill: var(--primary);
-		stroke: var(--primary);
-	}
-
 	.step-fill {
 		fill: rgba(0.2, 0.9, 0, 0.2);
 		stroke: rgba(0.2 0.9, 0, 0.2);
