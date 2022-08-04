@@ -2,8 +2,7 @@
 	import { scale, clip } from '$lib/utility';
 
 	export let value = 0; // value always comes in true
-	export let 
-		min = 0,
+	export let min = 0,
 		max = 2,
 		step = 1;
 	export let width = 40;
@@ -20,24 +19,22 @@
 	let prev_touch = false;
 	let prev_value = null;
 
-	$: thumb_x = clip(
-		scale(value, min, max, 0, width), 0, width
-	) + thumb_width
+	$: thumb_x = clip(scale(value, min, max, 0, width), 0, width) + thumb_width;
 
-	const move = e => {
+	const move = (e) => {
 		rect = bar.getBoundingClientRect();
 		if (down) {
 			const x = e.pageX - rect.left;
 			const ratio = x / width;
 			let scaled = scale(ratio, 0, 1, min, max);
-			value = Math.round((scaled-min) / step) * step + min;
+			value = Math.round((scaled - min) / step) * step + min;
 			value = clip(value, min, max);
 			if (prev_value !== value) {
 				func();
 			}
 			prev_value = value;
 		}
-	}
+	};
 
 	const handle_controldown = (e) => {
 		down = true;
@@ -50,7 +47,7 @@
 		down = false;
 	};
 	const handle_mousemove = (e) => {
-			move(e);
+		move(e);
 	};
 	const handle_touchmove = (e) => {
 		const touch = e.touches[0];
@@ -71,40 +68,29 @@
 <svg
 	on:mousedown={handle_controldown}
 	on:touchstart={handle_controldown}
-	width={width}
-	height={height}
+	{width}
+	{height}
 	bind:this={bar}
 	class:active
 >
 	<!-- <rect class='thumb' x={thumb_x} bind:this={thumb} width={thumb_width} height={height} /> -->
 	<!-- Fill -->
-	<rect class='step-fill' x=0 width={thumb_x} height={height} />
-	<rect 
-	x={ (thumb_x / (subdivision)) * pos } 
-	class='pos' 
-	width={thumb_width} 
-	height={height} 
-	/>
+	<rect class="step-fill" x="0" width={thumb_x} {height} />
+	<rect x={(thumb_x / subdivision) * pos} class="pos" width={thumb_width} {height} />
 
 	<!-- Step Pipss -->
-	{#each Array((subdivision)) as _, i}
-	<rect 
-	class='pip' 
-	x={ (thumb_x / (subdivision)) * i } 
-	width={thumb_width} 
-	height={height} 
-	/>
+	{#each Array(subdivision) as _, i}
+		<rect class="pip" x={(thumb_x / subdivision) * i} width={thumb_width} {height} />
 	{/each}
 
-	<text x={width - 50} y={height / 2 +3}>
-	{#if display_value !== null}
-		{display_value}
-	{:else}
-		{value.toFixed(2)}
-	{/if}
+	<text x={width - 50} y={height / 2 + 3}>
+		{#if display_value !== null}
+			{display_value}
+		{:else}
+			{value.toFixed(2)}
+		{/if}
 	</text>
 </svg>
-
 
 <style>
 	svg {
