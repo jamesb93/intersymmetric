@@ -9,8 +9,7 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-node": "next",
-		"@sveltejs/adapter-static": "next",
-		"@sveltejs/kit": "next",
+		"@sveltejs/kit": "1.0.0-next.394",
 		"eslint": "^8.16.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^4.0.0",
@@ -25,7 +24,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@rnbo/js": "0.17.0-dev.24",
+		"@rnbo/js": "0.17.0-dev.31",
 		"global": "^4.4.0",
 		"socket.io-client": "^4.5.1",
 		"d3": "^6.7.0",
