@@ -5,9 +5,9 @@
 	export let min = 0,
 		max = 2,
 		step = 1;
-	export let width = 40;
-	export let height = 200;
-	export let thumb_width = 2;
+	export let width = 400;
+	export let height = 30;
+	export let thumb_width = 6;
 	export let active = false;
 	export let func = () => {};
 	export let display_value = null;
