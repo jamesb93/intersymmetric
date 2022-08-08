@@ -19,6 +19,9 @@ export const num_users = writable(0);
 socket.on('num_users', (x) => num_users.set(x));
 
 // Common
+export const rate = writable(120);
+socket.on('rate', (x) => rate.set(x));
+
 export const a_sound = writable(0);
 export const b_sound = writable(0);
 export const c_sound = writable(0);
@@ -92,17 +95,3 @@ export const palette = {
 
 export const primary = palette.gold;
 export const primary_darker = palette.blue;
-
-export const subdiv = {
-	a: writable(16),
-	b: writable(16),
-	c: writable(16),
-	d: writable(16)
-};
-
-export const range = {
-	a: writable(16),
-	b: writable(16),
-	c: writable(16),
-	d: writable(16)
-};
