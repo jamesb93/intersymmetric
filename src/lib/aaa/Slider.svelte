@@ -53,7 +53,8 @@
 		}
 	};
 	const handle_touchmove = (e) => {
-		const touch = e.touches[0];
+		e.preventDefault();
+		const touch = e.targetTouches[0];
 		if (prev_touch) {
 			move(touch);
 		}
@@ -62,8 +63,6 @@
 </script>
 
 <svelte:window
-	on:mousemove={handle_mousemove}
-	on:touchmove={handle_touchmove}
 	on:mouseup={handle_mouseup}
 	on:touchend={handle_touchend}
 />
@@ -71,6 +70,8 @@
 <div class="container">
 	<svg
 		on:mousedown={handle_controldown}
+		on:mousemove={handle_mousemove}
+		on:touchmove={handle_touchmove}
 		on:touchstart={handle_controldown}
 		{width}
 		height={bar_height}
