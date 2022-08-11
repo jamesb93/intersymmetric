@@ -2,40 +2,18 @@
 	import RNBO from '@rnbo/js';
 	import Interface from './Interface.svelte';
 	import Button from './Button.svelte';
+	import { load_samples } from '$lib/common/patch_helpers';
 
 	let ctx, d, patcher, context;
 	let samples_loaded = false;
 
-	function loadSample(buffer, path) {
-		return fetch(path)
-			.then((response) => response.arrayBuffer())
-			.then((buffer) => context.decodeAudioData(buffer))
-			.then((audioBuf) => {
-				d.setDataBuffer(buffer, audioBuf);
-			});
-	}
-
-	async function loadAllSamples() {
-		let samples = new Array(34).fill(0).map((x, i) => {
-			return {
-				buffer: 'b' + i,
-				path: `/nyege/samples/${i}.mp3`
-			};
-		});
-		return Promise.all(
-			samples.map((sample) => {
-				return loadSample(sample.buffer, sample.path);
-			})
-		);
-	}
-
-	const start = () => {
+	const start = async () => {
 		ctx = window.AudioContext || window.webkitAudioContext;
 		context = new ctx();
 		let outputNode = context.createGain();
 		outputNode.connect(context.destination);
 
-		fetch('/nyege/code/patch.export.json')
+		await fetch('/nyege/code/patch.export.json')
 			.then((response) => response.json())
 
 			.then((response) => {
@@ -44,17 +22,16 @@
 			})
 
 			.then((device) => {
-				device.node.connect(outputNode);
 				d = device;
-				loadAllSamples();
-
+				d.node.connect(outputNode);
+				load_samples(d, context, 33, 'b', '/nyege/samples/');
 				d.messageEvent.subscribe((e) => {
 					if (e.tag.includes('debug')) {
 						console.log(e.tag, e.payload);
 					}
 				});
 			})
-			.then((x) => {
+			.then(() => {
 				samples_loaded = true;
 			})
 			.catch((err) => {

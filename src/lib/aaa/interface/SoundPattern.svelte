@@ -5,7 +5,7 @@
 	import Blip from '../Blip.svelte';
 	import RadioV from '../RadioV.svelte';
 	import { socket } from '../app';
-	import { send_message } from '$lib/aaa/patch_helpers';
+	import { send_message } from '$lib/common/patch_helpers';
 	import {
 		fm1_freq_preset,
 		fm1_mod_preset,

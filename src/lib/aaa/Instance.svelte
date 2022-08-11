@@ -2,32 +2,10 @@
 	import RNBO from '@rnbo/js';
 	import Interface from './interface/Interface.svelte';
 	import Button from './Button.svelte';
+	import { load_samples } from '$lib/common/patch_helpers';
 
 	let ctx, d, patcher, context;
 	let samples_loaded = false;
-
-	function loadSample(buffer, path) {
-		return fetch(path)
-			.then((response) => response.arrayBuffer())
-			.then((buffer) => context.decodeAudioData(buffer))
-			.then((audioBuf) => {
-				d.setDataBuffer(buffer, audioBuf);
-			});
-	}
-
-	async function loadAllSamples() {
-		let samples = new Array(46).fill(0).map((x, i) => {
-			return {
-				buffer: `buf${i}`,
-				path: `/aaa/samples/${i}.mp3`
-			};
-		});
-		return Promise.all(
-			samples.map((sample) => {
-				return loadSample(sample.buffer, sample.path);
-			})
-		);
-	}
 
 	const start = () => {
 		ctx = window.AudioContext || window.webkitAudioContext;
@@ -37,24 +15,21 @@
 
 		fetch('/aaa/code/patch.export.json')
 			.then((response) => response.json())
-
 			.then((response) => {
 				patcher = response;
 				return RNBO.createDevice({ context, patcher });
 			})
-
 			.then((device) => {
 				device.node.connect(outputNode);
 				d = device;
-				loadAllSamples();
-
+				load_samples(d, context, 46, 'buf', '/aaa/samples/');
 				d.messageEvent.subscribe((e) => {
 					if (e.tag.includes('debug')) {
 						console.log(e.tag, e.payload);
 					}
 				});
 			})
-			.then((x) => {
+			.then(() => {
 				samples_loaded = true;
 			})
 			.catch((err) => {

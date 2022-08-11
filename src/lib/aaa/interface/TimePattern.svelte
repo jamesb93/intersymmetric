@@ -4,7 +4,7 @@
 	import Slider from '../Slider.svelte';
 	import { socket, calculated_speed } from '../app';
 	import { max_scale } from '$lib/utility';
-	import { send_message } from '$lib/aaa/patch_helpers';
+	import { send_message } from '$lib/common/patch_helpers';
 	import {
 		a_mode,
 		b_mode,
