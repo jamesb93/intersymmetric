@@ -24,7 +24,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@rnbo/js": "0.17.0-dev.31",
+		"@rnbo/js": "0.17.0-dev.39",
 		"global": "^4.4.0",
 		"socket.io-client": "^4.5.1",
 		"d3": "^6.7.0",

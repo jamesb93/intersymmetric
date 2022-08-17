@@ -9,9 +9,9 @@
 	export let step = 1;
 	export let reset_value = 0;
 	export let scale = 1.0;
-	export let WIDTH = 80;
+	export let WIDTH = 60;
 	export let HEIGHT = 60;
-	export let show_value = false;
+	export let showValue = true;
 	export let display_value = null;
 	export let secondary_color = primary;
 	export let stroke_width = 1;
@@ -20,10 +20,10 @@
 	export let value;
 	export let internal = value;
 
-	const RADIUS = 21;
+	const RADIUS = 17;
 	const MID_X = WIDTH / 2;
 	const MID_Y = HEIGHT / 2;
-	const SHIFT = 1.1;
+	const SHIFT = 1;
 	const MIN_RADIANS = (4 * Math.PI) / 3;
 	const MAX_RADIANS = -Math.PI / 3;
 
@@ -163,7 +163,7 @@
 		<!-- Line Value -->
 		<path d={pointer_path} stroke-width="1" stroke="black" />
 
-		{#if show_value}
+		{#if showValue}
 			<text x={MID_X} y={HEIGHT} text-anchor="middle" fill={'black'} class="value">
 				{#if !display_value}
 					{parseFloat(value.toFixed(1))}
@@ -178,7 +178,7 @@
 <style>
 	.knob-control {
 		display: grid;
-		grid-template-rows: 7px 60px;
+		place-items: center;
 		touch-action: none;
 		cursor: grab;
 	}

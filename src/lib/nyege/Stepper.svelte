@@ -11,7 +11,7 @@
 	export let active = false;
 	export let func = () => {};
 	export let display_value = null;
-	export let subdivision = 16;
+	export let div = 16;
 	export let pos = 0;
 
 	let thumb, fill, bar, rect;
@@ -73,14 +73,13 @@
 	bind:this={bar}
 	class:active
 >
-	<!-- <rect class='thumb' x={thumb_x} bind:this={thumb} width={thumb_width} height={height} /> -->
 	<!-- Fill -->
 	<rect class="step-fill" x="0" width={thumb_x} {height} />
-	<rect x={(thumb_x / subdivision) * pos} class="pos" width={thumb_width} {height} />
+	<rect x={(thumb_x / div) * pos} class="pos" width={thumb_width} {height} />
 
 	<!-- Step Pipss -->
-	{#each Array(subdivision) as _, i}
-		<rect class="pip" x={(thumb_x / subdivision) * i} width={thumb_width} {height} />
+	{#each Array(div) as _, i}
+		<rect class="pip" x={(thumb_x / div) * i} width={thumb_width} {height} />
 	{/each}
 
 	<text x={width - 50} y={height / 2 + 3}>
@@ -94,11 +93,16 @@
 
 <style>
 	svg {
+		cursor: grab;
 		touch-action: none;
 		background-color: white;
 		stroke-width: 1px;
 		stroke: black;
 		outline: 1px solid rgb(136, 136, 136);
+	}
+
+	svg:active {
+		cursor: grabbing;
 	}
 
 	text {
