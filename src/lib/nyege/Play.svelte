@@ -1,28 +1,39 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
+
 	export let WIDTH = 80;
 	export let HEIGHT = 60;
 	export let state = false;
+
+	function fwdPlay() {
+		createEventDispatcher('play')
+	}
+	
+	function fwdStop() {
+		createEventDispatcher('stop')
+	}
+
+	function clickHandler() {
+		state=!state;
+		if (state) {
+			fwdPlay()
+		} else {
+			fwdStop()
+		}
+	}
 
 	const offsetX = 25;
 	const offsetY = 15;
 	const triangle = `${offsetX},${offsetY} ${offsetX},${HEIGHT - offsetY}, ${WIDTH - 30},${
 		HEIGHT / 2
 	}`;
-
-	const click = () => {
-		if (state === 0) {
-			state = 1;
-		} else {
-			state = 0;
-		}
-	};
 </script>
 
 <div class="container" style:height={HEIGHT} style:width={WIDTH}>
 	<div class="text no_hover">play/pause</div>
 
-	<svg width={WIDTH} height={HEIGHT} on:click={click}>
-		{#if state === 0}
+	<svg width={WIDTH} height={HEIGHT} on:click={clickHandler}>
+		{#if state === false}
 			<polygon class="tri" points={triangle} />
 		{:else}
 			<g class="tri">

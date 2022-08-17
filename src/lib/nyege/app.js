@@ -19,7 +19,7 @@ export const num_users = writable(0);
 socket.on('num_users', (x) => num_users.set(x));
 
 // Common
-export const rate = writable(120);
+export const rate = writable(0.5);
 socket.on('rate', (x) => rate.set(x));
 
 export const buf0 = writable(0);
