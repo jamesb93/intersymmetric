@@ -1,20 +1,14 @@
-<script context="module">
-	export async function load({ params }) {
-		return {
-			props: { id: params.id }
-		};
-	}
-</script>
-
 <script>
 	import { workshopID, room, socket } from '$lib/nobounds/app';
-	import { createRoomID } from '$lib/utility.js';
+	import { createRoomID } from '$lib/utility';
 	import Grid from '$lib/nobounds/components/Grid.svelte';
-	export let id;
 
+	/** @type {import('./$types').PageData} */
+	export let data;
+	
 	$workshopID = 'workshop';
-	$room = id;
-	socket.emit('roomJoin', createRoomID($workshopID, id));
+	$room = data.id;
+	socket.emit('roomJoin', createRoomID($workshopID, data.id));
 </script>
 
 <div class="main-layout">

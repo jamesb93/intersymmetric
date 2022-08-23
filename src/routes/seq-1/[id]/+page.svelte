@@ -1,11 +1,3 @@
-<script context="module">
-	export async function load({ params }) {
-		return {
-			props: { id: params.id }
-		};
-	}
-</script>
-
 <script>
 	import { browser } from '$app/env';
 	import Grid from '$lib/nobounds/components/Grid.svelte';
@@ -16,12 +8,14 @@
 	import { metal1, metal2, fm1, fm2 } from '$lib/nobounds/instruments/ensemble.js';
 	import { workshopID, room, socket } from '$lib/nobounds/app.js';
 	import { createRoomID } from '$lib/utility.js';
-	export let id;
+	
+	/** @type {import('./$types').PageData} */
+	export let data;
 
 	$workshopID = 'nobounds';
-	$room = id;
-	socket.emit('roomJoin', createRoomID($workshopID, id));
-	console.log(createRoomID($workshopID, id));
+	$room = data.id;
+	socket.emit('roomJoin', createRoomID($workshopID, data.id));
+	console.log(createRoomID($workshopID, data.id));
 </script>
 
 <div class="main-layout">
