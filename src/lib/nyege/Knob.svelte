@@ -9,8 +9,8 @@
 	export let step = 1;
 	export let reset_value = 0;
 	export let scale = 1.0;
-	export let WIDTH = 60;
-	export let HEIGHT = 60;
+	export let WIDTH = 70;
+	export let HEIGHT = 50;
 	export let showValue = true;
 	export let display_value = null;
 	export let secondary_color = primary;
@@ -189,12 +189,14 @@
 
 	.knob-control__range {
 		fill: none;
+		stroke: var(--primary);
 		/* transition: stroke .1s ease-in; */
 	}
 
 	.knob-control__value {
 		animation-name: dash-frame;
 		/* animation-fill-mode: forwards; */
+		stroke: var(--primary);
 		fill: none;
 	}
 

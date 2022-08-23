@@ -1,20 +1,19 @@
 <script>
     import RoomPrompt from "$lib/nyege/RoomPrompt.svelte";
     import { num_users } from "$lib/nyege/app";
-    console.log("%c Intersymmetric Version", 'background: #222; color: #bada55');
 </script>
 
 <header>
     <div id="title">
-        <span class='no_hover'>Intersymmetric Works</span>
-        <span class='no_hover'>Nyege Nyege</span>
+        <div class='no_hover'>Intersymmetric Works</div>
+        <div class='no_hover'>Nyege Nyege</div>
     </div>
     <div id="room">
         <RoomPrompt />
     </div>
     <div id='participants'>
-        <span class='no_hover'>Players:</span>
-        <span class='no_hover'>{$num_users}</span>
+        <div class='no_hover'>Players:</div>
+        <div class='no_hover'>{$num_users}</div>
     </div>
 </header>
 
@@ -34,6 +33,7 @@
         min-height: var(--h);
         max-height: var(--h);
         padding-top: 10px;
+        color: var(--primary);
     }
 
     @media only screen and (max-width: 1005px) {

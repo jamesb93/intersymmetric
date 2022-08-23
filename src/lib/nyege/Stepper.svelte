@@ -7,7 +7,7 @@
 		step = 1;
 	export let width = 400;
 	export let height = 30;
-	export let thumb_width = 6;
+	export let thumb_width = 1;
 	export let active = false;
 	export let func = () => {};
 	export let display_value = null;
@@ -79,7 +79,14 @@
 
 	<!-- Step Pipss -->
 	{#each Array(div) as _, i}
-		<rect class="pip" x={(thumb_x / div) * i} width={thumb_width} {height} />
+		<!-- <rect class="pip" x={(thumb_x / div) * i} width={thumb_width} {height} /> -->
+		<line class='pip' 
+		x1={(thumb_x / div) * i} 
+		x2={(thumb_x / div) * i}
+		y1=0
+		y2={height}
+		
+		/>
 	{/each}
 
 	<text x={width - 50} y={height / 2 + 3}>
@@ -97,8 +104,8 @@
 		touch-action: none;
 		background-color: white;
 		stroke-width: 1px;
-		stroke: black;
-		outline: 1px solid rgb(136, 136, 136);
+		stroke: var(--primary);
+		border: 1px solid var(--primary);
 	}
 
 	svg:active {
@@ -113,12 +120,12 @@
 	}
 
 	.step-fill {
-		fill: rgba(0.2, 0.9, 0, 0.2);
-		stroke: rgba(0.2 0.9, 0, 0.2);
+		fill: white;
 	}
 
 	.pip {
-		fill: rgba(24, 126, 24, 0.2);
+		stroke: var(--primary);
+		stroke-width: 1px;
 	}
 
 	.pos {

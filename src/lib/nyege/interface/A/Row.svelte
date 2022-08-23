@@ -43,9 +43,9 @@
 <style>
 	.row {
 		display: grid;
-		justify-content: space-around;
 		align-items: center;
-		grid-template-columns: 20px 50px 600px 50px 50px 50px ;
+		justify-content: center;
+		grid-template-columns: var(--grid);
 		height: 55px;
 	}
 </style>

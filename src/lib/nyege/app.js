@@ -22,6 +22,8 @@ socket.on('num_users', (x) => num_users.set(x));
 export const rate = writable(0.5);
 socket.on('rate', (x) => rate.set(x));
 
+export const globalCycle = writable(16);
+
 export const buf0 = writable(0);
 export const buf1 = writable(0);
 export const buf2 = writable(0);
@@ -42,14 +44,14 @@ export const pitch2 = writable(0);
 export const pitch3 = writable(0);
 export const pitch4 = writable(0);
 export const pitch5 = writable(0);
-export const pitch6 = writable(0);
+export const scale = writable(0);
 socket.on('pitch0', (x) => pitch0.set(x));
 socket.on('pitch1', (x) => pitch1.set(x));
 socket.on('pitch2', (x) => pitch2.set(x));
 socket.on('pitch3', (x) => pitch3.set(x));
 socket.on('pitch4', (x) => pitch4.set(x));
 socket.on('pitch5', (x) => pitch5.set(x));
-socket.on('pitch6', (x) => pitch6.set(x));
+socket.on('scale', x => scale.set(x));
 export const len0 = writable(0.5);
 export const len1 = writable(0.5);
 export const len2 = writable(0.5);
@@ -64,6 +66,7 @@ socket.on('len3', (x) => len3.set(x));
 socket.on('len4', (x) => len4.set(x));
 socket.on('len5', (x) => len5.set(x));
 socket.on('len6', (x) => len6.set(x));
+
 
 // Polymetric
 export const div0 = writable(16);
