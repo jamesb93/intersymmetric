@@ -117,18 +117,9 @@ class:active
 	}
 	
 	.step-fill {
-		fill:lightgray;
+		fill: var(--primary);
 	}
-	
-	.pip {
-		stroke: var(--primary);
-		stroke-width: 1px;
-	}
-	
-	.pos {
-		fill: rgba(186, 99, 18, 0.8);
-	}
-	
+
 	.active {
 		background-color: var(--grey);
 	}

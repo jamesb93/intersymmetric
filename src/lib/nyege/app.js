@@ -67,6 +67,11 @@ socket.on('len4', (x) => len4.set(x));
 socket.on('len5', (x) => len5.set(x));
 socket.on('len6', (x) => len6.set(x));
 
+// RSlider
+export const rslidermin = writable(1);
+export const rslidermax = writable(8);
+socket.on('rslidermin', x => rslidermin.set(x))
+socket.on('rslidermax', x => rslidermax.set(x))
 
 // Polymetric
 export const div0 = writable(16);

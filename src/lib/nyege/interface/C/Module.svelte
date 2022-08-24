@@ -1,10 +1,11 @@
 <script>
+	import RSlider from '$lib/nyege/RSlider.svelte';
 	import RadioH from '$lib/nyege/RadioH.svelte';
 	import RadioV from '$lib/nyege/RadioV.svelte';
 	import Blip from '$lib/aaa/Blip.svelte';
 	import Knob from '$lib/nyege/Knob.svelte';
 
-	import { buf6, scale, len6} from '$lib/nyege/app';
+	import { buf6, scale, len6, rslidermin, rslidermax} from '$lib/nyege/app';
 
 	const radioh = {
 		options: [1, 2, 3, 4, 5, 6, 7, 8],
@@ -13,6 +14,7 @@
 	const radiov = {
 		options: [1, 2, 3, 4, 'off']
 	}
+	const rslider = { min: 1, max: 8, step: 1 };
 	const soundKnob = {
 		showValue: true,
 		min: 0, max: 33, step: 1, scale: 0.25
@@ -31,7 +33,10 @@
 	<div class="row">
 		<Blip />
 		<RadioV />
-		<RadioH {...radioh} />
+		<div class="centre">
+			<RSlider {...rslider} bind:low={$rslidermin} bind:high={$rslidermax}/>
+			<RadioH {...radioh} />
+		</div>
 		<Knob {...soundKnob} bind:value={$buf6} />
 		<Knob {...scaleKnob} bind:value={$scale} />
 		<Knob {...lenKnob} bind:value={$len6} />
