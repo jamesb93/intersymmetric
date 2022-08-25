@@ -22,7 +22,7 @@
 			.then((device) => {
 				device.node.connect(outputNode);
 				d = device;
-				load_samples(d, context, 46, 'buf', '/aaa/samples/');
+				load_samples(d, context, 46, 'buf', '/aaa/samples/', 0);
 				d.messageEvent.subscribe((e) => {
 					if (e.tag.includes('debug')) {
 						console.log(e.tag, e.payload);

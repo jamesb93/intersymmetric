@@ -6,9 +6,9 @@ const send_message = (patch, key, data) => {
 	}
 };
 
-const load_samples = async (patch, context, numsamples, prefix, asset_path) => {
+const load_samples = async (patch, context, numsamples, prefix, asset_path, offset) => {
 	let samples = new Array(numsamples).fill(0).map((x, i) => ({
-		buffer: `${prefix}${i}`,
+		buffer: `${prefix}${i+offset}`,
 		path: `${asset_path}${i}.mp3`
 	}));
 	return Promise.all(
