@@ -24,7 +24,7 @@
 			.then((device) => {
 				d = device;
 				d.node.connect(outputNode);
-				load_samples(d, context, 33, 'b.', '/nyege/samples/');
+				load_samples(d, context, 33, 'b.', '/nyege/samples/', 1);
 				d.messageEvent.subscribe((e) => {
 					if (e.tag.includes('debug')) {
 						console.log(e.tag, e.payload);
