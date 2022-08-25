@@ -1,25 +1,10 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
-
 	export let WIDTH = 80;
 	export let HEIGHT = 60;
 	export let state = false;
 
-	function fwdPlay() {
-		createEventDispatcher('play')
-	}
-	
-	function fwdStop() {
-		createEventDispatcher('stop')
-	}
-
 	function clickHandler() {
 		state=!state;
-		if (state) {
-			fwdPlay()
-		} else {
-			fwdStop()
-		}
 	}
 
 	const offsetX = 25;
