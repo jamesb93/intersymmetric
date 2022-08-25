@@ -2,6 +2,7 @@
 	import Stepper from '$lib/nyege/Stepper.svelte';
 	import Knob from '$lib/nyege/Knob.svelte';
 	import Blip from '$lib/aaa/Blip.svelte';
+	import { socket } from '$lib/nyege/app';
 
 	export let patch;
 	export let div;
@@ -11,7 +12,8 @@
 	export let len;
 
 	const divKnob = {
-		min: 1, max: 16, step: 1, scale: 0.25
+		min: 1, max: 16, step: 1, scale: 0.25,
+		func: () => { console.log('change'); socket.emit('div0', div) }
 	}
 	const stepper = {
 		min: 1, max: 16, step: 1,
