@@ -22,7 +22,7 @@
   $: highX = clip(scale(high, min, max, 0, width), 0, width);
   $: fill = 0; // the width of the internal box (range)
 
-  const move = (e) => {
+  const move = e => {
     if (down) {
       const x = e.pageX - rect.left;
       const ratio = x / width;
@@ -40,12 +40,12 @@
     }
   };
 
-  const handle_controldown = (e) => {
+  const handle_controldown = e => {
     down = true;
     rect = bar.getBoundingClientRect();
     const x = e.pageX - rect.left;
     // Which handle are you closer to?
-    const distances = [lowX, highX].map((v) => Math.abs(x - v));
+    const distances = [lowX, highX].map(v => Math.abs(x - v));
     edge = distances.indexOf(Math.min(...distances));
     move(e);
   };
@@ -55,10 +55,10 @@
   const handle_touchend = () => {
     down = false;
   };
-  const handle_mousemove = (e) => {
+  const handle_mousemove = e => {
     move(e);
   };
-  const handle_touchmove = (e) => {
+  const handle_touchmove = e => {
     const touch = e.touches[0];
     if (prev_touch) {
       move(touch);

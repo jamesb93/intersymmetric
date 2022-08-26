@@ -33,7 +33,7 @@
               }
             }
 
-            $prevInsertions.slice(-$maxCells).forEach((d) => {
+            $prevInsertions.slice(-$maxCells).forEach(d => {
               $grid[d.x][d.y] = true;
             });
           }
@@ -50,7 +50,7 @@
       $grid[x][y] = true;
 
       let unique = true;
-      $prevInsertions.slice(-$maxCells).forEach((d) => {
+      $prevInsertions.slice(-$maxCells).forEach(d => {
         if (d.x == insertion.x && d.y == insertion.y) {
           unique = false;
         }
@@ -75,7 +75,7 @@
             }
           }
 
-          $prevInsertions.slice(-$maxCells).forEach((d) => {
+          $prevInsertions.slice(-$maxCells).forEach(d => {
             $grid[d.x][d.y] = true;
           });
         }

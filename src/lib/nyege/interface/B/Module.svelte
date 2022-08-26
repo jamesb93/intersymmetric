@@ -34,7 +34,7 @@
   let blip0, blip1;
   let radio0, radio1;
 
-  patch.messageEvent.subscribe((e) => {
+  patch.messageEvent.subscribe(e => {
     if (e.tag === 'blip') {
       if (e.payload === 4) {
         blip0.blink();

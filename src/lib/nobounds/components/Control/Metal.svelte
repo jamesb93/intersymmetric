@@ -21,31 +21,31 @@
     0
   );
 
-  socket.on('params::' + id + '::frequency', (data) => {
+  socket.on('params::' + id + '::frequency', data => {
     $params[id].frequency = data;
   });
-  socket.on('params::' + id + '::harmonicity', (data) => {
+  socket.on('params::' + id + '::harmonicity', data => {
     $params[id].harmonicity = data;
   });
-  socket.on('params::' + id + '::modulationIndex', (data) => {
+  socket.on('params::' + id + '::modulationIndex', data => {
     $params[id].modulationIndex = data;
   });
-  socket.on('params::' + id + '::resonance', (data) => {
+  socket.on('params::' + id + '::resonance', data => {
     $params[id].resonance = data;
   });
-  socket.on('params::' + id + '::octaves', (data) => {
+  socket.on('params::' + id + '::octaves', data => {
     $params[id].octaves = data;
   });
-  socket.on('params::' + id + '::order', (data) => {
+  socket.on('params::' + id + '::order', data => {
     $params[id].order = data;
   });
-  socket.on('params::' + id + '::attack', (data) => {
+  socket.on('params::' + id + '::attack', data => {
     $params[id].attack = data;
   });
-  socket.on('params::' + id + '::decay', (data) => {
+  socket.on('params::' + id + '::decay', data => {
     $params[id].decay = data;
   });
-  socket.on('params::' + id + '::release', (data) => {
+  socket.on('params::' + id + '::release', data => {
     $params[id].release = data;
   });
 </script>

@@ -21,7 +21,7 @@
 
   $: thumbX = clip(scale(value, min, max, 0, width), 0, width) + thumbWidth;
 
-  const move = (e) => {
+  const move = e => {
     rect = bar.getBoundingClientRect();
     if (down) {
       const x = e.pageX - rect.left;
@@ -36,7 +36,7 @@
     }
   };
 
-  const handlecontroldown = (e) => {
+  const handlecontroldown = e => {
     down = true;
     move(e);
   };
@@ -46,10 +46,10 @@
   const handletouchend = () => {
     down = false;
   };
-  const handlemousemove = (e) => {
+  const handlemousemove = e => {
     move(e);
   };
-  const handletouchmove = (e) => {
+  const handletouchmove = e => {
     const touch = e.touches[0];
     if (prevTouch) {
       move(touch);

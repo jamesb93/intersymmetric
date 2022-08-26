@@ -120,7 +120,7 @@
 
   $: if (samplers !== null) {
     samplers.forEach((sampler, i) => {
-      sampler.players.forEach((player) => {
+      sampler.players.forEach(player => {
         player.playbackRate = $trackRates[i] * $playbackRate;
       });
     });
@@ -148,18 +148,18 @@
     let config = `${url}/config.txt`;
 
     await fetch(config)
-      .then((response) => response.text())
-      .then((data) => {
+      .then(response => response.text())
+      .then(data => {
         const rows = data.split('\n');
         let banks = [rows[0], rows[2], rows[4], rows[6], rows[8], rows[10]];
-        banks.forEach((bank) => {
+        banks.forEach(bank => {
           $totalNumSamples += bank.split(',').length;
         });
         banks.forEach((bank, i) => {
           const sampler = new Sampler();
           let sampleList = bank.split(',');
           $numSamples[i] = sampleList.length;
-          sampleList.forEach((s) => {
+          sampleList.forEach(s => {
             let sampleUrl = s.trim().replaceAll(' ', '');
             sampleUrl = `${url}/samples/${sampleUrl}`;
             sampler.load(sampleUrl, () => ($numLoadedSamples += 1));
@@ -173,7 +173,7 @@
       $samplesLoaded = true;
     });
 
-    loop = new Tone.Loop((time) => {
+    loop = new Tone.Loop(time => {
       if ($grid[0][pos] === true)
         // samplers[0].trigger(time, 1, 1.0, 10.0)
         samplers[0].trigger(time, $sampleSelectors[0], 1.0, $length * $trackLengths[0]);

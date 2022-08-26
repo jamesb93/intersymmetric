@@ -57,7 +57,7 @@
   };
 
   const radio = {
-    options: [32, 24, 16, 12, 9, 8, 6, 4, 3, 2, 1, 0.5].map((x) => ({ value: x, display: x })),
+    options: [32, 24, 16, 12, 9, 8, 6, 4, 3, 2, 1, 0.5].map(x => ({ value: x, display: x })),
     width: '54.54px',
     height: '20px'
   };
@@ -73,7 +73,7 @@
   $: send_message(patch, 'sampler_params', [3, $buf3, $pitch3, $len3]);
   $: send_message(patch, 'global_cycle', [$globalCycle]);
 
-  patch.messageEvent.subscribe((e) => {
+  patch.messageEvent.subscribe(e => {
     if (e.tag === 'pips') {
       $pips = e.payload;
     }

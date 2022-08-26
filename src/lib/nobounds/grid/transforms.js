@@ -2,7 +2,7 @@ import { socket } from '../app.js';
 import { mirror, deepCopy } from './matrix.js';
 import { get } from 'svelte/store';
 
-const sendGrid = (store) => {
+const sendGrid = store => {
   const grid = get(store);
   socket.emit('grid', grid);
 };
@@ -49,14 +49,14 @@ export const mirrorWithPoint = (store, axis) => {
 
 export const mirrorGridHorizontal = (store, mirrorPoint) => {
   const grid = get(store);
-  const t = grid.map((row) => mirror(row));
+  const t = grid.map(row => mirror(row));
   store.set(t);
   sendGrid(store);
 };
 
-export const mirrorGridVertical = (store) => {
+export const mirrorGridVertical = store => {
   const grid = get(store);
-  const t = grid.map((row) => row);
+  const t = grid.map(row => row);
   for (let i = 0; i < grid.length; i++) {
     if (i >= grid.length / 2) {
       let mirrored = grid.length - 1 - i;
@@ -67,7 +67,7 @@ export const mirrorGridVertical = (store) => {
   sendGrid(store);
 };
 
-export const invertGridVertical = (store) => {
+export const invertGridVertical = store => {
   let grid = get(store);
   const temp = deepCopy(grid);
   for (let i = grid.length - 1, j = 0; i > 0, j < grid.length; i--, j++) {
@@ -107,16 +107,16 @@ export const shiftColumnUp = (store, col) => {
   sendGrid(store);
 };
 
-export const clearGrid = (store) => {
+export const clearGrid = store => {
   let grid = get(store);
-  grid = grid.map((gridRow) => gridRow.map((cell) => false));
+  grid = grid.map(gridRow => gridRow.map(cell => false));
   store.set(grid);
   sendGrid(store);
 };
 
-export const randomiseGrid = (store) => {
+export const randomiseGrid = store => {
   let grid = get(store);
-  grid = grid.map((gridRow) => gridRow.map((cell) => Math.random() < 0.2));
+  grid = grid.map(gridRow => gridRow.map(cell => Math.random() < 0.2));
   store.set(grid);
   sendGrid(store);
 };

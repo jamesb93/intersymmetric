@@ -127,7 +127,7 @@
   let a_current_step = 0;
   let b_current_step = 0;
   let c_current_step = 0;
-  patch.messageEvent.subscribe((e) => {
+  patch.messageEvent.subscribe(e => {
     if (e.tag === 'pattern') {
       a_current_step = e.payload[0];
       b_current_step = e.payload[1];

@@ -8,7 +8,7 @@
 
   let waiting = false;
 
-  const set = (i) => {
+  const set = i => {
     value = i;
     func();
     if (synced) {

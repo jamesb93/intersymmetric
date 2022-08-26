@@ -14,10 +14,10 @@
   let slider2 = 0.5;
   let slider3 = 0.5;
 
-  socket.on('slider0', (x) => (slider0 = x));
-  socket.on('slider1', (x) => (slider1 = x));
-  socket.on('slider2', (x) => (slider2 = x));
-  socket.on('slider3', (x) => (slider3 = x));
+  socket.on('slider0', x => (slider0 = x));
+  socket.on('slider1', x => (slider1 = x));
+  socket.on('slider2', x => (slider2 = x));
+  socket.on('slider3', x => (slider3 = x));
 
   const sliderConfig = { min: 0, max: 1, step: 0.01, thumb_height: 2, bar_height: 450 };
 </script>

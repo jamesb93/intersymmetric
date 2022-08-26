@@ -26,7 +26,7 @@
 
   let state = 0;
 
-  patch.messageEvent.subscribe((e) => {
+  patch.messageEvent.subscribe(e => {
     if (e.tag === 'pattern') {
       $tala[0] = e.payload[0];
     } else if (e.tag === 'b_index') {

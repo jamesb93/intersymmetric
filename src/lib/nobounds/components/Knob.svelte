@@ -74,7 +74,7 @@
 
   let internal = null;
   let pv = null;
-  const updatePosition = (change) => {
+  const updatePosition = change => {
     // This way it always forces it to match the bound value when it is first moved.
     if (internal === null) {
       internal = value;
@@ -90,7 +90,7 @@
 
   let anchor = null;
   let down = false;
-  const moveHandler = (e) => {
+  const moveHandler = e => {
     if (enabled) {
       if (anchor != null && down === true) {
         updatePosition(e.movementY * -1);
@@ -98,14 +98,14 @@
     }
   };
 
-  const clickHandler = (e) => {
+  const clickHandler = e => {
     if (enabled) {
       $recentParamName = title;
       $recentParamValue = value;
     }
   };
 
-  const downHandler = (e) => {
+  const downHandler = e => {
     if (enabled) {
       $recentParamName = title;
       down = true;
@@ -114,7 +114,7 @@
     }
   };
 
-  const upHandler = (e) => {
+  const upHandler = e => {
     if (enabled) {
       down = false;
       primaryColor = '#00c300';

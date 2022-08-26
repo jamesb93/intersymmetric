@@ -15,7 +15,7 @@
   }
 
   $: t = internalValue.split(' ');
-  $: value = t.filter((d) => parseFloat(d) === parseFloat(d)); // check if it can be numerable
+  $: value = t.filter(d => parseFloat(d) === parseFloat(d)); // check if it can be numerable
   $: value = value.length === 0 ? ['1.0'] : value;
 </script>
 

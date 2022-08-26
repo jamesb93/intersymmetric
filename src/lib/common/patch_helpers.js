@@ -12,12 +12,12 @@ const load_samples = async (patch, context, numsamples, prefix, asset_path, offs
     path: `${asset_path}${i}.mp3`
   }));
   return Promise.all(
-    samples.map((sample) => {
+    samples.map(sample => {
       // return load_sample(patch, context, sample.buffer, sample.path);
       return fetch(sample.path)
-        .then((response) => response.arrayBuffer())
-        .then((buffer) => context.decodeAudioData(buffer))
-        .then((audioBuf) => patch.setDataBuffer(sample.buffer, audioBuf));
+        .then(response => response.arrayBuffer())
+        .then(buffer => context.decodeAudioData(buffer))
+        .then(audioBuf => patch.setDataBuffer(sample.buffer, audioBuf));
     })
   );
 };

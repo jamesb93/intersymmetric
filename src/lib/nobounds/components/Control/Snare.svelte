@@ -11,11 +11,11 @@
   $: snare.membrane.frequency.rampTo($params.snare.membraneFreq * freqMap($pitchOffset), 0.1);
   $: snare.waveshaper.order = clip(Math.round($params.snare.order), 1, 100);
 
-  socket.on('params::snare::attack', (data) => ($params.snare.attack = data));
-  socket.on('params::snare::decay', (data) => ($params.snare.decay = data));
-  socket.on('params::snare::sustain', (data) => ($params.snare.sustain = data));
-  socket.on('params::snare::release', (data) => ($params.snare.release = data));
-  socket.on('params::snare::order', (data) => ($params.snare.order = data));
-  socket.on('params::snare::membraneFreq', (data) => ($params.snare.membraneFreq = data));
-  socket.on('params::snare::frequency', (data) => ($params.snare.frequency = data));
+  socket.on('params::snare::attack', data => ($params.snare.attack = data));
+  socket.on('params::snare::decay', data => ($params.snare.decay = data));
+  socket.on('params::snare::sustain', data => ($params.snare.sustain = data));
+  socket.on('params::snare::release', data => ($params.snare.release = data));
+  socket.on('params::snare::order', data => ($params.snare.order = data));
+  socket.on('params::snare::membraneFreq', data => ($params.snare.membraneFreq = data));
+  socket.on('params::snare::frequency', data => ($params.snare.frequency = data));
 </script>

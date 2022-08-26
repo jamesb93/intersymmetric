@@ -114,7 +114,7 @@
   if (browser) {
     Tone.context.lookAhead = 0.2;
     updatePlayStatus(false);
-    loop = new Tone.Loop((time) => {
+    loop = new Tone.Loop(time => {
       if ($grid[KICK][pos] === true) {
         kick.trigger(time, selectedPattern[0], $length);
       }

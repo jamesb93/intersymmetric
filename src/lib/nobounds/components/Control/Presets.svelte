@@ -8,7 +8,7 @@
   let hovered = false;
   let store = {};
 
-  const handleClick = (idx) => {
+  const handleClick = idx => {
     selected = idx;
     if (modifierDown) {
       store[idx] = JSON.stringify(data[key]);
@@ -22,12 +22,12 @@
     }
   };
 
-  const handleKeyDown = (key) => {
+  const handleKeyDown = key => {
     if (key.code === 'ShiftLeft') {
       modifierDown = true;
     }
   };
-  const handleKeyUp = (key) => {
+  const handleKeyUp = key => {
     if (key.code === 'ShiftLeft') {
       modifierDown = false;
     }

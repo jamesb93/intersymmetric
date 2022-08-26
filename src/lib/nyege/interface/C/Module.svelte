@@ -7,7 +7,7 @@
 
   export let patch;
 
-  import { buf6, scale, len6, rslidermin, rslidermax } from '$lib/nyege/app';
+  import { buf6, scale, len6, rslidermin, rslidermax, chordfollow } from '$lib/nyege/app';
 
   const radioh = {
     options: [1, 2, 3, 4, 5, 6, 7, 8].map((x) => ({ display: x, value: x })),
@@ -15,11 +15,11 @@
   };
   const radiov = {
     options: [
+      { value: 0, display: 'off' },
       { value: 1, display: 1 },
       { value: 2, display: 2 },
       { value: 3, display: 3 },
-      { value: 4, display: 4 },
-      { value: 0, display: 'off' }
+      { value: 4, display: 4 }
     ]
   };
   const rslider = { min: 1, max: 8, step: 1 };
@@ -49,7 +49,7 @@
 <div class="container">
   <div class="row">
     <Blip />
-    <RadioV {...radiov} />
+    <RadioV {...radiov} bind:value={$} />
     <div class="centre">
       <RSlider {...rslider} bind:low={$rslidermin} bind:high={$rslidermax} />
       <RadioH {...radioh} />

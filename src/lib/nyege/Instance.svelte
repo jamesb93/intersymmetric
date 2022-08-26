@@ -14,18 +14,18 @@
     outputNode.connect(context.destination);
 
     await fetch('/nyege/code/patch.export.json')
-      .then((response) => response.json())
+      .then(response => response.json())
 
-      .then((response) => {
+      .then(response => {
         patcher = response;
         return RNBO.createDevice({ context, patcher });
       })
 
-      .then((device) => {
+      .then(device => {
         d = device;
         d.node.connect(outputNode);
         load_samples(d, context, 33, 'b.', '/nyege/samples/', 1);
-        d.messageEvent.subscribe((e) => {
+        d.messageEvent.subscribe(e => {
           if (e.tag.includes('debug')) {
             console.log(e.tag, e.payload);
           }
@@ -34,7 +34,7 @@
       .then(() => {
         samples_loaded = true;
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
       });
   };

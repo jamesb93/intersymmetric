@@ -22,7 +22,7 @@
     ? clip(scale(value, min, max, 0, bar_height), 0, bar_height - thumb_height)
     : clip(scale(value, max, min, 0, bar_height), 0, bar_height - thumb_height);
 
-  const move = (e) => {
+  const move = e => {
     rect = bar.getBoundingClientRect();
     if (down) {
       const y = e.pageY - rect.top - window.scrollY;
@@ -37,7 +37,7 @@
     }
   };
 
-  const handle_controldown = (e) => {
+  const handle_controldown = e => {
     down = true;
     move(e);
   };
@@ -47,12 +47,12 @@
   const handle_touchend = () => {
     down = false;
   };
-  const handle_mousemove = (e) => {
+  const handle_mousemove = e => {
     {
       move(e);
     }
   };
-  const handle_touchmove = (e) => {
+  const handle_touchmove = e => {
     e.preventDefault();
     const touch = e.targetTouches[0];
     if (prev_touch) {

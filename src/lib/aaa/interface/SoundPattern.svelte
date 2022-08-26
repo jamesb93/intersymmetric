@@ -262,7 +262,7 @@
 
   let blip_1, blip_2, blip_3;
 
-  patch.messageEvent.subscribe((e) => {
+  patch.messageEvent.subscribe(e => {
     if (e.tag === 'a_event') {
       if ($perc_listener === 1) blip_1.blink();
       if ($fm1_listener === 1) blip_2.blink();

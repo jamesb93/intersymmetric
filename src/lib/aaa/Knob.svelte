@@ -66,7 +66,7 @@
 
   let pv = null;
   $: value = Math.round((internal - min) / step) * step + min;
-  const updatePosition = (change) => {
+  const updatePosition = change => {
     // This way it always forces it to match the bound value when it is first moved.
     if (!internal) {
       internal = value;
@@ -80,17 +80,17 @@
 
   let down = false;
 
-  const move = (posUpdate) => {
+  const move = posUpdate => {
     if (enabled && down) {
       updatePosition(posUpdate);
     }
   };
-  const mouseMoveHandler = (e) => {
+  const mouseMoveHandler = e => {
     move(e.movementY * -1);
   };
 
   let prev_touch;
-  const touchMoveHandler = (e) => {
+  const touchMoveHandler = e => {
     const touch = e.touches[0];
     if (prev_touch) {
       const movementY = touch.pageY - prev_touch.pageY;
@@ -99,13 +99,13 @@
     prev_touch = touch;
   };
 
-  const handleDown = (e) => {
+  const handleDown = e => {
     if (enabled) {
       down = true;
     }
   };
 
-  const handleUp = (e) => {
+  const handleUp = e => {
     if (enabled) {
       down = false;
     }

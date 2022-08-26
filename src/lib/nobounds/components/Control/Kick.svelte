@@ -18,25 +18,25 @@
     }
   }
 
-  socket.on('params::kick::distortion', (data) => {
+  socket.on('params::kick::distortion', data => {
     $params.kick.distortion = data;
   });
-  socket.on('params::kick::frequency', (data) => {
+  socket.on('params::kick::frequency', data => {
     $params.kick.frequency = data;
   });
-  socket.on('params::kick::octaves', (data) => {
+  socket.on('params::kick::octaves', data => {
     $params.kick.octaves = data;
   });
-  socket.on('params::kick::attack', (data) => {
+  socket.on('params::kick::attack', data => {
     $params.kick.attack = data;
   });
-  socket.on('params::kick::decay', (data) => {
+  socket.on('params::kick::decay', data => {
     $params.kick.decay = data;
   });
-  socket.on('params::kick::release', (data) => {
+  socket.on('params::kick::release', data => {
     $params.kick.release = data;
   });
-  socket.on('params::kick::sustain', (data) => {
+  socket.on('params::kick::sustain', data => {
     $params.kick.sustain = data;
   });
 </script>

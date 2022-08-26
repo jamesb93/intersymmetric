@@ -30,7 +30,7 @@
 
   let instrumentMap = ['kick', 'snare', 'metal1', 'metal2', 'fm1', 'fm2'];
 
-  socket.on('trackSound', (x) => {
+  socket.on('trackSound', x => {
     trackSound.set(x);
     $trackSound.forEach((_, i) => {
       updateSound(i);
