@@ -145,7 +145,7 @@
 	on:touchstart={handleDown}
 	on:dblclick={resetHandler}
 >
-	<div id="title" class="no_hover">{title}</div>
+	<div id="title" class="no-hover">{title}</div>
 	<svg width={WIDTH} height={HEIGHT}>
 		<path
 			d={range_path}

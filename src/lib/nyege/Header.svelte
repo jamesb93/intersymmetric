@@ -5,15 +5,15 @@
 
 <header>
     <div id="title">
-        <div class='no_hover'>Intersymmetric Works</div>
-        <div class='no_hover'>Nyege Nyege</div>
+        <div class='no-hover'>Intersymmetric Works</div>
+        <div class='no-hover'>Nyege Nyege</div>
     </div>
     <div id="room">
         <RoomPrompt />
     </div>
     <div id='participants'>
-        <div class='no_hover'>Players:</div>
-        <div class='no_hover'>{$num_users}</div>
+        <div class='no-hover'>Players:</div>
+        <div class='no-hover'>{$num_users}</div>
     </div>
 </header>
 

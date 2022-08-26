@@ -11,7 +11,7 @@
 
 <div class="container">
 	{#each options as o, i}
-		<button class="no_hover" on:click={() => set(i)} class:selected={value === i}>
+		<button class="no-hover" on:click={() => set(i)} class:selected={value === i}>
 			{o}
 		</button>
 	{/each}

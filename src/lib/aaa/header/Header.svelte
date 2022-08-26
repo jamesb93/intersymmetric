@@ -6,15 +6,15 @@
 
 <header>
 	<div id="title">
-		<span class="no_hover">Intersymmetric Works</span>
-		<span class="no_hover">AAA</span>
+		<span class="no-hover">Intersymmetric Works</span>
+		<span class="no-hover">AAA</span>
 	</div>
 	<div id="room">
 		<RoomPrompt />
 	</div>
 	<div id="participants">
-		<span class="no_hover">Players:</span>
-		<span class="no_hover">{$num_users}</span>
+		<span class="no-hover">Players:</span>
+		<span class="no-hover">{$num_users}</span>
 	</div>
 </header>
 

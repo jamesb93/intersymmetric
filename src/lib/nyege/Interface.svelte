@@ -10,7 +10,7 @@
 <div class="container">
 	<Transport bind:patch />
 	<A bind:patch />
-	<!-- <B bind:patch /> -->
+	<B bind:patch />
 	<!-- <C bind:patch /> -->
 </div>
 <style>

@@ -80,7 +80,7 @@
 	>
 		<rect y={thumb_y} bind:this={thumb} {width} height={thumb_height} />
 	</svg>
-	<div class="no_hover">
+	<div class="no-hover">
 		{#if display_value !== null}
 			{display_value}
 		{:else}

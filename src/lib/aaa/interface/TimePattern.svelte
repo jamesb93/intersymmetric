@@ -137,10 +137,10 @@
 </script>
 
 <div class="time_pattern area">
-	<div class="label no_hover">time pattern</div>
+	<div class="label no-hover">time pattern</div>
 	<div class="controls">
 		<div class="a time_unit">
-			<div class="no_hover">steps</div>
+			<div class="no-hover">steps</div>
 			<RadioH
 				func={() => {
 					socket.emit('a_mode', $a_mode);
@@ -154,7 +154,7 @@
 			</div>
 		</div>
 		<div class="b time_unit">
-			<div class="no_hover">durations</div>
+			<div class="no-hover">durations</div>
 			<RadioH
 				func={() => {
 					socket.emit('b_mode', $b_mode);
@@ -183,7 +183,7 @@
 			</div>
 		</div>
 		<div class="c time_unit">
-			<div class="no_hover">subdivisions</div>
+			<div class="no-hover">subdivisions</div>
 			<RadioH
 				func={() => {
 					socket.emit('c_mode', $c_mode);

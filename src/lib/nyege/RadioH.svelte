@@ -1,9 +1,9 @@
 <script>
-	export let options = ['>', '<', '<>', '?'];
+	export let options = [ {value: 0, display: 'off '} ]
 	export let value = 0;
 	export let func = () => {};
-	export let width = '50px'
-	export let height = '50px'
+	export let width = '54px'
+	export let height = '40px'
 
 	const set = (i) => {
 		value = i;
@@ -11,11 +11,16 @@
 	};
 </script>
 
-<div class="container">
-	{#each options as o, i}
-	<button style:width={width} style:height={height} class="no_hover" on:click={() => set(i)} class:selected={value === i}>
-		{o}
-	</button>
+<div class="container" style:height={height}>
+	{#each options as o}
+		<button 
+		style:width={width}
+		class="no-hover" 
+		on:click={() => set(o.value)} 
+		class:selected={value === o.value}
+		>
+			{o.display}
+		</button>
 	{/each}
 </div>
 
@@ -23,16 +28,14 @@
 	.container {
 		display: flex;
 		flex-direction: row;
-		gap: 0;
-		justify-content: space-around;
-		width: 600px;
 		gap: 1px;
+		place-items: center;
 	}
 	button {
 		border-radius: 1rem;
 		background-color: #ffffff;
 		border: 1px solid var(--primary);
-		height: 20px;
+		height: 100%;
 		font-family: var(--font);
 		color: black;
 		font-size: 10px;

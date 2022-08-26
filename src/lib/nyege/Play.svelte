@@ -15,7 +15,7 @@
 </script>
 
 <div class="container" style:height={HEIGHT} style:width={WIDTH}>
-	<div class="text no_hover">play/pause</div>
+	<div class="text no-hover">play/pause</div>
 
 	<svg width={WIDTH} height={HEIGHT} on:click={clickHandler}>
 		{#if state === false}

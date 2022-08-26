@@ -1,8 +1,8 @@
 <footer>
-    <div class='no_hover'>
+    <div class='no-hover'>
         <a target="_blank" href="http://www.markfell.com/wiki/">Mark Fell</a> and <a target="_blank" href="http://www.riantreanor.com/">Rian Treanor</a>
     </div>
-    <div class='no_hover'>
+    <div class='no-hover'>
         Programming is not by <a target="_blank" href="https://www.jamesbradbury.net">James Bradbury</a>
     </div>
 </footer>

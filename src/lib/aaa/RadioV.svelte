@@ -12,7 +12,7 @@
 <div class="container">
 	{#each options as o, i}
 		<button
-			class="no_hover"
+			class="no-hover"
 			on:mousedown={() => set(i)}
 			on:touchstart={() => set(i)}
 			class:selected={value === i}

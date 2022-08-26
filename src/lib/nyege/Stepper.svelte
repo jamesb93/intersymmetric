@@ -129,7 +129,8 @@
 	}
 
 	.pos {
-		fill: rgba(186, 99, 18, 0.8);
+		fill: var(--primary);
+		stroke-width: 2px;
 	}
 
 	.active {

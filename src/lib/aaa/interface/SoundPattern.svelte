@@ -280,7 +280,7 @@
 </script>
 
 <div class="sound_pattern area">
-	<div class="label no_hover">sound pattern</div>
+	<div class="label no-hover">sound pattern</div>
 	<div class="controls">
 		<div class="panel">
 			<RadioV

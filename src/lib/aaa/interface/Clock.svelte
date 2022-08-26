@@ -43,7 +43,7 @@
 </script>
 
 <div class="clock area">
-	<div class="label no_hover">clock</div>
+	<div class="label no-hover">clock</div>
 	<div class="controls">
 		<Play bind:state />
 		<Knob
@@ -57,7 +57,7 @@
 		/>
 	</div>
 
-	<div class="tala no_hover">
+	<div class="tala no-hover">
 		{#each $tala as t, i}
 			<div class="col">
 				<div class="letter">
