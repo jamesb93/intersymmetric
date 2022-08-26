@@ -94,8 +94,8 @@ socket.on('range3', (x) => range3.set(x));
 export const pips = writable([0, 0, 0, 0]);
 
 // Retriggers
+export const retrig0 = writable(0)
 export const retrig1 = writable(0)
-export const retrig2 = writable(0)
 // Chord
 
 export const palette = {
