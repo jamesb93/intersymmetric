@@ -16,6 +16,7 @@
 		width: 20px;
 		height: 20px;
 		border-radius: 50%;
+		transition: background-color 50ms ease-in-out;
 	}
 	.active {
 		background-color: var(--primary);
