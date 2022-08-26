@@ -53,7 +53,8 @@
 			{ value: 2, display: 2 },
 			{ value: 1, display: 1 }
 		],
-		width: '54.54px'
+		width: '54.54px',
+		height: '20px'
 	}
 	
 	$: send_message(patch, 'global_cycle', [$globalCycle]);
