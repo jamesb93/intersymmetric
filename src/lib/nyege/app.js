@@ -17,9 +17,9 @@ export const num_users = writable(0);
 socket.on('num_users', (x) => num_users.set(x));
 
 // Common
+export const pips = writable([0, 0, 0, 0]);
 export const rate = writable(0.2);
 socket.on('rate', (x) => rate.set(x));
-
 export const globalCycle = writable(16);
 
 export const buf0 = writable(0);
@@ -89,12 +89,13 @@ socket.on('range1', (x) => range1.set(x));
 socket.on('range2', (x) => range2.set(x));
 socket.on('range3', (x) => range3.set(x));
 
-export const pips = writable([0, 0, 0, 0]);
-
 // Retriggers
 export const retrig0 = writable(0);
+socket.on('retrig0', x => retrig0.set(x));
 export const retrig1 = writable(0);
+
 // Chord
+// export const 
 
 export const palette = {
   gold: 'rgb(148,108,53)',
