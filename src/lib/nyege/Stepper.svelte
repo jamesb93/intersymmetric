@@ -7,19 +7,19 @@
 		step = 1;
 	export let width = 400;
 	export let height = 30;
-	export let thumb_width = 1;
+	export let thumbWidth = 1;
 	export let active = false;
-	export let display_value = null;
+	export let displayValue = null;
 	export let div = 16;
 	export let pos = 0;
 	export let func = () => {};
 
 	let thumb, fill, bar, rect;
 	let down = false;
-	let prev_touch = false;
-	let prev_value = null;
+	let prevTouch = false;
+	let prevValue = null;
 
-	$: thumb_x = clip(scale(value, min, max, 0, width), 0, width) + thumb_width;
+	$: thumbX = clip(scale(value, min, max, 0, width), 0, width) + thumbWidth;
 
 	const move = (e) => {
 		rect = bar.getBoundingClientRect();
@@ -29,69 +29,75 @@
 			let scaled = scale(ratio, 0, 1, min, max);
 			value = Math.round((scaled - min) / step) * step + min;
 			value = clip(value, min, max);
-			if (prev_value !== value) {
+			if (prevValue !== value) {
 				func();
 			}
-			prev_value = value;
+			prevValue = value;
 		}
 	};
 
-	const handle_controldown = (e) => {
+	const handlecontroldown = (e) => {
 		down = true;
 		move(e);
 	};
-	const handle_mouseup = () => {
+	const handlemouseup = () => {
 		down = false;
 	};
-	const handle_touchend = () => {
+	const handletouchend = () => {
 		down = false;
 	};
-	const handle_mousemove = (e) => {
+	const handlemousemove = (e) => {
 		move(e);
 	};
-	const handle_touchmove = (e) => {
+	const handletouchmove = (e) => {
 		const touch = e.touches[0];
-		if (prev_touch) {
+		if (prevTouch) {
 			move(touch);
 		}
-		prev_touch = touch;
+		prevTouch = touch;
 	};
 </script>
 
 <svelte:window
-	on:mousemove={handle_mousemove}
-	on:touchmove={handle_touchmove}
-	on:mouseup={handle_mouseup}
-	on:touchend={handle_touchend}
+	on:mousemove={handlemousemove}
+	on:touchmove={handletouchmove}
+	on:mouseup={handlemouseup}
+	on:touchend={handletouchend}
 />
 
 <svg
-	on:mousedown={handle_controldown}
-	on:touchstart={handle_controldown}
+	on:mousedown={handlecontroldown}
+	on:touchstart={handlecontroldown}
 	{width}
 	{height}
 	bind:this={bar}
 	class:active
 >
 	<!-- Fill -->
-	<!-- <rect class="step-fill" x="0" width={thumb_x} {height} /> -->
-	<rect x={(thumb_x / div) * pos} class="pos" width={thumb_width} {height} />
+	<!-- <rect class="step-fill" x="0" width={thumbX} {height} /> -->
+	<line 
+	x1={thumbX}
+	x2={thumbX}
+	y1=0
+	y2={height}
+	stroke-dasharray=3
+	/>
+	<rect x={(thumbX / div) * pos} class="pos" width={thumbWidth} {height} />
 
 	<!-- Step Pipss -->
 	{#each Array(div) as _, i}
-		<!-- <rect class="pip" x={(thumb_x / div) * i} width={thumb_width} {height} /> -->
+		<!-- <rect class="pip" x={(thumbX / div) * i} width={thumbWidth} {height} /> -->
 		<line class='pip' 
-		x1={(thumb_x / div) * i} 
-		x2={(thumb_x / div) * i}
+		x1={(thumbX / div) * i} 
+		x2={(thumbX / div) * i}
 		y1=0
 		y2={height}
-		
 		/>
 	{/each}
 
 	<text x={width - 50} y={height / 2 + 3}>
-		{#if display_value !== null}
-			{display_value}
+		{#if displayValue !== null}
+			{displayValue}
 		{:else}
 			{value.toFixed(2)}
 		{/if}
