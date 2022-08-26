@@ -10,7 +10,7 @@
   import { buf6, scale, len6, rslidermin, rslidermax, chordfollow } from '$lib/nyege/app';
 
   const radioh = {
-    options: [1, 2, 3, 4, 5, 6, 7, 8].map((x) => ({ display: x, value: x })),
+    options: [1, 2, 3, 4, 5, 6, 7, 8].map(x => ({ display: x, value: x })),
     width: '75px'
   };
   const radiov = {
