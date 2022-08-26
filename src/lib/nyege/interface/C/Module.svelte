@@ -5,14 +5,33 @@
 	import Blip from '$lib/aaa/Blip.svelte';
 	import Knob from '$lib/nyege/Knob.svelte';
 
+	export let patch;
+
 	import { buf6, scale, len6, rslidermin, rslidermax} from '$lib/nyege/app';
 
 	const radioh = {
-		options: [1, 2, 3, 4, 5, 6, 7, 8],
+		options: [
+			{ value: 1, display: 1 },
+			{ value: 2, display: 2 },
+			{ value: 3, display: 3 },
+			{ value: 4, display: 4 },
+			{ value: 5, display: 5 },
+			{ value: 6, display: 6 },
+			{ value: 7, display: 7 },
+			{ value: 8, display: 8 },
+		],
 		width: '75px'
 	}
 	const radiov = {
-		options: [1, 2, 3, 4, 'off']
+		options: [
+			{ value: 1, display: 1 },
+			{ value: 2, display: 2 },
+			{ value: 3, display: 3 },
+			{ value: 4, display: 4 },
+			{ value: 0, display: 'off' },
+
+
+		]
 	}
 	const rslider = { min: 1, max: 8, step: 1 };
 	const soundKnob = {

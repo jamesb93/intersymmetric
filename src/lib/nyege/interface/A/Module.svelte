@@ -66,24 +66,24 @@
 	$: send_message(patch, 'sampler_params', [1, $buf1, $pitch1, $len1]);
 	$: send_message(patch, 'sampler_params', [2, $buf2, $pitch2, $len2]);
 	$: send_message(patch, 'sampler_params', [3, $buf3, $pitch3, $len3]);
-	
+	$: send_message(patch, 'global_cycle', [$globalCycle]);
+
 	patch.messageEvent.subscribe(e => {
 		if (e.tag === 'pips') {
 			$pips = e.payload;
 		}
 
 		if (e.tag === 'blip') {
-			blips[e.payload].blink();
+			if (e.payload <= 3) {
+				blips[e.payload].blink();
+			}
 		}
 	});
-	
 </script>
-
-
 
 <div class="container">
 	<div class="radio-row">
-		<RadioH {...radio} />
+		<RadioH {...radio} bind:value={$globalCycle} />
 		<div class='knob-labels'>
 			<div>sound</div>
 			<div>pitch</div>
