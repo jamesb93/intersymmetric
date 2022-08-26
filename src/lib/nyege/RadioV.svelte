@@ -10,14 +10,14 @@
 </script>
 
 <div class="container">
-	{#each options as o, i}
+	{#each options as o}
 		<button
 			class="no-hover"
-			on:mousedown={() => set(i)}
-			on:touchstart={() => set(i)}
-			class:selected={value === i}
+			on:mousedown={() => set(o.value)}
+			on:touchstart={() => set(o.value)}
+			class:selected={value === o.value}
 		>
-			{o}
+			{o.display}
 		</button>
 	{/each}
 </div>
