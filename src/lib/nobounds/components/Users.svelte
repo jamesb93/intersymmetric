@@ -1,11 +1,11 @@
 <script>
-	import { users, socket } from '$lib/nobounds/app';
+  import { users, socket } from '$lib/nobounds/app';
 
-	let name = 'anon';
+  let name = 'anon';
 
-	const setName = () => {
-		socket.send(['name', name]);
-	};
+  const setName = () => {
+    socket.send(['name', name]);
+  };
 </script>
 
 <br />
@@ -18,19 +18,19 @@ You are {name}
 <br />
 
 {#each $users as user}
-	{user}
-	<br />
+  {user}
+  <br />
 {/each}
 
 <style>
-	button {
-		border: 1px outset blue;
-		background-color: lightBlue;
-		cursor: pointer;
-	}
+  button {
+    border: 1px outset blue;
+    background-color: lightBlue;
+    cursor: pointer;
+  }
 
-	button:hover {
-		background-color: rgb(181, 181, 181);
-		color: white;
-	}
+  button:hover {
+    background-color: rgb(181, 181, 181);
+    color: white;
+  }
 </style>

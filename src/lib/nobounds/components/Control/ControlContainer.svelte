@@ -1,22 +1,22 @@
 <script>
-	export let hide = false;
+  export let hide = false;
 </script>
 
 <div class="container" class:hide>
-	<slot />
+  <slot />
 </div>
 
 <style>
-	.container {
-		display: flex;
-		flex-direction: column;
-		flex-wrap: nowrap;
-		gap: 10px;
-		padding: 5px;
-		align-items: center;
-	}
+  .container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+    padding: 5px;
+    align-items: center;
+  }
 
-	.hide {
-		display: none;
-	}
+  .hide {
+    display: none;
+  }
 </style>

@@ -1,33 +1,33 @@
 {
-	"name": "intersymmetric",
-	"version": "0.0.1",
-	"scripts": {
-		"dev": "vite dev --host",
-		"build": "vite build",
-		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
-		"format": "prettier --write --plugin-search-dir=. ."
-	},
-	"devDependencies": {
-		"@sveltejs/adapter-node": "next",
-		"@sveltejs/kit": "1.0.0-next.430",
-		"eslint": "^8.16.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-svelte3": "^4.0.0",
-		"prettier": "^2.6.2",
-		"prettier-plugin-svelte": "^2.7.0",
-		"autoprefixer": "^10.4.7",
-		"postcss": "^8.4.14",
-		"postcss-load-config": "^3.1.4",
-		"svelte": "^3.49.0",
-		"svelte-preprocess": "^4.10.7",
-		"vite": "^3.0.2"
-	},
-	"type": "module",
-	"dependencies": {
-		"@rnbo/js": "0.17.0-dev.40",
-		"global": "^4.4.0",
-		"socket.io-client": "^4.5.1",
-		"d3": "^6.7.0",
-		"tone": "^14.7.77"
-	}
+  "name": "intersymmetric",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite dev --host",
+    "build": "vite build",
+    "lint": "prettier --check --plugin-search-dir=. . && eslint .",
+    "format": "prettier --write --plugin-search-dir=. ."
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-node": "next",
+    "@sveltejs/kit": "1.0.0-next.430",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "prettier": "^2.6.2",
+    "prettier-plugin-svelte": "^2.7.0",
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "postcss-load-config": "^3.1.4",
+    "svelte": "^3.49.0",
+    "svelte-preprocess": "^4.10.7",
+    "vite": "^3.0.2"
+  },
+  "type": "module",
+  "dependencies": {
+    "@rnbo/js": "0.17.0-dev.40",
+    "global": "^4.4.0",
+    "socket.io-client": "^4.5.1",
+    "d3": "^6.7.0",
+    "tone": "^14.7.77"
+  }
 }

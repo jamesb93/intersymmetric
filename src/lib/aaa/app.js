@@ -2,14 +2,12 @@ import { io } from 'socket.io-client';
 import { writable } from 'svelte/store';
 
 // Sockets
-let socketAddr = import.meta.env.PROD
-	? 'wss://aaa.intersymmetric.xyz:49123'
-	: 'ws://localhost:49123';
+let socketAddr = import.meta.env.PROD ? 'wss://aaa.intersymmetric.xyz:49123' : 'ws://localhost:49123';
 
 export const socket = io(socketAddr);
 
 socket.on('connect', () => {
-	console.log('connected to AAA websocket');
+  console.log('connected to AAA websocket');
 });
 
 // Room Management
@@ -39,7 +37,7 @@ socket.on('c_mode', (x) => c_mode.set(x));
 // Duration/Pattern
 export const a_steps_0 = writable(5);
 socket.on('a_steps_0', (x) => {
-	a_steps_0.set(x);
+  a_steps_0.set(x);
 });
 export const a_steps_1 = writable(2);
 socket.on('a_steps_1', (x) => a_steps_1.set(x));

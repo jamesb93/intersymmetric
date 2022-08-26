@@ -2,14 +2,12 @@ import { io } from 'socket.io-client';
 import { writable } from 'svelte/store';
 
 // Sockets
-let socketAddr = import.meta.env.PROD
-	? 'wss://nyege-server.intersymmetric.xyz:49124'
-	: 'ws://localhost:49124';
+let socketAddr = import.meta.env.PROD ? 'wss://nyege-server.intersymmetric.xyz:49124' : 'ws://localhost:49124';
 
 export const socket = io(socketAddr);
 
 socket.on('connect', () => {
-	console.log('connected to nyegenyege websocket');
+  console.log('connected to nyegenyege websocket');
 });
 
 // Room Management
@@ -99,9 +97,9 @@ export const retrig1 = writable(0);
 // Chord
 
 export const palette = {
-	gold: 'rgb(148,108,53)',
-	blue: 'rgb(148,108,53)',
-	green: 'rgb(59,136,81)'
+  gold: 'rgb(148,108,53)',
+  blue: 'rgb(148,108,53)',
+  green: 'rgb(59,136,81)'
 };
 
 export const primary = palette.gold;

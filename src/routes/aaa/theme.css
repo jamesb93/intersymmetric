@@ -1,9 +1,9 @@
 :root {
-	--primary: #ff44b4;
-	--primary-darker: hsl(324, 100%, 40%);
+  --primary: #ff44b4;
+  --primary-darker: hsl(324, 100%, 40%);
 }
 
 html {
-	font-size: 10px;
-	background-color: white;
+  font-size: 10px;
+  background-color: white;
 }
