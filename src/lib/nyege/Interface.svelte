@@ -13,6 +13,7 @@
 	<B bind:patch />
 	<C bind:patch />
 </div>
+
 <style>
 	.container {
 		display: flex;

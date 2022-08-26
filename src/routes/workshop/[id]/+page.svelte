@@ -5,7 +5,7 @@
 
 	/** @type {import('./$types').PageData} */
 	export let data;
-	
+
 	$workshopID = 'workshop';
 	$room = data.id;
 	socket.emit('roomJoin', createRoomID($workshopID, data.id));

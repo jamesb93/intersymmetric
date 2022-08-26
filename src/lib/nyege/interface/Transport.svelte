@@ -18,11 +18,11 @@
 	};
 
 	$: send_message(patch, 'rate', [$rate]);
-	$: send_message(patch, 'state', [playing])
+	$: send_message(patch, 'state', [playing]);
 </script>
 
 <div class="container">
-	<Play bind:state={playing} on:play={()=>{}} on:stop={()=>{}}/>
+	<Play bind:state={playing} on:play={() => {}} on:stop={() => {}} />
 	<Knob {...rate_knob} bind:value={$rate} />
 </div>
 

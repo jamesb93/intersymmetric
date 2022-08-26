@@ -62,10 +62,7 @@
 	};
 </script>
 
-<svelte:window
-	on:mouseup={handle_mouseup}
-	on:touchend={handle_touchend}
-/>
+<svelte:window on:mouseup={handle_mouseup} on:touchend={handle_touchend} />
 
 <div class="container">
 	<svg

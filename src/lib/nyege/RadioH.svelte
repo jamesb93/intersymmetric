@@ -1,10 +1,10 @@
 <script>
-	export let options = [ {value: 0, display: 'off '} ]
+	export let options = [{ value: 0, display: 'off ' }];
 	export let value = 0;
 	export let func = () => {};
-	export let width = '54px'
-	export let height = '40px'
-	export let synced = false
+	export let width = '54px';
+	export let height = '40px';
+	export let synced = false;
 
 	let waiting = false;
 
@@ -18,18 +18,18 @@
 
 	export const deWait = () => {
 		waiting = false;
-	}
+	};
 </script>
 
-<div class="container" style:height={height}>
+<div class="container" style:height>
 	{#each options as o}
-		<button 
-		style:width={width}
-		class="no-hover" 
-		class:waiting={waiting}
-		disabled={waiting}
-		on:click={() => set(o.value)} 
-		class:selected={value === o.value}
+		<button
+			style:width
+			class="no-hover"
+			class:waiting
+			disabled={waiting}
+			on:click={() => set(o.value)}
+			class:selected={value === o.value}
 		>
 			{o.display}
 		</button>

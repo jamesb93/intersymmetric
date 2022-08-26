@@ -51,7 +51,7 @@ socket.on('pitch2', (x) => pitch2.set(x));
 socket.on('pitch3', (x) => pitch3.set(x));
 socket.on('pitch4', (x) => pitch4.set(x));
 socket.on('pitch5', (x) => pitch5.set(x));
-socket.on('scale', x => scale.set(x));
+socket.on('scale', (x) => scale.set(x));
 export const len0 = writable(1);
 export const len1 = writable(1);
 export const len2 = writable(1);
@@ -70,8 +70,8 @@ socket.on('len6', (x) => len6.set(x));
 // RSlider
 export const rslidermin = writable(1);
 export const rslidermax = writable(8);
-socket.on('rslidermin', x => rslidermin.set(x))
-socket.on('rslidermax', x => rslidermax.set(x))
+socket.on('rslidermin', (x) => rslidermin.set(x));
+socket.on('rslidermax', (x) => rslidermax.set(x));
 
 // Polymetric
 export const div0 = writable(16);
@@ -94,8 +94,8 @@ socket.on('range3', (x) => range3.set(x));
 export const pips = writable([0, 0, 0, 0]);
 
 // Retriggers
-export const retrig0 = writable(0)
-export const retrig1 = writable(0)
+export const retrig0 = writable(0);
+export const retrig1 = writable(0);
 // Chord
 
 export const palette = {

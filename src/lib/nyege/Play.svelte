@@ -4,7 +4,7 @@
 	export let state = false;
 
 	function clickHandler() {
-		state=!state;
+		state = !state;
 	}
 
 	const offsetX = 25;

@@ -75,24 +75,13 @@
 >
 	<!-- Fill -->
 	<!-- <rect class="step-fill" x="0" width={thumbX} {height} /> -->
-	<line 
-	x1={thumbX}
-	x2={thumbX}
-	y1=0
-	y2={height}
-	stroke-dasharray=3
-	/>
+	<line x1={thumbX} x2={thumbX} y1="0" y2={height} stroke-dasharray="3" />
 	<rect x={(thumbX / div) * pos} class="pos" width={thumbWidth} {height} />
 
 	<!-- Step Pipss -->
 	{#each Array(div) as _, i}
 		<!-- <rect class="pip" x={(thumbX / div) * i} width={thumbWidth} {height} /> -->
-		<line class='pip' 
-		x1={(thumbX / div) * i} 
-		x2={(thumbX / div) * i}
-		y1=0
-		y2={height}
-		/>
+		<line class="pip" x1={(thumbX / div) * i} x2={(thumbX / div) * i} y1="0" y2={height} />
 	{/each}
 
 	<text x={width - 50} y={height / 2 + 3}>

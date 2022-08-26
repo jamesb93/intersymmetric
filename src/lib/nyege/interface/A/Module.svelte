@@ -4,41 +4,64 @@
 	import Blip from '$lib/aaa/Blip.svelte';
 	import RadioH from '$lib/nyege/RadioH.svelte';
 	import { socket } from '$lib/nyege/app';
-	import { 
-		range0, range1, range2, range3, 
-		buf0, buf1, buf2, buf3,
-		pitch0, pitch1, pitch2, pitch3,
-		len0, len1, len2, len3,
-		div0, div1, div2, div3,
-		globalCycle, pips
-		
+	import {
+		range0,
+		range1,
+		range2,
+		range3,
+		buf0,
+		buf1,
+		buf2,
+		buf3,
+		pitch0,
+		pitch1,
+		pitch2,
+		pitch3,
+		len0,
+		len1,
+		len2,
+		len3,
+		div0,
+		div1,
+		div2,
+		div3,
+		globalCycle,
+		pips
 	} from '$lib/nyege/app';
 	import { send_message } from '$lib/common/patch_helpers';
-	
+
 	export let patch;
-	
+
 	let blips = new Array(4).fill(null);
-	
+
 	const divKnob = { min: 1, max: 16, step: 1, scale: 0.25 };
 	const stepper = {
-		min: 1, max: 16, step: 1,
-		width: '600', height: '40'
-	}
+		min: 1,
+		max: 16,
+		step: 1,
+		width: '600',
+		height: '40'
+	};
 	const soundKnob = { min: 0, max: 33, step: 1, scale: 0.25 };
 	const pitchKnob = {
-		min: -36, max: 36, step: 1, scale: 0.5
-	}
+		min: -36,
+		max: 36,
+		step: 1,
+		scale: 0.5
+	};
 	const lenKnob = {
-		min: 0, max: 1, step: 0.01, scale: 0.005
-	}
-	
+		min: 0,
+		max: 1,
+		step: 0.01,
+		scale: 0.005
+	};
+
 	const radio = {
-		options: [32, 24, 16, 12, 9, 8, 6, 4, 3, 2, 1, 0.5]
-			.map(x => ({ value: x, display: x})),
+		options: [32, 24, 16, 12, 9, 8, 6, 4, 3, 2, 1, 0.5].map((x) => ({ value: x, display: x })),
 		width: '54.54px',
 		height: '20px'
-	}
-	
+	};
+
 	$: send_message(patch, 'global_cycle', [$globalCycle]);
 	$: send_message(patch, 'polymetric_params', [0, $range0, $div0]);
 	$: send_message(patch, 'polymetric_params', [1, $range1, $div1]);
@@ -50,7 +73,7 @@
 	$: send_message(patch, 'sampler_params', [3, $buf3, $pitch3, $len3]);
 	$: send_message(patch, 'global_cycle', [$globalCycle]);
 
-	patch.messageEvent.subscribe(e => {
+	patch.messageEvent.subscribe((e) => {
 		if (e.tag === 'pips') {
 			$pips = e.payload;
 		}
@@ -66,13 +89,13 @@
 <div class="container">
 	<div class="radio-row">
 		<RadioH {...radio} bind:value={$globalCycle} />
-		<div class='knob-labels'>
+		<div class="knob-labels">
 			<div>sound</div>
 			<div>pitch</div>
 			<div>length</div>
 		</div>
 	</div>
-	
+
 	<div class="row">
 		<Blip bind:this={blips[0]} />
 		<Knob {...divKnob} bind:value={$div0} />
@@ -119,7 +142,7 @@
 		margin-left: 100px;
 		display: grid;
 	}
-	
+
 	.knob-labels {
 		display: grid;
 		grid-template-columns: repeat(3, 50px);
@@ -127,7 +150,7 @@
 		width: 210px;
 		color: var(--primary);
 	}
-	
+
 	.row {
 		display: grid;
 		align-items: center;

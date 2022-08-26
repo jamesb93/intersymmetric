@@ -7,34 +7,43 @@
 
 	export let patch;
 
-	import { buf6, scale, len6, rslidermin, rslidermax} from '$lib/nyege/app';
+	import { buf6, scale, len6, rslidermin, rslidermax } from '$lib/nyege/app';
 
 	const radioh = {
-		options: [1, 2, 3, 4, 5, 6, 7, 8].map(x => ({ display: x, value: x })),
+		options: [1, 2, 3, 4, 5, 6, 7, 8].map((x) => ({ display: x, value: x })),
 		width: '75px'
-	}
+	};
 	const radiov = {
 		options: [
 			{ value: 1, display: 1 },
 			{ value: 2, display: 2 },
 			{ value: 3, display: 3 },
 			{ value: 4, display: 4 },
-			{ value: 0, display: 'off' },
+			{ value: 0, display: 'off' }
 		]
-	}
+	};
 	const rslider = { min: 1, max: 8, step: 1 };
 	const soundKnob = {
 		showValue: true,
-		min: 0, max: 33, step: 1, scale: 0.25
-	}
+		min: 0,
+		max: 33,
+		step: 1,
+		scale: 0.25
+	};
 	const scaleKnob = {
 		showValue: true,
-		min: 0, max: 6, step: 1, scale: 0.5
-	}
+		min: 0,
+		max: 6,
+		step: 1,
+		scale: 0.5
+	};
 	const lenKnob = {
 		showValue: true,
-		min: 0, max: 1, step: 0.01, scale: 0.005
-	}
+		min: 0,
+		max: 1,
+		step: 0.01,
+		scale: 0.005
+	};
 </script>
 
 <div class="container">
@@ -42,7 +51,7 @@
 		<Blip />
 		<RadioV {...radiov} />
 		<div class="centre">
-			<RSlider {...rslider} bind:low={$rslidermin} bind:high={$rslidermax}/>
+			<RSlider {...rslider} bind:low={$rslidermin} bind:high={$rslidermax} />
 			<RadioH {...radioh} />
 		</div>
 		<Knob {...soundKnob} bind:value={$buf6} />
@@ -60,5 +69,3 @@
 		height: 55px;
 	}
 </style>
-
-

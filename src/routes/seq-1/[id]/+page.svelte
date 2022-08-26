@@ -8,7 +8,7 @@
 	import { metal1, metal2, fm1, fm2 } from '$lib/nobounds/instruments/ensemble.js';
 	import { workshopID, room, socket } from '$lib/nobounds/app.js';
 	import { createRoomID } from '$lib/utility.js';
-	
+
 	/** @type {import('./$types').PageData} */
 	export let data;
 
