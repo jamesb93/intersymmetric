@@ -32,7 +32,7 @@
 		place-items: center;
 	}
 	button {
-		border-radius: 1rem;
+		border-radius: 10px;
 		background-color: #ffffff;
 		border: 1px solid var(--primary);
 		height: 100%;
