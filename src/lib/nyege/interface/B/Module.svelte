@@ -27,18 +27,9 @@
 		width: '100px',
 		synced: true
 	}
-	const soundKnob = {
-		showValue: true,
-		min: 0, max: 33, step: 1, scale: 0.25
-	}
-	const pitchKnob = {
-		showValue: true,
-		min: -36, max: 36, step: 1, scale: 0.5
-	}
-	const lenKnob = {
-		showValue: true,
-		min: 0, max: 1, step: 0.01, scale: 0.005
-	}
+	const soundKnob = { min: 0, max: 33, step: 1, scale: 0.25 };
+	const pitchKnob = { min: -36, max: 36, step: 1, scale: 0.5 };
+	const lenKnob = { min: 0, max: 1, step: 0.01, scale: 0.005 };
 
 	$: send_message(patch, 'retrigger_params', [0, $retrig0])
 	$: send_message(patch, 'retrigger_params', [1, $retrig1])

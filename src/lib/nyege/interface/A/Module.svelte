@@ -19,40 +19,22 @@
 	
 	let blips = new Array(4).fill(null);
 	
-	const divKnob = {
-		min: 1, max: 16, step: 1, scale: 0.25,
-	}
+	const divKnob = { min: 1, max: 16, step: 1, scale: 0.25 };
 	const stepper = {
 		min: 1, max: 16, step: 1,
 		width: '600', height: '40'
 	}
-	const soundKnob = {
-		showValue: true,
-		min: 0, max: 33, step: 1, scale: 0.25
-	}
+	const soundKnob = { min: 0, max: 33, step: 1, scale: 0.25 };
 	const pitchKnob = {
-		showValue: true,
 		min: -36, max: 36, step: 1, scale: 0.5
 	}
 	const lenKnob = {
-		showValue: true,
 		min: 0, max: 1, step: 0.01, scale: 0.005
 	}
 	
 	const radio = {
-		options: [
-			{ value: 32, display: 32 },
-			{ value: 24, display: 24 },
-			{ value: 16, display: 16 },
-			{ value: 12, display: 12 },
-			{ value: 9, display: 9 },
-			{ value: 8, display: 8 },
-			{ value: 6, display: 6 },
-			{ value: 4, display: 4 },
-			{ value: 3, display: 3 },
-			{ value: 2, display: 2 },
-			{ value: 1, display: 1 }
-		],
+		options: [32, 24, 16, 12, 9, 8, 6, 4, 3, 2, 1, 0.5]
+			.map(x => ({ value: x, display: x})),
 		width: '54.54px',
 		height: '20px'
 	}
