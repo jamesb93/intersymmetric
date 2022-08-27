@@ -4,10 +4,19 @@
   import RadioV from '$lib/nyege/RadioV.svelte';
   import Blip from '$lib/aaa/Blip.svelte';
   import Knob from '$lib/nyege/Knob.svelte';
+  import { send_message } from '$lib/common/patch_helpers';
 
   export let patch;
 
-  import { buf6, scale, len6, rslidermin, rslidermax, chordfollow } from '$lib/nyege/app';
+  import { 
+    buf6, 
+    scale, 
+    len6, 
+    chordfollow,
+    chordspread,
+    chordlow,
+    chordhigh,
+  } from '$lib/nyege/app';
 
   const radioh = {
     options: [1, 2, 3, 4, 5, 6, 7, 8].map(x => ({ display: x, value: x })),
@@ -22,37 +31,44 @@
       { value: 4, display: 4 }
     ]
   };
-  const rslider = { min: 1, max: 8, step: 1 };
+  const rslider = { min: 0, max: 100, step: 1 };
   const soundKnob = {
-    showValue: true,
     min: 0,
     max: 33,
     step: 1,
     scale: 0.25
   };
   const scaleKnob = {
-    showValue: true,
     min: 0,
     max: 6,
     step: 1,
     scale: 0.5
   };
   const lenKnob = {
-    showValue: true,
     min: 0,
     max: 1,
     step: 0.01,
     scale: 0.005
   };
+
+  let blip;
+
+  patch.messageEvent.subscribe(e => {
+    if (e.tag === 'blip' && e.payload === 6) {
+        blip.blink();
+    }
+  });
+
+  $: send_message(patch, 'chord_params', [$chordfollow, $chordspread, $chordlow/100.0, $chordhigh/100.0, $scale, $buf6, $len6])
 </script>
 
 <div class="container">
   <div class="row">
-    <Blip />
-    <RadioV {...radiov} bind:value={$} />
+    <Blip bind:this={blip}/>
+    <RadioV {...radiov} bind:value={$chordfollow} />
     <div class="centre">
-      <RSlider {...rslider} bind:low={$rslidermin} bind:high={$rslidermax} />
-      <RadioH {...radioh} />
+      <RSlider {...rslider} bind:low={$chordlow} bind:high={$chordhigh} />
+      <RadioH {...radioh} bind:value={$chordspread} />
     </div>
     <Knob {...soundKnob} bind:value={$buf6} />
     <Knob {...scaleKnob} bind:value={$scale} />

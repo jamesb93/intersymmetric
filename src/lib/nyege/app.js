@@ -42,14 +42,12 @@ export const pitch2 = writable(2);
 export const pitch3 = writable(0);
 export const pitch4 = writable(0);
 export const pitch5 = writable(0);
-export const scale = writable(0);
 socket.on('pitch0', x => pitch0.set(x));
 socket.on('pitch1', x => pitch1.set(x));
 socket.on('pitch2', x => pitch2.set(x));
 socket.on('pitch3', x => pitch3.set(x));
 socket.on('pitch4', x => pitch4.set(x));
 socket.on('pitch5', x => pitch5.set(x));
-socket.on('scale', x => scale.set(x));
 export const len0 = writable(1);
 export const len1 = writable(1);
 export const len2 = writable(1);
@@ -64,12 +62,6 @@ socket.on('len3', x => len3.set(x));
 socket.on('len4', x => len4.set(x));
 socket.on('len5', x => len5.set(x));
 socket.on('len6', x => len6.set(x));
-
-// RSlider
-export const rslidermin = writable(1);
-export const rslidermax = writable(8);
-socket.on('rslidermin', x => rslidermin.set(x));
-socket.on('rslidermax', x => rslidermax.set(x));
 
 // Polymetric
 export const div0 = writable(16);
@@ -96,7 +88,15 @@ export const retrig1 = writable(0);
 
 // Chord
 export const chordfollow = writable(0);
+export const chordspread = writable(5);
+export const chordlow = writable(0);
+export const chordhigh = writable(1);
+export const scale = writable(0);
+socket.on('chordlow', x => chordlow.set(x));
 socket.on('chordfollow', x => chordfollow.set(x));
+socket.on('chordspread', x => chordspread.set(x));
+socket.on('chordhigh', x => chordhigh.set(x));
+socket.on('scale', x => scale.set(x));
 
 export const palette = {
   gold: 'rgb(148,108,53)',
