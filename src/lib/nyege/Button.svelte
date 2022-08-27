@@ -1,31 +1,31 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  const dispatch = createEventDispatcher();
-  const click = () => {
-    dispatch('click');
-  };
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
+    const click = () => {
+        dispatch('click');
+    };
 
-  export let font_size = '10px';
-  export let width = '40px';
-  export let height = '20px';
+    export let font_size = '10px';
+    export let width = '40px';
+    export let height = '20px';
 </script>
 
 <button style:font-size={font_size} style:height style:width on:click={click}>
-  <slot />
+    <slot />
 </button>
 
 <style>
-  button {
-    color: black;
-    border: 1px solid var(--primary);
-    border-radius: 10px;
-    background-color: #ffffff;
-    text-align: center;
-    font-family: var(--font);
-  }
+    button {
+        color: black;
+        border: 1px solid var(--primary);
+        border-radius: 10px;
+        background-color: #ffffff;
+        text-align: center;
+        font-family: var(--font);
+    }
 
-  button:hover {
-    background-color: var(--grey);
-    color: black;
-  }
+    button:hover {
+        background-color: var(--grey);
+        color: black;
+    }
 </style>

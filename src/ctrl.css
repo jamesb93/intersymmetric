@@ -1,15 +1,15 @@
 @font-face {
-  font-family: 'Space Mono';
-  src: url('/fonts/SpaceMono-Regular.ttf') format('truetype');
+    font-family: 'Space Mono';
+    src: url('/fonts/SpaceMono-Regular.ttf') format('truetype');
 }
 
 :root {
-  --primary: #3a5963;
-  --primary-darker: hsl(324, 100%, 40%);
-  --grey: #e4e4e3;
+    --primary: #3a5963;
+    --primary-darker: hsl(324, 100%, 40%);
+    --grey: #e4e4e3;
 }
 
 html {
-  font-size: 20px;
-  background-color: white;
+    font-size: 20px;
+    background-color: white;
 }

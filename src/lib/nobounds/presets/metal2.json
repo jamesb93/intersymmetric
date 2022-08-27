@@ -1,68 +1,68 @@
 {
-  "5": {
-    "frequency": 4,
-    "harmonicity": 0.1,
-    "modulationIndex": 12,
-    "resonance": 2271,
-    "octaves": 0.5,
-    "order": 1,
-    "attack": 0.992,
-    "decay": 2,
-    "release": 1
-  },
-  "4": {
-    "frequency": 150,
-    "harmonicity": 1.2,
-    "modulationIndex": 9.11,
-    "resonance": 811,
-    "octaves": 3,
-    "order": 1,
-    "attack": 0.001,
-    "decay": 1.229,
-    "release": 1
-  },
-  "3": {
-    "frequency": 150,
-    "harmonicity": 1.2,
-    "modulationIndex": 10.61,
-    "resonance": 394,
-    "octaves": 3,
-    "order": 1,
-    "attack": 0.001,
-    "decay": 1.229,
-    "release": 1
-  },
-  "2": {
-    "frequency": 150,
-    "harmonicity": 0.8,
-    "modulationIndex": 7.31,
-    "resonance": 200,
-    "octaves": 0.5,
-    "order": 1,
-    "attack": 0.001,
-    "decay": 2,
-    "release": 1
-  },
-  "1": {
-    "frequency": 150,
-    "harmonicity": 0.7,
-    "modulationIndex": 5.81,
-    "resonance": 200,
-    "octaves": 0.5,
-    "order": 1,
-    "attack": 0.001,
-    "decay": 2,
-    "release": 1
-  },
-  "0": {
-    "frequency": 150,
-    "harmonicity": 0.2,
-    "modulationIndex": 5.81,
-    "resonance": 200,
-    "octaves": 0.5,
-    "order": 1,
-    "attack": 0.001,
-    "decay": 2,
-    "release": 1
-  }
+    "5": {
+        "frequency": 4,
+        "harmonicity": 0.1,
+        "modulationIndex": 12,
+        "resonance": 2271,
+        "octaves": 0.5,
+        "order": 1,
+        "attack": 0.992,
+        "decay": 2,
+        "release": 1
+    },
+    "4": {
+        "frequency": 150,
+        "harmonicity": 1.2,
+        "modulationIndex": 9.11,
+        "resonance": 811,
+        "octaves": 3,
+        "order": 1,
+        "attack": 0.001,
+        "decay": 1.229,
+        "release": 1
+    },
+    "3": {
+        "frequency": 150,
+        "harmonicity": 1.2,
+        "modulationIndex": 10.61,
+        "resonance": 394,
+        "octaves": 3,
+        "order": 1,
+        "attack": 0.001,
+        "decay": 1.229,
+        "release": 1
+    },
+    "2": {
+        "frequency": 150,
+        "harmonicity": 0.8,
+        "modulationIndex": 7.31,
+        "resonance": 200,
+        "octaves": 0.5,
+        "order": 1,
+        "attack": 0.001,
+        "decay": 2,
+        "release": 1
+    },
+    "1": {
+        "frequency": 150,
+        "harmonicity": 0.7,
+        "modulationIndex": 5.81,
+        "resonance": 200,
+        "octaves": 0.5,
+        "order": 1,
+        "attack": 0.001,
+        "decay": 2,
+        "release": 1
+    },
+    "0": {
+        "frequency": 150,
+        "harmonicity": 0.2,
+        "modulationIndex": 5.81,
+        "resonance": 200,
+        "octaves": 0.5,
+        "order": 1,
+        "attack": 0.001,
+        "decay": 2,
+        "release": 1
+    }
 }

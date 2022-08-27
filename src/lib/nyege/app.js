@@ -7,7 +7,7 @@ let socketAddr = import.meta.env.PROD ? 'wss://nyege-server.intersymmetric.xyz:4
 export const socket = io(socketAddr);
 
 socket.on('connect', () => {
-  console.log('connected to nyegenyege websocket');
+    console.log('connected to nyegenyege websocket');
 });
 
 // Room Management
@@ -99,9 +99,9 @@ socket.on('chordhigh', x => chordhigh.set(x));
 socket.on('scale', x => scale.set(x));
 
 export const palette = {
-  gold: 'rgb(148,108,53)',
-  blue: 'rgb(148,108,53)',
-  green: 'rgb(59,136,81)'
+    gold: 'rgb(148,108,53)',
+    blue: 'rgb(148,108,53)',
+    green: 'rgb(59,136,81)'
 };
 
 export const primary = palette.gold;
