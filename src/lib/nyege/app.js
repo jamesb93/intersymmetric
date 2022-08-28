@@ -19,7 +19,10 @@ socket.on('num_users', x => num_users.set(x));
 // Common
 export const pips = writable([0, 0, 0, 0]);
 export const rate = writable(0.2);
-socket.on('rate', x => { rate.set(x); console.log(x) });
+socket.on('rate', x => {
+    rate.set(x);
+    console.log(x);
+});
 export const globalCycle = writable(16);
 socket.on('globalCycle', x => globalCycle.set(x));
 

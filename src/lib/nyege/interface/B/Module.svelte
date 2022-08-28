@@ -36,7 +36,7 @@
             } else if (e.payload === 5) {
                 blip1.blink();
             }
-        };
+        }
     });
 
     $: send_message(patch, 'retrigger_params', [0, $retrig0]);

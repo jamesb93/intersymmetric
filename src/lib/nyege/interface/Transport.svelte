@@ -23,11 +23,7 @@
 
 <div class="container">
     <Play bind:state={playing} />
-    <Knob
-        {...rate_knob}
-        bind:value={$rate}
-        func={() => socket.emit('rate', $rate)}
-    />
+    <Knob {...rate_knob} bind:value={$rate} func={() => socket.emit('rate', $rate)} />
 </div>
 
 <style>
