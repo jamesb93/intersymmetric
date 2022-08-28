@@ -10,12 +10,14 @@
     export let height = 30;
     export let active = false;
     export let displayValue = null;
-    export let func = () => {};
+    export let lofunc = () => {};
+    export let hifunc = () => {};
 
     let thumb, fill, bar, rect;
     let down = false;
     let prev_touch = false;
-    let prev_value = null;
+    let prevLow = null;
+    let prevHigh = null;
     let edge = 0; // 0 left 1 right;
 
     $: lowX = clip(scale(low, min, max, 0, width), 0, width);
@@ -27,7 +29,6 @@
             const x = e.pageX - rect.left;
             const ratio = x / width;
             const scaled = scale(ratio, 0, 1, min, max);
-            // console.log(scaled)
             if (edge === 0) {
                 low = Math.round((scaled - min) / step) * step + min;
                 low = clip(low, min, high);
@@ -35,8 +36,14 @@
                 high = Math.round((scaled - min) / step) * step + min;
                 high = clip(high, low, max);
             }
-            // if (prev_value !== [low, high]) { func() };
-            // prev_value = [low, high];
+            if (prevLow !== low) {
+                lofunc();
+            }
+            if (prevHigh !== high) {
+                hifunc();
+            }
+            prevLow = low;
+            prevHigh = high;
         }
     };
 

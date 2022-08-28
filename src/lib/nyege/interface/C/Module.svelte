@@ -5,6 +5,7 @@
     import Blip from '$lib/aaa/Blip.svelte';
     import Knob from '$lib/nyege/Knob.svelte';
     import { send_message } from '$lib/common/patch_helpers';
+    import { socket } from '$lib/nyege/app';
     import { buf6, scale, len6, chordfollow, chordspread, chordlow, chordhigh } from '$lib/nyege/app';
 
     export let patch;
@@ -66,14 +67,20 @@
 <div class="container">
     <div class="row grid">
         <Blip bind:this={blip} />
-        <RadioV {...radiov} bind:value={$chordfollow} />
+        <RadioV {...radiov} bind:value={$chordfollow} func={() => socket.emit('chordfollow', $chordfollow)} />
         <div class="centre">
-            <RSlider {...rslider} bind:low={$chordlow} bind:high={$chordhigh} />
-            <RadioH {...radioh} bind:value={$chordspread} />
+            <RSlider 
+                {...rslider} 
+                bind:low={$chordlow} 
+                bind:high={$chordhigh} 
+                lofunc={() => socket.emit('chordlow', $chordlow)} 
+                hifunc={() => socket.emit('chordhigh', $chordhigh)} 
+            />
+            <RadioH {...radioh} bind:value={$chordspread} func={() => socket.emit('chordspread', $chordspread)} />
         </div>
-        <Knob {...soundKnob} bind:value={$buf6} />
-        <Knob {...scaleKnob} bind:value={$scale} />
-        <Knob {...lenKnob} bind:value={$len6} />
+        <Knob {...soundKnob} bind:value={$buf6} func={() => socket.emit('buf6', $buf6)} />
+        <Knob {...scaleKnob} bind:value={$scale} func={() => socket.emit('scale', $scale)} />
+        <Knob {...lenKnob} bind:value={$len6} func={() => socket.emit('len6', $len6)} />
     </div>
 </div>
 
