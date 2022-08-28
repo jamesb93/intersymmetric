@@ -4,7 +4,7 @@
     import RadioV from '$lib/nyege/RadioV.svelte';
     import Blip from '$lib/aaa/Blip.svelte';
     import Knob from '$lib/nyege/Knob.svelte';
-    import { send_message } from '$lib/common/patch_helpers';
+    import { sendMessage } from '$lib/common/patch_helpers';
     import { socket } from '$lib/nyege/app';
     import { buf6, scale, len6, chordfollow, chordspread, chordlow, chordhigh } from '$lib/nyege/app';
 
@@ -56,7 +56,7 @@
         }
     });
 
-    $: send_message(patch, 'chord_params', [
+    $: sendMessage(patch, 'chord_params', [
         $chordfollow,
         $chordspread,
         $chordlow / 100.0,

@@ -1,6 +1,6 @@
 import RNBO from '@rnbo/js';
 
-const send_message = (patch, key, data) => {
+const sendMessage = (patch, key, data) => {
     if (patch && RNBO) {
         patch.scheduleEvent(new RNBO.MessageEvent(RNBO.TimeNow, key, data));
     }
@@ -22,4 +22,4 @@ const load_samples = async (patch, context, numsamples, prefix, asset_path, offs
     );
 };
 
-export { send_message, load_samples };
+export { sendMessage, load_samples };

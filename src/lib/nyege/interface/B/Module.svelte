@@ -2,7 +2,7 @@
     import RadioH from '$lib/nyege/RadioH.svelte';
     import Blip from '$lib/aaa/Blip.svelte';
     import Knob from '$lib/nyege/Knob.svelte';
-    import { send_message } from '$lib/common/patch_helpers';
+    import { sendMessage } from '$lib/common/patch_helpers';
     import { socket } from '$lib/nyege/app';
     import { buf4, buf5, pitch4, pitch5, len4, len5, retrig0, retrig1 } from '$lib/nyege/app';
 
@@ -39,10 +39,10 @@
         }
     });
 
-    $: send_message(patch, 'retrigger_params', [0, $retrig0]);
-    $: send_message(patch, 'retrigger_params', [1, $retrig1]);
-    $: send_message(patch, 'sampler_params', [4, $buf4, $pitch4, $len4]);
-    $: send_message(patch, 'sampler_params', [5, $buf5, $pitch5, $len5]);
+    $: sendMessage(patch, 'retrigger_params', [0, $retrig0]);
+    $: sendMessage(patch, 'retrigger_params', [1, $retrig1]);
+    $: sendMessage(patch, 'sampler_params', [4, $buf4, $pitch4, $len4]);
+    $: sendMessage(patch, 'sampler_params', [5, $buf5, $pitch5, $len5]);
 </script>
 
 <div class="container">

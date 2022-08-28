@@ -4,7 +4,7 @@
     import Blip from '$lib/aaa/Blip.svelte';
     import RadioH from '$lib/nyege/RadioH.svelte';
     import { socket } from '$lib/nyege/app';
-    import { send_message } from '$lib/common/patch_helpers';
+    import { sendMessage } from '$lib/common/patch_helpers';
     import {
         range0,
         range1,
@@ -67,14 +67,14 @@
         }
     });
 
-    $: send_message(patch, 'polymetric_params', [0, $range0, $div0]);
-    $: send_message(patch, 'polymetric_params', [1, $range1, $div1]);
-    $: send_message(patch, 'polymetric_params', [2, $range2, $div2]);
-    $: send_message(patch, 'polymetric_params', [3, $range3, $div3]);
-    $: send_message(patch, 'sampler_params', [0, $buf0, $pitch0, $len0]);
-    $: send_message(patch, 'sampler_params', [1, $buf1, $pitch1, $len1]);
-    $: send_message(patch, 'sampler_params', [2, $buf2, $pitch2, $len2]);
-    $: send_message(patch, 'sampler_params', [3, $buf3, $pitch3, $len3]);
+    $: sendMessage(patch, 'polymetric_params', [0, $range0, $div0]);
+    $: sendMessage(patch, 'polymetric_params', [1, $range1, $div1]);
+    $: sendMessage(patch, 'polymetric_params', [2, $range2, $div2]);
+    $: sendMessage(patch, 'polymetric_params', [3, $range3, $div3]);
+    $: sendMessage(patch, 'sampler_params', [0, $buf0, $pitch0, $len0]);
+    $: sendMessage(patch, 'sampler_params', [1, $buf1, $pitch1, $len1]);
+    $: sendMessage(patch, 'sampler_params', [2, $buf2, $pitch2, $len2]);
+    $: sendMessage(patch, 'sampler_params', [3, $buf3, $pitch3, $len3]);
 </script>
 
 <div class="container">

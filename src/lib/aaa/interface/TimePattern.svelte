@@ -4,7 +4,7 @@
     import Slider from '../Slider.svelte';
     import { socket, calculated_speed } from '../app';
     import { max_scale } from '$lib/utility';
-    import { send_message } from '$lib/common/patch_helpers';
+    import { sendMessage } from '$lib/common/patch_helpers';
     import {
         a_mode,
         b_mode,
@@ -117,12 +117,12 @@
     $: calculated_b_1 = ((b1_map * 1) / $calculated_speed).toFixed(0);
     $: calculated_b_2 = ((b2_map * 1) / $calculated_speed).toFixed(0);
 
-    $: send_message(patch, 'a_steps', [$a_steps_0, $a_steps_1, $a_steps_2]);
-    $: send_message(patch, 'b_steps', [b0_map, b1_map, b2_map]);
-    $: send_message(patch, 'c_steps', [$c_steps_0, $c_steps_1, $c_steps_2]);
-    $: send_message(patch, 'a_mode', [$a_mode]);
-    $: send_message(patch, 'b_mode', [$b_mode]);
-    $: send_message(patch, 'c_mode', [$c_mode]);
+    $: sendMessage(patch, 'a_steps', [$a_steps_0, $a_steps_1, $a_steps_2]);
+    $: sendMessage(patch, 'b_steps', [b0_map, b1_map, b2_map]);
+    $: sendMessage(patch, 'c_steps', [$c_steps_0, $c_steps_1, $c_steps_2]);
+    $: sendMessage(patch, 'a_mode', [$a_mode]);
+    $: sendMessage(patch, 'b_mode', [$b_mode]);
+    $: sendMessage(patch, 'c_mode', [$c_mode]);
 
     let a_current_step = 0;
     let b_current_step = 0;
