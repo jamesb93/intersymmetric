@@ -4,8 +4,8 @@
     import Knob from '$lib/nyege/Knob.svelte';
     import { send_message } from '$lib/common/patch_helpers';
     import { socket } from '$lib/nyege/app';
-
     import { buf4, buf5, pitch4, pitch5, len4, len5, retrig0, retrig1 } from '$lib/nyege/app';
+
 
     export let patch;
 
@@ -28,11 +28,6 @@
     const pitchKnob = { min: -36, max: 36, step: 1, scale: 0.5 };
     const lenKnob = { min: 0, max: 1, step: 0.01, scale: 0.005 };
 
-    $: send_message(patch, 'retrigger_params', [0, $retrig0]);
-    $: send_message(patch, 'retrigger_params', [1, $retrig1]);
-    $: send_message(patch, 'sampler_params', [4, $buf4, $pitch4, $len4]);
-    $: send_message(patch, 'sampler_params', [5, $buf5, $pitch5, $len5]);
-
     let blip0, blip1;
     let radio0, radio1;
 
@@ -49,6 +44,11 @@
             radio1.deWait();
         }
     });
+
+    $: send_message(patch, 'retrigger_params', [0, $retrig0]);
+    $: send_message(patch, 'retrigger_params', [1, $retrig1]);
+    $: send_message(patch, 'sampler_params', [4, $buf4, $pitch4, $len4]);
+    $: send_message(patch, 'sampler_params', [5, $buf5, $pitch5, $len5]);
 </script>
 
 <div class="container">
