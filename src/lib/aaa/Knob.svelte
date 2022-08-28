@@ -16,7 +16,7 @@
     export let HEIGHT = 60;
     export let show_value = false;
     export let displayValue = null;
-    export let secondary_color = primary;
+    export let accentColor = primary;
     export let stroke_width = 1;
     export let enabled = true;
     export let func = () => {};
@@ -34,7 +34,7 @@
     let pathValue;
     let knob;
 
-    $: primary_color = enabled ? primary : secondary_color;
+    $: primaryColor = enabled ? primary : accentColor;
 
     onMount(() => {
         dashLength();
@@ -150,14 +150,14 @@
         <path
             d={range_path}
             stroke-width={stroke_width}
-            stroke={down ? primary_darker : primary_color}
+            stroke={down ? primary_darker : primaryColor}
             class="knob-control__range"
         />
         <!-- Arc Fill -->
         <path
             d={value_path}
             stroke-width={stroke_width}
-            stroke={down ? primary_darker : primary_color}
+            stroke={down ? primary_darker : primaryColor}
             style={dash_style}
             bind:this={pathValue}
             data-dash={length}
