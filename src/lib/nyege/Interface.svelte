@@ -20,7 +20,7 @@
         flex-direction: column;
         margin: 0 auto;
         margin-top: 2em;
-        gap: 4em;
+        gap: 1em;
     }
 
     @media only screen and (min-width: 1005px) {

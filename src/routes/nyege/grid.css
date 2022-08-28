@@ -2,5 +2,14 @@
     display: grid;
     justify-content: center;
     align-items: center;
+    gap: 10px;
     grid-template-columns: 30px 50px 600px 50px 50px 50px;
+}
+
+.centre {
+    width: 600px;
+}
+
+.empty {
+    width: 100%;
 }

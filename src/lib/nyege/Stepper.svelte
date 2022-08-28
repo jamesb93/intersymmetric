@@ -5,7 +5,7 @@
     export let min = 0,
         max = 2,
         step = 1;
-    export let width = 400;
+    export let width = 600;
     export let height = 30;
     export let thumbWidth = 1;
     export let active = false;

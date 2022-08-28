@@ -12,7 +12,6 @@
 
     const radioh = {
         options: [1, 2, 3, 4, 5, 6, 7, 8].map(x => ({ display: x, value: x })),
-        width: '75px',
         height: '40px'
     };
     const radiov = {
@@ -24,7 +23,12 @@
             { value: 4, display: 4 }
         ]
     };
-    const rslider = { min: 0, max: 100, step: 1 };
+    const rslider = { 
+        min: 0, 
+        max: 100, 
+        step: 1,
+        width: 598
+    };
     const soundKnob = {
         min: 0,
         max: 33,
@@ -64,26 +68,38 @@
 </script>
 
 <div class="container">
-    <div class="row grid">
+    <div class="grid">
         <Blip bind:this={blip} />
         <RadioV {...radiov} bind:value={$chordfollow} func={() => socket.emit('chordfollow', $chordfollow)} />
         <div class="centre">
             <RSlider
-                {...rslider}
-                bind:low={$chordlow}
-                bind:high={$chordhigh}
-                lofunc={() => socket.emit('chordlow', $chordlow)}
-                hifunc={() => socket.emit('chordhigh', $chordhigh)}
+            {...rslider}
+            bind:low={$chordlow}
+            bind:high={$chordhigh}
+            lofunc={() => socket.emit('chordlow', $chordlow)}
+            hifunc={() => socket.emit('chordhigh', $chordhigh)}
             />
             <RadioH {...radioh} bind:value={$chordspread} func={() => socket.emit('chordspread', $chordspread)} />
         </div>
-        <Knob {...soundKnob} bind:value={$buf6} func={() => socket.emit('buf6', $buf6)} />
-        <Knob {...scaleKnob} bind:value={$scale} func={() => socket.emit('scale', $scale)} />
-        <Knob {...lenKnob} bind:value={$len6} func={() => socket.emit('len6', $len6)} />
-    </div>
+        <div class="sound">
+            <div>sound</div>
+            <Knob {...soundKnob} bind:value={$buf6} func={() => socket.emit('buf6', $buf6)} />
+        </div>
+        <div class="scale">
+            <div>scale</div>
+            <Knob {...scaleKnob} bind:value={$scale} func={() => socket.emit('scale', $scale)} />
+        </div>
+        <div class="length">
+            <div>length</div>
+            <Knob {...lenKnob} bind:value={$len6} func={() => socket.emit('len6', $len6)} />
+        </div>
+        </div>
 </div>
 
 <style>
+    .container {
+        height: 94px;
+    }
     .row {
         height: 90px;
     }

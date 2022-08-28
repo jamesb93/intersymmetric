@@ -21,10 +21,9 @@
     };
 </script>
 
-<div class="container" style:height>
+<div class="container centre" style:height>
     {#each options as o}
         <button
-            style:width
             class="no-hover"
             class:waiting
             disabled={waiting}
@@ -40,10 +39,11 @@
     .container {
         display: flex;
         flex-direction: row;
-        gap: 1px;
         place-items: center;
+        gap: 0.1rem;
     }
     button {
+        flex: 1 1 0;
         background-color: #ffffff;
         border: 1px solid var(--primary);
         height: 100%;

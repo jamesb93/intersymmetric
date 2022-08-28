@@ -26,7 +26,6 @@
         div1,
         div2,
         div3,
-        globalCycle,
         pips
     } from '$lib/nyege/app';
 
@@ -39,7 +38,7 @@
         min: 1,
         max: 16,
         step: 1,
-        width: '600',
+        width: 598,
         height: '40'
     };
     const soundKnob = { min: 0, max: 33, step: 1, scale: 0.25 };
@@ -56,12 +55,6 @@
         scale: 0.005
     };
 
-    const radio = {
-        options: [32, 24, 16, 12, 9, 8, 6, 4, 3, 2, 1, 0.5].map(x => ({ value: x, display: x })),
-        width: '54.54px',
-        height: '20px'
-    };
-
     patch.messageEvent.subscribe(e => {
         if (e.tag === 'pips') {
             $pips = e.payload;
@@ -74,7 +67,6 @@
         }
     });
 
-    $: send_message(patch, 'global_cycle', [$globalCycle]);
     $: send_message(patch, 'polymetric_params', [0, $range0, $div0]);
     $: send_message(patch, 'polymetric_params', [1, $range1, $div1]);
     $: send_message(patch, 'polymetric_params', [2, $range2, $div2]);
@@ -83,17 +75,13 @@
     $: send_message(patch, 'sampler_params', [1, $buf1, $pitch1, $len1]);
     $: send_message(patch, 'sampler_params', [2, $buf2, $pitch2, $len2]);
     $: send_message(patch, 'sampler_params', [3, $buf3, $pitch3, $len3]);
-    $: send_message(patch, 'global_cycle', [$globalCycle]);
 </script>
 
 <div class="container">
-    <div class="radio-row">
-        <RadioH {...radio} bind:value={$globalCycle} func={() => socket.emit('globalCycle', $globalCycle)} />
-        <div class="knob-labels">
-            <div>sound</div>
-            <div>pitch</div>
-            <div>length</div>
-        </div>
+    <div class="labels grid">
+        <div id='sound-label'>sound</div>
+        <div id='pitch-label'>pitch</div>
+        <div id='length-label'>length</div>
     </div>
 
     <div class="row grid">
@@ -159,18 +147,13 @@
         display: flex;
         flex-direction: column;
     }
-    .radio-row {
-        display: grid;
-        grid-template-columns: 600px 150px;
-        justify-content: center;
-        margin-left: 80px;
-    }
 
-    .knob-labels {
+    .labels {
         display: grid;
         grid-template-columns: repeat(3, 50px);
-        justify-content: space-around;
+        justify-content: center;
         color: var(--primary);
+        margin-left: 710px;
     }
 
     .row {

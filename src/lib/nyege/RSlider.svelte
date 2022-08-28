@@ -6,10 +6,9 @@
     export let min = 0;
     export let max = 2;
     export let step = 1;
-    export let width = 600;
+    export let width = 598;
     export let height = 30;
     export let active = false;
-    export let displayValue = null;
     export let lofunc = () => {};
     export let hifunc = () => {};
 
@@ -81,17 +80,15 @@
     on:touchend={handle_touchend}
 />
 
-<svg on:mousedown={handle_controldown} on:touchstart={handle_controldown} {width} {height} bind:this={bar} class:active>
-    <!-- Fill -->
+<svg 
+on:mousedown={handle_controldown} 
+on:touchstart={handle_controldown} 
+{width} 
+{height} 
+bind:this={bar} 
+class:active
+>
     <rect class="step-fill" x={lowX} width={Math.max(highX - lowX, 2)} {height} />
-
-    <!-- <text x={width - 50} y={height / 2 + 3}>
-	{#if displayValue !== null}
-	{displayValue}
-	{:else}
-	{value.toFixed(2)}
-	{/if}
-</text> -->
 </svg>
 
 <style>
@@ -99,8 +96,6 @@
         cursor: grab;
         touch-action: none;
         background-color: white;
-        stroke-width: 1px;
-        stroke: var(--primary);
         border: 1px solid var(--primary);
     }
 
