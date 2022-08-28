@@ -3,9 +3,10 @@
     --primary-darker: #47361c;
     --grey: #e4e4e3;
     --light-grey: rgb(243, 243, 243);
+    --bg: papayawhip;
 }
 
 body {
     font-size: 10px;
-    background-color: papayawhip;
+    background-color: var(--bg);
 }
