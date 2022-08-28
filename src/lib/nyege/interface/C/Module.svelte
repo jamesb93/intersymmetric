@@ -5,10 +5,10 @@
     import Blip from '$lib/aaa/Blip.svelte';
     import Knob from '$lib/nyege/Knob.svelte';
     import { send_message } from '$lib/common/patch_helpers';
+    import { buf6, scale, len6, chordfollow, chordspread, chordlow, chordhigh } from '$lib/nyege/app';
 
     export let patch;
 
-    import { buf6, scale, len6, chordfollow, chordspread, chordlow, chordhigh } from '$lib/nyege/app';
 
     const radioh = {
         options: [1, 2, 3, 4, 5, 6, 7, 8].map(x => ({ display: x, value: x })),
