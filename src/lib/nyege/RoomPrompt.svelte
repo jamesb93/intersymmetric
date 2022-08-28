@@ -8,7 +8,7 @@
     function change_handler() {
         console.log('ever used');
         ever_used = true;
-        socket.emit('join_room', `aaa.${code}`);
+        socket.emit('join_room', `nyege.${code}`);
         $room = code;
         code = '';
         goto(`/nyege/${$room}`);
