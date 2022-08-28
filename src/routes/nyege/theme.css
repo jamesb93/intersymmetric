@@ -5,7 +5,7 @@
     --light-grey: rgb(243, 243, 243);
 }
 
-html {
+body {
     font-size: 10px;
-    background-color: var(--light-grey);
+    background-color:papayawhip;
 }

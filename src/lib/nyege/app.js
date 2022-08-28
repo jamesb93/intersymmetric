@@ -89,8 +89,8 @@ export const retrig1 = writable(0);
 // Chord
 export const chordfollow = writable(0);
 export const chordspread = writable(5);
-export const chordlow = writable(0);
-export const chordhigh = writable(1);
+export const chordlow = writable(10);
+export const chordhigh = writable(90);
 export const scale = writable(0);
 socket.on('chordlow', x => chordlow.set(x));
 socket.on('chordfollow', x => chordfollow.set(x));

@@ -3,6 +3,7 @@
     import Blip from '$lib/aaa/Blip.svelte';
     import Knob from '$lib/nyege/Knob.svelte';
     import { send_message } from '$lib/common/patch_helpers';
+    import { socket } from '$lib/nyege/app';
 
     import { buf4, buf5, pitch4, pitch5, len4, len5, retrig0, retrig1 } from '$lib/nyege/app';
 
@@ -20,7 +21,8 @@
             { value: 0.25, display: '1/4' }
         ],
         width: '100px',
-        synced: true
+        synced: true,
+        height: '40px'
     };
     const soundKnob = { min: 0, max: 33, step: 1, scale: 0.25 };
     const pitchKnob = { min: -36, max: 36, step: 1, scale: 0.5 };
@@ -50,23 +52,21 @@
 </script>
 
 <div class="container">
-    <div class="row">
+    <div class="row grid">
         <Blip bind:this={blip0} />
         <div class="empty" />
-        <!-- Vertical Radio -->
-        <RadioH {...cycle} bind:value={$retrig0} bind:this={radio0} />
-        <Knob {...soundKnob} bind:value={$buf4} />
-        <Knob {...pitchKnob} bind:value={$pitch4} />
-        <Knob {...lenKnob} bind:value={$len4} />
+        <RadioH {...cycle} bind:value={$retrig0} bind:this={radio0} func={() => socket.emit('retrig0', $retrig0)} />
+        <Knob {...soundKnob} bind:value={$buf4} func={() => socket.emit('buf4', $buf4)} />
+        <Knob {...pitchKnob} bind:value={$pitch4} func={() => socket.emit('pitch4', $pitch4)} />
+        <Knob {...lenKnob} bind:value={$len4} func={() => socket.emit('len4', $len4)} />
     </div>
-    <div class="row">
+    <div class="row grid">
         <Blip bind:this={blip1} />
         <div class="empty" />
-        <!-- Vertical Radio -->
-        <RadioH {...cycle} bind:value={$retrig1} bind:this={radio1} />
-        <Knob {...soundKnob} bind:value={$buf5} />
-        <Knob {...pitchKnob} bind:value={$pitch5} />
-        <Knob {...lenKnob} bind:value={$len5} />
+        <RadioH {...cycle} bind:value={$retrig1} bind:this={radio1} func={() => socket.emit('retrig0', $retrig1)} />
+        <Knob {...soundKnob} bind:value={$buf5} func={() => socket.emit('buf5', $buf5)} />
+        <Knob {...pitchKnob} bind:value={$pitch5} func={() => socket.emit('pitch5', $pitch5)} />
+        <Knob {...lenKnob} bind:value={$len5} func={() => socket.emit('len5', $len5)} />
     </div>
 </div>
 
@@ -76,10 +76,6 @@
         flex-direction: column;
     }
     .row {
-        display: grid;
-        grid-template-columns: var(--grid);
-        align-items: center;
-        justify-content: center;
         height: 55px;
     }
     .empty {

@@ -51,7 +51,7 @@
     };
 </script>
 
-<div class="row">
+<div class="row grid">
     <Blip />
     <Knob {...divKnob} bind:value={div} />
     <Stepper {...stepper} bind:value={range} bind:div />
@@ -62,10 +62,6 @@
 
 <style>
     .row {
-        display: grid;
-        align-items: center;
-        justify-content: center;
-        grid-template-columns: var(--grid);
         height: 55px;
     }
 </style>

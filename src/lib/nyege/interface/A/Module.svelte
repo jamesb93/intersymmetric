@@ -96,7 +96,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row grid">
         <Blip bind:this={blips[0]} />
         <Knob {...divKnob} bind:value={$div0} />
         <Stepper {...stepper} bind:value={$range0} bind:div={$div0} pos={$pips[0]} />
@@ -104,7 +104,7 @@
         <Knob {...pitchKnob} bind:value={$pitch0} />
         <Knob {...lenKnob} bind:value={$len0} />
     </div>
-    <div class="row">
+    <div class="row grid">
         <Blip bind:this={blips[1]} />
         <Knob {...divKnob} bind:value={$div1} />
         <Stepper {...stepper} bind:value={$range1} bind:div={$div1} pos={$pips[1]} />
@@ -112,7 +112,7 @@
         <Knob {...pitchKnob} bind:value={$pitch1} />
         <Knob {...lenKnob} bind:value={$len1} />
     </div>
-    <div class="row">
+    <div class="row grid">
         <Blip bind:this={blips[2]} />
         <Knob {...divKnob} bind:value={$div2} />
         <Stepper {...stepper} bind:value={$range2} bind:div={$div2} pos={$pips[2]} />
@@ -120,7 +120,7 @@
         <Knob {...pitchKnob} bind:value={$pitch2} />
         <Knob {...lenKnob} bind:value={$len2} />
     </div>
-    <div class="row">
+    <div class="row grid">
         <Blip bind:this={blips[3]} />
         <Knob {...divKnob} bind:value={$div3} />
         <Stepper {...stepper} bind:value={$range3} bind:div={$div3} pos={$pips[3]} />
@@ -137,25 +137,19 @@
     }
     .radio-row {
         display: grid;
-        grid-template-columns: 600px 210px;
+        grid-template-columns: 600px 150px;
         justify-content: center;
-        margin-left: 100px;
-        display: grid;
+        margin-left: 80px;
     }
 
     .knob-labels {
         display: grid;
         grid-template-columns: repeat(3, 50px);
         justify-content: space-around;
-        width: 210px;
         color: var(--primary);
     }
 
     .row {
-        display: grid;
-        align-items: center;
-        justify-content: center;
-        grid-template-columns: var(--grid);
         height: 55px;
     }
 </style>

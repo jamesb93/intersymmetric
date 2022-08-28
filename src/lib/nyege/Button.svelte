@@ -18,7 +18,6 @@
     button {
         color: black;
         border: 1px solid var(--primary);
-        border-radius: 10px;
         background-color: #ffffff;
         text-align: center;
         font-family: var(--font);

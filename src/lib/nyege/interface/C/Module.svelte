@@ -12,7 +12,8 @@
 
     const radioh = {
         options: [1, 2, 3, 4, 5, 6, 7, 8].map(x => ({ display: x, value: x })),
-        width: '75px'
+        width: '75px',
+        height: '40px'
     };
     const radiov = {
         options: [
@@ -63,7 +64,7 @@
 </script>
 
 <div class="container">
-    <div class="row">
+    <div class="row grid">
         <Blip bind:this={blip} />
         <RadioV {...radiov} bind:value={$chordfollow} />
         <div class="centre">
@@ -78,10 +79,6 @@
 
 <style>
     .row {
-        display: grid;
-        grid-template-columns: 30px 70px 600px 70px 70px 70px;
-        align-items: center;
-        justify-content: center;
-        height: 55px;
+        height: 90px;
     }
 </style>

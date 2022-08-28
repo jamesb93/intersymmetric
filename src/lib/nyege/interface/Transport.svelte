@@ -2,7 +2,7 @@
     import Play from '$lib/nyege/Play.svelte';
     import Knob from '$lib/nyege/Knob.svelte';
     import { send_message } from '$lib/common/patch_helpers';
-    import { rate } from '$lib/nyege/app';
+    import { socket, rate } from '$lib/nyege/app';
 
     export let patch;
     let playing = false;
@@ -22,8 +22,15 @@
 </script>
 
 <div class="container">
-    <Play bind:state={playing} on:play={() => {}} on:stop={() => {}} />
-    <Knob {...rate_knob} bind:value={$rate} />
+    <Play bind:state={playing} />
+    <Knob 
+        {...rate_knob} 
+        bind:value={$rate}
+        func={ () => {
+            socket.emit('rate', $rate)
+            } 
+        } 
+    />
 </div>
 
 <style>

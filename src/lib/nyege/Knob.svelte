@@ -9,7 +9,7 @@
     export let step = 1;
     export let reset_value = 0;
     export let scale = 1.0;
-    export let WIDTH = 70;
+    export let WIDTH = 50;
     export let HEIGHT = 50;
     export let showValue = true;
     export let display_value = null;

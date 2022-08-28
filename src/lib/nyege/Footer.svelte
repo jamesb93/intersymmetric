@@ -4,14 +4,12 @@
         <a target="_blank" href="http://www.riantreanor.com/">Rian Treanor</a>
     </div>
     <div class="no-hover">
-        Programming is not by <a target="_blank" href="https://www.jamesbradbury.net">James Bradbury</a>
+        Programming by <a target="_blank" href="https://www.jamesbradbury.net">James Bradbury</a>
     </div>
 </footer>
 
 <style>
     footer {
-        position: absolute;
-        bottom: 0;
         display: flex;
         flex-direction: column;
         margin-top: 2em;

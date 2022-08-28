@@ -2,6 +2,8 @@
     export let options = ['off', 'a', 'b', 'c'];
     export let value = 0;
     export let func = () => {};
+    export let width = '30px'
+    export let height = '18px';
 
     const set = i => {
         value = i;
@@ -12,6 +14,8 @@
 <div class="container">
     {#each options as o}
         <button
+            style:width={width}
+            style:height={height}
             class="no-hover"
             on:mousedown={() => set(o.value)}
             on:touchstart={() => set(o.value)}
@@ -28,17 +32,15 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 0.05em;
+        gap: 1px;
     }
     button {
-        border-radius: 1em;
         background-color: #ffffff;
         border: 1px solid var(--primary);
-        height: 17px;
-        width: 55px;
+        height: 10px;
         font-family: var(--font);
         color: var(--primary);
-        font-size: 10px;
+        font-size: 8px;
         text-align: center;
     }
 

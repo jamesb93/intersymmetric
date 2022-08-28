@@ -1,3 +1,6 @@
-:root {
-    --grid: 30px 70px 600px 70px 70px 70px;
+.grid {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 30px 50px 600px 50px 50px 50px;
 }
