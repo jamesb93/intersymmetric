@@ -26,9 +26,7 @@
     <Knob
         {...rate_knob}
         bind:value={$rate}
-        func={() => {
-            socket.emit('rate', $rate);
-        }}
+        func={() => socket.emit('rate', $rate)}
     />
 </div>
 
