@@ -7,7 +7,7 @@
     export let min = 0;
     export let max = 100;
     export let step = 1;
-    export let reset_value = 0;
+    export let resetValue = 0;
     export let scale = 1.0;
     export let WIDTH = 50;
     export let HEIGHT = 50;
@@ -116,7 +116,7 @@
     }
 
     function resetHandler() {
-        value = reset_value;
+        value = resetValue;
         internal = value;
         func();
     }

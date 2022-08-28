@@ -14,7 +14,7 @@
         max: 4,
         step: 0.05,
         scale: 0.03,
-        reset_value: 4,
+        resetValue: 4,
         show_value: true
     };
 

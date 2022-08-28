@@ -41,7 +41,7 @@
         max: presets.fm1_freq.length - 1,
         step: 1,
         scale: 0.1,
-        reset_value: 0,
+        resetValue: 0,
         func: () => {
             socket.emit('fm1_freq_preset', $fm1_freq_preset);
         }
@@ -53,7 +53,7 @@
         max: presets.fm1_mod.length - 1,
         step: 1,
         scale: 0.1,
-        reset_value: 0,
+        resetValue: 0,
         func: () => {
             socket.emit('fm1_mod_preset', $fm1_mod_preset);
         }
@@ -65,7 +65,7 @@
         max: presets.fm1_shape.length - 1,
         step: 1,
         scale: 0.1,
-        reset_value: 0,
+        resetValue: 0,
         func: () => {
             socket.emit('fm1_shape_preset', $fm1_shape_preset);
         }
@@ -78,7 +78,7 @@
         max: presets.fm2_freq.length - 1,
         step: 1,
         scale: 0.1,
-        reset_value: 0,
+        resetValue: 0,
         func: () => {
             socket.emit('fm2_freq_preset', $fm2_freq_preset);
         }
@@ -89,7 +89,7 @@
         max: presets.fm2_mod.length - 1,
         step: 1,
         scale: 0.1,
-        reset_value: 0,
+        resetValue: 0,
         func: () => {
             socket.emit('fm2_mod_preset', $fm2_mod_preset);
         }
@@ -100,7 +100,7 @@
         max: presets.fm2_shape.length - 1,
         step: 1,
         scale: 0.1,
-        reset_value: 0,
+        resetValue: 0,
         func: () => {
             socket.emit('fm2_shape_preset', $fm2_shape_preset);
         }
@@ -111,7 +111,7 @@
         max: presets.perc_sound.length - 1,
         step: 1,
         scale: 0.1,
-        reset_value: 0,
+        resetValue: 0,
         func: () => {
             socket.emit('perc_sound_preset', $perc_sound_preset);
         }
@@ -122,7 +122,7 @@
         max: presets.perc_sound.length - 1,
         step: 1,
         scale: 0.1,
-        reset_value: 0,
+        resetValue: 0,
         func: () => {
             socket.emit('perc_transpose_preset', $perc_transpose_preset);
         }
@@ -133,7 +133,7 @@
         max: presets.perc_shape.length - 1,
         step: 1,
         scale: 0.1,
-        reset_value: 0,
+        resetValue: 0,
         func: () => {
             socket.emit('perc_shape_preset', $perc_shape_preset);
         }

@@ -13,7 +13,7 @@
         max: 1,
         step: 0.01,
         scale: 0.01,
-        reset_value: 0.5,
+        resetValue: 0.5,
         show_value: true
     };
 
