@@ -6,7 +6,6 @@
     import { socket } from '$lib/nyege/app';
     import { buf4, buf5, pitch4, pitch5, len4, len5, retrig0, retrig1 } from '$lib/nyege/app';
 
-
     export let patch;
 
     const cycle = {

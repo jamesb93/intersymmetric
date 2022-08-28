@@ -10,7 +10,6 @@
 
     export let patch;
 
-
     const radioh = {
         options: [1, 2, 3, 4, 5, 6, 7, 8].map(x => ({ display: x, value: x })),
         width: '75px',
@@ -69,12 +68,12 @@
         <Blip bind:this={blip} />
         <RadioV {...radiov} bind:value={$chordfollow} func={() => socket.emit('chordfollow', $chordfollow)} />
         <div class="centre">
-            <RSlider 
-                {...rslider} 
-                bind:low={$chordlow} 
-                bind:high={$chordhigh} 
-                lofunc={() => socket.emit('chordlow', $chordlow)} 
-                hifunc={() => socket.emit('chordhigh', $chordhigh)} 
+            <RSlider
+                {...rslider}
+                bind:low={$chordlow}
+                bind:high={$chordhigh}
+                lofunc={() => socket.emit('chordlow', $chordlow)}
+                hifunc={() => socket.emit('chordhigh', $chordhigh)}
             />
             <RadioH {...radioh} bind:value={$chordspread} func={() => socket.emit('chordspread', $chordspread)} />
         </div>

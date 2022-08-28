@@ -2,7 +2,7 @@
     export let options = ['off', 'a', 'b', 'c'];
     export let value = 0;
     export let func = () => {};
-    export let width = '30px'
+    export let width = '30px';
     export let height = '18px';
 
     const set = i => {
@@ -14,8 +14,8 @@
 <div class="container">
     {#each options as o}
         <button
-            style:width={width}
-            style:height={height}
+            style:width
+            style:height
             class="no-hover"
             on:mousedown={() => set(o.value)}
             on:touchstart={() => set(o.value)}
