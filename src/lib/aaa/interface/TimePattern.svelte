@@ -164,19 +164,19 @@
             <div class="slider-group">
                 <Slider
                     {...b_steps_0_slider}
-                    bind:display_value={calculated_b_0}
+                    bind:displayValue={calculated_b_0}
                     bind:value={$b_steps_0}
                     active={b_current_step === 0}
                 />
                 <Slider
                     {...b_steps_1_slider}
-                    bind:display_value={calculated_b_1}
+                    bind:displayValue={calculated_b_1}
                     bind:value={$b_steps_1}
                     active={b_current_step === 1}
                 />
                 <Slider
                     {...b_steps_2_slider}
-                    bind:display_value={calculated_b_2}
+                    bind:displayValue={calculated_b_2}
                     bind:value={$b_steps_2}
                     active={b_current_step === 2}
                 />

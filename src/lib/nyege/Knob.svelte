@@ -12,7 +12,7 @@
     export let WIDTH = 50;
     export let HEIGHT = 50;
     export let showValue = true;
-    export let display_value = null;
+    export let displayValue = null;
     export let secondary_color = primary;
     export let stroke_width = 1;
     export let enabled = true;
@@ -165,10 +165,10 @@
 
         {#if showValue}
             <text x={MID_X} y={HEIGHT} text-anchor="middle" fill={'black'} class="value">
-                {#if !display_value}
+                {#if !displayValue}
                     {parseFloat(value.toFixed(1))}
                 {:else}
-                    {display_value}
+                    {displayValue}
                 {/if}
             </text>
         {/if}

@@ -10,7 +10,7 @@
     export let thumb_height = 3;
     export let active = false;
     export let func = () => {};
-    export let display_value = null;
+    export let displayValue = null;
     export let invert = false;
 
     let thumb, bar, rect;
@@ -78,8 +78,8 @@
         <rect y={thumb_y} bind:this={thumb} {width} height={thumb_height} />
     </svg>
     <div class="no-hover">
-        {#if display_value !== null}
-            {display_value}
+        {#if displayValue !== null}
+            {displayValue}
         {:else}
             {value.toFixed(2)}
         {/if}

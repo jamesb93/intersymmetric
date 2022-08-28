@@ -48,7 +48,7 @@
             {...speed_knob}
             bind:internal={$speed}
             bind:value={_speed}
-            bind:display_value={$calculated_speed}
+            bind:displayValue={$calculated_speed}
             func={() => {
                 socket.emit('speed', $speed);
             }}
