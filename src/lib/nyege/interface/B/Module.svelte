@@ -20,7 +20,6 @@
             { value: 0.25, display: '1/4' }
         ],
         width: '100px',
-        synced: true,
         height: '40px'
     };
     const soundKnob = { min: 0, max: 33, step: 1, scale: 0.25 };
@@ -37,11 +36,7 @@
             } else if (e.payload === 5) {
                 blip1.blink();
             }
-        }
-        if (e.tag === 'reset') {
-            radio0.deWait();
-            radio1.deWait();
-        }
+        };
     });
 
     $: send_message(patch, 'retrigger_params', [0, $retrig0]);
@@ -62,7 +57,7 @@
     <div class="row grid">
         <Blip bind:this={blip1} />
         <div class="empty" />
-        <RadioH {...cycle} bind:value={$retrig1} bind:this={radio1} func={() => socket.emit('retrig0', $retrig1)} />
+        <RadioH {...cycle} bind:value={$retrig1} bind:this={radio1} func={() => socket.emit('retrig1', $retrig1)} />
         <Knob {...soundKnob} bind:value={$buf5} func={() => socket.emit('buf5', $buf5)} />
         <Knob {...pitchKnob} bind:value={$pitch5} func={() => socket.emit('pitch5', $pitch5)} />
         <Knob {...lenKnob} bind:value={$len5} func={() => socket.emit('len5', $len5)} />
