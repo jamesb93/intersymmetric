@@ -2,12 +2,12 @@
     import { socket, room } from '$lib/nyege/app';
     import { goto } from '$app/navigation';
 
-    let ever_used = false;
+    let everUsed = false;
     let code = '';
 
-    function change_handler() {
+    function changeHandler() {
         console.log('ever used');
-        ever_used = true;
+        everUsed = true;
         socket.emit('join_room', `nyege.${code}`);
         $room = code;
         code = '';
@@ -16,13 +16,13 @@
 </script>
 
 <div class="prompt">
-    <span id="title" class="no-hover">Room Code:</span>
+    <div id="title" class="no-hover">Room Code:</div>
     <input
         type="text"
-        class:init={!ever_used}
+        class:init={!everUsed}
         bind:value={code}
-        on:change={change_handler}
-        placeholder={ever_used === false && $room === '' ? 'enter room code' : $room}
+        on:change={changeHandler}
+        placeholder={everUsed === false && $room === '' ? 'enter room code' : $room}
         id="room-input"
     />
 </div>
@@ -32,8 +32,8 @@
         text-align: left;
     }
     .prompt {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        place-items: center;
     }
 
     .init {
@@ -47,6 +47,7 @@
         background: white;
         border: none;
         width: 100px;
+        text-align: center;
         padding-top: 1px;
     }
 
