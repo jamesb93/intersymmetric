@@ -9,12 +9,11 @@
     let playing = false;
 
     const rateKnob = {
-        min: 0,
-        max: 1,
-        step: 0.01,
-        scale: 0.01,
-        resetValue: 0.5,
-        show_value: true
+        min: 10,
+        max: 240,
+        step: 1,
+        scale: 1,
+        resetValue: 170
     };
 
     const radio = {
@@ -37,7 +36,7 @@
         play
         {/if}
         </div>
-        <div>rate</div>
+        <div>bpm</div>
     </div>
     <div class="grid row">
         <Play bind:state={playing} />
