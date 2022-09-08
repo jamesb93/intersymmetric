@@ -75,7 +75,7 @@
         class:active
     >
         <!-- Fill -->
-        <rect class="step-fill" x="0" width={thumbX - thumbWidth} {height} />
+        <rect class="step-fill" x="0" width={thumbX} {height} />
         <!-- <line x1={thumbX} x2={thumbX} y1="0" y2={height} stroke-dasharray="3" /> -->
         <rect x={(thumbX / div) * pos} class="pos" width={thumbWidth} {height} />
 
@@ -90,7 +90,7 @@
             />
         {/each}
     </svg>
-    <div class="text">
+    <div class="text" class:white={value > 15}>
         {value.toFixed(0)}
     </div>
 </div>
@@ -106,7 +106,6 @@
         background-color: white;
         stroke-width: 1px;
         stroke: var(--primary);
-        /* border: 1px solid var(--primary); */
     }
 
     svg:active {
@@ -118,10 +117,14 @@
         display: grid;
         place-items: center;
         font: var(--font);
-        font-size: 10px;
         color: var(--primary);
+        font-size: 10px;
         top: 30%;
         right: 5px;
+    }
+
+    .white {
+        color: white;
     }
 
     .step-fill {
