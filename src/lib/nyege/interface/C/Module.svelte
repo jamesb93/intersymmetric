@@ -23,9 +23,9 @@
             { value: 4, display: 4 }
         ]
     };
-    const rslider = { 
-        min: 0, 
-        max: 100, 
+    const rslider = {
+        min: 0,
+        max: 100,
         step: 1,
         width: 598
     };
@@ -73,27 +73,27 @@
         <RadioV {...radiov} bind:value={$chordfollow} func={() => socket.emit('chordfollow', $chordfollow)} />
         <div class="centre">
             <RSlider
-            {...rslider}
-            bind:low={$chordlow}
-            bind:high={$chordhigh}
-            lofunc={() => socket.emit('chordlow', $chordlow)}
-            hifunc={() => socket.emit('chordhigh', $chordhigh)}
+                {...rslider}
+                bind:low={$chordlow}
+                bind:high={$chordhigh}
+                lofunc={() => socket.emit('chordlow', $chordlow)}
+                hifunc={() => socket.emit('chordhigh', $chordhigh)}
             />
             <RadioH {...radioh} bind:value={$chordspread} func={() => socket.emit('chordspread', $chordspread)} />
         </div>
         <div class="sound">
-            <div class='header'>sound</div>
+            <div class="header">sound</div>
             <Knob {...soundKnob} bind:value={$buf6} func={() => socket.emit('buf6', $buf6)} />
         </div>
         <div class="scale">
-            <div class='header'>scale</div>
+            <div class="header">scale</div>
             <Knob {...scaleKnob} bind:value={$scale} func={() => socket.emit('scale', $scale)} />
         </div>
         <div class="length">
-            <div class='header'>length</div>
+            <div class="header">length</div>
             <Knob {...lenKnob} bind:value={$len6} func={() => socket.emit('len6', $len6)} />
         </div>
-        </div>
+    </div>
 </div>
 
 <style>

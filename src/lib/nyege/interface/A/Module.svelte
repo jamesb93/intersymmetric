@@ -79,9 +79,9 @@
 
 <div class="container">
     <div class="labels grid">
-        <div id='sound-label'>sound</div>
-        <div id='pitch-label'>pitch</div>
-        <div id='length-label'>length</div>
+        <div id="sound-label">sound</div>
+        <div id="pitch-label">pitch</div>
+        <div id="length-label">length</div>
     </div>
 
     <div class="row grid">

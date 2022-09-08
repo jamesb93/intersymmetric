@@ -65,22 +65,34 @@
     on:touchend={handletouchend}
 />
 
-<div class="container" style:width={width} style:height={height}>
-    <svg on:mousedown={handlecontroldown} on:touchstart={handlecontroldown} {width} {height} bind:this={bar} class:active>
+<div class="container" style:width style:height>
+    <svg
+        on:mousedown={handlecontroldown}
+        on:touchstart={handlecontroldown}
+        {width}
+        {height}
+        bind:this={bar}
+        class:active
+    >
         <!-- Fill -->
-        <rect class="step-fill" x="0" width={thumbX-thumbWidth} {height} />
+        <rect class="step-fill" x="0" width={thumbX - thumbWidth} {height} />
         <!-- <line x1={thumbX} x2={thumbX} y1="0" y2={height} stroke-dasharray="3" /> -->
         <rect x={(thumbX / div) * pos} class="pos" width={thumbWidth} {height} />
 
         <!-- Step Pipss -->
         {#each Array(div) as _, i}
-            <line class="pip" x1={((thumbX / div) * i) + thumbWidth} x2={((thumbX / div) * i) + thumbWidth} y1="0" y2={height} />
+            <line
+                class="pip"
+                x1={(thumbX / div) * i + thumbWidth}
+                x2={(thumbX / div) * i + thumbWidth}
+                y1="0"
+                y2={height}
+            />
         {/each}
-        
     </svg>
     <div class="text">
         {value.toFixed(0)}
-    </div> 
+    </div>
 </div>
 
 <style>

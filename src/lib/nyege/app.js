@@ -20,7 +20,9 @@ socket.on('num_users', x => num_users.set(x));
 export const pips = writable([0, 0, 0, 0]);
 export const rate = writable(170);
 export const globalCycle = writable(16);
-socket.on('rate', x => { rate.set(x) });
+socket.on('rate', x => {
+    rate.set(x);
+});
 socket.on('globalCycle', x => globalCycle.set(x));
 
 export const buf0 = writable(0);

@@ -5,7 +5,7 @@
     export let disabled = false;
 </script>
 
-<button style:font-size={font_size} disabled={disabled} style:height style:width on:click>
+<button style:font-size={font_size} {disabled} style:height style:width on:click>
     <slot />
 </button>
 
@@ -23,7 +23,7 @@
         color: black;
     }
 
-    button:active{
+    button:active {
         background-color: var(--grey);
     }
 </style>

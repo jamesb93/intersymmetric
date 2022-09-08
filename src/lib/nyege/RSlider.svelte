@@ -80,14 +80,7 @@
     on:touchend={handle_touchend}
 />
 
-<svg 
-on:mousedown={handle_controldown} 
-on:touchstart={handle_controldown} 
-{width} 
-{height} 
-bind:this={bar} 
-class:active
->
+<svg on:mousedown={handle_controldown} on:touchstart={handle_controldown} {width} {height} bind:this={bar} class:active>
     <rect class="step-fill" x={lowX} width={Math.max(highX - lowX, 2)} {height} />
 </svg>
 

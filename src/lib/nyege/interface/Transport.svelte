@@ -30,11 +30,11 @@
 <div class="container">
     <div class="grid">
         <div class="">
-        {#if playing}
-        pause
-        {:else}
-        play
-        {/if}
+            {#if playing}
+                pause
+            {:else}
+                play
+            {/if}
         </div>
         <div>bpm</div>
     </div>
@@ -47,6 +47,5 @@
 
 <style>
     .container {
-
     }
 </style>
