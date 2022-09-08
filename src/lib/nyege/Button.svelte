@@ -1,16 +1,11 @@
 <script>
-    import { createEventDispatcher } from 'svelte';
-    const dispatch = createEventDispatcher();
-    const click = () => {
-        dispatch('click');
-    };
-
     export let font_size = '10px';
     export let width = '40px';
     export let height = '20px';
+    export let disabled = false;
 </script>
 
-<button style:font-size={font_size} style:height style:width on:click={click}>
+<button style:font-size={font_size} disabled={disabled} style:height style:width on:click>
     <slot />
 </button>
 
@@ -24,7 +19,11 @@
     }
 
     button:hover {
-        background-color: var(--grey);
+        background-color: var(--light-grey);
         color: black;
+    }
+
+    button:active{
+        background-color: var(--grey);
     }
 </style>
