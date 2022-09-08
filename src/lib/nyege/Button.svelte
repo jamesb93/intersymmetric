@@ -1,11 +1,11 @@
 <script>
-    export let font_size = '10px';
+    export let fontSize = '10px';
     export let width = '40px';
     export let height = '20px';
     export let disabled = false;
 </script>
 
-<button style:font-size={font_size} {disabled} style:height style:width on:click>
+<button style:font-size={fontSize} {disabled} style:height style:width on:click>
     <slot />
 </button>
 
