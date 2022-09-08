@@ -25,7 +25,7 @@
     }
     header {
         display: grid;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: 150px auto 150px;
         justify-content: space-between;
         max-width: 1005px;
         margin: 0 auto;
