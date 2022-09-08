@@ -9,7 +9,6 @@
     export let height = 30;
     export let thumbWidth = 1;
     export let active = false;
-    export let displayValue = null;
     export let div = 16;
     export let pos = 0;
     export let func = () => {};
@@ -20,6 +19,7 @@
     let prevValue = null;
 
     $: thumbX = clip(scale(value, min, max, 0, width), 0, width) + thumbWidth;
+    $: lineStrokeWidth = value > 2 ? '3px' : '2px';
 
     const move = e => {
         rect = bar.getBoundingClientRect();
@@ -83,10 +83,11 @@
         {#each Array(div) as _, i}
             <line
                 class="pip"
-                x1={(thumbX / div) * i + thumbWidth}
-                x2={(thumbX / div) * i + thumbWidth}
+                x1={(thumbX / div) * i + lineStrokeWidth}
+                x2={(thumbX / div) * i + lineStrokeWidth}
                 y1="0"
                 y2={height}
+                stroke-width={lineStrokeWidth}
             />
         {/each}
     </svg>
@@ -133,7 +134,6 @@
 
     .pip {
         stroke: white;
-        stroke-width: 3px;
     }
 
     .pos {
