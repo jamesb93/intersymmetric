@@ -12,7 +12,7 @@
 
     const radioh = {
         options: [1, 2, 3, 4, 5, 6, 7, 8].map(x => ({ display: x, value: x })),
-        height: '40px'
+        height: '60px'
     };
     const radiov = {
         options: [

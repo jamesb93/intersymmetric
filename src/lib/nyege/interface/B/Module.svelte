@@ -1,16 +1,17 @@
 <script>
     import RadioH from '$lib/nyege/RadioH.svelte';
+    import RadioV from '$lib/nyege/RadioV.svelte';
     import Blip from '$lib/nyege/Blip.svelte';
     import Knob from '$lib/nyege/Knob.svelte';
     import { sendMessage } from '$lib/common/patch_helpers';
     import { socket } from '$lib/nyege/app';
-    import { buf4, buf5, pitch4, pitch5, len4, len5, retrig0, retrig1 } from '$lib/nyege/app';
+    import { buf4, buf5, pitch4, pitch5, len4, len5, retrig0, retrig1, retrigGate0, retrigGate1 } from '$lib/nyege/app';
 
     export let patch;
 
     const cycle = {
         options: [
-            { value: 0, display: 'off' },
+            { value: 64, display: 64 },
             { value: 6, display: 6 },
             { value: 4, display: 4 },
             { value: 3, display: 3 },
@@ -25,9 +26,14 @@
     const soundKnob = { min: 0, max: 33, step: 1, scale: 0.25 };
     const pitchKnob = { min: -36, max: 36, step: 1, scale: 0.5 };
     const lenKnob = { min: 0, max: 1, step: 0.01, scale: 0.005 };
+    const tog = { 
+        options: [
+            { value: 0, display: 'off '},
+            { value: 1, display: 'on'}
+        ]
+    }
 
     let blip0, blip1;
-    let radio0, radio1;
 
     patch.messageEvent.subscribe(e => {
         if (e.tag === 'blip') {
@@ -48,16 +54,16 @@
 <div class="container">
     <div class="row grid">
         <Blip bind:this={blip0} />
-        <div class="empty" />
-        <RadioH {...cycle} bind:value={$retrig0} bind:this={radio0} func={() => socket.emit('retrig0', $retrig0)} />
+        <RadioV {...tog} bind:value={$retrigGate0} func={() => socket.emit('retrigGate0', $retrigGate0)} />
+        <RadioH {...cycle} bind:value={$retrig0} func={() => socket.emit('retrig0', $retrig0)} />
         <Knob {...soundKnob} bind:value={$buf4} func={() => socket.emit('buf4', $buf4)} />
         <Knob {...pitchKnob} bind:value={$pitch4} func={() => socket.emit('pitch4', $pitch4)} />
         <Knob {...lenKnob} bind:value={$len4} func={() => socket.emit('len4', $len4)} />
     </div>
     <div class="row grid">
         <Blip bind:this={blip1} />
-        <div class="empty" />
-        <RadioH {...cycle} bind:value={$retrig1} bind:this={radio1} func={() => socket.emit('retrig1', $retrig1)} />
+        <RadioV {...tog} bind:value={$retrigGate1} func={() => socket.emit('retrigGate1', $retrigGate1)} />
+        <RadioH {...cycle} bind:value={$retrig1} func={() => socket.emit('retrig1', $retrig1)} />
         <Knob {...soundKnob} bind:value={$buf5} func={() => socket.emit('buf5', $buf5)} />
         <Knob {...pitchKnob} bind:value={$pitch5} func={() => socket.emit('pitch5', $pitch5)} />
         <Knob {...lenKnob} bind:value={$len5} func={() => socket.emit('len5', $len5)} />
