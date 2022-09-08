@@ -83,8 +83,8 @@
         {#each Array(div) as _, i}
             <line
                 class="pip"
-                x1={(thumbX / div) * i + lineStrokeWidth}
-                x2={(thumbX / div) * i + lineStrokeWidth}
+                x1={(thumbX / div) * i + 1}
+                x2={(thumbX / div) * i + 1}
                 y1="0"
                 y2={height}
                 stroke-width={lineStrokeWidth}
