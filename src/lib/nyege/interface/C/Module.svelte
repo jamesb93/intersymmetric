@@ -39,7 +39,7 @@
         min: 0,
         max: 6,
         step: 1,
-        scale: 0.5
+        scale: 0.05
     };
     const lenKnob = {
         min: 0,
