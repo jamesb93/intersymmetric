@@ -12,7 +12,7 @@
 <style>
     button {
         color: black;
-        border: 1px solid var(--primary);
+        border: 0px solid var(--primary);
         background-color: #ffffff;
         text-align: center;
         font-family: var(--font);
