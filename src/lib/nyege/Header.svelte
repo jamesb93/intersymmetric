@@ -6,7 +6,7 @@
 <header>
     <div id="title">
         <div class="no-hover">Intersymmetric Works</div>
-        <div class="no-hover">Nyege Nyege</div>
+        <div class="no-hover">NNNB</div>
     </div>
     <div id="room">
         <RoomPrompt />
