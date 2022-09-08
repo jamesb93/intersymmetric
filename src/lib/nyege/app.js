@@ -88,9 +88,13 @@ socket.on('range3', x => range3.set(x));
 
 // Retriggers
 export const retrig0 = writable(0);
-socket.on('retrig0', x => retrig0.set(x));
 export const retrig1 = writable(0);
+export const retrigGate0 = writable(0);
+export const retrigGate1 = writable(0);
+socket.on('retrig0', x => retrig0.set(x));
 socket.on('retrig1', x => retrig1.set(x));
+socket.on('retrigGate0', x => retrigGate0.set(x));
+socket.on('retrigGate1', x => retrigGate1.set(x));
 
 // Chord
 export const chordfollow = writable(0);
