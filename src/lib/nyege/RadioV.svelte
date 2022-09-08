@@ -42,9 +42,14 @@
         color: var(--primary);
         font-size: 8px;
         text-align: center;
+        color: black;
     }
 
     button:hover:not(.selected) {
+        background-color: var(--light-grey);
+    }
+
+    button:active {
         background-color: var(--grey);
         color: black;
     }
