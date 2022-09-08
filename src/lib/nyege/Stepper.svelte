@@ -68,30 +68,20 @@
 <div class="container" style:width={width} style:height={height}>
     <svg on:mousedown={handlecontroldown} on:touchstart={handlecontroldown} {width} {height} bind:this={bar} class:active>
         <!-- Fill -->
-        <!-- <rect class="step-fill" x="0" width={thumbX} {height} /> -->
-        <line x1={thumbX} x2={thumbX} y1="0" y2={height} stroke-dasharray="3" />
+        <rect class="step-fill" x="0" width={thumbX-thumbWidth} {height} />
+        <!-- <line x1={thumbX} x2={thumbX} y1="0" y2={height} stroke-dasharray="3" /> -->
         <rect x={(thumbX / div) * pos} class="pos" width={thumbWidth} {height} />
 
         <!-- Step Pipss -->
         {#each Array(div) as _, i}
-            <!-- <rect class="pip" x={(thumbX / div) * i} width={thumbWidth} {height} /> -->
-            <line class="pip" x1={(thumbX / div) * i} x2={(thumbX / div) * i} y1="0" y2={height} />
+            <line class="pip" x1={((thumbX / div) * i) + thumbWidth} x2={((thumbX / div) * i) + thumbWidth} y1="0" y2={height} />
         {/each}
-
-        <!-- <text x={width - 50} y={height / 2 + 3}>
-
-        </text> -->
+        
     </svg>
     <div class="text">
-        {#if displayValue !== null}
-        {displayValue}
-        {:else}
-            {value.toFixed(0)}
-        {/if}
+        {value.toFixed(0)}
     </div> 
 </div>
-
-
 
 <style>
     .container {
@@ -123,12 +113,12 @@
     }
 
     .step-fill {
-        fill: white;
+        fill: var(--primary);
     }
 
     .pip {
-        stroke: var(--primary);
-        stroke-width: 1px;
+        stroke: white;
+        stroke-width: 3px;
     }
 
     .pos {
