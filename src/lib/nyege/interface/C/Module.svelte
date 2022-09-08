@@ -82,15 +82,15 @@
             <RadioH {...radioh} bind:value={$chordspread} func={() => socket.emit('chordspread', $chordspread)} />
         </div>
         <div class="sound">
-            <div>sound</div>
+            <div class='header'>sound</div>
             <Knob {...soundKnob} bind:value={$buf6} func={() => socket.emit('buf6', $buf6)} />
         </div>
         <div class="scale">
-            <div>scale</div>
+            <div class='header'>scale</div>
             <Knob {...scaleKnob} bind:value={$scale} func={() => socket.emit('scale', $scale)} />
         </div>
         <div class="length">
-            <div>length</div>
+            <div class='header'>length</div>
             <Knob {...lenKnob} bind:value={$len6} func={() => socket.emit('len6', $len6)} />
         </div>
         </div>
@@ -102,5 +102,8 @@
     }
     .row {
         height: 90px;
+    }
+    .header {
+        color: var(--primary);
     }
 </style>
