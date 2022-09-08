@@ -65,29 +65,40 @@
     on:touchend={handletouchend}
 />
 
-<svg on:mousedown={handlecontroldown} on:touchstart={handlecontroldown} {width} {height} bind:this={bar} class:active>
-    <!-- Fill -->
-    <!-- <rect class="step-fill" x="0" width={thumbX} {height} /> -->
-    <line x1={thumbX} x2={thumbX} y1="0" y2={height} stroke-dasharray="3" />
-    <rect x={(thumbX / div) * pos} class="pos" width={thumbWidth} {height} />
+<div class="container" style:width={width} style:height={height}>
+    <svg on:mousedown={handlecontroldown} on:touchstart={handlecontroldown} {width} {height} bind:this={bar} class:active>
+        <!-- Fill -->
+        <!-- <rect class="step-fill" x="0" width={thumbX} {height} /> -->
+        <line x1={thumbX} x2={thumbX} y1="0" y2={height} stroke-dasharray="3" />
+        <rect x={(thumbX / div) * pos} class="pos" width={thumbWidth} {height} />
 
-    <!-- Step Pipss -->
-    {#each Array(div) as _, i}
-        <!-- <rect class="pip" x={(thumbX / div) * i} width={thumbWidth} {height} /> -->
-        <line class="pip" x1={(thumbX / div) * i} x2={(thumbX / div) * i} y1="0" y2={height} />
-    {/each}
+        <!-- Step Pipss -->
+        {#each Array(div) as _, i}
+            <!-- <rect class="pip" x={(thumbX / div) * i} width={thumbWidth} {height} /> -->
+            <line class="pip" x1={(thumbX / div) * i} x2={(thumbX / div) * i} y1="0" y2={height} />
+        {/each}
 
-    <text x={width - 50} y={height / 2 + 3}>
+        <!-- <text x={width - 50} y={height / 2 + 3}>
+
+        </text> -->
+    </svg>
+    <div class="text">
         {#if displayValue !== null}
-            {displayValue}
+        {displayValue}
         {:else}
             {value.toFixed(2)}
         {/if}
-    </text>
-</svg>
+    </div> 
+</div>
+
+
 
 <style>
+    .container {
+        position: relative;
+    }
     svg {
+        position: relative;
         cursor: grab;
         touch-action: none;
         background-color: white;
@@ -100,11 +111,15 @@
         cursor: grabbing;
     }
 
-    text {
+    .text {
+        position: absolute;
+        display: grid;
+        place-items: center;
         font: var(--font);
         font-size: 10px;
-        color: black;
-        font-weight: 100;
+        color: var(--primary);
+        top: 30%;
+        right: 5px;
     }
 
     .step-fill {
