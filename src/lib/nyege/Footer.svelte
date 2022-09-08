@@ -10,6 +10,9 @@
 
 <style>
     footer {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
         display: flex;
         flex-direction: column;
         margin-top: 2em;
