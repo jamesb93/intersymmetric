@@ -87,8 +87,8 @@ socket.on('range2', x => range2.set(x));
 socket.on('range3', x => range3.set(x));
 
 // Retriggers
-export const retrig0 = writable(0);
-export const retrig1 = writable(0);
+export const retrig0 = writable(6);
+export const retrig1 = writable(6);
 export const retrigGate0 = writable(0);
 export const retrigGate1 = writable(0);
 socket.on('retrig0', x => retrig0.set(x));
