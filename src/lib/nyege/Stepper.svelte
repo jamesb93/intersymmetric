@@ -86,7 +86,7 @@
         {#if displayValue !== null}
         {displayValue}
         {:else}
-            {value.toFixed(2)}
+            {value.toFixed(0)}
         {/if}
     </div> 
 </div>
