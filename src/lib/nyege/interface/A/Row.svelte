@@ -1,7 +1,7 @@
 <script>
     import Stepper from '$lib/nyege/Stepper.svelte';
     import Knob from '$lib/nyege/Knob.svelte';
-    import Blip from '$lib/aaa/Blip.svelte';
+    import Blip from '$lib/nyege/Blip.svelte';
     import { socket } from '$lib/nyege/app';
 
     export let patch;

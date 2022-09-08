@@ -45,7 +45,8 @@
     button {
         flex: 1 1 0;
         background-color: #ffffff;
-        border: 1px solid var(--primary);
+        border: 0px solid var(--primary);
+        /* border: 1px solid var(--primary); */
         height: 100%;
         font-family: var(--font);
         color: black;

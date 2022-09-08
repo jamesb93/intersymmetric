@@ -36,7 +36,7 @@
     }
     button {
         background-color: #ffffff;
-        border: 1px solid var(--primary);
+        border: 0px solid var(--primary);
         height: 10px;
         font-family: var(--font);
         color: var(--primary);

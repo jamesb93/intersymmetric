@@ -111,4 +111,4 @@ export const palette = {
 };
 
 export const primary = palette.gold;
-export const primary_darker = palette.blue;
+export const primaryDarker = palette.blue;

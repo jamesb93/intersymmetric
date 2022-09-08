@@ -89,7 +89,7 @@
         cursor: grab;
         touch-action: none;
         background-color: white;
-        border: 1px solid var(--primary);
+        border: 0px solid var(--primary);
     }
 
     svg:active {

@@ -29,14 +29,14 @@
 
 <div class="container">
     <div class="grid">
-        <div class="">
+        <div class="text">
             {#if playing}
                 pause
             {:else}
                 play
             {/if}
         </div>
-        <div>bpm</div>
+        <div class='text'>bpm</div>
     </div>
     <div class="grid row">
         <Play bind:state={playing} />
@@ -46,6 +46,7 @@
 </div>
 
 <style>
-    .container {
+    .text {
+        color: var(--primary);
     }
 </style>

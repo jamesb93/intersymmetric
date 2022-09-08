@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    import { primary, primary_darker } from '$lib/nyege/app';
+    import { primary, primaryDarker } from '$lib/nyege/app';
     import { clip } from '$lib/utility';
 
     export let title = '';
@@ -14,7 +14,7 @@
     export let showValue = true;
     export let displayValue = null;
     export let accentColor = primary;
-    export let stroke_width = 1;
+    export let strokeWidth = 2;
     export let enabled = true;
     export let func = () => {};
     export let value;
@@ -27,21 +27,20 @@
     const MIN_RADIANS = (4 * Math.PI) / 3;
     const MAX_RADIANS = -Math.PI / 3;
 
+    let knob;
     let length = 0;
     let pathValue;
-    let knob;
+    let pv = null;
+    let down = false;
+    let prev_touch;
+
+    onMount(() => { dashLength() });
 
     $: primaryColor = enabled ? primary : accentColor;
-
-    onMount(() => {
-        dashLength();
-    });
-
-    $: dash_style = {
+    $: dashStyle = {
         strokeDasharray: length,
         strokeDashoffset: length
     };
-
     $: range_path = `M ${min_x} ${min_y} A ${RADIUS} ${RADIUS} 0 1 1 ${max_x} ${max_y}`;
     $: value_path = `M ${zero_x} ${zero_y} A ${RADIUS} ${RADIUS} 0 ${large_arc} ${sweep} ${value_x} ${value_y}`;
     $: pointer_path = `M ${MID_X} ${MID_Y * SHIFT} L ${value_x} ${value_y}`;
@@ -60,9 +59,8 @@
     $: value_y = SHIFT * MID_Y - Math.sin(value_radians) * RADIUS;
     $: large_arc = Math.abs(zero_radians - value_radians) < Math.PI ? 0 : 1;
     $: sweep = value_radians > zero_radians ? 0 : 1;
-
-    let pv = null;
     $: value = Math.round((internal - min) / step) * step + min;
+
     const updatePosition = change => {
         // This way it always forces it to match the bound value when it is first moved.
         if (!internal) {
@@ -74,9 +72,6 @@
             pv = value;
         }
     };
-
-    let down = false;
-
     const move = posUpdate => {
         if (enabled && down) {
             updatePosition(posUpdate);
@@ -86,7 +81,6 @@
         move(e.movementY * -1);
     };
 
-    let prev_touch;
     const touchMoveHandler = e => {
         const touch = e.touches[0];
         if (prev_touch) {
@@ -95,32 +89,27 @@
         }
         prev_touch = touch;
     };
-
     const handleDown = e => {
         if (enabled) {
             down = true;
         }
     };
-
     const handleUp = e => {
         if (enabled) {
             down = false;
         }
     };
-
     function dashLength() {
         let element = pathValue;
         let length = element.getTotalLength();
         element.dataset.dash = length;
         length = length;
     }
-
     function resetHandler() {
         value = resetValue;
         internal = value;
         func();
     }
-
     function mapRange(x, inMin, inMax, outMin, outMax) {
         return ((x - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
     }
@@ -146,25 +135,23 @@
     <svg width={WIDTH} height={HEIGHT}>
         <path
             d={range_path}
-            stroke-width={stroke_width}
-            stroke={down ? primary_darker : primaryColor}
+            stroke-width={strokeWidth}
             class="knob-control__range"
         />
         <!-- Arc Fill -->
         <path
             d={value_path}
-            stroke-width={stroke_width}
-            stroke={down ? primary_darker : primaryColor}
-            style={dash_style}
+            stroke-width={strokeWidth}
+            style={dashStyle}
             bind:this={pathValue}
             data-dash={length}
             class="knob-control__value"
         />
         <!-- Line Value -->
-        <path d={pointer_path} stroke-width="1" stroke="black" />
+        <path d={pointer_path} stroke-width={strokeWidth} stroke="black" class='needle' />
 
         {#if showValue}
-            <text x={MID_X} y={HEIGHT} text-anchor="middle" fill={'black'} class="value">
+            <text x={MID_X} y={HEIGHT} text-anchor="middle" class="value">
                 {#if !displayValue}
                     {parseFloat(value.toFixed(1))}
                 {:else}
@@ -189,24 +176,24 @@
 
     .knob-control__range {
         fill: none;
-        stroke: var(--primary);
-        /* transition: stroke .1s ease-in; */
+        stroke: white;
     }
 
     .knob-control__value {
         animation-name: dash-frame;
-        /* animation-fill-mode: forwards; */
         stroke: var(--primary);
         fill: none;
     }
-
+    .value {
+        fill: var(--primary);
+        font-size: var(--font-size);
+    }
+    .needle {
+        stroke: var(--primary);
+    }
     #title {
         text-align: center;
         color: black;
-        font-size: var(--font-size);
-    }
-
-    .value {
         font-size: var(--font-size);
     }
 </style>

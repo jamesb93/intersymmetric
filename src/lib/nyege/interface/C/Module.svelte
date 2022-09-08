@@ -2,7 +2,7 @@
     import RSlider from '$lib/nyege/RSlider.svelte';
     import RadioH from '$lib/nyege/RadioH.svelte';
     import RadioV from '$lib/nyege/RadioV.svelte';
-    import Blip from '$lib/aaa/Blip.svelte';
+    import Blip from '$lib/nyege/Blip.svelte';
     import Knob from '$lib/nyege/Knob.svelte';
     import { sendMessage } from '$lib/common/patch_helpers';
     import { socket } from '$lib/nyege/app';

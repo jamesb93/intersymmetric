@@ -106,7 +106,7 @@
         background-color: white;
         stroke-width: 1px;
         stroke: var(--primary);
-        border: 1px solid var(--primary);
+        /* border: 1px solid var(--primary); */
     }
 
     svg:active {
