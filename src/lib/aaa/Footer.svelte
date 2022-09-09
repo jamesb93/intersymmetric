@@ -1,6 +1,6 @@
 <footer>
     <span class="no-hover">
-        <a target="_blank" href="http://www.markfell.com/wiki/">Mark Fell</a> and
+        <a target="_blank" href="http://www.markfell.com/">Mark Fell</a> and
         <a target="_blank" href="http://www.riantreanor.com/">Rian Treanor</a>
     </span>
     <span class="no-hover">

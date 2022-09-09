@@ -5,7 +5,7 @@
 <div id="bottom-panel">
     <footer>
         <span>
-            <a target="_blank" href="http://www.markfell.com/wiki/">Mark Fell</a> and
+            <a target="_blank" href="http://www.markfell.com/">Mark Fell</a> and
             <a target="_blank" href="https://riantreanor.bandcamp.com/">Rian Treanor</a>
         </span>
         <span>
