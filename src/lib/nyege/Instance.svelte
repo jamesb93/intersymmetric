@@ -44,7 +44,7 @@
     <Interface bind:patch={d} />
 {:else}
     <div class="loading">
-        <Button on:click={start} height={'60px'} width={'150px'} font_size={'24px'}>load</Button>
+        <Button on:click={start} height={'60px'} width={'150px'} fontSize={'24px'}>load</Button>
     </div>
 {/if}
 
