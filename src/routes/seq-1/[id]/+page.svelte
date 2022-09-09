@@ -21,14 +21,14 @@
 <div class="main-layout">
     <Grid mode={'synth'} />
     {#if browser}
-        <div class="synth-controls">
-            <Snare hide={false} />
-            <Kick hide={false} />
-            <Metal id="metal1" instrument={metal1} hide={false} />
-            <Metal id="metal2" instrument={metal2} hide={false} />
-            <FM id="fm1" instrument={fm1} hide={false} />
-            <FM id="fm2" instrument={fm2} hide={false} />
-        </div>
+    <div class="synth-controls">
+        <Snare hide={true} />
+        <Kick hide={true} />
+        <Metal id="metal1" instrument={metal1} hide={true} />
+        <Metal id="metal2" instrument={metal2} hide={true} />
+        <FM id="fm1" instrument={fm1} hide={true} />
+        <FM id="fm2" instrument={fm2} hide={true} />
+    </div>
     {/if}
 </div>
 
