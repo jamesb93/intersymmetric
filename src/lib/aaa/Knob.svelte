@@ -103,6 +103,7 @@
         if (enabled) {
             down = true;
         }
+        prev_touch = null
     };
 
     const handleUp = e => {
