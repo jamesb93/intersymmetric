@@ -6,6 +6,9 @@
     <div class="no-hover">
         Programming by <a target="_blank" href="https://www.jamesbradbury.net">James Bradbury</a>
     </div>
+    <div class="no-hover">
+        Commissioned by <a target="_blank" href="https://noboundsfestival.co.uk/">No Bounds</a> in collaboration with <a target='blank' href="https://nyegenyege.com/">Nyege Nyege</a>
+    </div>
 </footer>
 
 <style>
