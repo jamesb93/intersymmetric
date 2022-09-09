@@ -32,7 +32,7 @@
     let pathValue;
     let pv = null;
     let down = false;
-    let prev_touch;
+    let prevTouch;
 
     onMount(() => { dashLength() });
 
@@ -83,11 +83,12 @@
 
     const touchMoveHandler = e => {
         const touch = e.touches[0];
-        if (prev_touch) {
-            const movementY = touch.pageY - prev_touch.pageY;
+        console.log(e)
+        if (prevTouch) {
+            const movementY = touch.pageY - prevTouch.pageY;
             move(movementY * -1);
         }
-        prev_touch = touch;
+        prevTouch = touch;
     };
     const handleDown = e => {
         if (enabled) {
@@ -98,6 +99,7 @@
         if (enabled) {
             down = false;
         }
+        prevTouch = null;
     };
     function dashLength() {
         let element = pathValue;
