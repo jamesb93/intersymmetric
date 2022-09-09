@@ -9,7 +9,7 @@ import { SnareSynth } from './snare.js';
 import { KickSynth } from './kick.js';
 import { MetalSynth } from './metal.js';
 
-import { browser } from '$app/env';
+import { browser } from '$app/environment';
 
 let kick, snare, metal1, metal2, fm1, fm2;
 

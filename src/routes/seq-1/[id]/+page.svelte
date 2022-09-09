@@ -1,5 +1,5 @@
 <script>
-    import { browser } from '$app/env';
+    import { browser } from '$app/environment';
     import Grid from '$lib/nobounds/components/Grid.svelte';
     import Snare from '$lib/nobounds/components/Control/Snare.svelte';
     import Kick from '$lib/nobounds/components/Control/Kick.svelte';

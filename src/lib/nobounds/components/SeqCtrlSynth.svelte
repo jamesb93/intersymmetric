@@ -1,6 +1,6 @@
 <script>
     import { onDestroy } from 'svelte';
-    import { browser } from '$app/env';
+    import { browser } from '$app/environment';
     import * as Tone from 'tone';
     import Play from './Play.svelte';
     import Knob from './Knob.svelte';

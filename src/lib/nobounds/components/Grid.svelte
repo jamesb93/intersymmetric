@@ -1,5 +1,5 @@
 <script>
-    import { browser } from '$app/env';
+    import { browser } from '$app/environment';
     import { room } from '$lib/nobounds/app';
     import SeqCtrlSynth from '$lib/nobounds/components/SeqCtrlSynth.svelte';
     import SeqCtrlSample from '$lib/nobounds/components/SeqCtrlSample.svelte';
