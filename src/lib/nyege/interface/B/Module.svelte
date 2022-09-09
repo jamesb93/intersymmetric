@@ -11,7 +11,7 @@
 
     const cycle = {
         options: [
-            { value: 64, display: 64 },
+            { value: 32, display: 32 },
             { value: 6, display: 6 },
             { value: 4, display: 4 },
             { value: 3, display: 3 },
