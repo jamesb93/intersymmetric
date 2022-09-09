@@ -80,11 +80,11 @@
         <rect x={(thumbX / div) * pos} class="pos" width={thumbWidth} {height} />
 
         <!-- Step Pipss -->
-        {#each Array(div) as _, i}
+        {#each Array(div-1) as _, i}
             <line
                 class="pip"
-                x1={(thumbX / div) * i + 1}
-                x2={(thumbX / div) * i + 1}
+                x1={(thumbX / div) * (i+1) + 1}
+                x2={(thumbX / div) * (i+1) + 1}
                 y1="0"
                 y2={height}
                 stroke-width={lineStrokeWidth}
