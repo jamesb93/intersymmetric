@@ -176,7 +176,7 @@
 
     .knob-control__range {
         fill: none;
-        stroke: white;
+        stroke: var(--primary);
     }
 
     .knob-control__value {
