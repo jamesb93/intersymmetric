@@ -1,7 +1,3 @@
-<script>
-    import Editor from '$lib/nobounds/components/Editor.svelte';
-</script>
-
 <div id="bottom-panel">
     <footer>
         <span>
@@ -16,7 +12,6 @@
         </span>
         <span> Comissioned by No Bounds 2021 </span>
     </footer>
-    <Editor />
     <div class="donation">
         Make a donation to Rotherham Ethnic Minority Alliance <a
             target="_blank"
