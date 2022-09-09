@@ -23,7 +23,7 @@
         width: '100px',
         height: '40px'
     };
-    const soundKnob = { min: 0, max: 33, step: 1, scale: 0.25 };
+    const soundKnob = { min: 0, max: 19, step: 1, scale: 0.15 };
     const pitchKnob = { min: -36, max: 36, step: 1, scale: 0.5 };
     const lenKnob = { min: 0, max: 1, step: 0.01, scale: 0.005 };
     const tog = { 
@@ -45,8 +45,8 @@
         }
     });
 
-    $: sendMessage(patch, 'retrigger_params', [0, $retrig0]);
-    $: sendMessage(patch, 'retrigger_params', [1, $retrig1]);
+    $: sendMessage(patch, 'retrigger_params', [0, $retrigGate0, $retrig0]);
+    $: sendMessage(patch, 'retrigger_params', [1, $retrigGate1, $retrig1]);
     $: sendMessage(patch, 'sampler_params', [4, $buf4, $pitch4, $len4]);
     $: sendMessage(patch, 'sampler_params', [5, $buf5, $pitch5, $len5]);
 </script>
