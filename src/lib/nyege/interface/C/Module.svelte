@@ -57,13 +57,13 @@
     });
 
     $: sendMessage(patch, 'chord_params', [
-        $chordfollow,
-        $chordspread,
-        $chordlow / 100.0,
-        $chordhigh / 100.0,
-        $scale,
-        $buf6,
-        $len6
+        $chordfollow, // 0
+        $chordspread, // 1
+        $chordlow / 100.0, // 2
+        $chordhigh / 100.0, // 3
+        $scale, // 4 
+        $buf6, // 5 
+        $len6 // 6
     ]);
 </script>
 
