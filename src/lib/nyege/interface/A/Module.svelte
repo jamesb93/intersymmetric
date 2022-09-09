@@ -32,7 +32,7 @@
 
     let blips = new Array(4).fill(null);
 
-    const divKnob = { min: 1, max: 16, step: 1, scale: 0.25 };
+    const divKnob = { min: 1, max: 16, step: 1, scale: 0.1 };
     const stepper = {
         min: 1,
         max: 16,
@@ -40,7 +40,7 @@
         width: 598,
         height: '40'
     };
-    const soundKnob = { min: 0, max: 33, step: 1, scale: 0.25 };
+    const soundKnob = { min: 0, max: 19, step: 1, scale: 0.15 };
     const pitchKnob = {
         min: -36,
         max: 36,
