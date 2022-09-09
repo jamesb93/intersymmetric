@@ -27,11 +27,11 @@ socket.on('globalCycle', x => globalCycle.set(x));
 
 export const buf0 = writable(0);
 export const buf1 = writable(13);
-export const buf2 = writable(25);
+export const buf2 = writable(19);
 export const buf3 = writable(7);
 export const buf4 = writable(0);
 export const buf5 = writable(0);
-export const buf6 = writable(0);
+export const buf6 = writable(20);
 socket.on('buf0', x => buf0.set(x));
 socket.on('buf1', x => buf1.set(x));
 socket.on('buf2', x => buf2.set(x));
