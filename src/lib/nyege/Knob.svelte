@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
-    import { primary, primaryDarker } from '$lib/nyege/app';
-    import { clip } from '$lib/utility';
+    import { primary } from '$lib/nyege/app';
+    import { clip, mapRange } from '$lib/utility';
 
     export let title = '';
     export let min = 0;
@@ -83,7 +83,6 @@
 
     const touchMoveHandler = e => {
         const touch = e.touches[0];
-        console.log(e)
         if (prevTouch) {
             const movementY = touch.pageY - prevTouch.pageY;
             move(movementY * -1);
@@ -111,9 +110,6 @@
         value = resetValue;
         internal = value;
         func();
-    }
-    function mapRange(x, inMin, inMax, outMin, outMax) {
-        return ((x - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
     }
 </script>
 
@@ -182,7 +178,6 @@
     }
 
     .knob-control__value {
-        animation-name: dash-frame;
         stroke: var(--primary);
         fill: none;
     }

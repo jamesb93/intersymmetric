@@ -1,10 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { primary, primary_darker } from '$lib/aaa/app';
-
-    const clip = (i, low, high) => {
-        return Math.min(Math.max(i, low), high);
-    };
+    import { clip, mapRange } from '$lib/utility';
 
     export let title = '';
     export let min = 0;
@@ -123,10 +120,6 @@
         value = resetValue;
         internal = value;
         func();
-    }
-
-    function mapRange(x, inMin, inMax, outMin, outMax) {
-        return ((x - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
     }
 </script>
 

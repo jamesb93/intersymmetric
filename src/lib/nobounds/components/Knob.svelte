@@ -1,26 +1,10 @@
 <script>
     import { onMount } from 'svelte';
     import { recentParamName, recentParamValue } from '$lib/nobounds/app.js';
-
-    const clip = (i, low, high) => {
-        return Math.min(Math.max(i, low), high);
-    };
+    import { clip, mapRange } from '$lib/utility';
 
     export let WIDTH = 80;
     export let HEIGHT = 60;
-    const RADIUS = 21;
-    const MID_X = WIDTH / 2;
-    const MID_Y = HEIGHT / 2;
-    const SHIFT = 1.1;
-    const MIN_RADIANS = (4 * Math.PI) / 3;
-    const MAX_RADIANS = -Math.PI / 3;
-
-    let pathValue;
-    let knob;
-
-    let length = 0;
-    let interval = null;
-
     export let resetValue = null;
     export let showTitle = true;
     export let title = '';
@@ -30,29 +14,37 @@
     export let showValue = true;
     export let altValue = null;
     export let scale = 1.0;
-
     export let enabled = true;
     export let step = 1;
     export let secondaryColor = '#989898';
     export let strokeWidth = 1;
+    export let func = () => {};
+
+    const RADIUS = 21;
+    const MID_X = WIDTH / 2;
+    const MID_Y = HEIGHT / 2;
+    const SHIFT = 1.1;
+    const MIN_RADIANS = (4 * Math.PI) / 3;
+    const MAX_RADIANS = -Math.PI / 3;
+
+    let pathValue;
+    let knob;
+    let length = 0;
+    let internal = null;
+    let pv = null;
+    let prevTouch = null;
+    let anchor = null;
+    let down = false;
+
+    onMount(() => { dashLength() });
 
     $: primaryColor = enabled ? '#40ac47;' : secondaryColor;
     $: textColor = enabled ? '#000000' : secondaryColor;
     $: containerStyle = `height: ${HEIGHT}px; width: ${WIDTH}px;`;
-
-    export let func = () => {};
-
-    onMount(() => {
-        dashLength();
-        clearInterval(interval);
-        interval = null;
-    });
-
     $: dashStyle = {
         strokeDasharray: length,
         strokeDashoffset: length
     };
-
     $: rangePath = `M ${minX} ${minY} A ${RADIUS} ${RADIUS} 0 1 1 ${maxX} ${maxY}`;
     $: valuePath = `M ${zeroX} ${zeroY} A ${RADIUS} ${RADIUS} 0 ${largeArc} ${sweep} ${valueX} ${valueY}`;
     $: pointerPath = `M ${MID_X} ${MID_Y * SHIFT} L ${valueX} ${valueY}`;
@@ -72,8 +64,6 @@
     $: largeArc = Math.abs(zeroRadians - valueRadians) < Math.PI ? 0 : 1;
     $: sweep = valueRadians > zeroRadians ? 0 : 1;
 
-    let internal = null;
-    let pv = null;
     const updatePosition = change => {
         // This way it always forces it to match the bound value when it is first moved.
         if (internal === null) {
@@ -88,22 +78,27 @@
         $recentParamValue = value;
     };
 
-    let anchor = null;
-    let down = false;
-    const moveHandler = e => {
-        if (enabled) {
-            if (anchor != null && down === true) {
-                updatePosition(e.movementY * -1);
-            }
+    const move = posUpdate => {
+        if (enabled && down) {
+            updatePosition(posUpdate)
         }
-    };
-
-    const clickHandler = e => {
-        if (enabled) {
+    }
+    const moveHandler = e => {
+        if (anchor) {
+            move(e.movementY * -1);
             $recentParamName = title;
             $recentParamValue = value;
         }
     };
+
+    const touchMoveHandler = e => {
+        const touch = e.touches[0];
+        if (prevTouch) {
+            const movementY = touch.pageY - prevTouch.pageY;
+            move(movementY * -1);
+        }
+        prevTouch = touch;
+    }
 
     const downHandler = e => {
         if (enabled) {
@@ -119,6 +114,7 @@
             down = false;
             primaryColor = '#00c300';
         }
+        prevTouch = null;
     };
 
     function dashLength() {
@@ -136,24 +132,25 @@
             func();
         }
     }
-
-    function mapRange(x, inMin, inMax, outMin, outMax) {
-        return ((x - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
-    }
 </script>
 
-<svelte:window on:mousemove={moveHandler} on:mouseup={upHandler} />
+<svelte:window 
+on:mousemove={moveHandler} 
+on:touchmove={touchMoveHandler}
+on:mouseup={upHandler}
+on:touchend={upHandler} 
+/>
 
 <div
+    bind:this={knob}
     class="knob-control"
     style={containerStyle}
-    bind:this={knob}
-    on:mousedown|preventDefault={downHandler}
+    on:mousedown={downHandler}
+    on:touchstart={downHandler}
     on:dblclick={resetHandler}
-    on:click={clickHandler}
 >
     {#if showTitle}
-        <span id="title">{title}</span>
+        <div id="title">{title}</div>
     {/if}
     <svg width="{WIDTH}px" height="{HEIGHT}px">
         <path d={rangePath} stroke-width={strokeWidth} stroke={secondaryColor} class="knob-control__range" />
@@ -185,17 +182,19 @@
 <style>
     .knob-control {
         display: grid;
+        cursor: grab;
+        touch-action: none;
         grid-template-rows: 7px 60px;
+    }
+    .knob-control:active {
+        cursor:grabbing;
     }
 
     .knob-control__range {
         fill: none;
-        transition: stroke 0.1s ease-in;
     }
 
     .knob-control__value {
-        animation-name: dash-frame;
-        animation-fill-mode: forwards;
         fill: none;
     }
 
