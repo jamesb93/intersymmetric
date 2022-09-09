@@ -17,8 +17,8 @@
             { value: 3, display: 3 },
             { value: 2, display: 2 },
             { value: 1, display: 1 },
-            { value: 0.5, display: '1/2' },
-            { value: 0.25, display: '1/4' }
+            { value: 0.5, display: 0.5 },
+            { value: 0.25, display: 0.25 }
         ],
         width: '100px',
         height: '40px'
