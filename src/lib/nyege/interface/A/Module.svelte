@@ -32,7 +32,7 @@
 
     let blips = new Array(4).fill(null);
 
-    const divKnob = { min: 1, max: 16, step: 1, scale: 0.1, reset: 1 };
+    const divKnob = { min: 1, max: 16, step: 1, scale: 0.1, resetValue: 1 };
     const stepper = {
         min: 1,
         max: 16,
@@ -40,20 +40,20 @@
         width: 598,
         height: '40'
     };
-    const soundKnob = { min: 0, max: 19, step: 1, scale: 0.15, reset: 0 };
+    const soundKnob = { min: 0, max: 19, step: 1, scale: 0.15, resetValue: 0 };
     const pitchKnob = {
         min: -36,
         max: 36,
         step: 1,
         scale: 0.5,
-        reset: 0
+        resetValue: 0
     };
     const lenKnob = {
         min: 0,
         max: 1,
         step: 0.01,
         scale: 0.005,
-        reset: 1,
+        resetValue: 1,
     };
 
     patch.messageEvent.subscribe(e => {

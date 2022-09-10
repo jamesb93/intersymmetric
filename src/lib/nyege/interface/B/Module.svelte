@@ -23,9 +23,9 @@
         width: '100px',
         height: '40px'
     };
-    const soundKnob = { min: 0, max: 19, step: 1, scale: 0.15, reset: 0 };
-    const pitchKnob = { min: -36, max: 36, step: 1, scale: 0.5, reset: 0 };
-    const lenKnob = { min: 0, max: 1, step: 0.01, scale: 0.005, reset: 1 };
+    const soundKnob = { min: 0, max: 19, step: 1, scale: 0.15, resetValue: 0 };
+    const pitchKnob = { min: -36, max: 36, step: 1, scale: 0.5, resetValue: 0 };
+    const lenKnob = { min: 0, max: 1, step: 0.01, scale: 0.005, resetValue: 1 };
     const tog = { 
         options: [
             { value: 0, display: 'off '},

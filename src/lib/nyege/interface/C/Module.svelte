@@ -34,21 +34,21 @@
         max: 33,
         step: 1,
         scale: 0.25,
-        reset: 20
+        resetValue: 20
     };
     const scaleKnob = {
         min: 0,
         max: 6,
         step: 1,
         scale: 0.05,
-        reset: 0
+        resetValue: 0
     };
     const lenKnob = {
         min: 0,
         max: 1,
         step: 0.01,
         scale: 0.005,
-        reset: 1
+        resetValue: 1
     };
 
     let blip;
