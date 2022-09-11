@@ -34,7 +34,9 @@
     let down = false;
     let prevTouch;
 
-    onMount(() => { dashLength() });
+    onMount(() => {
+        dashLength();
+    });
 
     $: primaryColor = enabled ? primary : accentColor;
     $: dashStyle = {
@@ -131,11 +133,7 @@
 >
     <div id="title" class="no-hover">{title}</div>
     <svg width={WIDTH} height={HEIGHT}>
-        <path
-            d={range_path}
-            stroke-width={strokeWidth}
-            class="knob-control__range"
-        />
+        <path d={range_path} stroke-width={strokeWidth} class="knob-control__range" />
         <!-- Arc Fill -->
         <path
             d={value_path}
@@ -146,7 +144,7 @@
             class="knob-control__value"
         />
         <!-- Line Value -->
-        <path d={pointer_path} stroke-width={strokeWidth} stroke="black" class='needle' />
+        <path d={pointer_path} stroke-width={strokeWidth} stroke="black" class="needle" />
 
         {#if showValue}
             <text x={MID_X} y={HEIGHT} text-anchor="middle" class="value">

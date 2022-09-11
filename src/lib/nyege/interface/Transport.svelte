@@ -36,7 +36,7 @@
                 play
             {/if}
         </div>
-        <div class='text'>rate</div>
+        <div class="text">rate</div>
     </div>
     <div class="grid row">
         <Play bind:state={playing} />

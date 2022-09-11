@@ -53,7 +53,7 @@
         max: 1,
         step: 0.01,
         scale: 0.005,
-        resetValue: 1,
+        resetValue: 1
     };
 
     patch.messageEvent.subscribe(e => {

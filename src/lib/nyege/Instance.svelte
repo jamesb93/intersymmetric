@@ -9,13 +9,11 @@
     const start = async () => {
         context = new (window.AudioContext || window.webkitAudioContext)();
         let output = context.createGain().connect(context.destination);
-        createInstance('/nyege/code/patch.export.json', context, output)
-        .then(response => {
-            patch = response
+        createInstance('/nyege/code/patch.export.json', context, output).then(response => {
+            patch = response;
             loadSamples(patch, context, 33, 'b.', '/nyege/samples/', 1);
             samplesLoaded = true;
-        })
-        
+        });
     };
 </script>
 

@@ -26,12 +26,12 @@
     const soundKnob = { min: 0, max: 19, step: 1, scale: 0.15, resetValue: 0 };
     const pitchKnob = { min: -36, max: 36, step: 1, scale: 0.5, resetValue: 0 };
     const lenKnob = { min: 0, max: 1, step: 0.01, scale: 0.005, resetValue: 1 };
-    const tog = { 
+    const tog = {
         options: [
-            { value: 0, display: 'off '},
-            { value: 1, display: 'on'}
+            { value: 0, display: 'off ' },
+            { value: 1, display: 'on' }
         ]
-    }
+    };
 
     let blip0, blip1;
 

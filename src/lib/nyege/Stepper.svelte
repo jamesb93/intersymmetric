@@ -75,28 +75,28 @@
         class:active
     >
         <!-- Fill -->
-        <rect class="step-fill" x=0 width={thumbX} {height} />
+        <rect class="step-fill" x="0" width={thumbX} {height} />
         <!-- <line x1={thumbX} x2={thumbX} y1="0" y2={height} stroke-dasharray="3" /> -->
 
         <!-- Step Pipss -->
-        {#each Array(div-1) as _, i}
-        <line
-        class="pip"
-        x1={(thumbX / div) * (i+1)}
-        x2={(thumbX / div) * (i+1)}
-        y1="0"
-        y2={height}
-        stroke-width={lineStrokeWidth}
-        />
+        {#each Array(div - 1) as _, i}
+            <line
+                class="pip"
+                x1={(thumbX / div) * (i + 1)}
+                x2={(thumbX / div) * (i + 1)}
+                y1="0"
+                y2={height}
+                stroke-width={lineStrokeWidth}
+            />
         {/each}
 
         <line
-        class="pos" 
-        x1={(thumbX / div) * pos}
-        x2={(thumbX / div) * pos} 
-        y1=0
-        y2={height} 
-        stroke-width={lineStrokeWidth}
+            class="pos"
+            x1={(thumbX / div) * pos}
+            x2={(thumbX / div) * pos}
+            y1="0"
+            y2={height}
+            stroke-width={lineStrokeWidth}
         />
     </svg>
     <div class="text" class:white={value > 15}>

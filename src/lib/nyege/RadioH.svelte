@@ -13,11 +13,7 @@
 
 <div class="container centre" style:height>
     {#each options as o}
-        <button
-            class="no-hover"
-            on:click={() => set(o.value)}
-            class:selected={value === o.value}
-        >
+        <button class="no-hover" on:click={() => set(o.value)} class:selected={value === o.value}>
             {o.display}
         </button>
     {/each}

@@ -9,7 +9,7 @@
 </script>
 
 <div class="container">
-    <div class='blip' class:active />
+    <div class="blip" class:active />
 </div>
 
 <style>

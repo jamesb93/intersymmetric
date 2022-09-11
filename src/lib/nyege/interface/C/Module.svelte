@@ -60,7 +60,7 @@
     });
 
     $: sendMessage(patch, 'chordfollow', [$chordfollow]);
-    $: sendMessage(patch, 'chordscale', [$chordspread, $chordlow/100.0, $chordhigh/100.0, $scale])
+    $: sendMessage(patch, 'chordscale', [$chordspread, $chordlow / 100.0, $chordhigh / 100.0, $scale]);
     $: sendMessage(patch, 'chordsampler', [$buf6, $len6]);
 </script>
 

@@ -36,7 +36,9 @@
     let anchor = null;
     let down = false;
 
-    onMount(() => { dashLength() });
+    onMount(() => {
+        dashLength();
+    });
 
     $: primaryColor = enabled ? '#40ac47;' : secondaryColor;
     $: textColor = enabled ? '#000000' : secondaryColor;
@@ -80,9 +82,9 @@
 
     const move = posUpdate => {
         if (enabled && down) {
-            updatePosition(posUpdate)
+            updatePosition(posUpdate);
         }
-    }
+    };
     const moveHandler = e => {
         if (anchor) {
             move(e.movementY * -1);
@@ -98,7 +100,7 @@
             move(movementY * -1);
         }
         prevTouch = touch;
-    }
+    };
 
     const downHandler = e => {
         if (enabled) {
@@ -134,11 +136,11 @@
     }
 </script>
 
-<svelte:window 
-on:mousemove={moveHandler} 
-on:touchmove={touchMoveHandler}
-on:mouseup={upHandler}
-on:touchend={upHandler} 
+<svelte:window
+    on:mousemove={moveHandler}
+    on:touchmove={touchMoveHandler}
+    on:mouseup={upHandler}
+    on:touchend={upHandler}
 />
 
 <div
@@ -187,7 +189,7 @@ on:touchend={upHandler}
         grid-template-rows: 7px 60px;
     }
     .knob-control:active {
-        cursor:grabbing;
+        cursor: grabbing;
     }
 
     .knob-control__range {
