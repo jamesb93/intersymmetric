@@ -3,7 +3,7 @@
     import Play from '../Play.svelte';
     import { speed, socket, tala, calculated_speed } from '../app';
     import { max_scale, clip } from '$lib/utility';
-    import { sendMessage } from '$lib/common/patch_helpers';
+    import { sendMessage } from '$lib/common/patch-helpers';
 
     export let patch;
 
