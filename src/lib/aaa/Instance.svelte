@@ -11,7 +11,7 @@
         let output = context.createGain().connect(context.destination);
         createInstance('/aaa/code/patch.export.json', context, output).then(response => {
             patch = response;
-            loadSamples(patch, context, 46, 'buf', '/aaa/samples/', 0);
+            loadSamples(patch, context, 46, 'b.', '/aaa/samples/', 0);
             samplesLoaded = true;
         });
     };
