@@ -2,15 +2,14 @@
     import Interface from './interface/Interface.svelte';
     import Button from './Button.svelte';
     import { loadSamples, createInstance } from '$lib/common/patch-helpers';
-    import { maxStore } from '$lib/common/max-store';
 
     let patch, context;
     let samplesLoaded = false;
 
     const start = async() => {
         context = new (window.AudioContext || window.webkitAudioContext)();
-        let outputNode = context.createGain().connect(context.destination);
-        createInstance('/aaa/code/patch.export.json', context, outputNode)
+        let output = context.createGain().connect(context.destination);
+        createInstance('/aaa/code/patch.export.json', context, output)
         .then(response => { 
             patch = response 
             loadSamples(patch, context, 46, 'buf', '/aaa/samples/', 0);

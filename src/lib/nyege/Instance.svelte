@@ -1,47 +1,26 @@
 <script>
-    import RNBO from '@rnbo/js';
     import Interface from './Interface.svelte';
     import Button from './Button.svelte';
-    import { load_samples } from '$lib/common/patch_helpers';
+    import { loadSamples, createInstance } from '$lib/common/patch-helpers';
 
-    let ctx, d, patcher, context;
-    let samples_loaded = false;
+    let patch, context;
+    let samplesLoaded = false;
 
     const start = async () => {
-        ctx = window.AudioContext || window.webkitAudioContext;
-        context = new ctx();
-        let outputNode = context.createGain();
-        outputNode.connect(context.destination);
-
-        await fetch('/nyege/code/patch.export.json')
-            .then(response => response.json())
-
-            .then(response => {
-                patcher = response;
-                return RNBO.createDevice({ context, patcher });
-            })
-
-            .then(device => {
-                d = device;
-                d.node.connect(outputNode);
-                load_samples(d, context, 33, 'b.', '/nyege/samples/', 1);
-                d.messageEvent.subscribe(e => {
-                    if (e.tag.includes('debug')) {
-                        console.log(e.tag, e.payload);
-                    }
-                });
-            })
-            .then(() => {
-                samples_loaded = true;
-            })
-            .catch(err => {
-                console.error(err);
-            });
+        context = new (window.AudioContext || window.webkitAudioContext)();
+        let output = context.createGain().connect(context.destination);
+        createInstance('/nyege/code/patch.export.json', context, output)
+        .then(response => {
+            patch = response
+            loadSamples(patch, context, 33, 'b.', '/nyege/samples/', 1);
+            samplesLoaded = true;
+        })
+        
     };
 </script>
 
-{#if d && samples_loaded}
-    <Interface bind:patch={d} />
+{#if patch && samplesLoaded}
+    <Interface bind:patch />
 {:else}
     <div class="loading">
         <Button on:click={start} height={'60px'} width={'150px'} fontSize={'24px'}>load</Button>

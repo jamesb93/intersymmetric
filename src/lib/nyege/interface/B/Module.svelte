@@ -3,7 +3,7 @@
     import RadioV from '$lib/nyege/RadioV.svelte';
     import Blip from '$lib/nyege/Blip.svelte';
     import Knob from '$lib/nyege/Knob.svelte';
-    import { sendMessage } from '$lib/common/patch_helpers';
+    import { sendMessage } from '$lib/common/patch-helpers';
     import { socket } from '$lib/nyege/app';
     import { buf4, buf5, pitch4, pitch5, len4, len5, retrig0, retrig1, retrigGate0, retrigGate1 } from '$lib/nyege/app';
 

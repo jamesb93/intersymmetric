@@ -24,7 +24,6 @@ socket.on('rate', x => {
     rate.set(x);
 });
 socket.on('globalCycle', x => globalCycle.set(x));
-
 export const buf0 = writable(0);
 export const buf1 = writable(13);
 export const buf2 = writable(19);

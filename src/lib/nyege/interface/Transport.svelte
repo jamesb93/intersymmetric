@@ -2,7 +2,7 @@
     import Play from '$lib/nyege/Play.svelte';
     import Knob from '$lib/nyege/Knob.svelte';
     import RadioH from '$lib/nyege/RadioH.svelte';
-    import { sendMessage } from '$lib/common/patch_helpers';
+    import { sendMessage } from '$lib/common/patch-helpers';
     import { socket, rate, globalCycle } from '$lib/nyege/app';
 
     export let patch;

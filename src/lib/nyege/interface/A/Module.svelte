@@ -3,7 +3,7 @@
     import Knob from '$lib/nyege/Knob.svelte';
     import Blip from '$lib/nyege/Blip.svelte';
     import { socket } from '$lib/nyege/app';
-    import { sendMessage } from '$lib/common/patch_helpers';
+    import { sendMessage } from '$lib/common/patch-helpers';
     import {
         range0,
         range1,
