@@ -1,9 +1,11 @@
+@import 'knob.css';
+
 :root {
     --primary: #ff44b4;
     --primary-darker: hsl(324, 100%, 40%);
 }
 
-html {
+body {
     font-size: 10px;
     background-color: white;
 }

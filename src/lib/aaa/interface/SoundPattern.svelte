@@ -1,7 +1,7 @@
 <script>
     import './interface.css';
     import presets from '../../../../static/aaa/presets.json';
-    import Knob from '../Knob.svelte';
+    import Knob from '$lib/common/Knob.svelte';
     import Blip from '../Blip.svelte';
     import RadioV from '../RadioV.svelte';
     import { socket } from '../app';
@@ -35,109 +35,99 @@
 
     let step = 1;
     let min = 0;
-    const fm1_freq_knob = {
-        title: 'sound',
-        min: 0,
-        max: presets.fm1_freq.length - 1,
+
+    const knob = {
+        WIDTH: 80, 
+        HEIGHT: 60,
+        SHIFT: 1.1,
+        RADIUS: 21,
+        showValue: false,
         step: 1,
         scale: 0.1,
-        resetValue: 0,
+        resetValue: 0
+    }
+
+    const fm1_freq_knob = Object.assign({
+        title: 'sound',
+        min: 0,
+        max: presets.fm1_freq.length-1,
         func: () => {
             socket.emit('fm1_freq_preset', $fm1_freq_preset);
         }
-    };
+    }, knob);
 
-    const fm1_mod_knob = {
+    const fm1_mod_knob = Object.assign({
         title: 'mod',
         min: 0,
-        max: presets.fm1_mod.length - 1,
-        step: 1,
-        scale: 0.1,
-        resetValue: 0,
+        max: presets.fm1_mod.length-1,
         func: () => {
             socket.emit('fm1_mod_preset', $fm1_mod_preset);
         }
-    };
+    }, knob);
 
-    const fm1_shape_knob = {
+    const fm1_shape_knob = Object.assign({
         title: 'shape',
         min: 0,
-        max: presets.fm1_shape.length - 1,
-        step: 1,
-        scale: 0.1,
-        resetValue: 0,
+        max: presets.fm1_shape.length-1,
         func: () => {
             socket.emit('fm1_shape_preset', $fm1_shape_preset);
         }
-    };
+    }, knob);
     $: _fm1_mod_preset = Math.round(($fm1_mod_preset - min) / step) * step + min;
 
-    const fm2_freq_knob = {
+    const fm2_freq_knob = Object.assign({
         title: 'sound',
         min: 0,
-        max: presets.fm2_freq.length - 1,
-        step: 1,
-        scale: 0.1,
-        resetValue: 0,
+        max: presets.fm2_freq.length-1,
         func: () => {
             socket.emit('fm2_freq_preset', $fm2_freq_preset);
         }
-    };
-    const fm2_mod_knob = {
+    }, knob);
+
+    const fm2_mod_knob = Object.assign({
         title: 'mod',
         min: 0,
-        max: presets.fm2_mod.length - 1,
-        step: 1,
-        scale: 0.1,
-        resetValue: 0,
+        max: presets.fm2_mod.length-1,
         func: () => {
             socket.emit('fm2_mod_preset', $fm2_mod_preset);
         }
-    };
-    const fm2_shape_knob = {
+    }, knob);
+
+    const fm2_shape_knob = Object.assign({
         title: 'shape',
         min: 0,
-        max: presets.fm2_shape.length - 1,
-        step: 1,
-        scale: 0.1,
-        resetValue: 0,
+        max: presets.fm2_shape.length-1,
         func: () => {
             socket.emit('fm2_shape_preset', $fm2_shape_preset);
         }
-    };
-    const perc_sound_knob = {
+    }, knob);
+
+    const perc_sound_knob = Object.assign({
         title: 'sound',
         min: 0,
-        max: presets.perc_sound.length - 1,
-        step: 1,
-        scale: 0.1,
-        resetValue: 0,
+        max: presets.perc_sound.length-1,
         func: () => {
             socket.emit('perc_sound_preset', $perc_sound_preset);
         }
-    };
-    const perc_transpose_knob = {
+    }, knob);
+
+    const perc_transpose_knob = Object.assign({
         title: 'mod',
         min: 0,
-        max: presets.perc_sound.length - 1,
-        step: 1,
-        scale: 0.1,
-        resetValue: 0,
+        max: presets.perc_sound.length-1,
         func: () => {
             socket.emit('perc_transpose_preset', $perc_transpose_preset);
         }
-    };
-    const perc_shape_knob = {
+    }, knob);
+
+    const perc_shape_knob = Object.assign({
         title: 'shape',
         min: 0,
-        max: presets.perc_shape.length - 1,
-        step: 1,
-        scale: 0.1,
-        resetValue: 0,
+        max: presets.perc_shape.length-1,
         func: () => {
             socket.emit('perc_shape_preset', $perc_shape_preset);
         }
-    };
+    }, knob);
 
     $: {
         try {

@@ -1,6 +1,6 @@
 <script>
     import Stepper from '$lib/nyege/Stepper.svelte';
-    import Knob from '$lib/nyege/Knob.svelte';
+    import Knob from '$lib/common/Knob.svelte';
     import Blip from '$lib/nyege/Blip.svelte';
     import { socket } from '$lib/nyege/app';
     import { sendMessage } from '$lib/common/patch-helpers';

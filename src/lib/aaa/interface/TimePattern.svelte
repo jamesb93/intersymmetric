@@ -3,7 +3,6 @@
     import RadioH from '../RadioH.svelte';
     import Slider from '../Slider.svelte';
     import { socket, calculated_speed } from '../app';
-    import { max_scale } from '$lib/utility';
     import { sendMessage } from '$lib/common/patch-helpers';
     import {
         a_mode,
@@ -106,9 +105,6 @@
         }
     };
 
-    // $: b0_map = max_scale($b_steps_0, 0, 1, 100, 1000, 2);
-    // $: b1_map = max_scale($b_steps_1, 0, 1, 100, 1000, 2);
-    // $: b2_map = max_scale($b_steps_2, 0, 1, 100, 1000, 2);
     const duration_lookup = [1, 2, 3, 4, 6, 8, 12, 16, 32];
     $: b0_map = duration_lookup[$b_steps_0] * 25;
     $: b1_map = duration_lookup[$b_steps_1] * 25;

@@ -186,12 +186,9 @@
 
     .knob-control__range {
         fill: none;
-        /* transition: stroke .1s ease-in; */
     }
 
     .knob-control__value {
-        animation-name: dash-frame;
-        /* animation-fill-mode: forwards; */
         fill: none;
     }
 

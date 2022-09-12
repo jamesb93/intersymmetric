@@ -1,0 +1,20 @@
+.knob {
+    stroke-width: 2;
+}
+
+.stroke {
+    fill: none;
+    stroke: var(--primary);
+}
+
+.knob-value {
+    fill: var(--primary);
+    font-size: var(--font-size);
+}
+
+
+.knob-title {
+	text-align: center;
+	color: black;
+	font-size: var(--font-size);
+}

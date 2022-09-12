@@ -1,0 +1,29 @@
+.knob {
+    stroke-width: 1;
+}
+
+.stroke {
+    fill: none;
+    stroke: var(--primary);
+}
+
+.knob-needle {
+	stroke: black;
+}
+
+.knob-arc {
+	fill: none;
+	stroke: var(--primary);
+}
+
+.knob-value {
+    fill: black;
+    font-size: var(--font-size);
+}
+
+
+.knob-title {
+	text-align: center;
+	color: black;
+	font-size: var(--font-size);
+}

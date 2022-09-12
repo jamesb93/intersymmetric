@@ -1,5 +1,5 @@
 <script>
-    import Knob from '../Knob.svelte';
+    import Knob from '$lib/common/Knob.svelte';
     import Play from '../Play.svelte';
     import { speed, socket, tala, calculated_speed } from '../app';
     import { max_scale, clip } from '$lib/utility';
@@ -15,7 +15,11 @@
         step: 0.05,
         scale: 0.03,
         resetValue: 4,
-        show_value: true
+        show_value: true,
+        WIDTH: 80,
+        HEIGHT: 60,
+        RADIUS: 21,
+        SHIFT: 1.1
     };
 
     $: $calculated_speed = clip(

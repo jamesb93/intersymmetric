@@ -1,6 +1,5 @@
 <script>
     import './theme.css';
-    import './grid.css';
     import Header from '$lib/nyege/Header.svelte';
     import Footer from '$lib/nyege/Footer.svelte';
 </script>

@@ -3,7 +3,7 @@
     import RadioH from '$lib/nyege/RadioH.svelte';
     import RadioV from '$lib/nyege/RadioV.svelte';
     import Blip from '$lib/nyege/Blip.svelte';
-    import Knob from '$lib/nyege/Knob.svelte';
+    import Knob from '$lib/common/Knob.svelte';
     import { sendMessage } from '$lib/common/patch-helpers';
     import { socket } from '$lib/nyege/app';
     import { buf6, scale, len6, chordfollow, chordspread, chordlow, chordhigh } from '$lib/nyege/app';
