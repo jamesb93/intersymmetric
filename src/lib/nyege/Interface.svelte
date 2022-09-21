@@ -21,10 +21,13 @@
 </script>
 
 
-<svelte:window bind:innerHeight={h} on:mousewheel|nonpassive={scroll} />
+<svelte:window 
+bind:innerHeight={h} 
+on:mousewheel|nonpassive={scroll} 
+on:touchmove|nonpassive={scroll}
+/>
 
 <div class="container" on:click={() => vp = !vp}>
-    { h }
     <div class="top" class:hide={h <= vertBreakpoint && vp}>
         <Transport bind:patch/>
         <A bind:patch />
