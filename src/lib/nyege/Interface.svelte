@@ -5,13 +5,34 @@
     import C from '$lib/nyege/interface/C/Module.svelte';
 
     export let patch;
+
+    let vp = false;
+    let h;
+    const vertBreakpoint = 600
+
+    function scroll(e) {
+        e.preventDefault();
+        if (e.deltaY >= 1) {
+            vp = true
+        } else if (e.deltaY <= -1) {
+            vp = false
+        }
+    }
 </script>
 
-<div class="container">
-    <Transport bind:patch />
-    <A bind:patch />
-    <B bind:patch />
-    <C bind:patch />
+
+<svelte:window bind:innerHeight={h} on:mousewheel|nonpassive={scroll} />
+
+<div class="container" on:click={() => vp = !vp}>
+    { h }
+    <div class="top" class:hide={h <= vertBreakpoint && vp}>
+        <Transport bind:patch/>
+        <A bind:patch />
+    </div>
+    <div class="bottom" class:hide={h <= vertBreakpoint && !vp}>
+        <B bind:patch />
+        <C bind:patch />
+    </div>
 </div>
 
 <style>
@@ -21,6 +42,17 @@
         margin: 0 auto;
         margin-top: 2em;
         gap: 1em;
+    }
+    .top {
+
+    }
+    .bottom {
+
+    }
+
+    .hide {
+        visibility: hidden;
+        height: 0;
     }
 
     @media only screen and (min-width: 1005px) {
