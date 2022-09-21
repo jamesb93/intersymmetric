@@ -7,6 +7,15 @@
     stroke: var(--primary);
 }
 
+.knob-needle {
+	stroke: var(--primary);
+}
+
+.knob-arc {
+	fill: none;
+	stroke: var(--primary);
+}
+
 .knob-value {
     fill: var(--primary);
     font-size: var(--font-size);
