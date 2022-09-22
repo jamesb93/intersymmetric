@@ -6,20 +6,21 @@
     import Knob from '$lib/common/Knob.svelte';
     import { sendMessage } from '$lib/common/patch-helpers';
     import { socket } from '$lib/nyege/app';
-    import { buf6, scale, len6, chordfollow, chordspread, chordlow, chordhigh } from '$lib/nyege/app';
+    import { buf6, scale, len6, chordfollow, chordspread, chordlow, chordhigh, hbp } from '$lib/nyege/app';
 
     export let patch;
+
+    let w;
 
     const radioh = {
         options: [1, 2, 3, 4, 5, 6, 7, 8].map(x => ({ display: x, value: x })),
         height: '50px',
-        width: '510px'
+        width: '450px'
     };
     const rslider = {
         min: 0,
         max: 100,
         step: 1,
-        width: 448,
         height: '30px'
     };
     const radiov = {
@@ -67,6 +68,8 @@
     $: sendMessage(patch, 'chordsampler', [$buf6, $len6]);
 </script>
 
+<svelte:window bind:innerWidth={w} />
+
 <div class="grid container">
     <Blip bind:this={blip} />
     <RadioV {...radiov} bind:value={$chordfollow} func={() => socket.emit('chordfollow', $chordfollow)} />
@@ -75,10 +78,11 @@
         {...rslider}
         bind:low={$chordlow}
         bind:high={$chordhigh}
+        width={w <= hbp ? 448 : 598}
         lofunc={() => socket.emit('chordlow', $chordlow)}
         hifunc={() => socket.emit('chordhigh', $chordhigh)}
         />
-        <RadioH {...radioh} bind:value={$chordspread} func={() => socket.emit('chordspread', $chordspread)} />
+        <RadioH {...radioh} bind:value={$chordspread} width={w <= hbp ? '450px' : '600px'} func={() => socket.emit('chordspread', $chordspread)} />
     </div>
     <div class="box">
         <div class="header">sound</div>

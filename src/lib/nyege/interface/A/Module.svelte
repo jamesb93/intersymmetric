@@ -25,19 +25,20 @@
         div1,
         div2,
         div3,
-        pips
+        pips,
+        hbp
     } from '$lib/nyege/app';
 
     export let patch;
 
     let blips = new Array(4).fill(null);
+    let w;
 
     const divKnob = { min: 1, max: 16, step: 1, scale: 0.1, resetValue: 1 };
     const stepper = {
         min: 1,
         max: 16,
         step: 1,
-        width: 510,
         height: 40
     };
     const soundKnob = { min: 0, max: 19, step: 1, scale: 0.15, resetValue: 0 };
@@ -78,6 +79,8 @@
     $: sendMessage(patch, 'sampler_params', [3, $buf3, $pitch3, $len3]);
 </script>
 
+<svelte:window bind:innerWidth={w} />
+
 <div class="container">
     <div class="labels grid">
         <div class='empty'></div>
@@ -95,6 +98,7 @@
             {...stepper}
             bind:value={$range0}
             bind:div={$div0}
+            width={w <= hbp ? 450 : 600}
             pos={$pips[0]}
             func={() => socket.emit('range0', $range0)}
         />
@@ -109,6 +113,7 @@
             {...stepper}
             bind:value={$range1}
             bind:div={$div1}
+            width={w <= hbp ? 450 : 600}
             pos={$pips[1]}
             func={() => socket.emit('range1', $range1)}
         />
@@ -123,6 +128,7 @@
             {...stepper}
             bind:value={$range2}
             bind:div={$div2}
+            width={w <= hbp ? 450 : 600}
             pos={$pips[2]}
             func={() => socket.emit('range2', $range2)}
         />
@@ -138,6 +144,7 @@
             bind:value={$range3}
             bind:div={$div3}
             pos={$pips[3]}
+            width={w <= hbp ? 450 : 600}
             func={() => socket.emit('range3', $range3)}
         />
         <Knob {...soundKnob} bind:value={$buf3} func={() => socket.emit('buf3', $buf3)} />
@@ -154,7 +161,7 @@
     }
 
     .labels {
-        margin-left: 578px;
+        margin-left: 578px;  
         justify-content: center;
         color: var(--primary);
         margin: 0 auto;

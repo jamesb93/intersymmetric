@@ -5,7 +5,7 @@
     import Knob from '$lib/common/Knob.svelte';
     import { sendMessage } from '$lib/common/patch-helpers';
     import { socket } from '$lib/nyege/app';
-    import { buf4, buf5, pitch4, pitch5, len4, len5, retrig0, retrig1, retrigGate0, retrigGate1 } from '$lib/nyege/app';
+    import { buf4, buf5, pitch4, pitch5, len4, len5, retrig0, retrig1, retrigGate0, retrigGate1, hbp } from '$lib/nyege/app';
 
     export let patch;
 
@@ -20,7 +20,6 @@
             { value: 0.5, display: 0.5 },
             { value: 0.25, display: 0.25 }
         ],
-        width: '510px',
         height: '50px'
     };
     const soundKnob = { min: 0, max: 19, step: 1, scale: 0.15, resetValue: 0 };
@@ -34,7 +33,7 @@
         height: '24px'
     };
 
-    let blip0, blip1;
+    let blip0, blip1, w;
 
     patch.messageEvent.subscribe(e => {
         if (e.tag === 'blip') {
@@ -52,11 +51,13 @@
     $: sendMessage(patch, 'sampler_params', [5, $buf5, $pitch5, $len5]);
 </script>
 
+<svelte:window bind:innerWidth={w} />
+
 <div class="container">
     <div class="row grid">
         <Blip bind:this={blip0} />
         <RadioV {...tog} bind:value={$retrigGate0} func={() => socket.emit('retrigGate0', $retrigGate0)} />
-        <RadioH {...cycle} bind:value={$retrig0} func={() => socket.emit('retrig0', $retrig0)} />
+        <RadioH {...cycle} bind:value={$retrig0} width={w <= hbp ? '450px' : '600px'} func={() => socket.emit('retrig0', $retrig0)} />
         <Knob {...soundKnob} bind:value={$buf4} func={() => socket.emit('buf4', $buf4)} />
         <Knob {...pitchKnob} bind:value={$pitch4} func={() => socket.emit('pitch4', $pitch4)} />
         <Knob {...lenKnob} bind:value={$len4} func={() => socket.emit('len4', $len4)} />
@@ -64,7 +65,7 @@
     <div class="row grid">
         <Blip bind:this={blip1} />
         <RadioV {...tog} bind:value={$retrigGate1} func={() => socket.emit('retrigGate1', $retrigGate1)} />
-        <RadioH {...cycle} bind:value={$retrig1} func={() => socket.emit('retrig1', $retrig1)} />
+        <RadioH {...cycle} bind:value={$retrig1} width={w <= hbp ? '450px' : '600px'} func={() => socket.emit('retrig1', $retrig1)} />
         <Knob {...soundKnob} bind:value={$buf5} func={() => socket.emit('buf5', $buf5)} />
         <Knob {...pitchKnob} bind:value={$pitch5} func={() => socket.emit('pitch5', $pitch5)} />
         <Knob {...lenKnob} bind:value={$len5} func={() => socket.emit('len5', $len5)} />

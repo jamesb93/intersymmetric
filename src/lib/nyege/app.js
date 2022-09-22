@@ -113,5 +113,4 @@ export const palette = {
     green: 'rgb(59,136,81)'
 };
 
-export const primary = palette.gold;
-export const primaryDarker = palette.blue;
+export const hbp = 1005;
