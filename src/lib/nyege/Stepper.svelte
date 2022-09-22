@@ -19,7 +19,7 @@
     let prevValue = null;
 
     $: thumbX = clip(scale(value, min, max, 0, width), 0, width) + thumbWidth;
-    $: lineStrokeWidth = value > 2 ? '3px' : '2px';
+    $: lineStrokeWidth = value > 2 ? '1px' : '1px';
 
     const move = e => {
         rect = bar.getBoundingClientRect();
@@ -96,7 +96,7 @@
             x2={(thumbX / div) * pos}
             y1="0"
             y2={height}
-            stroke-width={lineStrokeWidth}
+            stroke-width={5}
         />
     </svg>
     <div class="text" class:white={value > 15}>
@@ -146,7 +146,7 @@
     }
 
     .pos {
-        stroke: #7a7a7a;
+        stroke: white;
     }
 
     .active {
