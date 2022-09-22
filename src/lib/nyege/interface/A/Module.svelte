@@ -37,7 +37,7 @@
         min: 1,
         max: 16,
         step: 1,
-        width: 450,
+        width: 600,
         height: 40
     };
     const soundKnob = { min: 0, max: 19, step: 1, scale: 0.15, resetValue: 0 };
