@@ -23,7 +23,7 @@
     }
     header {
         display: grid;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: 180px auto 180px;
         justify-content: space-between;
         max-width: 1005px;
         margin: 0 auto;
