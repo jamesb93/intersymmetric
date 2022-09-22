@@ -13,17 +13,18 @@
     button {
         color: black;
         border: 0px solid var(--primary);
-        background-color: #ffffff;
+        background-color: var(--light-grey);
         text-align: center;
         font-family: var(--font);
     }
 
     button:hover {
-        background-color: var(--light-grey);
+        background-color: var(--grey);
         color: black;
     }
 
     button:active {
-        background-color: var(--grey);
+        background-color: var(--primary);
+        color: white;
     }
 </style>
