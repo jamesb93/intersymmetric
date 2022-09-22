@@ -14,12 +14,12 @@
 <div class="container">
     {#each options as o}
         <button
-            style:width
-            style:height
-            class="no-hover"
-            on:mousedown={() => set(o.value)}
-            on:touchstart={() => set(o.value)}
-            class:selected={value === o.value}
+        style:width
+        style:height
+        class="no-hover"
+        on:mousedown={() => set(o.value)}
+        on:touchstart={() => set(o.value)}
+        class:selected={value === o.value}
         >
             {o.display}
         </button>
@@ -35,14 +35,14 @@
         gap: 1px;
     }
     button {
+        border: 1px solid var(--primary);
         background-color: #ffffff;
-        border: 0px solid var(--primary);
         height: 10px;
         font-family: var(--font);
-        color: var(--primary);
         font-size: 8px;
         text-align: center;
-        color: black;
+        color: var(--primary);
+        align-content: center;
     }
 
     button:hover:not(.selected) {
@@ -51,7 +51,7 @@
 
     button:active {
         background-color: var(--grey);
-        color: black;
+        color: var(--primary);
     }
 
     .selected {

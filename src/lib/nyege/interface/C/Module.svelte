@@ -12,7 +12,8 @@
 
     const radioh = {
         options: [1, 2, 3, 4, 5, 6, 7, 8].map(x => ({ display: x, value: x })),
-        height: '60px'
+        height: '35px',
+        width: '450px'
     };
     const radiov = {
         options: [
@@ -21,13 +22,14 @@
             { value: 2, display: 2 },
             { value: 3, display: 3 },
             { value: 4, display: 4 }
-        ]
+        ],
+        height: '13.px'
     };
     const rslider = {
         min: 0,
         max: 100,
         step: 1,
-        width: 598
+        width: 448
     };
     const soundKnob = {
         min: 20,
@@ -64,32 +66,30 @@
     $: sendMessage(patch, 'chordsampler', [$buf6, $len6]);
 </script>
 
-<div class="container">
-    <div class="grid">
-        <Blip bind:this={blip} />
-        <RadioV {...radiov} bind:value={$chordfollow} func={() => socket.emit('chordfollow', $chordfollow)} />
-        <div class="centre">
-            <RSlider
-                {...rslider}
-                bind:low={$chordlow}
-                bind:high={$chordhigh}
-                lofunc={() => socket.emit('chordlow', $chordlow)}
-                hifunc={() => socket.emit('chordhigh', $chordhigh)}
-            />
-            <RadioH {...radioh} bind:value={$chordspread} func={() => socket.emit('chordspread', $chordspread)} />
-        </div>
-        <div class="sound">
-            <div class="header">sound</div>
-            <Knob {...soundKnob} bind:value={$buf6} func={() => socket.emit('buf6', $buf6)} />
-        </div>
-        <div class="scale">
-            <div class="header">scale</div>
-            <Knob {...scaleKnob} bind:value={$scale} func={() => socket.emit('scale', $scale)} />
-        </div>
-        <div class="length">
-            <div class="header">length</div>
-            <Knob {...lenKnob} bind:value={$len6} func={() => socket.emit('len6', $len6)} />
-        </div>
+<div class="grid container">
+    <Blip bind:this={blip} />
+    <RadioV {...radiov} bind:value={$chordfollow} func={() => socket.emit('chordfollow', $chordfollow)} />
+    <div class="centre">
+        <RSlider
+        {...rslider}
+        bind:low={$chordlow}
+        bind:high={$chordhigh}
+        lofunc={() => socket.emit('chordlow', $chordlow)}
+        hifunc={() => socket.emit('chordhigh', $chordhigh)}
+        />
+        <RadioH {...radioh} bind:value={$chordspread} func={() => socket.emit('chordspread', $chordspread)} />
+    </div>
+    <div class="box">
+        <div class="header">sound</div>
+        <Knob {...soundKnob} bind:value={$buf6} func={() => socket.emit('buf6', $buf6)} />
+    </div>
+    <div class="box">
+        <div class="header">scale</div>
+        <Knob {...scaleKnob} bind:value={$scale} func={() => socket.emit('scale', $scale)} />
+    </div>
+    <div class="box">
+        <div class="header">length</div>
+        <Knob {...lenKnob} bind:value={$len6} func={() => socket.emit('len6', $len6)} />
     </div>
 </div>
 
@@ -102,5 +102,10 @@
     }
     .header {
         color: var(--primary);
+        width: 35px;
+    }
+    .box {
+        display: flex;
+        flex-direction: column;
     }
 </style>

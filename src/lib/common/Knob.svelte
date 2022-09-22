@@ -3,9 +3,9 @@
     import { clip, mapRange } from '$lib/utility';
 
     export let title = '';
-	export let WIDTH = 50;
+	export let WIDTH = 35;
     export let HEIGHT = 50;
-    export let RADIUS = 17;
+    export let RADIUS = 15;
     export let SHIFT = 1;
     export let min = 0;
     export let max = 100;
@@ -138,13 +138,13 @@
         <path d={pointer_path} class="knob knob-needle" />
 
         {#if showValue}
-            <text x={MID_X} y={HEIGHT} text-anchor="middle" class="knob knob-value">
-                {#if !displayValue}
-                    {parseFloat(value.toFixed(1))}
-                {:else}
-                    {displayValue}
-                {/if}
-            </text>
+        <text x={MID_X} y={HEIGHT} text-anchor="middle" class="knob knob-value">
+            {#if !displayValue}
+                {parseFloat(value.toFixed(1))}
+            {:else}
+                {displayValue}
+            {/if}
+        </text>
         {/if}
     </svg>
 </div>

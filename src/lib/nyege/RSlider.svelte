@@ -6,7 +6,7 @@
     export let min = 0;
     export let max = 2;
     export let step = 1;
-    export let width = 598;
+    export let width = 500;
     export let height = 30;
     export let active = false;
     export let lofunc = () => {};
@@ -89,7 +89,7 @@
         cursor: grab;
         touch-action: none;
         background-color: white;
-        border: 0px solid var(--primary);
+        border: 1px solid var(--primary);
     }
 
     svg:active {

@@ -37,8 +37,8 @@
         min: 1,
         max: 16,
         step: 1,
-        width: 598,
-        height: '40'
+        width: 450,
+        height: 35
     };
     const soundKnob = { min: 0, max: 19, step: 1, scale: 0.15, resetValue: 0 };
     const pitchKnob = {
@@ -80,6 +80,9 @@
 
 <div class="container">
     <div class="labels grid">
+        <div class='empty'></div>
+        <div class='empty'></div>
+        <div class='empty'></div>
         <div id="sound-label">sound</div>
         <div id="pitch-label">pitch</div>
         <div id="length-label">length</div>
@@ -147,17 +150,17 @@
     .container {
         display: flex;
         flex-direction: column;
+        gap: 0;
     }
 
     .labels {
-        display: grid;
-        grid-template-columns: repeat(3, 50px);
+        margin-left: 515px;
         justify-content: center;
         color: var(--primary);
-        margin-left: 710px;
+        margin: 0 auto;
     }
 
     .row {
-        height: 55px;
+        height: 50px;
     }
 </style>

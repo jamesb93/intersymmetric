@@ -3,11 +3,11 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    grid-template-columns: 30px 50px 600px 50px 50px 50px;
+    grid-template-columns: 30px 35px 450px 30px 30px 30px;
 }
 
 .centre {
-    width: 600px;
+    width: 450px;
 }
 
 .empty {

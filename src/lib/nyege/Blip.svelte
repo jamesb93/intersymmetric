@@ -18,7 +18,7 @@
         place-items: center;
     }
     .blip {
-        border: 2px solid var(--primary);
+        border: 1px solid var(--primary);
         width: 10px;
         height: 10px;
         border-radius: 50%;

@@ -43,8 +43,8 @@ on:touchmove|nonpassive={scroll}
         display: flex;
         flex-direction: column;
         margin: 0 auto;
-        margin-top: 2em;
-        gap: 1em;
+        margin-top: 1em;
+        gap: 10px;
     }
     .top {
 
@@ -52,21 +52,8 @@ on:touchmove|nonpassive={scroll}
     .bottom {
 
     }
-
     .hide {
         visibility: hidden;
         height: 0;
-    }
-
-    @media only screen and (min-width: 1005px) {
-        .container {
-            grid-template-columns: repeat(3, auto);
-        }
-    }
-
-    @media only screen and (max-width: 1005px) {
-        .container {
-            grid-template-rows: repeat(3, auto);
-        }
     }
 </style>

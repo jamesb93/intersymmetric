@@ -11,11 +11,11 @@
     };
 </script>
 
-<div class="container centre" style:height>
+<div class="container centre" style:height style:width>
     {#each options as o}
-        <button class="no-hover" on:click={() => set(o.value)} class:selected={value === o.value}>
-            {o.display}
-        </button>
+    <button class="no-hover" on:click={() => set(o.value)} class:selected={value === o.value}>
+        {o.display}
+    </button>
     {/each}
 </div>
 
@@ -23,19 +23,19 @@
     .container {
         display: flex;
         flex-direction: row;
+        justify-content: center;
         place-items: center;
         gap: 0.1rem;
     }
     button {
         flex: 1 1 0;
         background-color: #ffffff;
-        border: 0px solid var(--primary);
+        border: 1px solid var(--primary);
         height: 100%;
         font-family: var(--font);
         font-size: 10px;
         text-align: center;
-        transition: opacity 250ms linear;
-        color: black;
+        color: var(--primary);
     }
     button:hover:not(.selected) {
         background-color: var(--light-grey);

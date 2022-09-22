@@ -5,7 +5,7 @@
     export let min = 0,
         max = 2,
         step = 1;
-    export let width = 600;
+    export let width = 500;
     export let height = 30;
     export let thumbWidth = 1;
     export let active = false;
@@ -115,6 +115,7 @@
         background-color: white;
         stroke-width: 1px;
         stroke: var(--primary);
+        outline: 1px solid var(--primary);
     }
 
     svg:active {

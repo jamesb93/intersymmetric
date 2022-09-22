@@ -20,8 +20,8 @@
             { value: 0.5, display: 0.5 },
             { value: 0.25, display: 0.25 }
         ],
-        width: '100px',
-        height: '40px'
+        width: '450px',
+        height: '35px'
     };
     const soundKnob = { min: 0, max: 19, step: 1, scale: 0.15, resetValue: 0 };
     const pitchKnob = { min: -36, max: 36, step: 1, scale: 0.5, resetValue: 0 };
@@ -30,7 +30,8 @@
         options: [
             { value: 0, display: 'off ' },
             { value: 1, display: 'on' }
-        ]
+        ],
+        height: '17px'
     };
 
     let blip0, blip1;

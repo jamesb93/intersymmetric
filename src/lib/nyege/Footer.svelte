@@ -10,6 +10,9 @@
         Commissioned by <a target="_blank" href="https://noboundsfestival.co.uk/">No Bounds</a> in collaboration with
         <a target="blank" href="https://nyegenyege.com/">Nyege Nyege</a>
     </div>
+    <div>
+        swap view
+    </div>
 </footer>
 
 <style>
