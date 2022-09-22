@@ -10,22 +10,19 @@
     let h;
     const vertBreakpoint = 600
 
-    function scroll(e) {
-        e.preventDefault();
-        if (e.deltaY >= 1) {
-            vp = true
-        } else if (e.deltaY <= -1) {
-            vp = false
-        }
-    }
 </script>
 
 
 <svelte:window 
 bind:innerHeight={h} 
-on:mousewheel|nonpassive={scroll} 
-on:touchmove|nonpassive={scroll}
 />
+
+{#if h <= vertBreakpoint}
+<div class="tab">
+    <button class:disabled={!vp} on:click={() => vp = false}>⬆</button>
+    <button class:disabled={vp} on:click={() => vp = true}>⬇</button>
+</div>
+{/if}
 
 <div class="container">
     <div class="top" class:hide={h <= vertBreakpoint && vp}>
@@ -45,6 +42,34 @@ on:touchmove|nonpassive={scroll}
         gap: 2em;
         margin: 0 auto;
         margin-top: 2em;
+        /* overflow-y:hidden; */
+    }
+    .tab {
+        position: fixed;
+        top: 75px;
+        display: grid;
+        gap: 10px;
+        grid-template-rows: auto auto;
+        right: 10px;
+    }
+    button {
+        background: transparent;
+        border: 1px solid var(--primary);
+        font-family: var(--font);
+        font-size: 10px;
+        color: var(--primary);
+        width: 30px;
+        height: 100px;
+        text-align: center;
+    }
+    button:hover:not(.selected) {
+        background-color: var(--light-grey);
+    }
+    button:active:not(.selected) {
+        background-color: var(--grey);
+    }
+    .disabled {
+        opacity: 0.5;
     }
     .bottom {
         display: flex;
