@@ -14,15 +14,15 @@
 
 <style>
     footer {
-        position: relative;
         bottom: 0;
         display: flex;
         flex-direction: column;
         color: var(--primary);
-        font-size: 10px;
         text-align: left;
         gap: 0.1em;
-        margin-top: 3em;
+        margin-top: 2em;
+        font-size: 10px;
+        -webkit-text-size-adjust: none;
     }
 
     @media only screen and (max-width: 1005px) {

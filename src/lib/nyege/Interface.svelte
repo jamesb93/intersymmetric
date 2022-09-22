@@ -12,27 +12,11 @@
 
 </script>
 
-
-<svelte:window 
-bind:innerHeight={h} 
-/>
-
-{#if h <= vertBreakpoint}
-<div class="tab">
-    <button class:disabled={!vp} on:click={() => vp = false}>⬆</button>
-    <button class:disabled={vp} on:click={() => vp = true}>⬇</button>
-</div>
-{/if}
-
 <div class="container">
-    <div class="top" class:hide={h <= vertBreakpoint && vp}>
-        <Transport bind:patch/>
-        <A bind:patch />
-    </div>
-    <div class="bottom" class:hide={h <= vertBreakpoint && !vp}>
-        <B bind:patch />
-        <C bind:patch />
-    </div>
+    <Transport bind:patch/>
+    <A bind:patch />
+    <B bind:patch />
+    <C bind:patch />
 </div>
 
 <style>
@@ -42,7 +26,6 @@ bind:innerHeight={h}
         gap: 2em;
         margin: 0 auto;
         margin-top: 2em;
-        /* overflow-y:hidden; */
     }
     .tab {
         position: fixed;
@@ -50,10 +33,10 @@ bind:innerHeight={h}
         display: grid;
         gap: 10px;
         grid-template-rows: auto auto;
-        right: 10px;
+        right: 0px;
     }
     button {
-        background: transparent;
+        background-color: white;
         border: 1px solid var(--primary);
         font-family: var(--font);
         font-size: 10px;

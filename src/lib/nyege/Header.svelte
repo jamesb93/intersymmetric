@@ -27,7 +27,6 @@
         justify-content: space-between;
         max-width: 1005px;
         margin: 0 auto;
-        font-size: 10px;
         min-height: var(--h);
         max-height: var(--h);
         padding-top: 10px;
