@@ -30,10 +30,10 @@
             const scaled = scale(ratio, 0, 1, min, max);
             if (edge === 0) {
                 low = Math.round((scaled - min) / step) * step + min;
-                low = clip(low, min, high);
+                low = clip(low, min, high-5);
             } else if (edge === 1) {
                 high = Math.round((scaled - min) / step) * step + min;
-                high = clip(high, low, max);
+                high = clip(high, low+5, max);
             }
             if (prevLow !== low) {
                 lofunc();
@@ -51,8 +51,10 @@
         rect = bar.getBoundingClientRect();
         const x = e.pageX - rect.left;
         // Which handle are you closer to?
+        // This will always snap to the left edge at minimum range... fix
         const distances = [lowX, highX].map(v => Math.abs(x - v));
         edge = distances.indexOf(Math.min(...distances));
+        console.log(edge)
         move(e);
     };
     const handle_mouseup = () => {
