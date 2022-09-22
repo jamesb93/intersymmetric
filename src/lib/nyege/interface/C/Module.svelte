@@ -12,8 +12,15 @@
 
     const radioh = {
         options: [1, 2, 3, 4, 5, 6, 7, 8].map(x => ({ display: x, value: x })),
-        height: '35px',
+        height: '50px',
         width: '450px'
+    };
+    const rslider = {
+        min: 0,
+        max: 100,
+        step: 1,
+        width: 448,
+        height: '30px'
     };
     const radiov = {
         options: [
@@ -23,13 +30,7 @@
             { value: 3, display: 3 },
             { value: 4, display: 4 }
         ],
-        height: '13.px'
-    };
-    const rslider = {
-        min: 0,
-        max: 100,
-        step: 1,
-        width: 448
+        height: '16.4px'
     };
     const soundKnob = {
         min: 20,
@@ -97,15 +98,12 @@
     .container {
         height: 94px;
     }
-    .row {
-        height: 90px;
+    .box {
+        display: flex;
+        flex-direction: column;
     }
     .header {
         color: var(--primary);
         width: 35px;
-    }
-    .box {
-        display: flex;
-        flex-direction: column;
     }
 </style>

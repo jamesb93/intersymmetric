@@ -38,7 +38,7 @@
         max: 16,
         step: 1,
         width: 450,
-        height: 35
+        height: 40
     };
     const soundKnob = { min: 0, max: 19, step: 1, scale: 0.15, resetValue: 0 };
     const pitchKnob = {

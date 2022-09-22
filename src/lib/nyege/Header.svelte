@@ -5,15 +5,13 @@
 
 <header>
     <div id="title">
-        <div class="no-hover">Intersymmetric Works</div>
-        <div class="no-hover">NNNB</div>
+        <div class="no-hover">Intersymmetric Works | NNNB</div>
     </div>
     <div id="room">
         <RoomPrompt />
     </div>
     <div id="participants">
-        <div class="no-hover">Players:</div>
-        <div class="no-hover">{$num_users}</div>
+        <div class="no-hover">Players: {$num_users}</div>
     </div>
 </header>
 
@@ -21,11 +19,11 @@
 
 <style>
     :root {
-        --h: 40px;
+        --h: 20px;
     }
     header {
         display: grid;
-        grid-template-columns: 150px auto 150px;
+        grid-template-columns: auto auto auto;
         justify-content: space-between;
         max-width: 1005px;
         margin: 0 auto;
@@ -61,6 +59,6 @@
         left: 0;
         right: 0px;
         bottom: 10;
-        top: 50px;
+        top: 35px;
     }
 </style>

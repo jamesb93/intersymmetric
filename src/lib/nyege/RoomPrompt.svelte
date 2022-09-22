@@ -16,7 +16,6 @@
 </script>
 
 <div class="prompt">
-    <div id="title" class="no-hover">Room Code:</div>
     <input
         type="text"
         class:init={!everUsed}
@@ -28,18 +27,16 @@
 </div>
 
 <style>
-    #title {
-        text-align: left;
-    }
     .prompt {
         display: grid;
         place-items: center;
     }
-
+    #title {
+        text-align: left;
+    }
     .init {
         border: 1px solid rgb(204, 204, 204);
     }
-
     #room-input {
         font-family: var(--font);
         font-size: var(--font-size);

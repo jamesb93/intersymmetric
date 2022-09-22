@@ -19,7 +19,7 @@
     const radio = {
         options: [32, 24, 16, 12, 9, 8, 6, 4, 3, 2, 1, 0.5].map(x => ({ value: x, display: x })),
         width: '450px',
-        height: '35px'
+        height: '45px'
     };
 
     $: sendMessage(patch, 'rate', [$rate]);

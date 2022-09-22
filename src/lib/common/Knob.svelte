@@ -5,7 +5,7 @@
     export let title = '';
 	export let WIDTH = 35;
     export let HEIGHT = 50;
-    export let RADIUS = 15;
+    export let RADIUS = 17;
     export let SHIFT = 1;
     export let min = 0;
     export let max = 100;

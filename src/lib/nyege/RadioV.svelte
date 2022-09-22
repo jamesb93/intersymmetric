@@ -44,16 +44,13 @@
         color: var(--primary);
         align-content: center;
     }
-
     button:hover:not(.selected) {
         background-color: var(--light-grey);
     }
-
     button:active {
         background-color: var(--grey);
         color: var(--primary);
     }
-
     .selected {
         background-color: var(--primary);
         color: white;
