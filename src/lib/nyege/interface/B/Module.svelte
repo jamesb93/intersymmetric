@@ -20,7 +20,7 @@
             { value: 0.5, display: 0.5 },
             { value: 0.25, display: 0.25 }
         ],
-        width: '600px',
+        width: '510px',
         height: '50px'
     };
     const soundKnob = { min: 0, max: 19, step: 1, scale: 0.15, resetValue: 0 };

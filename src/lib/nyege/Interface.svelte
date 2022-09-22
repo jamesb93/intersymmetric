@@ -27,7 +27,7 @@ on:mousewheel|nonpassive={scroll}
 on:touchmove|nonpassive={scroll}
 />
 
-<div class="container" on:click={() => vp = !vp}>
+<div class="container">
     <div class="top" class:hide={h <= vertBreakpoint && vp}>
         <Transport bind:patch/>
         <A bind:patch />
@@ -42,15 +42,14 @@ on:touchmove|nonpassive={scroll}
     .container {
         display: flex;
         flex-direction: column;
+        gap: 2em;
         margin: 0 auto;
-        margin-top: 1em;
-        gap: 10px;
-    }
-    .top {
-
+        margin-top: 2em;
     }
     .bottom {
-
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
     }
     .hide {
         visibility: hidden;

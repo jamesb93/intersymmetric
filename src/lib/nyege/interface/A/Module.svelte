@@ -37,7 +37,7 @@
         min: 1,
         max: 16,
         step: 1,
-        width: 600,
+        width: 510,
         height: 40
     };
     const soundKnob = { min: 0, max: 19, step: 1, scale: 0.15, resetValue: 0 };
@@ -154,7 +154,7 @@
     }
 
     .labels {
-        margin-left: 515px;
+        margin-left: 578px;
         justify-content: center;
         color: var(--primary);
         margin: 0 auto;

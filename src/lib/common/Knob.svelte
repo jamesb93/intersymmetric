@@ -3,7 +3,7 @@
     import { clip, mapRange } from '$lib/utility';
 
     export let title = '';
-	export let WIDTH = 35;
+	export let WIDTH = 38;
     export let HEIGHT = 50;
     export let RADIUS = 17;
     export let SHIFT = 1;
