@@ -11,7 +11,7 @@
         socket.emit('join_room', `nnnb.${code}`);
         $room = code;
         code = '';
-        goto(`/nyege/${$room}`);
+        goto(`/nnnb/${$room}`);
     }
 </script>
 
