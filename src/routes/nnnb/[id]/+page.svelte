@@ -7,7 +7,7 @@
     export let data;
 
     $room = data.id;
-    socket.emit('join_room', createRoomID('nyege', data.id));
+    socket.emit('join_room', createRoomID('nnnb', data.id));
 </script>
 
 <!-- stuff -->
