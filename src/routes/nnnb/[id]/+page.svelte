@@ -6,8 +6,6 @@
     /** @type {import('./$types').PageData} */
     export let data;
 
-    console.log(data);
-
     $room = data.id;
     socket.emit('join_room', createRoomID('nyege', data.id));
 </script>
