@@ -3,14 +3,15 @@
 </script>
 
 <div class="links" transition:fade>
-    <a href="seq-1/idx">sequencer 01</a>
+    <a class="nnnb" href="nnnb/room1">nnnb</a>
     <a class="aaa" href="aaa/room1">AAA</a>
+    <a href="seq-1/idx">sequencer 01</a>
 </div>
 
 <style>
     .links {
         display: grid;
-        grid-template-rows: auto auto;
+        grid-template-rows: auto auto auto;
         margin-left: auto;
         margin-right: auto;
         margin-top: 20%;
@@ -28,5 +29,14 @@
     .aaa:hover {
         color: white;
         background-color: #ff44b4;
+    }
+
+    .nnnb,
+    .nnnb:visited {
+        color: #0540f6;
+    }
+    .nnnb:hover {
+        color: white;
+        background-color: #0540f6;
     }
 </style>
