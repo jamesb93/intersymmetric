@@ -1,7 +1,7 @@
 <script>
     import { scale, clip } from '$lib/utility';
 
-    export let value = 0; // value always comes in true
+    export let value = 0.0; // value always comes in true
     export let min = 0,
         max = 2,
         step = 1;
@@ -100,7 +100,9 @@
         />
     </svg>
     <div class="text" class:white={value > 15}>
+        {#if value}
         {value.toFixed(0)}
+        {/if}
     </div>
 </div>
 
