@@ -13,8 +13,8 @@ socket.on('connect', () => {
 // Room Management
 export const room = writable('');
 
-export const num_users = writable(0);
-socket.on('num_users', x => num_users.set(x));
+export const numUsers = writable(0);
+socket.on('users', x => numUsers.set(x));
 
 // Common
 export const pips = writable([0, 0, 0, 0]);
