@@ -1,6 +1,7 @@
 <script>
 	import { socket } from '$lib/nyege/app'
 	import {
+		rate, globalCycle,
 		buf0, buf1, buf2, buf3, buf4, buf5, buf6,
 		pitch0, pitch1, pitch2, pitch3, pitch4, pitch5,
 		len0, len1, len2, len3, len4, len5, len6,
@@ -15,6 +16,8 @@
 
 	const recall = (state) => {
 		// this is fucking horrible
+		$rate = state.rate
+		$globalCycle = state.globalCycle
 		$buf0 = state.buf0
 		$buf1 = state.buf1
 		$buf2 = state.buf2
