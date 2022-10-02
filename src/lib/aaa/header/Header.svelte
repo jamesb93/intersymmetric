@@ -1,6 +1,6 @@
 <script>
     import RoomPrompt from '$lib/aaa/header/RoomPrompt.svelte';
-    import { num_users } from '$lib/aaa/app';
+    import { numUsers } from '$lib/aaa/app';
     console.log('%c Intersymmetric Version 0.3', 'background: #222; color: #bada55');
 </script>
 
@@ -14,7 +14,7 @@
     </div>
     <div id="participants">
         <span class="no-hover">Players:</span>
-        <span class="no-hover">{$num_users}</span>
+        <span class="no-hover">{$numUsers}</span>
     </div>
 </header>
 
