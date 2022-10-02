@@ -73,9 +73,11 @@
 
 {#if !hide}
 <div class='container'>
+	{#if snapshots.length > 0}
 	{#each snapshots.slice(0, 128) as snap}
 	<button class='preset' on:click={() => recall(snap.state)}></button>
 	{/each}
+	{/if}
 </div>
 {/if}
 
