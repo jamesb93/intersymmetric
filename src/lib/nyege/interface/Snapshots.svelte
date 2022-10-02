@@ -14,6 +14,7 @@
 	let hide = true;
 
 	const recall = (state) => {
+		// this is fucking horrible
 		$buf0 = state.buf0
 		$buf1 = state.buf1
 		$buf2 = state.buf2
@@ -51,6 +52,44 @@
 		$chordlow = state.chordlow
 		$chordhigh = state.chordhigh
 		$scale = state.scale
+
+		socket.emit('buf0', $buf0)
+		socket.emit('buf1', $buf1)
+		socket.emit('buf2', $buf2)
+		socket.emit('buf3', $buf3)
+		socket.emit('buf4', $buf4)
+		socket.emit('buf5', $buf5)
+		socket.emit('buf6', $buf6)
+		socket.emit('pitch0', $pitch0)
+		socket.emit('pitch1', $pitch1)
+		socket.emit('pitch2', $pitch2)
+		socket.emit('pitch3', $pitch3)
+		socket.emit('pitch4', $pitch4)
+		socket.emit('pitch5', $pitch5)
+		socket.emit('len0', $len0)
+		socket.emit('len1', $len1)
+		socket.emit('len2', $len2)
+		socket.emit('len3', $len3)
+		socket.emit('len4', $len4)
+		socket.emit('len5', $len5)
+		socket.emit('len6', $len6)
+		socket.emit('div0', $div0)
+		socket.emit('div1', $div1)
+		socket.emit('div2', $div2)
+		socket.emit('div3', $div3)
+		socket.emit('range0', $range0)
+		socket.emit('range1', $range1)
+		socket.emit('range2', $range2)
+		socket.emit('range3', $range3)
+		socket.emit('retrig0', $retrig0)
+		socket.emit('retrig1', $retrig1)
+		socket.emit('retrigGate0', $retrigGate0)
+		socket.emit('retrigGate1', $retrigGate1)
+		socket.emit('chordfollow', $chordfollow)
+		socket.emit('chordspread', $chordspread)
+		socket.emit('chordlow', $chordlow)
+		socket.emit('chordhigh', $chordhigh)
+		socket.emit('scale', $scale)
 	}
 
 	const key = e => {
