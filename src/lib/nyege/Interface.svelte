@@ -3,14 +3,12 @@
     import A from '$lib/nyege/interface/A/Module.svelte';
     import B from '$lib/nyege/interface/B/Module.svelte';
     import C from '$lib/nyege/interface/C/Module.svelte';
+    import Snapshots from '$lib/nyege/interface/Snapshots.svelte'
 
     export let patch;
-
-    let vp = false;
-    let h;
-    const vertBreakpoint = 600
-
 </script>
+
+<Snapshots />
 
 <div class="container">
     <Transport bind:patch/>
