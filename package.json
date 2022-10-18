@@ -9,25 +9,25 @@
     },
     "devDependencies": {
         "@sveltejs/adapter-node": "next",
-        "@sveltejs/kit": "^1.0.0-next.506",
+        "@sveltejs/kit": "^1.0.0-next.517",
         "autoprefixer": "^10.4.12",
-        "eslint": "^8.24.0",
+        "eslint": "^8.25.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-svelte3": "^4.0.0",
-        "postcss": "^8.4.17",
+        "postcss": "^8.4.18",
         "postcss-load-config": "^3.1.4",
         "prettier": "^2.7.1",
-        "prettier-plugin-svelte": "^2.7.1",
-        "svelte": "^3.50.1",
+        "prettier-plugin-svelte": "^2.8.0",
+        "svelte": "^3.52.0",
         "svelte-preprocess": "^4.10.7",
-        "vite": "^3.1.4"
+        "vite": "^3.1.8"
     },
     "type": "module",
     "dependencies": {
-        "@rnbo/js": "0.18.0-dev.9",
+        "@rnbo/js": "1.1.0-dev.2",
         "d3": "^6.7.0",
         "global": "^4.4.0",
-        "socket.io-client": "^4.5.2",
+        "socket.io-client": "^4.5.3",
         "tone": "^14.7.77"
     }
 }
