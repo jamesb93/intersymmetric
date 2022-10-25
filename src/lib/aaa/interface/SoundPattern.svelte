@@ -1,11 +1,11 @@
 <script>
     import './interface.css';
-    import presets from '../../../../static/aaa/presets.json';
+    import presets from '$lib/aaa/data/presets.json'
     import Knob from '$lib/common/Knob.svelte';
     import Blip from '../Blip.svelte';
     import RadioV from '../RadioV.svelte';
     import { socket } from '../app';
-    import { sendMessage } from '$lib/common/patch-helpers';
+    import { sendDeviceMessage } from '@jamesb93/rnbo-svelte'
     import {
         fm1_freq_preset,
         fm1_mod_preset,
@@ -134,7 +134,7 @@
             if (Number.isInteger(_fm1_freq_preset)) {
                 const data = presets.fm1_freq[_fm1_freq_preset];
                 for (const [k, v] of Object.entries(data)) {
-                    sendMessage(patch, k, v);
+                    sendDeviceMessage(patch, k, v);
                 }
             }
         } catch (e) {
@@ -147,7 +147,7 @@
             if (Number.isInteger(_fm1_mod_preset)) {
                 const data = presets.fm1_mod[_fm1_mod_preset];
                 for (const [k, v] of Object.entries(data)) {
-                    sendMessage(patch, k, v);
+                    sendDeviceMessage(patch, k, v);
                 }
             }
         } catch (e) {
@@ -160,7 +160,7 @@
             if (Number.isInteger(_fm1_shape_preset)) {
                 const data = presets.fm1_shape[_fm1_shape_preset];
                 for (const [k, v] of Object.entries(data)) {
-                    sendMessage(patch, k, v);
+                    sendDeviceMessage(patch, k, v);
                 }
             }
         } catch (e) {
@@ -173,7 +173,7 @@
             if (Number.isInteger(_fm2_freq_preset)) {
                 const data = presets.fm2_freq[_fm2_freq_preset];
                 for (const [k, v] of Object.entries(data)) {
-                    sendMessage(patch, k, v);
+                    sendDeviceMessage(patch, k, v);
                 }
             }
         } catch (e) {
@@ -186,7 +186,7 @@
             if (Number.isInteger(_fm2_mod_preset)) {
                 const data = presets.fm2_mod[_fm2_mod_preset];
                 for (const [k, v] of Object.entries(data)) {
-                    sendMessage(patch, k, v);
+                    sendDeviceMessage(patch, k, v);
                 }
             }
         } catch (e) {
@@ -199,7 +199,7 @@
             if (Number.isInteger(_fm2_shape_preset)) {
                 const data = presets.fm2_shape[_fm2_shape_preset];
                 for (const [k, v] of Object.entries(data)) {
-                    sendMessage(patch, k, v);
+                    sendDeviceMessage(patch, k, v);
                 }
             }
         } catch (e) {
@@ -212,7 +212,7 @@
             if (Number.isInteger(_perc_sound_preset)) {
                 const data = presets.perc_sound[_perc_sound_preset];
                 for (const [k, v] of Object.entries(data)) {
-                    sendMessage(patch, k, v);
+                    sendDeviceMessage(patch, k, v);
                 }
             }
         } catch (e) {
@@ -225,7 +225,7 @@
             if (Number.isInteger(_perc_transpose_preset)) {
                 const data = presets.perc_transpose[_perc_transpose_preset];
                 for (const [k, v] of Object.entries(data)) {
-                    sendMessage(patch, k, v);
+                    sendDeviceMessage(patch, k, v);
                 }
             }
         } catch (e) {
@@ -238,7 +238,7 @@
             if (Number.isInteger(_perc_shape_preset)) {
                 const data = presets.perc_shape[_perc_shape_preset];
                 for (const [k, v] of Object.entries(data)) {
-                    sendMessage(patch, k, v);
+                    sendDeviceMessage(patch, k, v);
                 }
             }
         } catch (e) {
@@ -246,9 +246,9 @@
         }
     }
 
-    $: sendMessage(patch, 'perc_listener', [$perc_listener]);
-    $: sendMessage(patch, 'fm1_listener', [$fm1_listener]);
-    $: sendMessage(patch, 'fm2_listener', [$fm2_listener]);
+    $: sendDeviceMessage(patch, 'perc_listener', [$perc_listener]);
+    $: sendDeviceMessage(patch, 'fm1_listener', [$fm1_listener]);
+    $: sendDeviceMessage(patch, 'fm2_listener', [$fm2_listener]);
 
     let blip_1, blip_2, blip_3;
 

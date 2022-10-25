@@ -3,7 +3,7 @@
     import Play from '../Play.svelte';
     import { speed, socket, tala, calculated_speed } from '../app';
     import { max_scale, clip } from '$lib/utility';
-    import { sendMessage } from '$lib/common/patch-helpers';
+    import { sendDeviceMessage } from '@jamesb93/rnbo-svelte'
 
     export let patch;
 
@@ -40,8 +40,8 @@
         }
     });
 
-    $: sendMessage(patch, 'speed', [1 / $calculated_speed]);
-    $: sendMessage(patch, 'state', [state]);
+    $: sendDeviceMessage(patch, 'speed', [1 / $calculated_speed]);
+    $: sendDeviceMessage(patch, 'state', [state]);
 </script>
 
 <div class="clock area">

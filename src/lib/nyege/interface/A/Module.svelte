@@ -3,7 +3,7 @@
     import Knob from '$lib/common/Knob.svelte';
     import Blip from '$lib/nyege/Blip.svelte';
     import { socket } from '$lib/nyege/app';
-    import { sendMessage } from '$lib/common/patch-helpers';
+    import { sendDeviceMessage } from '@jamesb93/rnbo-svelte';
     import {
         range0,
         range1,
@@ -69,14 +69,14 @@
         }
     });
 
-    $: sendMessage(patch, 'polymetric_params', [0, $range0, $div0]);
-    $: sendMessage(patch, 'polymetric_params', [1, $range1, $div1]);
-    $: sendMessage(patch, 'polymetric_params', [2, $range2, $div2]);
-    $: sendMessage(patch, 'polymetric_params', [3, $range3, $div3]);
-    $: sendMessage(patch, 'sampler_params', [0, $buf0, $pitch0, $len0]);
-    $: sendMessage(patch, 'sampler_params', [1, $buf1, $pitch1, $len1]);
-    $: sendMessage(patch, 'sampler_params', [2, $buf2, $pitch2, $len2]);
-    $: sendMessage(patch, 'sampler_params', [3, $buf3, $pitch3, $len3]);
+    $: sendDeviceMessage(patch, 'polymetric_params', [0, $range0, $div0]);
+    $: sendDeviceMessage(patch, 'polymetric_params', [1, $range1, $div1]);
+    $: sendDeviceMessage(patch, 'polymetric_params', [2, $range2, $div2]);
+    $: sendDeviceMessage(patch, 'polymetric_params', [3, $range3, $div3]);
+    $: sendDeviceMessage(patch, 'sampler_params', [0, $buf0, $pitch0, $len0]);
+    $: sendDeviceMessage(patch, 'sampler_params', [1, $buf1, $pitch1, $len1]);
+    $: sendDeviceMessage(patch, 'sampler_params', [2, $buf2, $pitch2, $len2]);
+    $: sendDeviceMessage(patch, 'sampler_params', [3, $buf3, $pitch3, $len3]);
 </script>
 
 <svelte:window bind:innerWidth={w} />

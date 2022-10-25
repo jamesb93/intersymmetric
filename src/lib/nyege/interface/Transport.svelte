@@ -2,7 +2,7 @@
     import Play from '$lib/nyege/Play.svelte';
     import Knob from '$lib/common/Knob.svelte';
     import RadioH from '$lib/nyege/RadioH.svelte';
-    import { sendMessage } from '$lib/common/patch-helpers';
+    import { sendDeviceMessage } from '@jamesb93/rnbo-svelte'
     import { socket, rate, globalCycle, hbp } from '$lib/nyege/app';
 
     export let patch;
@@ -23,9 +23,9 @@
         height: '45px'
     };
 
-    $: sendMessage(patch, 'rate', [$rate]);
-    $: sendMessage(patch, 'state', [playing]);
-    $: sendMessage(patch, 'global_cycle', [$globalCycle]);
+    $: sendDeviceMessage(patch, 'rate', [$rate]);
+    $: sendDeviceMessage(patch, 'state', [playing]);
+    $: sendDeviceMessage(patch, 'global_cycle', [$globalCycle]);
 </script>
 
 <svelte:window bind:innerWidth={w} />

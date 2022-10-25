@@ -3,7 +3,7 @@
     import RadioV from '$lib/nyege/RadioV.svelte';
     import Blip from '$lib/nyege/Blip.svelte';
     import Knob from '$lib/common/Knob.svelte';
-    import { sendMessage } from '$lib/common/patch-helpers';
+    import { sendDeviceMessage } from '@jamesb93/rnbo-svelte'
     import { socket } from '$lib/nyege/app';
     import { buf4, buf5, pitch4, pitch5, len4, len5, retrig0, retrig1, retrigGate0, retrigGate1, hbp } from '$lib/nyege/app';
 
@@ -45,10 +45,10 @@
         }
     });
 
-    $: sendMessage(patch, 'retrigger_params', [0, $retrigGate0, $retrig0]);
-    $: sendMessage(patch, 'retrigger_params', [1, $retrigGate1, $retrig1]);
-    $: sendMessage(patch, 'sampler_params', [4, $buf4, $pitch4, $len4]);
-    $: sendMessage(patch, 'sampler_params', [5, $buf5, $pitch5, $len5]);
+    $: sendDeviceMessage(patch, 'retrigger_params', [0, $retrigGate0, $retrig0]);
+    $: sendDeviceMessage(patch, 'retrigger_params', [1, $retrigGate1, $retrig1]);
+    $: sendDeviceMessage(patch, 'sampler_params', [4, $buf4, $pitch4, $len4]);
+    $: sendDeviceMessage(patch, 'sampler_params', [5, $buf5, $pitch5, $len5]);
 </script>
 
 <svelte:window bind:innerWidth={w} />

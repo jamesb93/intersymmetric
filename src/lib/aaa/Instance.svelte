@@ -1,7 +1,7 @@
 <script>
     import Interface from './interface/Interface.svelte';
     import Button from './Button.svelte';
-    import { loadSamples, createInstance } from '$lib/common/patch-helpers';
+    import { loadSamples, createDeviceInstance } from '@jamesb93/rnbo-svelte';
 
     let patch, context;
     let samplesLoaded = false;
@@ -9,9 +9,14 @@
     const start = async () => {
         context = new (window.AudioContext || window.webkitAudioContext)();
         let output = context.createGain().connect(context.destination);
-        createInstance('/aaa/code/patch.export.json', context, output).then(response => {
+        createDeviceInstance('/aaa/code/patch.export.json', context, output)
+        .then(response => {
             patch = response;
-            loadSamples(patch, context, 46, 'b.', '/aaa/samples/', 0);
+            const samples = new Array(46).fill(0).map((_, i) => ({
+                url: `/aaa/samples/${i}.mp3`,
+                buffer: `b.${i}`
+            }));
+            loadSamples(patch, context, samples);
             samplesLoaded = true;
         });
     };

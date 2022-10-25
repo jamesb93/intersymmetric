@@ -4,7 +4,7 @@
     import RadioV from '$lib/nyege/RadioV.svelte';
     import Blip from '$lib/nyege/Blip.svelte';
     import Knob from '$lib/common/Knob.svelte';
-    import { sendMessage } from '$lib/common/patch-helpers';
+    import { sendDeviceMessage } from '@jamesb93/rnbo-svelte'
     import { socket } from '$lib/nyege/app';
     import { buf6, scale, len6, chordfollow, chordspread, chordlow, chordhigh, hbp } from '$lib/nyege/app';
 
@@ -63,9 +63,9 @@
         }
     });
 
-    $: sendMessage(patch, 'chordfollow', [$chordfollow]);
-    $: sendMessage(patch, 'chordscale', [$chordspread, $chordlow / 100.0, $chordhigh / 100.0, $scale]);
-    $: sendMessage(patch, 'chordsampler', [$buf6, $len6]);
+    $: sendDeviceMessage(patch, 'chordfollow', [$chordfollow]);
+    $: sendDeviceMessage(patch, 'chordscale', [$chordspread, $chordlow / 100.0, $chordhigh / 100.0, $scale]);
+    $: sendDeviceMessage(patch, 'chordsampler', [$buf6, $len6]);
 </script>
 
 <svelte:window bind:innerWidth={w} />
