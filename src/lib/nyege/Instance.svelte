@@ -1,6 +1,8 @@
 <script>
     import Interface from './Interface.svelte';
     import Button from './Button.svelte';
+    import OrientationWarning from '$lib/nyege/interface/OrientationWarning.svelte';
+    import IPhoneWarning from '$lib/nyege/interface/IPhoneWarning.svelte';
     import { loadSamples, createDeviceInstance } from '@jamesb93/rnbo-svelte';
 
     let patch, context;
@@ -22,6 +24,9 @@
 
     };
 </script>
+
+<!-- <IPhoneWarning /> -->
+<OrientationWarning />
 
 {#if patch && samplesLoaded}
     <Interface bind:patch />
