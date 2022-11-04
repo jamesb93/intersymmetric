@@ -9,9 +9,9 @@
     },
     "devDependencies": {
         "@sveltejs/adapter-node": "next",
-        "@sveltejs/kit": "^1.0.0-next.517",
-        "autoprefixer": "^10.4.12",
-        "eslint": "^8.25.0",
+        "@sveltejs/kit": "^1.0.0-next.535",
+        "autoprefixer": "^10.4.13",
+        "eslint": "^8.26.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-svelte3": "^4.0.0",
         "postcss": "^8.4.18",
@@ -20,10 +20,11 @@
         "prettier-plugin-svelte": "^2.8.0",
         "svelte": "^3.52.0",
         "svelte-preprocess": "^4.10.7",
-        "vite": "^3.1.8"
+        "vite": "^3.2.2"
     },
     "type": "module",
     "dependencies": {
+        "@jamesb93/rnbo-svelte": "^1.0.2",
         "@rnbo/js": "1.1.0-dev.5",
         "d3": "^6.7.0",
         "global": "^4.4.0",
