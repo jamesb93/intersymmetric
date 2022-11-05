@@ -25,7 +25,7 @@
     };
 </script>
 
-<!-- <IPhoneWarning /> -->
+<IPhoneWarning />
 <OrientationWarning />
 
 {#if patch && samplesLoaded}
