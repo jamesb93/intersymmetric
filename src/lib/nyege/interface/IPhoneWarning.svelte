@@ -30,7 +30,7 @@
 {#if ios && !dismissed && permanentlyDismissed !== 'yes'}
 <div class="container">
 	<div class="text">
-		unmute your device
+		turn silent mode off
 	</div>
 	<IPhoneSideProfile />
 	<!-- <img src='/img/iphone.svg' alt='iphone side view'> -->
