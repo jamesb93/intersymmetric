@@ -3,6 +3,7 @@
 
 	let portrait = false;
 	let ignore = false;
+	let isMobile = false;
 
 	function resizeHandler() {
 		portrait = window.matchMedia("(orientation: portrait)").matches
@@ -10,12 +11,13 @@
 
 	onMount(async() => {
 		resizeHandler()
+		isMobile = 'ontouchstart' in document.documentElement;
 	})
 </script>
 
 <svelte:window on:resize={resizeHandler}/>
 
-{#if portrait && !ignore}
+{#if portrait && !ignore && isMobile}
 <div class="container">
 	<div class='text'>Rotate your device to landscape</div>
 	<button on:click={() => ignore=true}>okay</button>
