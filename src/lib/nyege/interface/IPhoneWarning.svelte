@@ -60,7 +60,7 @@
 		border: 1px solid var(--primary);
 		background: white;
 		font-size: 1rem;
-		width: 330px;
+		width: 310px;
 		padding: 25px;
 		height: 125px;
 		color: var(--primary);

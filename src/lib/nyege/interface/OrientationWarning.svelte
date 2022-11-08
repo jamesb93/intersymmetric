@@ -35,7 +35,7 @@
 		border: 1px solid var(--primary);
 		background: white;
 		font-size: 1rem;
-		width: 330px;
+		width: 310px;
 		height: 75px;
 		padding: 25px;
 		color: var(--primary);
