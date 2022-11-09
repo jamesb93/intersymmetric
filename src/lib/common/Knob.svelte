@@ -139,11 +139,7 @@
 
         {#if showValue}
         <text x={MID_X} y={HEIGHT} text-anchor="middle" class="knob knob-value">
-            {#if !displayValue}
-                {parseFloat(value.toFixed(1))}
-            {:else}
-                {displayValue}
-            {/if}
+            { displayValue || parseFloat(value.toFixed(1)) }
         </text>
         {/if}
     </svg>
