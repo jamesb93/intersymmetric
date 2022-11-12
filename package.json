@@ -24,7 +24,7 @@
     },
     "type": "module",
     "dependencies": {
-        "@jamesb93/rnbo-svelte": "^1.0.2",
+        "@jamesb93/rnbo-svelte": "^1.0.3",
         "@rnbo/js": "1.0.1",
         "d3": "^6.7.0",
         "global": "^4.4.0",
