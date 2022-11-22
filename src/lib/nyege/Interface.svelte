@@ -3,12 +3,9 @@
     import A from '$lib/nyege/interface/A/Module.svelte';
     import B from '$lib/nyege/interface/B/Module.svelte';
     import C from '$lib/nyege/interface/C/Module.svelte';
-    import Snapshots from '$lib/nyege/interface/Snapshots.svelte'
 
     export let patch;
 </script>
-
-<Snapshots />
 
 <div class="container">
     <Transport bind:patch/>
