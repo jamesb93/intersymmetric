@@ -2,8 +2,10 @@
     import Play from '$lib/nyege/Play.svelte';
     import Knob from '$lib/common/Knob.svelte';
     import RadioH from '$lib/nyege/RadioH.svelte';
+    import { ref, set } from 'firebase/database';
+    import { attach, room, db } from '$lib/nyege/app';
     import { sendDeviceMessage } from '@jamesb93/rnbo-svelte'
-    import { socket, rate, globalCycle, hbp } from '$lib/nyege/app';
+    import { rate, globalCycle, hbp } from '$lib/nyege/app';
 
     export let patch;
     
@@ -26,6 +28,9 @@
     $: sendDeviceMessage(patch, 'rate', [$rate]);
     $: sendDeviceMessage(patch, 'state', [playing]);
     $: sendDeviceMessage(patch, 'global_cycle', [$globalCycle]);
+
+    $: attach($room, 'rate', rate, 170);
+    $: attach($room, 'globalCycle', globalCycle, 16);
 </script>
 
 <svelte:window bind:innerWidth={w} />
@@ -43,12 +48,12 @@
     </div>
     <div class="grid row">
         <Play bind:state={playing} />
-        <Knob {...rateKnob} bind:value={$rate} func={() => socket.emit('rate', $rate)} />
+        <Knob {...rateKnob} bind:value={$rate} func={ () => set(ref(db, `/nnnb/${$room}/rate`), $rate)} />
         <RadioH 
         {...radio} 
         bind:value={$globalCycle}
         width={w <= hbp ? '450px' : '600px'} 
-        func={() => socket.emit('globalCycle', $globalCycle)} 
+        func={ () => set(ref(db, `/nnnb/${$room}/globalCycle`), $globalCycle) } 
         />
     </div>
 </div>
