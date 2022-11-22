@@ -22,7 +22,6 @@
 	onMount(async() => {
 		ios = iOS();
 		permanentlyDismissed = localStorage.getItem('iphonedismissal') || false
-		console.log(permanentlyDismissed)
 	})
 </script>
 
