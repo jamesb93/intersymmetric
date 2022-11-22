@@ -3,9 +3,17 @@
     import RadioV from '$lib/nyege/RadioV.svelte';
     import Blip from '$lib/nyege/Blip.svelte';
     import Knob from '$lib/common/Knob.svelte';
+    import { ref, set } from 'firebase/database';
+    import { attach, room, db } from '$lib/nyege/app';
     import { sendDeviceMessage } from '@jamesb93/rnbo-svelte'
-    import { socket } from '$lib/nyege/app';
-    import { buf4, buf5, pitch4, pitch5, len4, len5, retrig0, retrig1, retrigGate0, retrigGate1, hbp } from '$lib/nyege/app';
+    import { 
+        buf4, buf5, 
+        pitch4, pitch5, 
+        len4, len5, 
+        retrig0, retrig1, 
+        retrigGate0, retrigGate1, 
+        hbp 
+    } from '$lib/nyege/app';
 
     export let patch;
 
@@ -49,6 +57,17 @@
     $: sendDeviceMessage(patch, 'retrigger_params', [1, $retrigGate1, $retrig1]);
     $: sendDeviceMessage(patch, 'sampler_params', [4, $buf4, $pitch4, $len4]);
     $: sendDeviceMessage(patch, 'sampler_params', [5, $buf5, $pitch5, $len5]);
+    
+    $: attach($room, 'buf4', buf4, 0);
+    $: attach($room, 'buf5', buf5, 0);
+    $: attach($room, 'pitch4', pitch4, 0);
+    $: attach($room, 'pitch5', pitch5, 0);
+    $: attach($room, 'len4', len4, 1);
+    $: attach($room, 'len5', len5, 1);
+    $: attach($room, 'retrig0', retrig0, 6);
+    $: attach($room, 'retrig1', retrig1, 6);
+    $: attach($room, 'retrigGate0', retrigGate0, 0);
+    $: attach($room, 'retrigGate1', retrigGate1, 0);
 </script>
 
 <svelte:window bind:innerWidth={w} />
@@ -56,19 +75,19 @@
 <div class="container">
     <div class="row grid">
         <Blip bind:this={blip0} />
-        <RadioV {...tog} bind:value={$retrigGate0} func={() => socket.emit('retrigGate0', $retrigGate0)} />
-        <RadioH {...cycle} bind:value={$retrig0} width={w <= hbp ? '450px' : '600px'} func={() => socket.emit('retrig0', $retrig0)} />
-        <Knob {...soundKnob} bind:value={$buf4} func={() => socket.emit('buf4', $buf4)} />
-        <Knob {...pitchKnob} bind:value={$pitch4} func={() => socket.emit('pitch4', $pitch4)} />
-        <Knob {...lenKnob} bind:value={$len4} func={() => socket.emit('len4', $len4)} />
+        <RadioV {...tog} bind:value={$retrigGate0} func={ () => set(ref(db, `/nnnb/${$room}/retrigGate0`), $retrigGate0) } />
+        <RadioH {...cycle} bind:value={$retrig0} width={w <= hbp ? '450px' : '600px'} func={ () => set(ref(db, `/nnnb/${$room}/retrig0`), $retrig0) } />
+        <Knob {...soundKnob} bind:value={$buf4} func={ () => set(ref(db, `/nnnb/${$room}/buf4`), $buf4) } />
+        <Knob {...pitchKnob} bind:value={$pitch4} func={ () => set(ref(db, `/nnnb/${$room}/pitch4`), $pitch4) } />
+        <Knob {...lenKnob} bind:value={$len4} func={ () => set(ref(db, `/nnnb/${$room}/len4`), $len4) } />
     </div>
     <div class="row grid">
         <Blip bind:this={blip1} />
-        <RadioV {...tog} bind:value={$retrigGate1} func={() => socket.emit('retrigGate1', $retrigGate1)} />
-        <RadioH {...cycle} bind:value={$retrig1} width={w <= hbp ? '450px' : '600px'} func={() => socket.emit('retrig1', $retrig1)} />
-        <Knob {...soundKnob} bind:value={$buf5} func={() => socket.emit('buf5', $buf5)} />
-        <Knob {...pitchKnob} bind:value={$pitch5} func={() => socket.emit('pitch5', $pitch5)} />
-        <Knob {...lenKnob} bind:value={$len5} func={() => socket.emit('len5', $len5)} />
+        <RadioV {...tog} bind:value={$retrigGate1} func={ () => set(ref(db, `/nnnb/${$room}/retrigGate1`), $retrigGate1) } />
+        <RadioH {...cycle} bind:value={$retrig1} width={w <= hbp ? '450px' : '600px'} func={ () => set(ref(db, `/nnnb/${$room}/retrig1`), $retrig1) } />
+        <Knob {...soundKnob} bind:value={$buf5} func={ () => set(ref(db, `/nnnb/${$room}/buf5`), $buf5) } />
+        <Knob {...pitchKnob} bind:value={$pitch5} func={ () => set(ref(db, `/nnnb/${$room}/pitch5`), $pitch5) } />
+        <Knob {...lenKnob} bind:value={$len5} func={ () => set(ref(db, `/nnnb/${$room}/len5`), $len5) } />
     </div>
 </div>
 
@@ -79,8 +98,5 @@
     }
     .row {
         height: 55px;
-    }
-    .empty {
-        width: 100%;
     }
 </style>

@@ -1,5 +1,5 @@
 <script>
-    import { socket, room } from '$lib/nyege/app';
+    import { room } from '$lib/nyege/app';
     import { goto } from '$app/navigation';
 
     let everUsed = false;
@@ -8,7 +8,6 @@
     function changeHandler() {
         console.log('ever used');
         everUsed = true;
-        socket.emit('join_room', `nnnb.${code}`);
         $room = code;
         code = '';
         goto(`/nnnb/${$room}`);
@@ -30,9 +29,6 @@
     .prompt {
         display: grid;
         place-items: center;
-    }
-    #title {
-        text-align: left;
     }
     .init {
         border: 1px solid rgb(204, 204, 204);

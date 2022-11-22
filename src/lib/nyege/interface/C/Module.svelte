@@ -4,12 +4,12 @@
     import RadioV from '$lib/nyege/RadioV.svelte';
     import Blip from '$lib/nyege/Blip.svelte';
     import Knob from '$lib/common/Knob.svelte';
+    import { ref, set } from 'firebase/database';
+    import { attach, room, db } from '$lib/nyege/app';
     import { sendDeviceMessage } from '@jamesb93/rnbo-svelte'
-    import { socket } from '$lib/nyege/app';
     import { buf6, scale, len6, chordfollow, chordspread, chordlow, chordhigh, hbp } from '$lib/nyege/app';
 
     export let patch;
-
     let w;
 
     const radioh = {
@@ -66,35 +66,43 @@
     $: sendDeviceMessage(patch, 'chordfollow', [$chordfollow]);
     $: sendDeviceMessage(patch, 'chordscale', [$chordspread, $chordlow / 100.0, $chordhigh / 100.0, $scale]);
     $: sendDeviceMessage(patch, 'chordsampler', [$buf6, $len6]);
+
+    $: attach($room, 'buf6', buf6, 20);
+    $: attach($room, 'scale', scale, 0);
+    $: attach($room, 'len6', len6, 1);
+    $: attach($room, 'chordfollow', chordfollow, 0);
+    $: attach($room, 'chordspread', chordspread, 5);
+    $: attach($room, 'chordlow', chordlow, 10);
+    $: attach($room, 'chordhigh', chordhigh, 90);
 </script>
 
 <svelte:window bind:innerWidth={w} />
 
 <div class="grid container">
     <Blip bind:this={blip} />
-    <RadioV {...radiov} bind:value={$chordfollow} func={() => socket.emit('chordfollow', $chordfollow)} />
+    <RadioV {...radiov} bind:value={$chordfollow} func={ () => set(ref(db, `/nnnb/${$room}/chordfollow`), $chordfollow) } />
     <div class="centre">
         <RSlider
         {...rslider}
         bind:low={$chordlow}
         bind:high={$chordhigh}
         width={w <= hbp ? 448 : 598}
-        lofunc={() => socket.emit('chordlow', $chordlow)}
-        hifunc={() => socket.emit('chordhigh', $chordhigh)}
+        lofunc={ () => set(ref(db, `/nnnb/${$room}/chordlow`), $chordlow) }
+        hifunc={ () => set(ref(db, `/nnnb/${$room}/chordhigh`), $chordhigh) }
         />
-        <RadioH {...radioh} bind:value={$chordspread} width={w <= hbp ? '450px' : '600px'} func={() => socket.emit('chordspread', $chordspread)} />
+        <RadioH {...radioh} bind:value={$chordspread} width={w <= hbp ? '450px' : '600px'} func={ () => set(ref(db, `/nnnb/${$room}/chordspread`), $chordspread) } />
     </div>
     <div class="box">
         <div class="header">sound</div>
-        <Knob {...soundKnob} bind:value={$buf6} func={() => socket.emit('buf6', $buf6)} />
+        <Knob {...soundKnob} bind:value={$buf6} func={ () => set(ref(db, `/nnnb/${$room}/buf6`), $buf6)} />
     </div>
     <div class="box">
         <div class="header">scale</div>
-        <Knob {...scaleKnob} bind:value={$scale} func={() => socket.emit('scale', $scale)} />
+        <Knob {...scaleKnob} bind:value={$scale} func={ () => set(ref(db, `/nnnb/${$room}/scale`), $scale) } />
     </div>
     <div class="box">
         <div class="header">length</div>
-        <Knob {...lenKnob} bind:value={$len6} func={() => socket.emit('len6', $len6)} />
+        <Knob {...lenKnob} bind:value={$len6} func={ () => set(ref(db, `/nnnb/${$room}/len6`), $len6) } />
     </div>
 </div>
 
