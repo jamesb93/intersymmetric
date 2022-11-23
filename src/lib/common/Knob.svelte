@@ -30,6 +30,7 @@
     let pv = null;
     let down = false;
     let prevTouch;
+    let needsUpdate = false;
 
     $: dashStyle = {
         strokeDasharray: length,
@@ -55,14 +56,23 @@
     $: sweep = value_radians > zero_radians ? 0 : 1;
     $: value = Math.round((internal - min) / step) * step + min;
 
+        $: { 
+        if (needsUpdate) {
+            needsUpdate = false;
+            func();
+        }
+    }
     const updatePosition = change => {
         // This way it always forces it to match the bound value when it is first moved.
         if (!internal) {
             internal = value;
+            internal = clip(internal, min, max);
         }
+
         internal = clip(internal + change * scale, min, max);
+
         if (pv !== value) {
-            func();
+            needsUpdate = true;
             pv = value;
         }
     };
