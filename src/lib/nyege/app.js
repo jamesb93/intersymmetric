@@ -1,7 +1,7 @@
 import { firebaseConfig } from '$lib/core';
 import { writable } from 'svelte/store';
 import { initializeApp } from "firebase/app";
-import { getDatabase, onValue, ref } from "firebase/database";
+import { getDatabase, onValue, ref, onDisconnect } from "firebase/database";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { PUBLIC_FB_USERNAME, PUBLIC_FB_PASSWORD } from '$env/static/public';
 
@@ -19,34 +19,41 @@ const authenticate = async() => {
         const errorMessage = error.message;
         console.log(errorCode, errorMessage)
     });
-}
+};
+
 authenticate()
 
 export const attach = (room, path, state, fallback) => {
-    onValue(
-        ref(db, `/nnnb/${room}/${path}`),
-        s => state.set(s.val() || fallback)
-    )
+    const r = ref(db, `/nnnb/${room}/${path}`)
+
+    onValue(r, s => {
+        if (s.exists()) {
+            state.set(s.val())
+        } else {
+            state.set(fallback)
+        }
+    })
 }
 
 // Room Management
 export const room = writable('room1');
-export const numUsers = writable(0);
+export const prevroom = writable('room1');
+export const players = writable(0);
 export const rate = writable(170);
 export const pips = writable([0, 0, 0, 0]);
 export const globalCycle = writable(16);
 
 export const buf0 = writable(0);
-export const buf1 = writable(13);
-export const buf2 = writable(19);
-export const buf3 = writable(7);
+export const buf1 = writable(0);
+export const buf2 = writable(0);
+export const buf3 = writable(0);
 export const buf4 = writable(0);
 export const buf5 = writable(0);
 export const buf6 = writable(20);
 
 export const pitch0 = writable(0);
 export const pitch1 = writable(0);
-export const pitch2 = writable(2);
+export const pitch2 = writable(0);
 export const pitch3 = writable(0);
 export const pitch4 = writable(0);
 export const pitch5 = writable(0);
