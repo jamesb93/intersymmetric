@@ -6,3 +6,4 @@ node_modules
 *.wav
 .svelte-kit
 static/rewire_samples/compressed_old
+.env
