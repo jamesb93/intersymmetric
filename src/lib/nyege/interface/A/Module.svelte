@@ -64,19 +64,19 @@
     $: sendDeviceMessage(patch, 'sampler_params', [3, $buf3, $pitch3, $len3]);
     
     $: attach($room, 'buf0', buf0, 0);
-    $: attach($room, 'buf1', buf1, 13);
-    $: attach($room, 'buf2', buf2, 19);
-    $: attach($room, 'buf3', buf3, 7);
+    $: attach($room, 'buf1', buf1, 0);
+    $: attach($room, 'buf2', buf2, 0);
+    $: attach($room, 'buf3', buf3, 0);
 
     $: attach($room, 'pitch0', pitch0, 0);
     $: attach($room, 'pitch1', pitch1, 0);
-    $: attach($room, 'pitch2', pitch2, 2);
+    $: attach($room, 'pitch2', pitch2, 0);
     $: attach($room, 'pitch3', pitch3, 0);
 
-    $: attach($room, 'len0', len0, 1);
-    $: attach($room, 'len1', len1, 1);
-    $: attach($room, 'len2', len2, 1);
-    $: attach($room, 'len3', len3, 1);
+    $: attach($room, 'len0', len0, 1.0);
+    $: attach($room, 'len1', len1, 1.0);
+    $: attach($room, 'len2', len2, 1.0);
+    $: attach($room, 'len3', len3, 1.0);
 
     $: attach($room, 'div0', div0, 16);
     $: attach($room, 'div1', div1, 6);
