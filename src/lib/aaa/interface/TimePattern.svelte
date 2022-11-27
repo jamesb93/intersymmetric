@@ -2,7 +2,8 @@
     import './interface.css';
     import RadioH from '../RadioH.svelte';
     import Slider from '../Slider.svelte';
-    import { socket, calculated_speed } from '../app';
+    import { ref, set } from 'firebase/database';
+    import { calculated_speed, db, room, attach } from '$lib/aaa/app';
     import { sendDeviceMessage } from '@jamesb93/rnbo-svelte'
     import {
         a_mode,
@@ -25,27 +26,21 @@
         min: 1,
         max: 12,
         step: 1,
-        func: () => {
-            socket.emit('a_steps_0', $a_steps_0);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/a_steps_0`), $a_steps_0)
     };
 
     const a_steps_1_slider = {
         min: 1,
         max: 12,
         step: 1,
-        func: () => {
-            socket.emit('a_steps_1', $a_steps_1);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/a_steps_1`), $a_steps_1)
     };
 
     const a_steps_2_slider = {
         min: 1,
         max: 12,
         step: 1,
-        func: () => {
-            socket.emit('a_steps_2', $a_steps_2);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/a_steps_2`), $a_steps_2)
     };
 
     const b_steps_0_slider = {
@@ -53,9 +48,7 @@
         max: 8,
         step: 1,
         invert: true,
-        func: () => {
-            socket.emit('b_steps_0', $b_steps_0);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/b_steps_0`), $b_steps_0)
     };
 
     const b_steps_1_slider = {
@@ -63,9 +56,7 @@
         max: 8,
         step: 1,
         invert: true,
-        func: () => {
-            socket.emit('b_steps_1', $b_steps_1);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/b_steps_1`), $b_steps_1)
     };
 
     const b_steps_2_slider = {
@@ -73,36 +64,28 @@
         max: 8,
         step: 1,
         invert: true,
-        func: () => {
-            socket.emit('b_steps_2', $b_steps_2);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/b_steps_2`), $b_steps_2)
     };
 
     const c_steps_0_slider = {
         min: 1,
         max: 9,
         step: 1,
-        func: () => {
-            socket.emit('c_steps_0', $c_steps_0);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/c_steps_0`), $c_steps_0)
     };
 
     const c_steps_1_slider = {
         min: 1,
         max: 9,
         step: 1,
-        func: () => {
-            socket.emit('c_steps_1', $c_steps_1);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/c_steps_1`), $c_steps_1)
     };
 
     const c_steps_2_slider = {
         min: 1,
         max: 9,
         step: 1,
-        func: () => {
-            socket.emit('c_steps_2', $c_steps_2);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/c_steps_2`), $c_steps_2)
     };
 
     const duration_lookup = [1, 2, 3, 4, 6, 8, 12, 16, 32];
@@ -119,6 +102,19 @@
     $: sendDeviceMessage(patch, 'a_mode', [$a_mode]);
     $: sendDeviceMessage(patch, 'b_mode', [$b_mode]);
     $: sendDeviceMessage(patch, 'c_mode', [$c_mode]);
+
+    $: attach($room, 'a_mode', a_mode, 0);
+    $: attach($room, 'b_mode', b_mode, 0);
+    $: attach($room, 'c_mode', c_mode, 0);
+    $: attach($room, 'a_steps_0', a_steps_0, 5);
+    $: attach($room, 'a_steps_1', a_steps_1, 2);
+    $: attach($room, 'a_steps_2', a_steps_2, 3);
+    $: attach($room, 'b_steps_0', b_steps_0, 2);
+    $: attach($room, 'b_steps_1', b_steps_1, 2);
+    $: attach($room, 'b_steps_2', b_steps_2, 2);
+    $: attach($room, 'c_steps_0', c_steps_0, 2);
+    $: attach($room, 'c_steps_1', c_steps_1, 4);
+    $: attach($room, 'c_steps_2', c_steps_2, 8);
 
     let a_current_step = 0;
     let b_current_step = 0;
@@ -138,10 +134,8 @@
         <div class="a time_unit">
             <div class="no-hover">steps</div>
             <RadioH
-                func={() => {
-                    socket.emit('a_mode', $a_mode);
-                }}
-                bind:value={$a_mode}
+            func={ () => set(ref(db, `/aaa/${$room}/a_mode`), $a_mode) }
+            bind:value={$a_mode}
             />
             <div class="slider-group">
                 <Slider {...a_steps_0_slider} bind:value={$a_steps_0} active={a_current_step === 0} />
@@ -152,10 +146,8 @@
         <div class="b time_unit">
             <div class="no-hover">durations</div>
             <RadioH
-                func={() => {
-                    socket.emit('b_mode', $b_mode);
-                }}
-                bind:value={$b_mode}
+            func={ () => set(ref(db, `/aaa/${$room}/b_mode`), $b_mode) }
+            bind:value={$b_mode}
             />
             <div class="slider-group">
                 <Slider
@@ -181,10 +173,8 @@
         <div class="c time_unit">
             <div class="no-hover">subdivisions</div>
             <RadioH
-                func={() => {
-                    socket.emit('c_mode', $c_mode);
-                }}
-                bind:value={$c_mode}
+            func={ () => set(ref(db, `/aaa/${$room}/c_mode`), $c_mode) }
+            bind:value={$c_mode}
             />
             <div class="slider-group">
                 <Slider {...c_steps_0_slider} bind:value={$c_steps_0} active={c_current_step === 0} />

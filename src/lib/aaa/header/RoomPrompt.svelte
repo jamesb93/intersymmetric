@@ -1,13 +1,11 @@
 <script>
-    import { socket, room } from '$lib/aaa/app.js';
+    import { room } from '$lib/aaa/app.js';
     import { goto } from '$app/navigation';
     let ever_used = false;
     let code = '';
 
     function change_handler() {
-        console.log('ever used');
         ever_used = true;
-        socket.emit('join_room', `aaa.${code}`);
         $room = code;
         code = '';
         goto(`/aaa/${$room}`);

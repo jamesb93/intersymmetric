@@ -1,16 +1,10 @@
 <script>
-    import { createEventDispatcher } from 'svelte';
-    const dispatch = createEventDispatcher();
-    const click = () => {
-        dispatch('click');
-    };
-
     export let font_size = '10px';
     export let width = '40px';
     export let height = '20px';
 </script>
 
-<button style:font-size={font_size} style:height style:width on:click={click}>
+<button on:click style:font-size={font_size} style:height style:width>
     <slot />
 </button>
 

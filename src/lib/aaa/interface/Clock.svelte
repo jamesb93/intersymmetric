@@ -1,9 +1,10 @@
 <script>
-    import Knob from '$lib/common/Knob.svelte';
-    import Play from '../Play.svelte';
-    import { speed, socket, tala, calculated_speed } from '../app';
+    import { ref, set } from 'firebase/database';
     import { max_scale, clip } from '$lib/utility';
     import { sendDeviceMessage } from '@jamesb93/rnbo-svelte'
+    import { speed, tala, calculated_speed, room, db, attach } from '$lib/aaa/app';
+    import Knob from '$lib/common/Knob.svelte';
+    import Play from '$lib/aaa/Play.svelte';
 
     export let patch;
 
@@ -42,6 +43,8 @@
 
     $: sendDeviceMessage(patch, 'speed', [1 / $calculated_speed]);
     $: sendDeviceMessage(patch, 'state', [state]);
+
+    $: attach($room, 'speed', speed, 3);
 </script>
 
 <div class="clock area">
@@ -53,9 +56,7 @@
             bind:internal={$speed}
             bind:value={_speed}
             bind:displayValue={$calculated_speed}
-            func={() => {
-                socket.emit('speed', $speed);
-            }}
+            func={ () => set(ref(db, `/aaa/${$room}/speed`), $speed) }
         />
     </div>
 

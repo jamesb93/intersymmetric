@@ -4,7 +4,8 @@
     import Knob from '$lib/common/Knob.svelte';
     import Blip from '../Blip.svelte';
     import RadioV from '../RadioV.svelte';
-    import { socket } from '../app';
+    import { ref, set } from 'firebase/database';
+    import { db, room, attach } from '$lib/aaa/app';
     import { sendDeviceMessage } from '@jamesb93/rnbo-svelte'
     import {
         fm1_freq_preset,
@@ -19,7 +20,7 @@
         fm1_listener,
         fm2_listener,
         perc_listener
-    } from '../app';
+    } from '$lib/aaa/app';
 
     export let patch;
 
@@ -51,27 +52,21 @@
         title: 'sound',
         min: 0,
         max: presets.fm1_freq.length-1,
-        func: () => {
-            socket.emit('fm1_freq_preset', $fm1_freq_preset);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/fm1_freq_preset`), $fm1_freq_preset)
     }, knob);
 
     const fm1_mod_knob = Object.assign({
         title: 'mod',
         min: 0,
         max: presets.fm1_mod.length-1,
-        func: () => {
-            socket.emit('fm1_mod_preset', $fm1_mod_preset);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/fm1_mod_preset`), $fm1_mod_preset)
     }, knob);
 
     const fm1_shape_knob = Object.assign({
         title: 'shape',
         min: 0,
         max: presets.fm1_shape.length-1,
-        func: () => {
-            socket.emit('fm1_shape_preset', $fm1_shape_preset);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/fm1_shape_preset`), $fm1_shape_preset)
     }, knob);
     $: _fm1_mod_preset = Math.round(($fm1_mod_preset - min) / step) * step + min;
 
@@ -79,54 +74,42 @@
         title: 'sound',
         min: 0,
         max: presets.fm2_freq.length-1,
-        func: () => {
-            socket.emit('fm2_freq_preset', $fm2_freq_preset);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/fm2_freq_preset`), $fm2_freq_preset)
     }, knob);
 
     const fm2_mod_knob = Object.assign({
         title: 'mod',
         min: 0,
         max: presets.fm2_mod.length-1,
-        func: () => {
-            socket.emit('fm2_mod_preset', $fm2_mod_preset);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/fm2_mod_preset`), $fm2_mod_preset)
     }, knob);
 
     const fm2_shape_knob = Object.assign({
         title: 'shape',
         min: 0,
         max: presets.fm2_shape.length-1,
-        func: () => {
-            socket.emit('fm2_shape_preset', $fm2_shape_preset);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/fm2_shape_preset`), $fm2_shape_preset)
     }, knob);
 
     const perc_sound_knob = Object.assign({
         title: 'sound',
         min: 0,
         max: presets.perc_sound.length-1,
-        func: () => {
-            socket.emit('perc_sound_preset', $perc_sound_preset);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/perc_sound_preset`), $perc_sound_preset)
     }, knob);
 
     const perc_transpose_knob = Object.assign({
         title: 'mod',
         min: 0,
         max: presets.perc_sound.length-1,
-        func: () => {
-            socket.emit('perc_transpose_preset', $perc_transpose_preset);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/perc_transpose_preset`), $perc_transpose_preset)
     }, knob);
 
     const perc_shape_knob = Object.assign({
         title: 'shape',
         min: 0,
         max: presets.perc_shape.length-1,
-        func: () => {
-            socket.emit('perc_shape_preset', $perc_shape_preset);
-        }
+        func: () => set(ref(db, `/aaa/${$room}/perc_shape_preset`), $perc_shape_preset)
     }, knob);
 
     $: {
@@ -250,6 +233,22 @@
     $: sendDeviceMessage(patch, 'fm1_listener', [$fm1_listener]);
     $: sendDeviceMessage(patch, 'fm2_listener', [$fm2_listener]);
 
+    $: attach($room, 'perc_listener', perc_listener, 0);
+    $: attach($room, 'fm1_listener', fm1_listener, 0);
+    $: attach($room, 'fm2_listener', fm2_listener, 0);
+
+    $: attach($room, 'perc_shape_preset', perc_shape_preset, 0);
+    $: attach($room, 'perc_transpose_preset', perc_transpose_preset, 0);
+    $: attach($room, 'perc_sound_preset', perc_sound_preset, 0);
+
+    $: attach($room, 'fm1_freq_preset', fm1_freq_preset, 0);
+    $: attach($room, 'fm1_mod_preset', fm1_mod_preset, 0);
+    $: attach($room, 'fm1_shape_preset', fm1_shape_preset, 0);
+
+    $: attach($room, 'fm2_freq_preset', fm2_freq_preset, 0);
+    $: attach($room, 'fm2_mod_preset', fm2_mod_preset, 0);
+    $: attach($room, 'fm2_shape_preset', fm2_shape_preset, 0);
+
     let blip_1, blip_2, blip_3;
 
     patch.messageEvent.subscribe(e => {
@@ -274,10 +273,8 @@
     <div class="controls">
         <div class="panel">
             <RadioV
-                func={() => {
-                    socket.emit('perc_listener', $perc_listener);
-                }}
-                bind:value={$perc_listener}
+            func={ () => set(ref(db, `/aaa/${$room}/perc_listener`), $perc_listener) }
+            bind:value={$perc_listener}
             />
             <Blip bind:this={blip_1} />
             <Knob {...perc_sound_knob} bind:internal={$perc_sound_preset} bind:value={_perc_sound_preset} />
@@ -287,10 +284,8 @@
 
         <div class="panel">
             <RadioV
-                func={() => {
-                    socket.emit('fm1_listener', $fm1_listener);
-                }}
-                bind:value={$fm1_listener}
+            func={ () => set(ref(db, `/aaa/${$room}/fm1_listener`), $fm1_listener) }
+            bind:value={$fm1_listener}
             />
             <Blip bind:this={blip_2} />
             <Knob {...fm1_freq_knob} bind:internal={$fm1_freq_preset} bind:value={_fm1_freq_preset} />
@@ -300,10 +295,8 @@
 
         <div class="panel">
             <RadioV
-                func={() => {
-                    socket.emit('fm2_listener', $fm2_listener);
-                }}
-                bind:value={$fm2_listener}
+            func={ () => set(ref(db, `/aaa/${$room}/fm2_listener`), $fm2_listener) }
+            bind:value={$fm2_listener}
             />
             <Blip bind:this={blip_3} />
             <Knob {...fm2_freq_knob} bind:internal={$fm2_freq_preset} bind:value={_fm2_freq_preset} />

@@ -6,7 +6,6 @@
     let code = '';
 
     function changeHandler() {
-        console.log('ever used');
         everUsed = true;
         $room = code;
         code = '';
