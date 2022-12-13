@@ -13,8 +13,8 @@
         <RoomPrompt />
     </div>
     <div id="participants">
-        <span class="no-hover">Players:</span>
-        <span class="no-hover">{$numUsers}</span>
+        <!-- <span class="no-hover">Players:</span> -->
+        <!-- <span class="no-hover">{$numUsers}</span> -->
     </div>
 </header>
 

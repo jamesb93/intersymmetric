@@ -1,8 +1,6 @@
 <script>
     import RoomPrompt from '$lib/nyege/RoomPrompt.svelte';
     import { players } from '$lib/nyege/app';
-
-    
 </script>
 
 <header>
@@ -13,7 +11,7 @@
         <RoomPrompt />
     </div>
     <div id="participants">
-        <div class="no-hover">Players: {$players}</div>
+        <!-- <div class="no-hover players">Players: {$players}</div> -->
     </div>
 </header>
 
