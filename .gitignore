@@ -7,3 +7,5 @@ node_modules
 .svelte-kit
 static/rewire_samples/compressed_old
 .env
+.npmrc
+pnpm-lock.yaml
