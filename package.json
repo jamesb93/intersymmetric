@@ -25,7 +25,6 @@
     "type": "module",
     "dependencies": {
         "@jamesb93/rnbo-svelte": "^1.0.4",
-        "@rnbo/js": "1.0.2",
         "d3": "^7.7.0",
         "firebase": "^9.15.0",
         "global": "^4.4.0",

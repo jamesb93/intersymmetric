@@ -2,7 +2,6 @@ lockfileVersion: 5.4
 
 specifiers:
   '@jamesb93/rnbo-svelte': ^1.0.4
-  '@rnbo/js': 1.0.2-alpha.1
   '@sveltejs/adapter-auto': ^1.0.0
   '@sveltejs/kit': ^1.0.0
   autoprefixer: ^10.4.13
@@ -24,7 +23,6 @@ specifiers:
 
 dependencies:
   '@jamesb93/rnbo-svelte': 1.0.4
-  '@rnbo/js': 1.0.2-alpha.1
   d3: 7.7.0
   firebase: 9.15.0
   global: 4.4.0
@@ -863,10 +861,6 @@ packages:
 
   /@rnbo/js/1.0.2:
     resolution: {integrity: sha512-xKup5iZKJUd+F6dr5pUQM+V+UpQjlAS+jF7uiQJ44Ss+G/fQFI1VCWf3gSDukvmelfQVQXQ+5QOHbZIhE+Gb0A==}
-    dev: false
-
-  /@rnbo/js/1.0.2-alpha.1:
-    resolution: {integrity: sha512-WZpaxySpIrFiaSniyMN12JFsb76Vbpt6mR1gCy1FuI5RHMcUgUZVWiD+iJb2Gcsbg2akkAVC1Efvbj0HJDiTsg==}
     dev: false
 
   /@socket.io/component-emitter/3.1.0:
