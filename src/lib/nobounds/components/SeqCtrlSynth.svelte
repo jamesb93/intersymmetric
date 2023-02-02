@@ -146,7 +146,8 @@
                 internalPos += clockMultiplier;
                 internalPos = wrap(internalPos, $offset.start - 1, $offset.end);
                 pos = Math.floor(internalPos);
-            } else if ($clockMode === 'rebound') {
+            } 
+            else if ($clockMode === 'rebound') {
                 if (clockDirection === 1) {
                     // if progressing forward
                     if (pos === $offset.end - 1) {
