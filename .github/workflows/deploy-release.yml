@@ -14,16 +14,16 @@ jobs:
         steps:
             - uses: actions/checkout@v3
 
-            # - name: Setup SSH
-            #   uses: shimataro/ssh-key-action@v2
-            #   with:
-            #     key: ${{ secrets.SSH_PRIVATE_KEY }}
-            #     known_hosts: 'placeholder'
+            - name: Setup SSH
+              uses: shimataro/ssh-key-action@v2
+              with:
+                key: ${{ secrets.DO_PRIVATE_KEY }}
+                known_hosts: 'placeholder'
 
-            # - name: Adding Known Hosts
-            #   run: |
-            #     mkdir -p ~/.ssh
-            #     ssh-keyscan -H ${{ secrets.DO_IP }} >> ~/.ssh/known_hosts
+            - name: Adding Known Hosts
+              run: |
+                mkdir -p ~/.ssh
+                ssh-keyscan -H ${{ secrets.DO_IP }} >> ~/.ssh/known_hosts
 
             - name: create .env file
               run: | 
@@ -40,6 +40,6 @@ jobs:
             - name: Build Site
               run: pnpm run build
 
-            # - name: Upload To Droplet
-            #   run: |
-            #     rsync -avz --delete --no-times --no-o --no-g --no-perms ./build/ james@${{ secrets.DO_IP }}:/home/learn/www/
+            - name: Upload To Droplet
+              run: |
+                rsync -avz --delete --no-times --no-o --no-g --no-perms ./build/ root@${{ secrets.DO_IP }}:/root/deploy/intersymmetric/prod/
