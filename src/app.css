@@ -6,7 +6,8 @@
 }
 
 :root {
-    --font: 'Space Mono', 'Courier New', Courier, monospace;
+    /* --font: 'Space Mono', 'Courier New', Courier, monospace; */
+    --font: Arial;
     --font-size: 10px;
     --primary-color: #40ac47;
     --primary-color-lighter: #5dee67;
