@@ -25,6 +25,12 @@ jobs:
             #     mkdir -p ~/.ssh
             #     ssh-keyscan -H ${{ secrets.DO_IP }} >> ~/.ssh/known_hosts
 
+            - name: create .env file
+              run: | 
+                echo PUBLIC_FB_USERNAME=${{ secerets.PUBLIC_FB_USERNAME }} >> .env
+                echo PUBLIC_FB_PASSWORD=${{ secerets.PUBLIC_FB_PASSWORD }} >> .env
+                cat .env
+
             - name: pnpm
               run: npm i -g pnpm
 
