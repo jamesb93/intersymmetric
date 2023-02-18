@@ -27,8 +27,8 @@ jobs:
 
             - name: create .env file
               run: | 
-                echo PUBLIC_FB_USERNAME=${{ secerets.PUBLIC_FB_USERNAME }} >> .env
-                echo PUBLIC_FB_PASSWORD=${{ secerets.PUBLIC_FB_PASSWORD }} >> .env
+                echo PUBLIC_FB_USERNAME=${{ secrets.PUBLIC_FB_USERNAME }} >> .env
+                echo PUBLIC_FB_PASSWORD=${{ secrets.PUBLIC_FB_PASSWORD }} >> .env
                 cat .env
 
             - name: pnpm
