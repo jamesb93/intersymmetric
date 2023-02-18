@@ -1,0 +1,45 @@
+name: deploy
+concurrency:
+    group: environment-${{ github.ref }}
+    cancel-in-progress: true
+
+on:
+    push:
+        branches: ['dev']
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Setup SSH
+              uses: shimataro/ssh-key-action@v2
+              with:
+                key: ${{ secrets.DO_PRIVATE_KEY }}
+                known_hosts: 'placeholder'
+
+            - name: Adding Known Hosts
+              run: |
+                mkdir -p ~/.ssh
+                ssh-keyscan -H ${{ secrets.DO_IP }} >> ~/.ssh/known_hosts
+
+            - name: create .env file
+              run: | 
+                echo PUBLIC_FB_USERNAME=${{ secrets.PUBLIC_FB_USERNAME }} >> .env
+                echo PUBLIC_FB_PASSWORD=${{ secrets.PUBLIC_FB_PASSWORD }} >> .env
+                cat .env
+
+            - name: pnpm
+              run: npm i -g pnpm
+
+            - name: Install Dependencies
+              run: pnpm i
+
+            - name: Build Site
+              run: pnpm run build
+
+            - name: Upload To Droplet
+              run: |
+                rsync -avz --delete --no-times --no-o --no-g --no-perms ./build/ root@${{ secrets.DO_IP }}:/root/deploy/intersymmetric/dev/
