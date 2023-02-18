@@ -1,0 +1,39 @@
+name: deploy
+concurrency:
+    group: environment-${{ github.ref }}
+    cancel-in-progress: true
+
+on:
+    push:
+        branches: ['main']
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            # - name: Setup SSH
+            #   uses: shimataro/ssh-key-action@v2
+            #   with:
+            #     key: ${{ secrets.SSH_PRIVATE_KEY }}
+            #     known_hosts: 'placeholder'
+
+            # - name: Adding Known Hosts
+            #   run: |
+            #     mkdir -p ~/.ssh
+            #     ssh-keyscan -H ${{ secrets.DO_IP }} >> ~/.ssh/known_hosts
+
+            - name: pnpm
+              run: npm i -g pnpm
+
+            - name: Install Dependencies
+              run: pnpm i
+
+            - name: Build Site
+              run: pnpm run build
+
+            # - name: Upload To Droplet
+            #   run: |
+            #     rsync -avz --delete --no-times --no-o --no-g --no-perms ./build/ james@${{ secrets.DO_IP }}:/home/learn/www/
