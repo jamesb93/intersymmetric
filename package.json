@@ -24,7 +24,7 @@
     },
     "type": "module",
     "dependencies": {
-        "@jamesb93/rnbo-svelte": "1.1.0",
+        "@jamesb93/rnbo-svelte": "1.1.1",
         "d3": "^7.8.2",
         "firebase": "^9.17.1",
         "global": "^4.4.0",
