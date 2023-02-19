@@ -33,14 +33,11 @@ jobs:
                 cat .env
 
             - name: pnpm
-              run: npm i -g pnpm
-
-            - name: Install Dependencies
-              run: pnpm i
+              run: npm ci --prod
 
             - name: Build Site
-              run: pnpm run build
+              run: npm run build
 
             - name: Upload To Droplet
               run: |
-                rsync -avz --delete --no-times --no-o --no-g --no-perms ./build/ root@${{ secrets.DO_IP }}:/root/deploy/intersymmetric/dev/
+                rsync -avz --delete --no-times --no-o --no-g --no-perms . root@${{ secrets.DO_IP }}:/root/deploy/intersymmetric/dev/
