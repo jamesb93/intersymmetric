@@ -33,7 +33,7 @@ jobs:
                 cat .env
 
             - name: install dependencies
-              run: npm i
+              run: npm i --registry https://registry.npmjs.org
 
             - name: Setup tmate session
               if: ${{ failure() }}
