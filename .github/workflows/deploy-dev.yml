@@ -42,4 +42,4 @@ jobs:
 
             - name: Upload To Droplet
               run: |
-                rsync -avz --delete --no-times --no-o --no-g --no-perms ./build/ root@${{ secrets.DO_IP }}:/root/deploy/intersymmetric/dev/
+                rsync -avz --no-times ./build/ root@${{ secrets.DO_IP }}:/root/deploy/intersymmetric/dev/
