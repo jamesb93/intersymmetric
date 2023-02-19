@@ -1,9 +1,15 @@
 import { writable } from 'svelte/store';
-import { firebaseConfig } from '$lib/core';
+import { env } from '$env/dynamic/public';
+import { PUBLIC_FB_USERNAME, PUBLIC_FB_PASSWORD } from '$env/static/public';
+import { firebaseProdConfig, firebaseDevConfig } from '$lib/core';
 import { initializeApp } from "firebase/app";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { PUBLIC_FB_USERNAME, PUBLIC_FB_PASSWORD } from '$env/static/public';
+
+const firebaseConfig = 
+    env.PUBLIC_MODE === 'dev' || 
+    env.PUBLIC_MODE === undefined ? 
+    firebaseDevConfig : firebaseProdConfig;
 
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
