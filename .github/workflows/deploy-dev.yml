@@ -33,10 +33,13 @@ jobs:
                 cat .env
 
             - name: pnpm
-              run: npm ci --prod
+              run: npm i -g pnpm
+
+            - name: dependencies
+              run: pnpm i
 
             - name: Build Site
-              run: npm run build
+              run: pnpm run build
 
             - name: Upload To Droplet
               run: |
