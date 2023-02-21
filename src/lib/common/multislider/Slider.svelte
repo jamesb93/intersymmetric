@@ -14,6 +14,13 @@
 	let width = parentWidth / data.length;
 
 	let slider;
+
+	const update = (e) => {
+		const rect = slider.getBoundingClientRect();
+		const y = e.pageY - rect.top - window.scrollY;
+		const normPos = (y / parentHeight);
+		data[index] = 1- normPos;
+	}
 </script>
 
 <rect
@@ -32,18 +39,25 @@
 	y={0}
 	width={width}
 	height={parentHeight}
-	on:mouseenter={() => {
+	on:mouseenter={e => {
+		if (mousedown) {
+			update(e);
+		}
 		hover = true;
 	}}
-	on:mouseleave={() => hover = false}
+	on:mouseleave={e => {
+		if (mousedown) {
+			update(e)
+		}
+		hover = false
+	}}
 	on:mousemove={e => {
 		if (mousedown) {
-			const rect = slider.getBoundingClientRect();
-			const y = e.pageY - rect.top - window.scrollY;
-			const normPos = (y / parentHeight);
-			data[index] = 1- normPos;
+			update(e);
 		}
-	
+	}}
+	on:mousedown={e => {
+		update(e)
 	}}
 />
 
@@ -58,4 +72,3 @@
 		fill: green;
 	}
 </style>
-

@@ -8,7 +8,7 @@
 	// 	width = (Math.random() * 300) + 100
 	// }, 1000)
 
-	let data = Array.from(new Array(12), x => Math.random())
+	let data = Array.from(new Array(128), x => Math.random())
 	// let data = [0.1, 0.2, 0.3, 0.4]
 </script>
 
