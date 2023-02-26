@@ -10,9 +10,6 @@ let firebaseConfig = env.PUBLIC_MODE === 'dev' ||
     env.PUBLIC_MODE === undefined ? 
     firebaseDevConfig : firebaseProdConfig;
 
-console.log(firebaseConfig)
-
-
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
 
