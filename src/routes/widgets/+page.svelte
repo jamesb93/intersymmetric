@@ -2,7 +2,7 @@
 	import Multislider from "$lib/common/multislider/Multislider.svelte"
 	let height = 100
 	let width = 400
-	let data = Array.from(new Array(50), x => Math.random())
+	let data = Array.from(new Array(128), x => Math.random())
 
 	let listening = false;
 	let buf = new CircularBuffer(2);
@@ -10,6 +10,7 @@
 	import { onMount } from 'svelte';
 	import { clip } from '$lib/utility';
     import { CircularBuffer } from '../../lib/common/queue';
+	import { linearInterp, scale } from '$lib/utility';
 	let canvas;
 	let rect;
 	let space;
@@ -43,11 +44,12 @@
 				})
 			},
 			action: (t, x, y, event) => {
-				if (t === 'drag' && listening) {
+				if (t === 'move' && listening) {
 					buf.enqueue(event);
 					
 					const canvasWidth = rect.right - rect.left;
-					if (buf.size() === 2) {
+					if (buf.isFull()) {
+						// a is now, b is history
 						const a = getMousePos(canvas, buf.get(0));
 						const b = getMousePos(canvas, buf.get(1));
 						a.idx = clip(
@@ -60,10 +62,24 @@
 							0, data.length
 						)
 						const numIntersects = Math.abs(a.idx - b.idx);
-						if (numIntersects >= 1) {
+						
+						if (numIntersects > 0) {
+							const start = b.y / (rect.bottom - rect.top);
+							const end = a.y / (rect.bottom - rect.top);
+							const isRev = b.idx > a.idx;
+					
 							for (let i=0; i < numIntersects; i++) {
-								const lowerBound = Math.min(a.idx, b.idx);
-								data[i+lowerBound] = b.y / (rect.bottom - rect.top)
+								
+								const interp = i / numIntersects;
+								
+								let value = 0.0;
+								if (isRev) {
+									value = linearInterp(end, start, interp);
+								} else{
+									value = linearInterp(start, end, interp);
+								}
+								data[Math.min(a.idx, b.idx)+i] = value;
+								
 							}
 						} else {
 							data[b.idx] = b.y / (rect.bottom - rect.top);
@@ -75,6 +91,7 @@
         space.play().bindMouse();
 	})
 </script>
+
 <svelte:window on:mouseup={() => { 
 	listening = false 
 	buf.clear();
