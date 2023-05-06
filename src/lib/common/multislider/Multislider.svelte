@@ -2,8 +2,8 @@
 	import { onMount } from 'svelte';
 	import * as d3 from 'd3';
 	import { CircularBuffer } from '$lib/common/queue';
-	import { CanvasSpace, Create, Group, Rectangle } from 'pts';
-	import { linearInterp, scale, clip } from '$lib/utility';
+	import { CanvasSpace, Rectangle } from 'pts';
+	import { linearInterp, clip } from '$lib/utility';
 	export let data = [];
 	export let width = 100
 	export let height = 100
