@@ -63,3 +63,7 @@ Array.prototype.rotate = (() => {
         return this;
     };
 })();
+
+export function linearInterp(a, b, t) {
+    return a + (b - a) * t
+}
