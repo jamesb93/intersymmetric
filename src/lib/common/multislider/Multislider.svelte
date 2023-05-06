@@ -62,7 +62,7 @@
 				})
 			},
 			action: (t, x, y, event) => {
-				if (t === 'move' && listening) {
+				if ((t === 'move' || t === 'out') && listening) {
 					buf.enqueue(event);
 					
 					const canvasWidth = rect.right - rect.left;
@@ -107,7 +107,7 @@
 							data[b.idx] = 1- (b.y / (rect.bottom - rect.top));
 						}
 					}
-				}
+				} 
 			}			
 		});
 		space.play().bindMouse();
