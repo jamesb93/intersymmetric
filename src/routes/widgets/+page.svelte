@@ -2,12 +2,14 @@
 	import Multislider from "$lib/common/multislider/Multislider.svelte"
 	let height = 100
 	let width = 400
-	let data = Array.from(new Array(4), x => Math.random())
+	let data = Array.from(new Array(50), x => Math.random())
 
 	let listening = false;
+	let buf = new CircularBuffer(2);
 	import { CanvasSpace, Create, Group, Rectangle } from 'pts';
 	import { onMount } from 'svelte';
 	import { clip } from '$lib/utility';
+    import { CircularBuffer } from '../../lib/common/queue';
 	let canvas;
 	let rect;
 	let space;
@@ -40,16 +42,33 @@
 					form.fill("#FF5733", 3 ).rect( r );
 				})
 			},
-			action: (t, x, y, e) => {
+			action: (t, x, y, event) => {
 				if (t === 'drag' && listening) {
-					const mouse = getMousePos(canvas, e);
+					buf.enqueue(event);
+					
 					const canvasWidth = rect.right - rect.left;
-					const idx = clip(
-						Math.floor((mouse.x / canvasWidth) * data.length),
-						0,
-						data.length
-					)
-					data[idx] = mouse.y / (rect.bottom - rect.top);
+					if (buf.size() === 2) {
+						const a = getMousePos(canvas, buf.get(0));
+						const b = getMousePos(canvas, buf.get(1));
+						a.idx = clip(
+							Math.floor((a.x / canvasWidth) * data.length),
+							0, data.length
+						)
+
+						b.idx = clip(
+							Math.floor((b.x / canvasWidth) * data.length),
+							0, data.length
+						)
+						const numIntersects = Math.abs(a.idx - b.idx);
+						if (numIntersects >= 1) {
+							for (let i=0; i < numIntersects; i++) {
+								const lowerBound = Math.min(a.idx, b.idx);
+								data[i+lowerBound] = b.y / (rect.bottom - rect.top)
+							}
+						} else {
+							data[b.idx] = b.y / (rect.bottom - rect.top);
+						}
+					}
 				}
 			}			
 		});
