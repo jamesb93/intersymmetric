@@ -75,7 +75,10 @@
         space.play().bindMouse();
 	})
 </script>
-<svelte:window on:mouseup={() => listening = false} />
+<svelte:window on:mouseup={() => { 
+	listening = false 
+	buf.clear();
+}} />
 <canvas id='sketch' bind:this={canvas} on:mousedown={() => listening = true} />
 
 <style>
