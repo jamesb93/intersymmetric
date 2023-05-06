@@ -1,11 +1,11 @@
 <script>
-	import MultiSlider from '$lib/common/multislider/MultiSlider.svelte';
+	import Multislider from '$lib/common/multislider/Multislider.svelte';
 	const length = 10;
 	let data = Array.from({ length }, () => Math.random());
 
 </script>
 
-<MultiSlider 
+<Multislider 
 bind:data={data}
 	width='400px'
 	maxWidth='50%'
