@@ -1,5 +1,4 @@
 <script>
-	import * as d3 from 'd3';
 	import { onMount } from 'svelte';
 	import { CircularBuffer } from '$lib/common/queue';
 	import { CanvasSpace, Rectangle, CanvasForm, Pt } from 'pts';
@@ -34,24 +33,9 @@
 	let form;
 
 	let buf = new CircularBuffer(2);
-	
-	/**
-	 * We need to do this manually otherwise when shifting the window the resize is not accounted for. 
-	 * @param {HTMLCanvasElement} canvas
-	 * @param {MouseEvent} evt
-	 * @returns {Object}
-	*/
-	function getMousePos(canvas, evt) {
-		rect = canvas.getBoundingClientRect();
-		return {
-			x: (evt.clientX - rect.left),
-			y: (evt.clientY - rect.top)
-		}
-	}
-	
 	onMount(async() => {
 		rect = canvas.getBoundingClientRect();
-		space = new CanvasSpace('#sketch')
+		space = new CanvasSpace(canvas)
 		.setup({
 			bgcolor: '#fff',
 			// resize: true,
@@ -166,14 +150,16 @@ on:touchend={() => { listening = true; buf.clear() }}
 on:touchmove={touchMoveHandler}
 />
 
-<canvas 
+<div>
+	<canvas 
 	id='sketch' 
 	bind:this={canvas} 
 	on:mousedown={() => listening = true} 
 	style:border-color={colour}
 	style:max-width={maxWidth}
 	style:max-height={maxHeight}
-/>
+	/>
+</div>
 	
 <style>
 	#sketch {
