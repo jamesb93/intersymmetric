@@ -32,7 +32,7 @@
 <div>
 
 <MultiSlider2 
-	bind:data={page0}
+	data={page0}
 	config={{
 		width : 200,
 		height : 200,
@@ -45,7 +45,7 @@
 />
 
 <MultiSlider2 
-	bind:data={page1}
+	data={page1}
 	config={{
 		width : 200,
 		height : 200,

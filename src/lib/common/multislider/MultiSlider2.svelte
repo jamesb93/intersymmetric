@@ -26,7 +26,7 @@
 	let height;
 	
 	function resize(entries) {
-		rect = entries[0].contentRect
+		rect = wrapper.getBoundingClientRect()
 		width = rect.width;
 		height = rect.height;
 	}
@@ -89,7 +89,6 @@
 					data[clampedIndex] = mapRange(1-value, 0, 1, config.min, config.max);
 				}
 			} else {
-				console.log(b.y)
 				let value = (b.y / (rect.bottom - rect.top));
 				console.log(value, rect.bottom, rect.top)
 				data[b.idx] = mapRange(1-value, 0, 1, config.min, config.max);
@@ -108,12 +107,13 @@
 	function touchMoveHandler(e) {
 		if (listening) {
 			const touchX = e.touches[0].clientX;
-			const toucY = e.touches[0].clientY;
+			const touchY = e.touches[0].clientY;
 			const [x, y] = getPointer(touchX, touchY);
 			buf.enqueue({ idx: 0, x:x, y:y })
 			updatePoints()
 		}
 	}
+	let w
 </script>
 
 <svelte:window 
