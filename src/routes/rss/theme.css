@@ -1,12 +1,9 @@
-@import 'knob.css';
-@import 'grid.css';
-
 :root {
     --primary: #0540f6;
     --primary-darker: #47361c;
     --grey: #e4e4e3;
     --light-grey: rgb(243, 243, 243);
-    --bg: white;
+    --bg: black;
 }
 
 body {

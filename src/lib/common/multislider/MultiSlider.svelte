@@ -2,7 +2,7 @@
 	import * as d3 from 'd3';
 	import { onMount } from 'svelte';
 	import { CircularBuffer } from '$lib/common/queue';
-	import { CanvasSpace, Rectangle, CanvasForm } from 'pts';
+	import { CanvasSpace, Rectangle, CanvasForm, Pt } from 'pts';
 	import { linearInterp, clip, mapRange, scale } from '$lib/utility';
 	
 	
@@ -54,12 +54,65 @@
 		space = new CanvasSpace('#sketch')
 		.setup({
 			bgcolor: '#fff',
-			resize: true,
+			// resize: true,
 		});
 		form = space.getForm();
 		
 		space.add({
 			animate: (time, ftime, space) => {
+				if (buf.isFull()) {
+					const canvasWidth = rect.right - rect.left;
+					// a is now, b is history
+					// TODO: make this code more readable instead of making it work
+					let pta = buf.get(0)
+					let ptb = buf.get(1)
+					let a = { idx:0, x:0, y:0 }
+					let b = { idx:0, x:0, y:0 }
+					a.x = pta[0]
+					b.x = ptb[0]
+					a.y = pta[1]
+					b.y = ptb[1]
+					a.idx = clip(
+						Math.floor((a.x / canvasWidth) * data.length),
+						0, data.length-1
+					)
+					
+					b.idx = clip(
+						Math.floor((b.x / canvasWidth) * data.length),
+						0, data.length-1
+					)
+					const numIntersects = Math.abs(a.idx - b.idx);
+					
+					if (numIntersects > 0) {
+						const start = b.y / (rect.bottom - rect.top);
+						const end = a.y / (rect.bottom - rect.top);
+						const isRev = b.idx > a.idx;
+						
+						for (let i=0; i<numIntersects; i++) {
+							
+							const interp = i / numIntersects;
+							
+							let value = 0.0;
+							if (isRev) {
+								value = linearInterp(end, start, interp);
+							} else{
+								value = linearInterp(start, end, interp);
+							}
+							const clampedIndex = clip(
+								Math.min(a.idx, b.idx)+i,
+								0, data.length-1
+							)
+							data[clampedIndex] = mapRange(1-value, 0, 1, min, max);
+							
+						}
+					} else {
+						let value = (b.y / (rect.bottom - rect.top));
+						let denorm = scale(1-value, 0, 1, min, max);
+						data[b.idx] = denorm;
+					}
+				}
+
+
 				const barWidth = space.width / data.length;
 				data.forEach((x, i) => {
 					const normalisedX = mapRange(x, min, max, 0.0, 1.0)
@@ -69,72 +122,34 @@
 						barWidth,  
 						1-normalisedX * space.height
 					);
-					// const colour = interpolateColors(i / data.length);
-					const colour = d3.interpolateSinebow(i / data.length)
-					// form.stroke(colour, 2).rect( r );
 					form.fillOnly(colour).rect( r );
 				})
-			},
-			action: (t, x, y, event) => {
-				console.log(t)
-				if ((t === 'move' || t === 'out') && listening) {
-					buf.enqueue(event);
-					
-					const canvasWidth = rect.right - rect.left;
-					if (buf.isFull()) {
-						// a is now, b is history
-						const a = getMousePos(canvas, buf.get(0));
-						const b = getMousePos(canvas, buf.get(1));
-						a.idx = clip(
-							Math.floor((a.x / canvasWidth) * data.length),
-							0, data.length-1
-						)
-						
-						b.idx = clip(
-							Math.floor((b.x / canvasWidth) * data.length),
-							0, data.length-1
-						)
-						const numIntersects = Math.abs(a.idx - b.idx);
-						
-						if (numIntersects > 0) {
-							const start = b.y / (rect.bottom - rect.top);
-							const end = a.y / (rect.bottom - rect.top);
-							const isRev = b.idx > a.idx;
-							
-							for (let i=0; i<numIntersects; i++) {
-								
-								const interp = i / numIntersects;
-								
-								let value = 0.0;
-								if (isRev) {
-									value = linearInterp(end, start, interp);
-								} else{
-									value = linearInterp(start, end, interp);
-								}
-								const clampedIndex = clip(
-									Math.min(a.idx, b.idx)+i,
-									0, data.length-1
-								)
-								data[clampedIndex] = mapRange(1-value, 0, 1, min, max);
-								
-							}
-						} else {
-							let value = (b.y / (rect.bottom - rect.top));
-							let denorm = scale(1-value, 0, 1, min, max);
-							data[b.idx] = denorm;
-						}
-					}
-				} 
-			}			
+			}	
 		});
 		space.play().bindMouse();
 	})
+
+	function mouseMove(e) {
+		if (listening) {
+			// Get the bounding rectangle of the element
+			const rect = canvas.getBoundingClientRect();
+			const maxWidth = rect.right - rect.left;
+			const maxHeight = rect.bottom - rect.top;
+	
+			// Calculate the relative position of the mouse
+			const x = clip(e.clientX - rect.left, 0, maxWidth);
+			const y = clip(e.clientY - rect.top, 0, maxHeight);
+	
+			buf.enqueue(new Pt(x, y))
+		}
+	}
 </script>
 
-<svelte:window on:mouseup={() => { 
-	listening = false 
-	buf.clear();
-}} />
+<svelte:window 
+on:mouseup={() => { listening = false }} 
+on:mousedown={() => { buf.clear() }}
+on:mousemove={mouseMove}
+/>
 
 <canvas 
 	id='sketch' 
