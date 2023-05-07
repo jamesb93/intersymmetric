@@ -129,26 +129,41 @@
 		space.play().bindMouse();
 	})
 
+	function getPointer(clientX, clientY) {
+		const rect = canvas.getBoundingClientRect();
+		const maxWidth = rect.right - rect.left;
+		const maxHeight = rect.bottom - rect.top;
+
+		const x = clip(clientX - rect.left, 0, maxWidth);
+		const y = clip(clientY - rect.top, 0, maxHeight);
+
+		return [x, y]
+	}
+
 	function mouseMove(e) {
 		if (listening) {
-			// Get the bounding rectangle of the element
-			const rect = canvas.getBoundingClientRect();
-			const maxWidth = rect.right - rect.left;
-			const maxHeight = rect.bottom - rect.top;
-	
-			// Calculate the relative position of the mouse
-			const x = clip(e.clientX - rect.left, 0, maxWidth);
-			const y = clip(e.clientY - rect.top, 0, maxHeight);
-	
-			buf.enqueue(new Pt(x, y))
+			const pt = getPointer(e.clientX, e.clientY)
+			buf.enqueue(new Pt(pt))
+		}
+	}
+
+	function touchMoveHandler(e) {
+		if (listening) {
+			const x = e.touches[0].clientX;
+			const y = e.touches[0].clientY;
+			const pt = getPointer(x, y);
+			buf.enqueue(new Pt(pt));
 		}
 	}
 </script>
 
 <svelte:window 
-on:mouseup={() => { listening = false }} 
 on:mousedown={() => { buf.clear() }}
+on:mouseup={() => { listening = false }} 
 on:mousemove={mouseMove}
+on:touchstart={() => { listening = true }}
+on:touchend={() => { listening = true; buf.clear() }}
+on:touchmove={touchMoveHandler}
 />
 
 <canvas 
@@ -162,5 +177,6 @@ on:mousemove={mouseMove}
 	
 <style>
 	#sketch {
+		touch-action: none;
 	}
 </style>
