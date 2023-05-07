@@ -90,7 +90,6 @@
 				}
 			} else {
 				let value = (b.y / (rect.bottom - rect.top));
-				console.log(value, rect.bottom, rect.top)
 				data[b.idx] = mapRange(1-value, 0, 1, config.min, config.max);
 			}
 		}
@@ -117,9 +116,7 @@
 </script>
 
 <svelte:window 
-on:mousedown={() => { buf.clear() }}
 on:mouseup={() => { listening = false; buf.clear() }} 
-on:touchstart={() => { listening = true }}
 on:touchend={() => { listening = false; buf.clear() }}
 on:touchmove={touchMoveHandler}
 on:mousemove={mouseMoveHandler}
@@ -131,7 +128,8 @@ on:mousemove={mouseMoveHandler}
 	class='svg' 
 	width='100%' 
 	height='100%' 
-	on:mousedown={() => { listening = true; console.log(wrapper) }}
+	on:mousedown={() => { listening = true }}
+	on:touchstart={(e) => { buf.clear(); listening = true; }}
 	>
 	{#each data as d, i}
 	<rect 

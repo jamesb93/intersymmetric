@@ -62,6 +62,7 @@
 	div {
 		display: flex;
 		flex-direction: column;
+		gap: 3em;
 	}
 </style>
 
