@@ -1,6 +1,6 @@
 <script>
-	import { onMount } from 'svelte';
 	import * as d3 from 'd3';
+	import { onMount } from 'svelte';
 	import { CircularBuffer } from '$lib/common/queue';
 	import { CanvasSpace, Rectangle, CanvasForm } from 'pts';
 	import { linearInterp, clip, mapRange, scale } from '$lib/utility';
@@ -71,7 +71,8 @@
 					);
 					// const colour = interpolateColors(i / data.length);
 					const colour = d3.interpolateSinebow(i / data.length)
-					form.fill(colour, 1).rect( r );
+					// form.stroke(colour, 2).rect( r );
+					form.fillOnly(colour).rect( r );
 				})
 			},
 			action: (t, x, y, event) => {
@@ -134,20 +135,17 @@
 	listening = false 
 	buf.clear();
 }} />
+
 <canvas 
-id='sketch' 
-bind:this={canvas} 
-on:mousedown={() => listening = true} 
-style:border-color={colour}
-style:width={width}
-style:max-width={maxWidth}
-style:max-height={maxHeight}
-style:height={height}
+	id='sketch' 
+	bind:this={canvas} 
+	on:mousedown={() => listening = true} 
+	style:border-color={colour}
+	style:max-width={maxWidth}
+	style:max-height={maxHeight}
 />
 	
 <style>
 	#sketch {
-		border: 1px solid black;
-		border-color: black;
 	}
 </style>
