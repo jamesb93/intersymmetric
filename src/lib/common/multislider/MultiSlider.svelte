@@ -2,34 +2,46 @@
 	import { onMount } from 'svelte';
 	import * as d3 from 'd3';
 	import { CircularBuffer } from '$lib/common/queue';
-	import { CanvasSpace, Rectangle } from 'pts';
-	import { linearInterp, clip } from '$lib/utility';
-	export let data = [];
-	export let width = 100
-	export let height = 100
-	export let colour = 'black'
-	export let maxWidth = 100
-	export let maxHeight = 100
-	export let margin = 0
-	export let scheme = null;
-
-		// Define the color scheme
-	// const colorScheme = d3.schemeCategory10;
-	// const colorScheme = d3.interpolateSinebow()
-
-	// Define the interpolator function
-	// const interpolateColors = d3.interpolate(...colorScheme);
-
+	import { CanvasSpace, Rectangle, CanvasForm } from 'pts';
+	import { linearInterp, clip, mapRange, scale } from '$lib/utility';
 	
+	
+	/** @type {Array<number>} */
+	export let data = [];
+	/** @type {string} */
+	export let width = '100px'
+	/** @type {string} */
+	export let height = '100px'
+	/** @type {string} */
+	export let colour = 'black'
+	/** @type {string} */
+	export let maxWidth = '100px'
+	/** @type {string} */
+	export let maxHeight = '100px'
+	/** @type {number} */
+	export let min = 0.0;
+	/** @type {number} */
+	export let max = 1.0;
+	/** @type {boolean} */
 	let listening = false;
+	
+	/** @type {HTMLCanvasElement} */
 	let canvas;
+	/** @type {DOMRect} */
 	let rect;
 	let space;
+	/** @type {CanvasForm} */
 	let form;
+
 	let buf = new CircularBuffer(2);
 	
+	/**
+	 * We need to do this manually otherwise when shifting the window the resize is not accounted for. 
+	 * @param {HTMLCanvasElement} canvas
+	 * @param {MouseEvent} evt
+	 * @returns {Object}
+	*/
 	function getMousePos(canvas, evt) {
-		// We need to do this manually otherwise when shifting the window the resize is not accounted for.
 		rect = canvas.getBoundingClientRect();
 		return {
 			x: (evt.clientX - rect.left),
@@ -50,11 +62,12 @@
 			animate: (time, ftime, space) => {
 				const barWidth = space.width / data.length;
 				data.forEach((x, i) => {
+					const normalisedX = mapRange(x, min, max, 0.0, 1.0)
 					const left = i * barWidth;
 					const r = Rectangle.fromTopLeft(
 						[left, space.height], 
 						barWidth,  
-						1-x * space.height
+						1-normalisedX * space.height
 					);
 					// const colour = interpolateColors(i / data.length);
 					const colour = d3.interpolateSinebow(i / data.length)
@@ -62,6 +75,7 @@
 				})
 			},
 			action: (t, x, y, event) => {
+				console.log(t)
 				if ((t === 'move' || t === 'out') && listening) {
 					buf.enqueue(event);
 					
@@ -100,11 +114,13 @@
 									Math.min(a.idx, b.idx)+i,
 									0, data.length-1
 								)
-								data[clampedIndex] = 1-value;
+								data[clampedIndex] = mapRange(1-value, 0, 1, min, max);
 								
 							}
 						} else {
-							data[b.idx] = 1- (b.y / (rect.bottom - rect.top));
+							let value = (b.y / (rect.bottom - rect.top));
+							let denorm = scale(1-value, 0, 1, min, max);
+							data[b.idx] = denorm;
 						}
 					}
 				} 

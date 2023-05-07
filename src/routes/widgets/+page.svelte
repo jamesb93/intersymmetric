@@ -1,16 +1,17 @@
 <script>
-	import Multislider from '$lib/common/multislider/Multislider.svelte';
+	import MultiSlider from '$lib/common/multislider/MultiSlider.svelte';
 	const length = 10;
-	let data = Array.from({ length }, () => Math.random());
+	let data = Array.from({ length }, () => Math.random() * 2 - 1);
 
 </script>
 
-<Multislider 
+<MultiSlider 
 bind:data={data}
 	width='400px'
 	maxWidth='50%'
 	height='150px'
 	maxHeight='150px'
 	colour='darkblue'
-	margin=100
+	min={-1.0}
+	max={1.0}
 />
