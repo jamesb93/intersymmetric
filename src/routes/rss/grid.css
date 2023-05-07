@@ -1,0 +1,21 @@
+.grid {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    grid-template-columns: 30px 38px 600px 38px 38px 38px;
+}
+
+@media only screen and (max-width: 1005px) {
+    .grid {
+        grid-template-columns: 30px 38px 450px 38px 38px 38px;
+    }
+}
+
+.centre {
+    width: 450px;
+}
+
+.empty {
+    width: 100%;
+}
