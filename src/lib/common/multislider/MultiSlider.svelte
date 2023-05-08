@@ -22,8 +22,10 @@
 	let buf = new CircularBuffer(2);
 	
 	let rect;
-	let width;
-	let height;
+	let width = 0;
+	let height = 0;
+	let scrollX = 0;
+	let scrollY = 0;
 	
 	function resize(entries) {
 		rect = wrapper.getBoundingClientRect()
@@ -37,14 +39,6 @@
 
 		return () => { sizeObserver.unobserver(wrapper) }
 	})
-	
-	function getPointer(clientX, clientY) {
-		const maxWidth = rect.right - rect.left;
-		const maxHeight = rect.bottom - rect.top;
-		const x = clip(clientX - rect.left, 0, maxWidth);
-		const y = clip(clientY - rect.top, 0, maxHeight);
-		return [x, y]
-	}
 	
 	function updatePoints() {
 		if (buf.isFull()) {
@@ -94,6 +88,14 @@
 			}
 		}
 	}
+
+	function getPointer(clientX, clientY) {
+		const maxWidth = rect.right - rect.left;
+		const maxHeight = rect.bottom - rect.top;
+		const x = clip((clientX + scrollX) - rect.left, 0, maxWidth);
+		const y = clip((clientY + scrollY) - rect.top, 0, maxHeight);
+		return [x, y]
+	}
 	
 	function mouseMoveHandler(e) {
 		if (listening) {
@@ -120,6 +122,8 @@ on:mouseup={() => { listening = false; buf.clear() }}
 on:touchend={() => { listening = false; buf.clear() }}
 on:touchmove={touchMoveHandler}
 on:mousemove={mouseMoveHandler}
+bind:scrollX={scrollX}
+bind:scrollY={scrollY}
 />
 
 <div class='wrapper' bind:this={wrapper}>

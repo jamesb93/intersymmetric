@@ -18,9 +18,7 @@
 </script>
 
 <div>
-
 	{#each data as d, i}
-		{ d }
 		<MultiSlider 
 		bind:data={ d }
 		config={{
@@ -35,8 +33,6 @@
 	/>
 	{/each}
 </div>
-
-{ data }
 
 <style>
 	div {
