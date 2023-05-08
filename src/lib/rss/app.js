@@ -37,9 +37,10 @@ authenticate()
 * @param {*} fallback – if the retrieved state is invalid use this is as a fallback
 */
 export const attach = (project, room, path, state, fallback) => {
-    const r = ref(db, `/nnnb/${room}/${path}`)
+    const r = ref(db, `/${project}/${room}/${path}`)
 
     onValue(r, s => {
+        console.log()
         if (s.exists()) {
             state.set(s.val())
         } else {
