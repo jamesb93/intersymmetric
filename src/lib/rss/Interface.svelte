@@ -1,9 +1,9 @@
 <script>
 // @ts-nocheck
-
+	import { sendDeviceMessage } from '@jamesb93/rnbo-svelte';
 	import MultiSlider from '$lib/common/multislider/MultiSlider.svelte';
-
 	import { s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15 } from '$lib/rss/app';
+	export let patch;
 
 	$: data = [
 		[$s0, $s1, $s2, $s3],
@@ -13,11 +13,15 @@
 	]
 
 	let view = 0;
+	let active = false;
 
+	
 	$: dataView = data[view]
-
-	export let patch;
+	
+	$: sendDeviceMessage(patch, 'on_off', [active]);
 </script>
+
+<div class='state' class:stateon={active}></div>
 
 <div class="wrapper">
 
@@ -43,8 +47,28 @@ config={{
 
 </div>
 
+<svelte:window on:keypress|preventDefault={(e) => {
+	if (e.code === 'Space') {
+		active = !active;
+		// send to patch
+	}
+}} />
+
 
 <style>
+	.state {
+		touch-action: none;
+		position: absolute;
+		top: 10;
+		left: 10;
+		width: 25px;
+		height: 25px;
+		background-color: red;
+	}
+
+	.stateon {
+		background-color: green;
+	}
 	.wrapper {
 		width: 100%;
 		height: 100%;

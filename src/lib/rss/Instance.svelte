@@ -9,8 +9,7 @@
         const context = new (window.AudioContext || window.webkitAudioContext)();
         const output = context.createGain().connect(context.destination);
         createDeviceInstance('/rss/code/patch.export.json', context, output)
-        .then(response => patch = response);
-        console.log(patch)
+        .then(response => { patch = response });
     };
 </script>
 
