@@ -3,18 +3,20 @@
 	
 	import { onMount } from 'svelte';
 	import { CircularBuffer } from '$lib/common/queue';
-	import { linearInterp, clip, mapRange, scale } from '$lib/utility';
+	import { linearInterp, clip, mapRange } from '$lib/utility';
 	
 	export let data = [];
 	export let config = {
 		width: 200,
 		height: 200,
 		colour: 'darkblue',
+		bgColour: 'yellow',
 		maxWidth: '350px',
 		maxHeight: '100px',
 		min: 0.0,
 		max: 1.0
 	}
+
 	
 	let listening = false;
 	let mounted = false;
@@ -35,16 +37,12 @@
 	onMount(async() => {
 		const sizeObserver = new ResizeObserver(resize).observe(wrapper);
 		mounted = true;
-		// TODO: unobserve
-
 		return () => { sizeObserver.unobserver(wrapper) }
 	})
 	
 	function updatePoints() {
 		if (buf.isFull()) {
 			const canvasWidth = rect.right - rect.left;
-			// a is now, b is history
-			// TODO: make this code more readable instead of making it work
 			let a = buf.get(0)
 			let b = buf.get(1)
 			
@@ -58,7 +56,6 @@
 			0, data.length-1
 			)
 			const numIntersects = Math.abs(a.idx - b.idx);
-
 		
 			if (numIntersects > 0) {
 				const start = b.y / (rect.bottom - rect.top);
@@ -67,7 +64,6 @@
 				const isRev = b.idx > a.idx;
 				
 				for (let i=0; i<numIntersects; i++) {
-					
 					const interp = i / numIntersects;
 					
 					let value = 0.0;
@@ -126,12 +122,19 @@ bind:scrollX={scrollX}
 bind:scrollY={scrollY}
 />
 
-<div class='wrapper' bind:this={wrapper}>
+<div class='wrapper' 
+bind:this={wrapper} 
+style:width={config.width}
+style:height={config.height}
+style:max-width={config.maxWidth} 
+style:max-height={config.maxHeight}
+>
 	{#if mounted && width}
-	<svg 
+	<svg
 	class='svg' 
 	width='100%' 
 	height='100%' 
+	style:background-color={config.bgColour}
 	on:mousedown={() => { listening = true }}
 	on:touchstart={(e) => { buf.clear(); listening = true; }}
 	>
@@ -142,6 +145,8 @@ bind:scrollY={scrollY}
 	y={(1-d) * height}
 	width={width / data.length}
 	height={d * height}
+	style:stroke={config.colour}
+	style:fill={config.colour}
 	/>
 	{/each}
 </svg>
@@ -150,19 +155,10 @@ bind:scrollY={scrollY}
 
 <style>
 	.wrapper {
-		width: 80%;
-		height: 150px;
-		border: 1px solid black;
 		touch-action: none;
 	}
 	
 	.svg {
 		touch-action: none;
-		background-color: aqua;
-	}
-	
-	.bar {
-		stroke: green;
-		fill: green;
 	}
 </style>

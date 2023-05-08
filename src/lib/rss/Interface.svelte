@@ -14,31 +14,58 @@
 
 	let view = 0;
 
+	$: dataView = data[view]
+
 	export let patch;
 </script>
 
-<div>
-	{#each data as d, i}
-		<MultiSlider 
-		bind:data={ d }
-		config={{
-			width : 200,
-			height : 200,
-			maxWidth : '200px',
-			maxHeight : '150px',
-			colour : 'blue',
-			min : 0.0,
-			max : 1.0
-		}}
-	/>
+<div class="wrapper">
+
+<MultiSlider 
+bind:data={ dataView }
+config={{
+	width : 400,
+	maxWidth : '100%',
+	height : '80vh',
+	maxHeight : '80vh',
+	bgColour : 'yellow',
+	colour : 'black',
+	min : 0.0,
+	max : 1.0
+}}
+/>
+
+<div class='view-toggle'>
+	{#each new Array(4) as x, i}
+	<button class:selected={view===i} class='view-tog' on:click={() => { view = i }}></button>
 	{/each}
 </div>
 
+</div>
+
+
 <style>
-	div {
+	.wrapper {
+		width: 100%;
+		height: 100%;
+		min-height: 100%;
+	}
+	.view-toggle {
 		display: flex;
-		flex-direction: column;
-		gap: 3em;
+		flex-direction: row;
+		height: 100%;
+		border-top: 1px solid black;
+	}
+	.view-tog {
+		height: 100%;
+		width: 25%;
+		background-color: yellow;
+		border: none;
+		margin-left: 1px;
+		margin-right: 1px;
+	}
+
+	.selected {
+		background-color: black;
 	}
 </style>
-

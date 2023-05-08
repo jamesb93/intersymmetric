@@ -8,7 +8,9 @@
 
 <style>
 	.container {
+		height: 100vh;
+		min-height: 100vh;
 		width: 100%;
-		margin: 0 auto;
+		min-width: 100%;
 	}
 </style>
