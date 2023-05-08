@@ -36,15 +36,16 @@ authenticate()
 * @param {import('svelte/store').writable} state - 
 * @param {*} fallback – if the retrieved state is invalid use this is as a fallback
 */
-export const attach = (project, room, path, state, fallback) => {
-    const r = ref(db, `/${project}/${room}/${path}`)
+export const attach = (room, path, state, fallback) => {
+    const r = ref(db, `/rss/${room}/${path}`)
 
     onValue(r, s => {
-        console.log()
         if (s.exists()) {
-            state.set(s.val())
+            console.log('value exists')
+            state.set(s.val());
         } else {
-            state.set(fallback)
+            console.log('value doesnt exist')
+            state.set(fallback);
         }
     })
 }

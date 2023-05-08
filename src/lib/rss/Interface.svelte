@@ -1,39 +1,58 @@
 <script>
 // @ts-nocheck
-	import { attach } from '$lib/rss/app';
+	import { attach, db } from '$lib/rss/app';
+	import { writable, get } from 'svelte/store';
+	import { ref, set } from 'firebase/database';
 	import { sendDeviceMessage } from '@jamesb93/rnbo-svelte';
 	import MultiSlider from '$lib/common/multislider/MultiSlider.svelte';
-	import { s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15 } from '$lib/rss/app';
+	import { s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15} from '$lib/rss/app';
+	
 	export let patch;
+
+	let view = 0;
+	let index = 0;
+	let active = false;
+
+	$: sendDeviceMessage(patch, 'on_off', [active]);
+	$: sendDeviceMessage(patch, 'sliders0', [$s0, $s1, $s2, $s3] );
+	$: sendDeviceMessage(patch, 'sliders1', [$s4, $s5, $s6, $s7] );
+	$: sendDeviceMessage(patch, 'sliders2', [$s8, $s9, $s10, $s11] );
+	$: sendDeviceMessage(patch, 'sliders3', [$s12, $s13, $s14, $s15] );
+
+	$: attach('devtest', 'view0slider0', s0, 0.5);
+	$: attach('devtest', 'view0slider1', s1, 0.5);
+	$: attach('devtest', 'view0slider2', s2, 0.5);
+	$: attach('devtest', 'view0slider3', s3, 0.5);
+
+	$: attach('devtest', 'view1slider0', s4, 0.5);
+	$: attach('devtest', 'view1slider1', s5, 0.5);
+	$: attach('devtest', 'view1slider2', s6, 0.5);
+	$: attach('devtest', 'view1slider3', s7, 0.5);
+
+	$: attach('devtest', 'view2slider0', s8, 0.5);
+	$: attach('devtest', 'view2slider1', s9, 0.5);
+	$: attach('devtest', 'view2slider2', s10, 0.5);
+	$: attach('devtest', 'view2slider3', s11, 0.5);
+	
+	$: attach('devtest', 'view3slider0', s12, 0.5);
+	$: attach('devtest', 'view3slider1', s13, 0.5);
+	$: attach('devtest', 'view3slider2', s14, 0.5);
+	$: attach('devtest', 'view3slider3', s15, 0.5);
 
 	$: data = [
 		[$s0, $s1, $s2, $s3],
 		[$s4, $s5, $s6, $s7],
 		[$s8, $s9, $s10, $s11],
 		[$s12, $s13, $s14, $s15]
-	]
-
-	let view = 0;
-	let active = false;
-
-	$: dataView = data[view];
-
-
-	$: sendDeviceMessage(patch, 'on_off', [active]);
-	$: sendDeviceMessage(patch, 'sliders0', [$s0, $s1, $s2, $s3]);
-	$: sendDeviceMessage(patch, 'sliders1', [$s4, $s5, $s6, $s7]);
-	$: sendDeviceMessage(patch, 'sliders2', [$s8, $s9, $s10, $s11]);
-	$: sendDeviceMessage(patch, 'sliders3', [$s12, $s13, $s14, $s15]);
-	$: attach('rss', 'devtest', 's0', s0, 0.5);
-
-	$s0 = 0.9;
+	];
 </script>
 
-<div class='state' class:stateon={active} on:click={() => {active = !active}}></div>
 
+<div class='state' class:stateon={active} on:click={() => {active = !active}}></div>
 <div class="wrapper">
-	<MultiSlider 
-	bind:data={ dataView }
+	<MultiSlider
+	bind:index
+	bind:data={data[view]}
 	config={{
 		width : 400,
 		maxWidth : '100%',
@@ -43,6 +62,12 @@
 		colour : 'black',
 		min : 0.0,
 		max : 1.0
+	}}
+	on:change={() => {
+		set(
+			ref(db, `/rss/devtest/view${view}slider${index}`),
+			data[view][index]
+		)
 	}}
 	/>
 

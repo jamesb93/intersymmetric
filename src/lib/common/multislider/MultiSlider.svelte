@@ -1,11 +1,13 @@
 <script>
 	// @ts-nocheck
-	
+	import { createEventDispatcher } from 'svelte';
 	import { onMount } from 'svelte';
+	import { get } from 'svelte/store';
 	import { CircularBuffer } from '$lib/common/queue';
 	import { linearInterp, clip, mapRange } from '$lib/utility';
-	
-	export let data = [];
+
+	export let index;
+	export let data = []
 	export let config = {
 		width: 200,
 		height: 200,
@@ -26,6 +28,11 @@
 	let height = 0;
 	let scrollX = 0;
 	let scrollY = 0;
+
+	const dispatch = createEventDispatcher();
+	const change = () => {
+		dispatch('change')
+	}
 	
 	function resize(entries) {
 		rect = wrapper.getBoundingClientRect()
@@ -74,12 +81,18 @@
 					Math.min(a.idx, b.idx)+i,
 					0, data.length-1
 					)
+					index = clampedIndex;
 					data[clampedIndex] = mapRange(1-value, 0, 1, config.min, config.max);
+					data = data
 				}
 			} else {
+				index = b.idx;
 				let value = (b.y / (rect.bottom - rect.top));
 				data[b.idx] = mapRange(1-value, 0, 1, config.min, config.max);
+				data = data
 			}
+
+			change();
 		}
 	}
 
@@ -146,8 +159,8 @@ style:max-height={config.maxHeight}
 	style:fill={config.colour}
 	/>
 	{/each}
-</svg>
-{/if}
+	</svg>
+	{/if}
 </div>
 
 <style>
