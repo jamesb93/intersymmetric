@@ -17,12 +17,10 @@
 		max: 1.0
 	}
 
-	
 	let listening = false;
 	let mounted = false;
 	let wrapper;
 	let buf = new CircularBuffer(2);
-	
 	let rect;
 	let width = 0;
 	let height = 0;
@@ -110,7 +108,6 @@
 			updatePoints()
 		}
 	}
-	let w
 </script>
 
 <svelte:window 
