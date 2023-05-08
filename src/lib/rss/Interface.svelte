@@ -21,7 +21,7 @@
 	$: sendDeviceMessage(patch, 'on_off', [active]);
 </script>
 
-<div class='state' class:stateon={active}></div>
+<div class='state' class:stateon={active} on:click={() => {active = !active}}></div>
 
 <div class="wrapper">
 
