@@ -1,168 +1,164 @@
 <script>
+	// @ts-nocheck
+	
 	import { onMount } from 'svelte';
 	import { CircularBuffer } from '$lib/common/queue';
-	import { CanvasSpace, Rectangle, CanvasForm, Pt } from 'pts';
 	import { linearInterp, clip, mapRange, scale } from '$lib/utility';
 	
-	
-	/** @type {Array<number>} */
 	export let data = [];
-	/** @type {string} */
-	export let width = '100px'
-	/** @type {string} */
-	export let height = '100px'
-	/** @type {string} */
-	export let colour = 'black'
-	/** @type {string} */
-	export let maxWidth = '100px'
-	/** @type {string} */
-	export let maxHeight = '100px'
-	/** @type {number} */
-	export let min = 0.0;
-	/** @type {number} */
-	export let max = 1.0;
-	/** @type {boolean} */
-	let listening = false;
+	export let config = {
+		width: 200,
+		height: 200,
+		colour: 'darkblue',
+		maxWidth: '350px',
+		maxHeight: '100px',
+		min: 0.0,
+		max: 1.0
+	}
 	
-	/** @type {HTMLCanvasElement} */
-	let canvas;
-	/** @type {DOMRect} */
-	let rect;
-	let space;
-	/** @type {CanvasForm} */
-	let form;
-
+	let listening = false;
+	let mounted = false;
+	let wrapper;
 	let buf = new CircularBuffer(2);
+	
+	let rect;
+	let width;
+	let height;
+	
+	function resize(entries) {
+		rect = wrapper.getBoundingClientRect()
+		width = rect.width;
+		height = rect.height;
+	}
 	onMount(async() => {
-		rect = canvas.getBoundingClientRect();
-		space = new CanvasSpace(canvas)
-		.setup({
-			bgcolor: '#fff',
-			// resize: true,
-		});
-		form = space.getForm();
-		
-		space.add({
-			animate: (time, ftime, space) => {
-				if (buf.isFull()) {
-					const canvasWidth = rect.right - rect.left;
-					// a is now, b is history
-					// TODO: make this code more readable instead of making it work
-					let pta = buf.get(0)
-					let ptb = buf.get(1)
-					let a = { idx:0, x:0, y:0 }
-					let b = { idx:0, x:0, y:0 }
-					a.x = pta[0]
-					b.x = ptb[0]
-					a.y = pta[1]
-					b.y = ptb[1]
-					a.idx = clip(
-						Math.floor((a.x / canvasWidth) * data.length),
-						0, data.length-1
-					)
-					
-					b.idx = clip(
-						Math.floor((b.x / canvasWidth) * data.length),
-						0, data.length-1
-					)
-					const numIntersects = Math.abs(a.idx - b.idx);
-					
-					if (numIntersects > 0) {
-						const start = b.y / (rect.bottom - rect.top);
-						const end = a.y / (rect.bottom - rect.top);
-						const isRev = b.idx > a.idx;
-						
-						for (let i=0; i<numIntersects; i++) {
-							
-							const interp = i / numIntersects;
-							
-							let value = 0.0;
-							if (isRev) {
-								value = linearInterp(end, start, interp);
-							} else{
-								value = linearInterp(start, end, interp);
-							}
-							const clampedIndex = clip(
-								Math.min(a.idx, b.idx)+i,
-								0, data.length-1
-							)
-							data[clampedIndex] = mapRange(1-value, 0, 1, min, max);
-							
-						}
-					} else {
-						let value = (b.y / (rect.bottom - rect.top));
-						let denorm = scale(1-value, 0, 1, min, max);
-						data[b.idx] = denorm;
-					}
-				}
+		const sizeObserver = new ResizeObserver(resize).observe(wrapper);
+		mounted = true;
+		// TODO: unobserve
 
-
-				const barWidth = space.width / data.length;
-				data.forEach((x, i) => {
-					const normalisedX = mapRange(x, min, max, 0.0, 1.0)
-					const left = i * barWidth;
-					const r = Rectangle.fromTopLeft(
-						[left, space.height], 
-						barWidth,  
-						1-normalisedX * space.height
-					);
-					form.fillOnly(colour).rect( r );
-				})
-			}	
-		});
-		space.play().bindMouse();
+		return () => { sizeObserver.unobserver(wrapper) }
 	})
-
+	
 	function getPointer(clientX, clientY) {
-		const rect = canvas.getBoundingClientRect();
 		const maxWidth = rect.right - rect.left;
 		const maxHeight = rect.bottom - rect.top;
-
 		const x = clip(clientX - rect.left, 0, maxWidth);
 		const y = clip(clientY - rect.top, 0, maxHeight);
-
 		return [x, y]
 	}
+	
+	function updatePoints() {
+		if (buf.isFull()) {
+			const canvasWidth = rect.right - rect.left;
+			// a is now, b is history
+			// TODO: make this code more readable instead of making it work
+			let a = buf.get(0)
+			let b = buf.get(1)
+			
+			a.idx = clip(
+			Math.floor((a.x / canvasWidth) * data.length),
+			0, data.length-1
+			)
+			
+			b.idx = clip(
+			Math.floor((b.x / canvasWidth) * data.length),
+			0, data.length-1
+			)
+			const numIntersects = Math.abs(a.idx - b.idx);
 
-	function mouseMove(e) {
-		if (listening) {
-			const pt = getPointer(e.clientX, e.clientY)
-			buf.enqueue(new Pt(pt))
+		
+			if (numIntersects > 0) {
+				const start = b.y / (rect.bottom - rect.top);
+				const end = a.y / (rect.bottom - rect.top);
+
+				const isRev = b.idx > a.idx;
+				
+				for (let i=0; i<numIntersects; i++) {
+					
+					const interp = i / numIntersects;
+					
+					let value = 0.0;
+					if (isRev) {
+						value = linearInterp(end, start, interp);
+					} else{
+						value = linearInterp(start, end, interp);
+					}
+					const clampedIndex = clip(
+					Math.min(a.idx, b.idx)+i,
+					0, data.length-1
+					)
+					data[clampedIndex] = mapRange(1-value, 0, 1, config.min, config.max);
+				}
+			} else {
+				let value = (b.y / (rect.bottom - rect.top));
+				data[b.idx] = mapRange(1-value, 0, 1, config.min, config.max);
+			}
 		}
 	}
-
+	
+	function mouseMoveHandler(e) {
+		if (listening) {
+			const [x, y] = getPointer(e.clientX, e.clientY)
+			buf.enqueue({ idx: 0, x:x, y:y })
+			updatePoints()
+		}
+	}
+	
 	function touchMoveHandler(e) {
 		if (listening) {
-			const x = e.touches[0].clientX;
-			const y = e.touches[0].clientY;
-			const pt = getPointer(x, y);
-			buf.enqueue(new Pt(pt));
+			const touchX = e.touches[0].clientX;
+			const touchY = e.touches[0].clientY;
+			const [x, y] = getPointer(touchX, touchY);
+			buf.enqueue({ idx: 0, x:x, y:y })
+			updatePoints()
 		}
 	}
+	let w
 </script>
 
 <svelte:window 
-on:mousedown={() => { buf.clear() }}
-on:mouseup={() => { listening = false }} 
-on:mousemove={mouseMove}
-on:touchstart={() => { listening = true }}
-on:touchend={() => { listening = true; buf.clear() }}
+on:mouseup={() => { listening = false; buf.clear() }} 
+on:touchend={() => { listening = false; buf.clear() }}
 on:touchmove={touchMoveHandler}
+on:mousemove={mouseMoveHandler}
 />
 
-<div>
-	<canvas 
-	id='sketch' 
-	bind:this={canvas} 
-	on:mousedown={() => listening = true} 
-	style:border-color={colour}
-	style:max-width={maxWidth}
-	style:max-height={maxHeight}
+<div class='wrapper' bind:this={wrapper}>
+	{#if mounted && width}
+	<svg 
+	class='svg' 
+	width='100%' 
+	height='100%' 
+	on:mousedown={() => { listening = true }}
+	on:touchstart={(e) => { buf.clear(); listening = true; }}
+	>
+	{#each data as d, i}
+	<rect 
+	class='bar'
+	x={i * (width / data.length)}
+	y={(1-d) * height}
+	width={width / data.length}
+	height={d * height}
 	/>
+	{/each}
+</svg>
+{/if}
 </div>
-	
+
 <style>
-	#sketch {
+	.wrapper {
+		width: 80%;
+		height: 150px;
+		border: 1px solid black;
 		touch-action: none;
+	}
+	
+	.svg {
+		touch-action: none;
+		background-color: aqua;
+	}
+	
+	.bar {
+		stroke: green;
+		fill: green;
 	}
 </style>
