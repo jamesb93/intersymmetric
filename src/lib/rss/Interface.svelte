@@ -56,8 +56,8 @@
 	config={{
 		width : 400,
 		maxWidth : '100%',
-		height : '80vh',
-		maxHeight : '80vh',
+		height : '100%',
+		maxHeight : '100%',
 		bgColour : 'yellow',
 		colour : 'black',
 		min : 0.0,
@@ -100,6 +100,8 @@
 		background-color: green;
 	}
 	.wrapper {
+		display: flex;
+		flex-direction: column;
 		width: 100%;
 		height: 100%;
 		min-height: 100%;
@@ -107,7 +109,7 @@
 	.view-toggle {
 		display: flex;
 		flex-direction: row;
-		height: 100%;
+		height: 200px;
 		border-top: 1px solid black;
 	}
 	.view-tog {
