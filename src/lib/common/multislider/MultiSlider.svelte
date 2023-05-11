@@ -2,10 +2,10 @@
 	// @ts-nocheck
 	import { createEventDispatcher } from 'svelte';
 	import { onMount } from 'svelte';
-	import { get } from 'svelte/store';
 	import { CircularBuffer } from '$lib/common/queue';
 	import { linearInterp, clip, mapRange } from '$lib/utility';
 
+	export let focus = null;
 	export let index;
 	export let data = []
 	export let config = {
@@ -91,7 +91,6 @@
 				data[b.idx] = mapRange(1-value, 0, 1, config.min, config.max);
 				data = data
 			}
-
 			change();
 		}
 	}
@@ -121,6 +120,27 @@
 			updatePoints()
 		}
 	}
+
+	function keyPressHandler(e) {
+		switch (e.code) {
+			case 'ArrowUp':
+				e.preventDefault();
+				if (focus !== null && (focus < data.length)) {
+					data[focus] = clip(data[focus] += 0.05, 0.0, 1.0);
+					data = data;
+				}
+				break
+			case 'ArrowDown':
+				e.preventDefault();
+				if (focus !== null && (focus < data.length)) {
+					data[focus] = clip(data[focus] -= 0.05, 0.0, 1.0);
+					data = data;
+				}
+				break
+			default:
+				break;
+		}
+	}
 </script>
 
 <svelte:window 
@@ -128,6 +148,7 @@ on:mouseup={() => { listening = false; buf.clear() }}
 on:touchend={() => { listening = false; buf.clear() }}
 on:touchmove={touchMoveHandler}
 on:mousemove={mouseMoveHandler}
+on:keydown={keyPressHandler}
 bind:scrollX={scrollX}
 bind:scrollY={scrollY}
 />
@@ -157,6 +178,11 @@ style:max-height={config.maxHeight}
 	height={d * height}
 	style:stroke={config.colour}
 	style:fill={config.colour}
+	on:focus={(e) => { 
+		focus = i;
+		console.log(i) 
+	}}
+	on:blur={() => { focus = null }}
 	/>
 	{/each}
 	</svg>
@@ -164,6 +190,9 @@ style:max-height={config.maxHeight}
 </div>
 
 <style>
+	rect:focus {
+		outline: 4px solid green;
+	}
 	.wrapper {
 		touch-action: none;
 	}
