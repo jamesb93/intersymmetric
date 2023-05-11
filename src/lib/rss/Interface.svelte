@@ -10,7 +10,7 @@
 
 	let view = 0;
 	let index = 0;
-	let active = false;
+	let active = true;
 
 	$: sendDeviceMessage(patch, 'on_off', [active]);
 	$: sendDeviceMessage(patch, 'sliders0', [$s0, $s1, $s2, $s3] );
