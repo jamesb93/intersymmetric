@@ -1,7 +1,6 @@
 <script>
 // @ts-nocheck
 	import { attach, db } from '$lib/rss/app';
-	import { writable, get } from 'svelte/store';
 	import { ref, set } from 'firebase/database';
 	import { sendDeviceMessage } from '@jamesb93/rnbo-svelte';
 	import MultiSlider from '$lib/common/multislider/MultiSlider.svelte';
@@ -47,7 +46,6 @@
 	];
 </script>
 
-
 <div class='state' class:stateon={active} on:click={() => {active = !active}}></div>
 <div class="wrapper">
 	<MultiSlider
@@ -79,6 +77,25 @@
 </div>
 
 <svelte:window on:keypress|preventDefault={(e) => {
+	switch (e.code) {
+		case 'Space':
+			active = !active;
+		case 'Digit1':
+			view = 0;
+			break;
+		case 'Digit2':
+			view = 1;
+			break;
+		case 'Digit3':
+			view = 2;
+			break;
+		case 'Digit4':
+			view = 3;
+			break;
+		default:
+			break;
+	}
+	
 	if (e.code === 'Space') {
 		active = !active;
 	}
@@ -93,7 +110,6 @@
 		left: 10;
 		width: 25px;
 		height: 25px;
-		background-color: red;
 	}
 
 	.stateon {
@@ -119,6 +135,10 @@
 		border: none;
 		margin-left: 1px;
 		margin-right: 1px;
+	}
+
+	.view-tog:focus{
+		outline: 4px solid green;
 	}
 
 	.selected {

@@ -43,7 +43,6 @@ export const attach = (room, path, state, fallback) => {
         if (s.exists()) {
             state.set(s.val());
         } else {
-            console.log('value doesnt exist')
             state.set(fallback);
         }
     })
