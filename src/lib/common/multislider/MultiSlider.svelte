@@ -178,11 +178,13 @@ style:max-height={config.maxHeight}
 	height={d * height}
 	style:stroke={config.colour}
 	style:fill={config.colour}
-	on:focus={(e) => { 
-		focus = i;
-		console.log(i) 
-	}}
+	on:focus={(e) => { focus = i }}
 	on:blur={() => { focus = null }}
+	role="slider"
+	aria-roledescription={'A vertical slider used to change one of the values stored in the "multislider".'}
+	aria-valuemin={config.min}
+	aria-valuemax={config.max}
+	aria-valuenow={d}
 	/>
 	{/each}
 	</svg>
