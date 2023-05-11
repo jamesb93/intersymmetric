@@ -41,7 +41,6 @@ export const attach = (room, path, state, fallback) => {
 
     onValue(r, s => {
         if (s.exists()) {
-            console.log('value exists')
             state.set(s.val());
         } else {
             console.log('value doesnt exist')
