@@ -22,7 +22,8 @@
 	let listening = false;
 	let mounted = false;
 	let wrapper;
-	let buf = new CircularBuffer(2);
+	let bufCache = Array.from({ length: 10}, () => new CircularBuffer(2));
+	// we store 10 circular buffers. One for each finger.
 	let rect;
 	let width = 0;
 	let height = 0;
@@ -46,53 +47,55 @@
 	})
 	
 	function updatePoints() {
-		if (buf.isFull()) {
-			const canvasWidth = rect.right - rect.left;
-			let a = buf.get(0)
-			let b = buf.get(1)
-			
-			a.idx = clip(
-			Math.floor((a.x / canvasWidth) * data.length),
-			0, data.length-1
-			)
-			
-			b.idx = clip(
-			Math.floor((b.x / canvasWidth) * data.length),
-			0, data.length-1
-			)
-			const numIntersects = Math.abs(a.idx - b.idx);
-		
-			if (numIntersects > 0) {
-				const start = b.y / (rect.bottom - rect.top);
-				const end = a.y / (rect.bottom - rect.top);
-
-				const isRev = b.idx > a.idx;
+		bufCache.forEach((buf) => {
+			if (buf.isFull()) {
+				const canvasWidth = rect.right - rect.left;
+				let a = buf.get(0)
+				let b = buf.get(1)
 				
-				for (let i=0; i<numIntersects; i++) {
-					const interp = i / numIntersects;
+				a.idx = clip(
+				Math.floor((a.x / canvasWidth) * data.length),
+				0, data.length-1
+				)
+				
+				b.idx = clip(
+				Math.floor((b.x / canvasWidth) * data.length),
+				0, data.length-1
+				)
+				const numIntersects = Math.abs(a.idx - b.idx);
+			
+				if (numIntersects > 0) {
+					const start = b.y / (rect.bottom - rect.top);
+					const end = a.y / (rect.bottom - rect.top);
+
+					const isRev = b.idx > a.idx;
 					
-					let value = 0.0;
-					if (isRev) {
-						value = linearInterp(end, start, interp);
-					} else{
-						value = linearInterp(start, end, interp);
+					for (let i=0; i<numIntersects; i++) {
+						const interp = i / numIntersects;
+						
+						let value = 0.0;
+						if (isRev) {
+							value = linearInterp(end, start, interp);
+						} else{
+							value = linearInterp(start, end, interp);
+						}
+						const clampedIndex = clip(
+						Math.min(a.idx, b.idx)+i,
+						0, data.length-1
+						)
+						index = clampedIndex;
+						data[clampedIndex] = mapRange(1-value, 0, 1, config.min, config.max);
+						data = data
 					}
-					const clampedIndex = clip(
-					Math.min(a.idx, b.idx)+i,
-					0, data.length-1
-					)
-					index = clampedIndex;
-					data[clampedIndex] = mapRange(1-value, 0, 1, config.min, config.max);
+				} else {
+					index = b.idx;
+					let value = (b.y / (rect.bottom - rect.top));
+					data[b.idx] = mapRange(1-value, 0, 1, config.min, config.max);
 					data = data
 				}
-			} else {
-				index = b.idx;
-				let value = (b.y / (rect.bottom - rect.top));
-				data[b.idx] = mapRange(1-value, 0, 1, config.min, config.max);
-				data = data
+				change();
 			}
-			change();
-		}
+		})
 	}
 
 	function getPointer(clientX, clientY) {
@@ -106,17 +109,19 @@
 	function mouseMoveHandler(e) {
 		if (listening) {
 			const [x, y] = getPointer(e.clientX, e.clientY)
-			buf.enqueue({ idx: 0, x:x, y:y })
+			bufCache[0].enqueue({ idx:  null, x:x, y:y })
 			updatePoints()
 		}
 	}
 	
 	function touchMoveHandler(e) {
 		if (listening) {
-			const touchX = e.touches[0].clientX;
-			const touchY = e.touches[0].clientY;
-			const [x, y] = getPointer(touchX, touchY);
-			buf.enqueue({ idx: 0, x:x, y:y })
+			for (let i=0; i < e.touches.length; i++) {
+				const touchX = e.touches[i].clientX;
+				const touchY = e.touches[i].clientY;
+				const [x, y] = getPointer(touchX, touchY);
+				bufCache[i].enqueue({ idx: null, x:x, y:y });
+			}
 			updatePoints()
 		}
 	}
@@ -141,11 +146,17 @@
 				break;
 		}
 	}
+
+	function clearCache() {
+		bufCache.forEach((buf, i) => {
+			buf.clear();
+		})
+	}
 </script>
 
 <svelte:window 
-on:mouseup={() => { listening = false; buf.clear() }} 
-on:touchend={() => { listening = false; buf.clear() }}
+on:mouseup={() => { listening = false; clearCache() }} 
+on:touchend={() => { listening = false; clearCache() }}
 on:touchmove={touchMoveHandler}
 on:mousemove={mouseMoveHandler}
 on:keydown={keyPressHandler}
@@ -167,7 +178,7 @@ style:max-height={config.maxHeight}
 	height='100%' 
 	style:background-color={config.bgColour}
 	on:mousedown={() => { listening = true }}
-	on:touchstart={(e) => { buf.clear(); listening = true; }}
+	on:touchstart={(e) => { clearCache(); listening = true; }}
 	>
 	{#each data as d, i}
 	<rect 
