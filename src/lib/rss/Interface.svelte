@@ -95,10 +95,6 @@
 		default:
 			break;
 	}
-	
-	if (e.code === 'Space') {
-		active = !active;
-	}
 }} />
 
 
@@ -110,6 +106,7 @@
 		left: 10;
 		width: 25px;
 		height: 25px;
+		background-color: red;
 	}
 
 	.stateon {
