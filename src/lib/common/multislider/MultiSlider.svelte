@@ -22,8 +22,8 @@
 	let listening = false;
 	let mounted = false;
 	let wrapper;
-	let bufCache = Array.from({ length: 10}, () => new CircularBuffer(2));
-	// we store 10 circular buffers. One for each finger.
+	// let bufCache = Array.from({ length: 10}, () => new CircularBuffer(2)); // we store 10 circular buffers. One for each finger.
+	let bufCache = {};
 	let rect;
 	let width = 0;
 	let height = 0;
@@ -47,12 +47,12 @@
 	})
 	
 	function updatePoints() {
-		bufCache.forEach((buf) => {
+		for (const [id, buf] of Object.entries(bufCache)) {
 			if (buf.isFull()) {
 				const canvasWidth = rect.right - rect.left;
 				let a = buf.get(0)
 				let b = buf.get(1)
-				
+
 				a.idx = clip(
 				Math.floor((a.x / canvasWidth) * data.length),
 				0, data.length-1
@@ -95,7 +95,7 @@
 				}
 				change();
 			}
-		})
+		}
 	}
 
 	function getPointer(clientX, clientY) {
@@ -109,6 +109,7 @@
 	function mouseMoveHandler(e) {
 		if (listening) {
 			const [x, y] = getPointer(e.clientX, e.clientY)
+			checkOrCreateCache(0);
 			bufCache[0].enqueue({ idx:  null, x:x, y:y })
 			updatePoints()
 		}
@@ -117,10 +118,11 @@
 	function touchMoveHandler(e) {
 		if (listening) {
 			for (let i=0; i < e.touches.length; i++) {
-				const touchX = e.touches[i].clientX;
-				const touchY = e.touches[i].clientY;
-				const [x, y] = getPointer(touchX, touchY);
-				bufCache[i].enqueue({ idx: null, x:x, y:y });
+				const touch = e.touches[i];
+				const id = touch.identifier;
+				checkOrCreateCache(id);
+				const [x, y] = getPointer(touch.clientX, touch.clientY);
+				bufCache[id].enqueue({ idx: null, x:x, y:y });
 			}
 			updatePoints()
 		}
@@ -147,16 +149,29 @@
 		}
 	}
 
+	function checkOrCreateCache(id) {
+		if (!bufCache.hasOwnProperty(id)) {
+			bufCache[id] = new CircularBuffer(2);
+		}
+	}
+
 	function clearCache() {
-		bufCache.forEach((buf, i) => {
-			buf.clear();
-		})
+		bufCache = {};
 	}
 </script>
 
 <svelte:window 
 on:mouseup={() => { listening = false; clearCache() }} 
-on:touchend={() => { listening = false; clearCache() }}
+on:touchend={(e) => { 
+	for (let i=0; i < e.changedTouches.length; i++) {
+		const touch = e.changedTouches[i];
+		const id = touch.identifier;
+		bufCache[id].clear();
+	}
+	if (e.touches.length === 0) {
+		listening = false;
+  	}
+}}
 on:touchmove={touchMoveHandler}
 on:mousemove={mouseMoveHandler}
 on:keydown={keyPressHandler}
