@@ -2,7 +2,7 @@
 // @ts-nocheck
 	import { attach, db } from '$lib/rss/app';
 	import { ref, set } from 'firebase/database';
-	import { sendDeviceMessage } from '$lib/common/rnbo/helpers.js';
+	import { sendDeviceMessage } from '@jamesb93/rnbo-svelte';
 	import MultiSlider from '$lib/common/multislider/MultiSlider.svelte';
 	import { s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15} from '$lib/rss/app';
 	
@@ -95,6 +95,10 @@
 		default:
 			break;
 	}
+	
+	if (e.code === 'Space') {
+		active = !active;
+	}
 }} />
 
 
@@ -106,7 +110,6 @@
 		left: 10;
 		width: 25px;
 		height: 25px;
-		background-color: red;
 	}
 
 	.stateon {
