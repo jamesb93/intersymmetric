@@ -164,6 +164,8 @@
     }
 
     .container:active {
-        cursor: grabbing;
+        /* cursor: grabbing; */
+        cursor:none;
+        user-select: none;
     }
 </style>
