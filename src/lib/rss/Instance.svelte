@@ -4,41 +4,23 @@
     
     /** @type {import('@rnbo/js').Device} */
     let device;
-    let interacted = false;
+
     const start = async () => {
         const context = new (window.AudioContext || window.webkitAudioContext)();
         const output = context.createGain().connect(context.destination);
         createDeviceInstance('/rss/code/patch.export.json', context, output)
             .then(response => { device = response });
     };
-
 </script>
 
-{#if !interacted}
-    <button on:click={() => interacted=true}>press me to unlock audio</button>
+{#if device}
+    <Interface bind:device />
 {:else}
-    {#if device}
-        <Interface bind:device />
-    {:else}
-        <FileUploader
-        labelTitle=""
-        buttonLabel="Add patch"
-        accept={['.json']}
-        on:change={(e) => {
-            const file = e.detail[0];
-            const reader = new FileReader();
-            reader.onloadend = async(x) => {
-                const patcher = await JSON.parse(x.target.result);
-                const context = new (window.AudioContext || window.webkitAudioContext)();
-                const output = context.createGain().connect(context.destination);
-                device = await RNBO.createDevice({ context, patcher })
-                device.node.connect(output);
-            }
-            reader.readAsBinaryString(file);
-        }}
-        />
-    {/if}
+    <button class='start-btn' on:click={start}>
+        start
+    </button>
 {/if}
+
 <style>
     .start-btn {
         position: absolute;
