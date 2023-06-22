@@ -7,12 +7,24 @@
     let device;
     let interacted = false;
 
+    // Audio State
+    /** @type {AudioContext} */
+    let context; 
+
+    /** @type {AudioNode} */
+    let output;
+
+    function initAudio() {
+        context = new (window.AudioContext || window.webkitAudioContext)();
+        output = context.createGain().connect(context.destination);
+    }
+
 </script>
 
-{#if !interacted}
-    <button on:click={() => interacted=true}>press me to unlock audio</button>
+{#if !context && !output}
+    <button on:click={initAudio}>press me to unlock audio</button>
 {:else}
-    {#if device}
+    {#if device && context && output}
         <Interface bind:device />
     {:else}
         <FileUploader
@@ -24,8 +36,6 @@
             const reader = new FileReader();
             reader.onloadend = async(x) => {
                 const patcher = await JSON.parse(x.target.result);
-                const context = new (window.AudioContext || window.webkitAudioContext)();
-                const output = context.createGain().connect(context.destination);
                 device = await RNBO.createDevice({ context, patcher })
                 device.node.connect(output);
             }
