@@ -1,11 +1,16 @@
 <script>
-    import { FileUploader } from "carbon-components-svelte";
     import Interface from './Interface.svelte';
-    import * as RNBO from '@rnbo/js'
+    import { createDeviceInstance } from '../common/rnbo/helpers';
     
     /** @type {import('@rnbo/js').Device} */
     let device;
     let interacted = false;
+    const start = async () => {
+        const context = new (window.AudioContext || window.webkitAudioContext)();
+        const output = context.createGain().connect(context.destination);
+        createDeviceInstance('/rss/code/patch.export.json', context, output)
+            .then(response => { device = response });
+    };
 
 </script>
 
