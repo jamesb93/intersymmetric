@@ -13,7 +13,7 @@
     export let resetValue = 50;
     export let scale = 1;
     export let showValue = true;
-    export let displayValue: string | number | boolean = '';
+    export let displayValue: string | number | boolean | null = null;
     export let enabled = true;
     export let func = () => {};
     export let value = 0;
@@ -149,7 +149,12 @@
 
         {#if showValue}
         <text x={MID_X} y={HEIGHT} text-anchor="middle" class="knob knob-value">
-            { displayValue || parseFloat(value.toFixed(1)) }
+
+            {#if displayValue !== null}
+                {displayValue}
+            {:else}
+                { parseFloat(value.toFixed(1)) }
+            {/if}
         </text>
         {/if}
     </svg>
