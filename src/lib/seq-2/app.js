@@ -58,6 +58,11 @@ export const multiplier = enum_parameter(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 
 export const grid_start = numeric_parameter(0, { min: 0, max: 15, step: 1 });
 export const grid_end   = numeric_parameter(15, { min: 0, max: 15, step: 1 });
 
+export const kick_level = writable(0.0);
+export const snare_level = writable(0.0);
+export const metal_level = writable(0.0);
+export const fm_level = writable(0.0);
+
 // export const kick_params    = numeric_array_writable(new Array(4).fill(0.5), 0.0, 1.0);
 // export const snare_params   = numeric_array_writable(new Array(4).fill(0.5), 0.0, 1.0);
 // export const metal_params   = numeric_array_writable(new Array(4).fill(0.5), 0.0, 1.0);
