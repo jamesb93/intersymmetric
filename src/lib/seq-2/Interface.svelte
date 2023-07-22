@@ -6,6 +6,7 @@
     import Knob from '$lib/common/Knob.svelte';
     import Toggle from '$lib/seq-2/Toggle.svelte';
     import Button from './Button.svelte';
+    import Meter from './Meter.svelte';
 
     import { 
         state, 
@@ -13,7 +14,11 @@
         direction,
         multiplier,
         grid_end,
-        grid_start 
+        grid_start,
+        kick_level,
+        metal_level,
+        snare_level,
+        fm_level
     } from '$lib/seq-2/app.js';
 
     const bpm_knob = {
@@ -32,18 +37,24 @@
         scale: 0.25,
         title: 'multiplier'
     }
+
     $: sendDeviceMessage(device, 'state', [$state])
+    $: sendDeviceMessage(device, 'bpm', [$bpm])
     $: sendDeviceMessage(device, 'direction', [$direction])
     $: sendDeviceMessage(device, 'multiplier', [multiplier.get_value($multiplier)])
     $: sendDeviceMessage(device, 'grid_start', [$grid_start])
     $: sendDeviceMessage(device, 'grid_end', [$grid_end])
-
 </script>
 
 <div class="container">
+    <Meter bind:level={$kick_level} />
+    <Meter bind:level={$snare_level} />
+    <Meter bind:level={$metal_level} />
+    <Meter bind:level={$fm_level} />
+
     <Toggle bind:enabled={$state}/>
     <Button on:click={() => sendDeviceMessage(device, 'randomise', [0])}>
-        randomise sounds
+        rand
     </Button>
     
     <Knob { ...bpm_knob} bind:value={$bpm} />
