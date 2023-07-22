@@ -7,6 +7,7 @@
     import Toggle from '$lib/seq-2/Toggle.svelte';
     import Button from './Button.svelte';
     import Meter from './Meter.svelte';
+    import Grid from './Grid.svelte';
 
     import { 
         state, 
@@ -19,7 +20,7 @@
         metal_level,
         snare_level,
         fm_level
-    } from '$lib/seq-2/app.js';
+    } from './app.js';
 
     const bpm_knob = {
         min: bpm.get().min,
@@ -47,26 +48,33 @@
 </script>
 
 <div class="container">
-    <Meter bind:level={$kick_level} />
-    <Meter bind:level={$snare_level} />
-    <Meter bind:level={$metal_level} />
-    <Meter bind:level={$fm_level} />
+    <div class='controls'>
+        <Meter bind:level={$kick_level} />
+        <Meter bind:level={$snare_level} />
+        <Meter bind:level={$metal_level} />
+        <Meter bind:level={$fm_level} />
 
-    <Toggle bind:enabled={$state}/>
-    <Button on:click={() => sendDeviceMessage(device, 'randomise', [0])}>
-        rand
-    </Button>
-    
-    <Knob { ...bpm_knob} bind:value={$bpm} />
-    <Knob {...multiplier_knob} bind:value={$multiplier} displayValue={multiplier.get_value($multiplier)} />
+        <Toggle bind:enabled={$state}/>
+        <Button on:click={() => sendDeviceMessage(device, 'randomise', [0])}>
+            rand
+        </Button>
+        
+        <Knob { ...bpm_knob} bind:value={$bpm} />
+        <Knob {...multiplier_knob} bind:value={$multiplier} displayValue={multiplier.get_value($multiplier)} />
+    </div>
+    <Grid />
 </div>
 
 <style>
     .container {
         display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .controls {
+        display: flex;
         flex-direction: row;
         gap: 2em;
-        margin: 0 auto;
-        margin-top: 2em;
     }
 </style>

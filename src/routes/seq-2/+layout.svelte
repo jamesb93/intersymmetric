@@ -6,18 +6,28 @@
 
 <div class="container">
     <Header />
-    <slot />
+    <div class="instrument">
+        <slot />
+    </div>
     <Footer />
 </div>
 
 <style>
     .container {
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        width: 100%;
+        height: 100vh;
+        user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -webkit-user-drag: none;
+        -webkit-user-select: none;
+    }
+    .instrument {
+        width: 100%;
         max-width: 1005px;
         margin: 0 auto;
-        -webkit-user-drag: none;
-        user-select: none;
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
     }
 </style>

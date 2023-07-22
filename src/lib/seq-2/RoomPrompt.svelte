@@ -1,5 +1,5 @@
 <script>
-    import { room } from '$lib/nyege/app';
+    import { room } from '$lib/seq-2/app';
     import { goto } from '$app/navigation';
 
     let everUsed = false;
@@ -9,7 +9,7 @@
         everUsed = true;
         $room = code;
         code = '';
-        goto(`/nnnb/${$room}`);
+        goto(`/seq-2/${$room}`);
     }
 </script>
 

@@ -1,31 +1,37 @@
 <script>
-    import RoomPrompt from '$lib/nyege/RoomPrompt.svelte';
+    import RoomPrompt from '$lib/seq-2/RoomPrompt.svelte';
 </script>
 
 <header>
-    <div id="title">
-        <div class="no-hover">Intersymmetric Works | Seq 2</div>
-    </div>
-    <div id="room">
-        <RoomPrompt />
+    <div class='header-content'>
+        <div id="title">
+            <div class="no-hover">Intersymmetric Works | Seq 2</div>
+        </div>
+        <div id="room">
+            <RoomPrompt />
+        </div>
+        <div></div>
     </div>
 </header>
 
-<div class="line" />
-
 <style>
-    :root {
-        --h: 20px;
-    }
     header {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--primary);
+    }
+    .header-content {
         display: grid;
         grid-template-columns: 180px auto 180px;
         justify-content: space-between;
         max-width: 1005px;
+        width: min(1005px, 80%);
         margin: 0 auto;
-        min-height: var(--h);
-        max-height: var(--h);
-        padding-top: 10px;
+        height: 100%;
         color: var(--primary);
     }
 
@@ -40,20 +46,5 @@
         word-wrap: none;
         display: flex;
         flex-direction: column;
-    }
-
-    #participants {
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-    }
-
-    .line {
-        border-bottom: 1px solid var(--primary);
-        position: absolute;
-        left: 0;
-        right: 0px;
-        bottom: 10;
-        top: 35px;
     }
 </style>

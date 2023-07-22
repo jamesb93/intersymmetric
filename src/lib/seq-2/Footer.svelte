@@ -8,13 +8,11 @@
 
 <style>
     footer {
-        bottom: 0;
         display: flex;
         flex-direction: column;
+        width: 100%;
         color: var(--primary);
         text-align: left;
-        gap: 0.1em;
-        margin-top: 2em;
         font-size: 10px;
         -webkit-text-size-adjust: none;
     }
@@ -22,6 +20,9 @@
     .credits {
         display: flex;
         flex-direction: column;
+        max-width: 1005px;
+        width: min(1005px, 80%);
+        margin: 0 auto;
     }
 
     @media only screen and (max-width: 1005px) {
