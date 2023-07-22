@@ -1,37 +1,44 @@
 <script lang='ts'>
     import { onMount } from 'svelte';
+    import { primary } from '$lib/nyege/app';
     import { clip, mapRange } from '$lib/utility';
 
     export let title = '';
-	export let WIDTH = 38;
-    export let HEIGHT = 50;
-    export let RADIUS = 17;
-    export let SHIFT = 1;
     export let min = 0;
     export let max = 100;
     export let step = 1;
-    export let resetValue = 50;
-    export let scale = 1;
+    export let resetValue = 0;
+    export let scale = 1.0;
+    export let WIDTH = 50;
+    export let HEIGHT = 50;
     export let showValue = true;
-    export let displayValue: string | number | boolean = '';
+    export let displayValue = null;
+    export let accentColor = primary;
+    export let strokeWidth = 2;
     export let enabled = true;
     export let func = () => {};
-    export let value = 0;
+    export let value;
     export let internal = value;
 
+    const RADIUS = 17;
     const MID_X = WIDTH / 2;
     const MID_Y = HEIGHT / 2;
+    const SHIFT = 1;
     const MIN_RADIANS = (4 * Math.PI) / 3;
     const MAX_RADIANS = -Math.PI / 3;
 
     let knob;
     let length = 0;
-    let pathValue = null;
+    let pathValue;
     let pv = null;
     let down = false;
-    let prevTouch = null;
-    let needsUpdate = false;
+    let prevTouch;
 
+    onMount(() => {
+        dashLength();
+    });
+
+    $: primaryColor = enabled ? primary : accentColor;
     $: dashStyle = {
         strokeDasharray: length,
         strokeDashoffset: length
@@ -56,23 +63,14 @@
     $: sweep = value_radians > zero_radians ? 0 : 1;
     $: value = Math.round((internal - min) / step) * step + min;
 
-        $: { 
-        if (needsUpdate) {
-            needsUpdate = false;
-            func();
-        }
-    }
     const updatePosition = change => {
         // This way it always forces it to match the bound value when it is first moved.
         if (!internal) {
             internal = value;
-            internal = clip(internal, min, max);
         }
-
         internal = clip(internal + change * scale, min, max);
-
         if (pv !== value) {
-            needsUpdate = true;
+            func();
             pv = value;
         }
     };
@@ -93,28 +91,28 @@
         }
         prevTouch = touch;
     };
-    const handleDown = () => {
-		down = enabled ? true : false;
+    const handleDown = e => {
+        if (enabled) {
+            down = true;
+        }
     };
     const handleUp = e => {
-		down = enabled ? false : false
+        if (enabled) {
+            down = false;
+        }
         prevTouch = null;
     };
-    const dashLength = () => {
+    function dashLength() {
         let element = pathValue;
         let length = element.getTotalLength();
         element.dataset.dash = length;
         length = length;
     }
-    const resetHandler = () => {
+    function resetHandler() {
         value = resetValue;
         internal = value;
         func();
     }
-
-    onMount(() => {
-        dashLength();
-    });
 </script>
 
 <svelte:window
@@ -126,44 +124,71 @@
 
 <div
     bind:this={knob}
-    class="container"
+    class="knob-control"
     style:height={`${HEIGHT}px`}
     style:width={`${WIDTH}px`}
     on:mousedown={handleDown}
     on:touchstart={handleDown}
     on:dblclick={resetHandler}
 >
-    <div class="knob-title no-hover">{title}</div>
+    <div id="title" class="no-hover">{title}</div>
     <svg width={WIDTH} height={HEIGHT}>
-        <path d={range_path} class="knob stroke" />
+        <path d={range_path} stroke-width={strokeWidth} class="knob-control__range" />
         <!-- Arc Fill -->
         <path
             d={value_path}
+            stroke-width={strokeWidth}
             style={dashStyle}
             bind:this={pathValue}
             data-dash={length}
-            class="knob knob-arc"
+            class="knob-control__value"
         />
         <!-- Line Value -->
-        <path d={pointer_path} class="knob knob-needle" />
+        <path d={pointer_path} stroke-width={strokeWidth} stroke="black" class="needle" />
 
         {#if showValue}
-        <text x={MID_X} y={HEIGHT} text-anchor="middle" class="knob knob-value">
-            { displayValue || parseFloat(value.toFixed(1)) }
-        </text>
+            <text x={MID_X} y={HEIGHT} text-anchor="middle" class="value">
+                {#if !displayValue}
+                    {parseFloat(value.toFixed(1))}
+                {:else}
+                    {displayValue}
+                {/if}
+            </text>
         {/if}
     </svg>
 </div>
 
 <style>
-    .container {
+    .knob-control {
         display: grid;
         place-items: center;
         touch-action: none;
         cursor: grab;
     }
 
-    .container:active, .container:focus {
+    .knob-control:active {
         cursor: grabbing;
+    }
+
+    .knob-control__range {
+        fill: none;
+        stroke: var(--primary);
+    }
+
+    .knob-control__value {
+        stroke: var(--primary);
+        fill: none;
+    }
+    .value {
+        fill: var(--primary);
+        font-size: var(--font-size);
+    }
+    .needle {
+        stroke: var(--primary);
+    }
+    #title {
+        text-align: center;
+        color: black;
+        font-size: var(--font-size);
     }
 </style>

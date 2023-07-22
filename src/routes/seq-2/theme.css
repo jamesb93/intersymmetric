@@ -1,0 +1,14 @@
+@import 'knob.css';
+
+:root {
+    --primary: #6a1681;
+    --primary-darker: #801515;
+    --grey: #e4e4e3;
+    --light-grey: rgb(243, 243, 243);
+    --bg: white;
+}
+
+body {
+    font-size: 10px;
+    background-color: var(--bg);
+}
