@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { writable, type Writable } from 'svelte/store';
 import numeric_parameter from '$lib/common/parameters/numeric';
 import enum_parameter from '$lib/common/parameters/enum';
 
@@ -8,6 +8,7 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { PUBLIC_FB_USERNAME, PUBLIC_FB_PASSWORD } from '$env/static/public';
+import { create_2d_array } from '../utility';
 
 let firebaseConfig = env.PUBLIC_MODE === 'dev' || 
     env.PUBLIC_MODE === undefined ? 
@@ -31,7 +32,7 @@ const authenticate = async() => {
 
 authenticate()
 
-export const attach = (room, path, state, fallback) => {
+export const attach = (room: string, path: string, state: Writable<number | string | boolean>, fallback: number | string | boolean) => {
     const r = ref(db, `/seq-2/${room}/${path}`)
 
     onValue(r, s => {
@@ -62,6 +63,8 @@ export const kick_level = writable(0.0);
 export const snare_level = writable(0.0);
 export const metal_level = writable(0.0);
 export const fm_level = writable(0.0);
+
+export const grid = writable( create_2d_array(4, 16, false) )
 
 // export const kick_params    = numeric_array_writable(new Array(4).fill(0.5), 0.0, 1.0);
 // export const snare_params   = numeric_array_writable(new Array(4).fill(0.5), 0.0, 1.0);

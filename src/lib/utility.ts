@@ -137,3 +137,7 @@ Array.prototype.rotate = (() => {
         return this;
     };
 })();
+
+export const create_2d_array= (rows: number, cols: number, defaultValue: any) => {
+    return Array.from({ length: rows }, () => Array(cols).fill(defaultValue));
+}

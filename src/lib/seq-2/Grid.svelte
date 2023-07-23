@@ -1,13 +1,22 @@
-<script>
-	export let rows = 4;
-	export let columns = 16;
+<script lang='ts'>
+	import type RNBO from '@rnbo/js'
+	import { grid } from '$lib/seq-2/app'
+	import { sendDeviceMessage } from '$lib/common/rnbo/helpers';
+
+	export let device: RNBO.Device;
+
+	function handle_click(i: number, j: number) {
+		$grid[i][j] = !$grid[i][j];
+		const flat = $grid.flat();
+		sendDeviceMessage(device, 'grid', flat);
+	}
 </script>
 
 <div class="container">
-	{#each new Array(rows) as i}
+	{#each $grid as row, i}
 	<div class="row">
-		{#each new Array(columns) as i}
-		<div class='col'></div>
+		{#each row as cell, j}
+		<div class='col' class:enabled={cell}  on:click={() => handle_click(i, j)}/>
 		{/each}
 	</div>
 	{/each}
@@ -24,7 +33,10 @@
 		min-width: 50px;
 		max-width: 50px;
 		height: 50px;
-		border: 0.25px solid var(--primary)
+		border: 1px solid var(--primary)
+	}
+	.enabled {
+		background-color: var(--primary)
 	}
 
 	.row {
@@ -32,4 +44,6 @@
 		flex-direction: row;
 		gap: 0.25em;
 	}
+
+
 </style>

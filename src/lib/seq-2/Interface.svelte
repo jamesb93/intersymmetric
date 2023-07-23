@@ -20,7 +20,7 @@
         metal_level,
         snare_level,
         fm_level
-    } from './app.js';
+    } from './app';
 
     const bpm_knob = {
         min: bpm.get().min,
@@ -62,7 +62,7 @@
         <Knob { ...bpm_knob} bind:value={$bpm} />
         <Knob {...multiplier_knob} bind:value={$multiplier} displayValue={multiplier.get_value($multiplier)} />
     </div>
-    <Grid />
+    <Grid bind:device />
 </div>
 
 <style>
