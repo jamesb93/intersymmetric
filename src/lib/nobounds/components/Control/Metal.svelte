@@ -1,6 +1,6 @@
 <script>
     import { socket, params, length, pitchOffset, trackPitch, trackShape } from '$lib/nobounds/app';
-    import { freqMap } from '$lib/utility.js';
+    import { freqMap } from '$lib/utility';
 
     export let instrument;
     export let id;

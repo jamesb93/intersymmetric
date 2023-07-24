@@ -1,7 +1,7 @@
 <script>
     import { socket, params, length, pitchOffset, trackPitch, trackShape } from '$lib/nobounds/app';
     import { kick } from '$lib/nobounds/instruments/ensemble.js';
-    import { freqMap, clip } from '$lib/utility.js';
+    import { freqMap, clip } from '$lib/utility';
 
     $: kick.membrane.octaves = clip($params.kick.octaves, 0, 999);
     $: kick.membrane.envelope.attack = Math.max($params.kick.attack * $length * Math.max($trackShape[0], 0.01), 0);

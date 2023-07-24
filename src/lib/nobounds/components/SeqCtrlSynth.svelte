@@ -7,7 +7,7 @@
     import BoxButton from './BoxButton.svelte';
     import Clock from './Control/Clock.svelte';
     import { kick, snare, fm1, fm2, metal1, metal2 } from '$lib/nobounds/instruments/ensemble.js';
-    import { wrap } from '$lib/utility.js';
+    import { wrap } from '$lib/utility';
 
     onDestroy(() => {
         Tone.Transport.stop();

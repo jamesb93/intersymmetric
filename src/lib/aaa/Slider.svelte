@@ -1,5 +1,5 @@
 <script>
-    import { scale, clip } from '$lib/utility.js';
+    import { scale, clip } from '$lib/utility';
 
     export let value = 0; // value always comes in true
     export let min = 0,

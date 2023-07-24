@@ -1,7 +1,7 @@
 <script>
     import { socket, room, workshopID } from '$lib/nobounds/app';
     import { goto } from '$app/navigation';
-    import { createRoomID } from '$lib/utility.js';
+    import { createRoomID } from '$lib/utility';
     let everUsed = false;
     let code = '';
 

@@ -1,5 +1,5 @@
 import * as Tone from 'tone';
-import { clip } from '$lib/utility.js';
+import { clip } from '$lib/utility';
 class SnareSynth {
     constructor() {
         this.out = new Tone.Limiter(-0.1);

@@ -1,6 +1,6 @@
 <script>
     import { workshopID, room, socket } from '$lib/nobounds/app.js';
-    import { createRoomID } from '$lib/utility.js';
+    import { createRoomID } from '$lib/utility';
     import Grid from '$lib/nobounds/components/Grid.svelte';
 
     const id = 'ewa-justka';

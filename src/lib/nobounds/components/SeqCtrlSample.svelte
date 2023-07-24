@@ -7,7 +7,7 @@
     import Clock from './Control/Clock.svelte';
     import ProgressBar from '$lib/nobounds/components/ProgressBar.svelte';
     import { Sampler } from '$lib/nobounds/instruments/sampler.js';
-    import { wrap } from '$lib/utility.js';
+    import { wrap } from '$lib/utility';
 
     import patterns from '$lib/nobounds/presets/velocity.json';
     import {

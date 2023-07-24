@@ -1,6 +1,6 @@
 <script>
     import { socket, params, length, pitchOffset, trackPitch, trackShape } from '$lib/nobounds/app.js';
-    import { clip, freqMap } from '$lib/utility.js';
+    import { clip, freqMap } from '$lib/utility';
     import { snare } from '$lib/nobounds/instruments/ensemble.js';
 
     $: snare.filter.frequency.rampTo($params.snare.frequency * freqMap($pitchOffset + $trackPitch[1]), 0.1);
