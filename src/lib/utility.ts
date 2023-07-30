@@ -9,14 +9,14 @@
  * @param {number} exp
  * @returns {number}
  */
-export const max_scale = (x, imin, imax, omin, omax, exp) => {
+export const max_scale = (x: number, imin: number, imax: number, omin: number, omax: number, exp: number) => {
     // duped from https://docs.cycling74.com/max8/refpages/scale
     return (x - imin) / (imax - imin) == 0
         ? omin
         : (x - imin) / (imax - imin) > 0
         ? omin + (omax - omin) * Math.pow((x - imin) / (imax - imin), exp)
         : omin + (omax - omin) * -Math.pow((-x + imin) / (imax - imin), exp);
-};
+}
 
 /**
  * Create a standardised room identity from a prefix and a code
@@ -25,7 +25,7 @@ export const max_scale = (x, imin, imax, omin, omax, exp) => {
  * @param {string} code
  * @returns {string}
  */
-export const createRoomID = (prefix, code) => `${prefix}.${code}`;
+export const createRoomID = (prefix: string, code: string) => `${prefix}.${code}`;
 
 /**
  * Convert MIDI values to frequency values
@@ -34,9 +34,9 @@ export const createRoomID = (prefix, code) => `${prefix}.${code}`;
  * @param {number} midi
  * @returns {number}
  */
-export const freqMap = (midi) => {
+export const freqMap = (midi: number) => {
     return Math.pow(2, midi / 12.0);
-};
+}
 
 /**
  * Clip a value between a minima and maxima
@@ -46,7 +46,7 @@ export const freqMap = (midi) => {
  * @param {number} high
  * @returns {*}
  */
-export const clip = (i, low, high) => {
+export const clip = (i: number, low: number, high: number) => {
     return Math.min(Math.max(i, low), high);
 };
 
@@ -59,7 +59,7 @@ export const clip = (i, low, high) => {
  * @param {number} oMax
  * @returns {number}
  */
-export const mapRange = (i, iMin, iMax, oMin, oMax) => {
+export const mapRange = (i: number, iMin: number, iMax: number, oMin: number, oMax: number) => {
     return ((i - iMin) * (oMax - oMin)) / (iMax - iMin) + oMin;
 };
 
@@ -121,7 +121,7 @@ export const wrap = (i, min, max) => {
  * @param {number} t
  * @returns {number}
  */
-export function linearInterp(a, b, t) {
+export function linearInterp(a: number, b: number, t: number): number {
     return a + (b - a) * t
 }
 
