@@ -5,10 +5,8 @@
     import IPhoneWarning from '$lib/nyege/interface/IPhoneWarning.svelte';
     import { createDeviceInstance } from '$lib/common/rnbo/helpers';
     import { 
-        kick_level,
-        metal_level,
-        snare_level,
-        fm_level
+        kick, metal, snare, fm,
+        grid_step
     } from '$lib/seq-2/app';
 
     /** @type {import('@rnbo/js').Device} */
@@ -25,16 +23,19 @@
             device.messageEvent.subscribe(e => {
                 switch (e.tag) {
                     case 'kick_env':
-                        kick_level.set(e.payload);
+                        kick.level.set(e.payload);
                         break;
                     case 'snare_env':
-                        snare_level.set(e.payload);
+                        snare.level.set(e.payload);
                         break;
                     case 'metal_env':
-                        metal_level.set(e.payload);
+                        metal.level.set(e.payload);
                         break;
                     case 'fm_env':
-                        fm_level.set(e.payload)
+                        fm.level.set(e.payload)
+                        break;
+                    case 'step':
+                        grid_step.set(e.payload);
                         break;
                     default:
                         break
