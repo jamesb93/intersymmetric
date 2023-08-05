@@ -6,9 +6,8 @@
     import Knob from '$lib/common/Knob.svelte';
     import Toggle from '$lib/seq-2/Toggle.svelte';
     import Button from './Button.svelte';
-    import Meter from './Meter.svelte';
     import Grid from './Grid.svelte';
-
+    import InstrumentControl from './InstrumentControl.svelte';
     import { 
         state, 
         bpm,
@@ -16,10 +15,8 @@
         multiplier,
         grid_end,
         grid_start,
-        kick_level,
-        metal_level,
-        snare_level,
-        fm_level
+        grid,
+        kick, snare, metal, fm
     } from './app';
 
     const bpm_knob = {
@@ -39,6 +36,11 @@
         title: 'multiplier'
     }
 
+    const randomise_everything = () => {
+        $grid = $grid.map(row => row.map(() => Math.random() > 0.5))
+        sendDeviceMessage(device, 'randomise', [0]);
+        sendDeviceMessage(device, 'grid', $grid.flat());
+    }
     $: sendDeviceMessage(device, 'state', [$state])
     $: sendDeviceMessage(device, 'bpm', [$bpm])
     $: sendDeviceMessage(device, 'direction', [$direction])
@@ -49,13 +51,10 @@
 
 <div class="container">
     <div class='controls'>
-        <Meter bind:level={$kick_level} />
-        <Meter bind:level={$snare_level} />
-        <Meter bind:level={$metal_level} />
-        <Meter bind:level={$fm_level} />
+        <InstrumentControl />
 
         <Toggle bind:enabled={$state}/>
-        <Button on:click={() => sendDeviceMessage(device, 'randomise', [0])}>
+        <Button on:click={randomise_everything}>
             rand
         </Button>
         
