@@ -65,6 +65,7 @@ const metal_pitch    = numeric_parameter(0, { min: -24, max: 24, step: 1 });
 const metal_shape    = numeric_parameter(0, { min: 0, max: 1, step: 0.01 });
 const metal_level    = writable(0.0);
 export const metal = {
+    name: 'Metal',
     sound: metal_sound,
     pitch: metal_pitch,
     shape: metal_shape,
@@ -76,6 +77,7 @@ const fm_pitch       = numeric_parameter(0, { min: -24, max: 24, step: 1 });
 const fm_shape       = numeric_parameter(0, { min: 0, max: 1, step: 0.01 });
 const fm_level       = writable(0.0);
 export const fm = {
+    name: 'FM',
     sound: fm_sound,
     pitch: fm_pitch,
     shape: fm_shape,
@@ -87,6 +89,7 @@ const kick_pitch     = numeric_parameter(0, { min: -24, max: 24, step: 1 });
 const kick_shape     = numeric_parameter(0, { min: 0, max: 1, step: 0.01 });
 const kick_level     = writable(0.0);
 export const kick = {
+    name: 'Kick',
     sound: kick_sound,
     pitch: kick_pitch,
     shape: kick_shape,
@@ -98,6 +101,7 @@ const snare_pitch    = numeric_parameter(0, { min: -24, max: 24, step: 1 });
 const snare_shape    = numeric_parameter(0, { min: 0, max: 1, step: 0.01 });
 const snare_level    = writable(0.0);
 export const snare = {
+    name: 'Snare',
     sound: snare_sound,
     pitch: snare_pitch,
     shape: snare_shape,

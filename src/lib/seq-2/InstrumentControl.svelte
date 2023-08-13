@@ -35,32 +35,38 @@
 		padding: 20,
 	}
 	let containerHeight = 0;
-	$: meterHeight = containerHeight-25;
+	let containerWidth = 0;
 </script>
 
-<div class='container' bind:clientHeight={containerHeight}>
-	<div class="knobs">
-		<Knob {...sound_knob} bind:value={$sound}/>
-		<Knob {...pitch_knob} bind:value={$pitch}/>
-		<Knob {...shape_knob} bind:value={$shape}/>
+<div class='container'>
+	<div>{instrument.name}</div>
+	<div class="widgets">
+		<div class="knobs">
+			<Knob {...sound_knob} bind:value={$sound}/>
+			<Knob {...pitch_knob} bind:value={$pitch}/>
+			<Knob {...shape_knob} bind:value={$shape}/>
+		</div>
+		<HMeter bind:level={$level} height={16}/>
 	</div>
-	<VMeter bind:level={$level} bind:height={meterHeight} />
 </div>
 
 <style>
 	.container {
-		display: grid;
-		grid-template-columns: auto auto;
-		width: max-content;
-		height: 225px;
-		/* height: max-content; */
-		gap: 1em;
+		display: flex;
+		flex-direction: column;
 		border: 1px solid var(--primary);
 		padding: 0.5em;
+	}
+	.widgets {
+		display: grid;
+		grid-template-rows: auto auto;
+		gap: 1em;
 		place-items: center;
+
 	}
 	.knobs {
 		display: grid;
-		grid-template-rows: auto auto auto;
+		grid-template-columns: auto auto auto;
+		gap: 0.25em;
 	}
 </style>

@@ -3,7 +3,7 @@
     export let device;
 
     import { sendDeviceMessage } from '../common/rnbo/helpers';
-    import Knob from '$lib/common/Knob.svelte';
+    import Knob from '$lib/seq-2/Knob.svelte';
     import Toggle from '$lib/seq-2/Toggle.svelte';
     import Button from './Button.svelte';
     import Grid from './Grid.svelte';
@@ -51,17 +51,20 @@
 
 <div class="container">
     <div class='controls'>
-        <InstrumentControl />
-
         <Toggle bind:enabled={$state}/>
         <Button on:click={randomise_everything}>
             rand
         </Button>
-        
         <Knob { ...bpm_knob} bind:value={$bpm} />
         <Knob {...multiplier_knob} bind:value={$multiplier} displayValue={multiplier.get_value($multiplier)} />
     </div>
     <Grid bind:device />
+    <div class="instrument-controllers">
+        <InstrumentControl instrument={kick}/>
+        <InstrumentControl instrument={snare}/>
+        <InstrumentControl instrument={fm}/>
+        <InstrumentControl instrument={metal}/>
+    </div>
 </div>
 
 <style>
@@ -69,11 +72,18 @@
         display: flex;
         flex-direction: column;
         gap: 1em;
+        place-items: center;
     }
 
     .controls {
         display: flex;
         flex-direction: row;
+        gap: 2em;
+    }
+    .instrument-controllers {
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+        justify-content: space-around;
         gap: 2em;
     }
 </style>
