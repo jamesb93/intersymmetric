@@ -56,13 +56,14 @@
 		flex-direction: column;
 		border: 1px solid var(--primary);
 		padding: 0.5em;
+		height: max-content;
+		width: max-content;
 	}
 	.widgets {
 		display: grid;
 		grid-template-rows: auto auto;
 		gap: 1em;
 		place-items: center;
-
 	}
 	.knobs {
 		display: grid;

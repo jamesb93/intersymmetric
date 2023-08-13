@@ -59,11 +59,13 @@
         <Knob {...multiplier_knob} bind:value={$multiplier} displayValue={multiplier.get_value($multiplier)} />
     </div>
     <Grid bind:device />
-    <div class="instrument-controllers">
-        <InstrumentControl instrument={kick}/>
-        <InstrumentControl instrument={snare}/>
-        <InstrumentControl instrument={fm}/>
-        <InstrumentControl instrument={metal}/>
+    <div class="grid-and-parameters">
+        <div class="instrument-controllers">
+            <InstrumentControl instrument={kick}/>
+            <InstrumentControl instrument={snare}/>
+            <InstrumentControl instrument={fm}/>
+            <InstrumentControl instrument={metal}/>
+        </div>
     </div>
 </div>
 
@@ -85,5 +87,10 @@
         grid-template-columns: repeat(4, auto);
         justify-content: space-around;
         gap: 2em;
+    }
+
+    .grid-and-parameters {
+        display: grid;
+        grid-template-columns: auto auto;
     }
 </style>

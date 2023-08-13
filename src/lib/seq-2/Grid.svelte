@@ -29,6 +29,10 @@
 </div>
 
 <style>
+	:root {
+		--cell-height: 34px;
+		--cell-width: 35px;
+	}
 	.container {
 		display: flex;
 		flex-direction: column;
@@ -40,19 +44,19 @@
 		gap: 0.25em;
 	}
 
-	@media only screen and (max-width: 768px) {
+	/* @media only screen and (max-width: 768px) {
 		.container { flex-direction: row }
 		.row { flex-direction: column }
-	}
+	} */
 
 	.step-active {
 		background-color: rgba(76, 40, 129, 0.232) !important;
    	}
 	.cell {
-		width: 25px;
-		height: 25px;
-		min-width: 25px;
-		max-width: 25px;
+		width: var(--cell-width);
+		height: var(--cell-height);
+		min-width: var(--cell-width);
+		max-width: var(--cell-width);
 		border: 1px solid var(--primary);
 	}
 
