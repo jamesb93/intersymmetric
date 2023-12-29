@@ -30,7 +30,7 @@
         "@jamesb93/rnbo-svelte": "1.1.1",
         "@rnbo/js": "^1.1.2",
         "carbon-components-svelte": "^0.73.5",
-        "d3": "^7.8.5",
+        "d3-interpolate": "^3.0.1",
         "firebase": "^9.23.0",
         "global": "^4.4.0",
         "socket.io-client": "^4.7.1",
