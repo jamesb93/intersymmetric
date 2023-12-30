@@ -1,3 +1,8 @@
+import { env } from '$env/dynamic/public';
+import { initializeApp } from "firebase/app";
+import { PUBLIC_FB_USERNAME, PUBLIC_FB_PASSWORD } from '$env/static/public';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 export const firebaseProdConfig = {
     apiKey: "AIzaSyBQ-SUfm2OZ_i4UCSK4qGfqZeflaewS004",
     authDomain: "intersymmetric-7e851.firebaseapp.com",
@@ -19,3 +24,36 @@ export const firebaseDevConfig = {
   appId: "1:766905406427:web:28e94f14e502e907e68dfe",
   measurementId: "G-W1KJ630H0K"
 };
+
+
+/**
+ * Determines the Firebase configuration based on the environment's public mode.
+ * If the public mode is 'dev' or undefined, the development configuration is used.
+ * Otherwise, the production configuration is used.
+ * 
+ * @returns {Object} The Firebase configuration object.
+ */
+export const firebaseConfig = 
+    env.PUBLIC_MODE === 'dev' || 
+    env.PUBLIC_MODE === undefined ? 
+    firebaseDevConfig : firebaseProdConfig;
+
+export const app = initializeApp(firebaseConfig);
+
+/**
+ * Authenticates the user by signing in with the provided username and password.
+ * @returns {Promise<void>} A promise that resolves when the authentication is successful.
+ */
+export async function authenticate() {
+  const auth = getAuth(app);
+  await signInWithEmailAndPassword(auth, PUBLIC_FB_USERNAME, PUBLIC_FB_PASSWORD)
+  .then(() => {
+      return
+  })
+  .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage)
+  });
+};
+  
