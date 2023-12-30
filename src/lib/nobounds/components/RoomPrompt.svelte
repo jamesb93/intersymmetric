@@ -14,7 +14,7 @@
 </script>
 
 <div class="prompt">
-    <span id="title">Room Code:</span>
+    <div id="title">Room Code:</div>
     <input
         type="text"
         class:init={!everUsed}

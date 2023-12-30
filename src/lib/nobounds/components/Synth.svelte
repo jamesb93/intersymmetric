@@ -101,33 +101,45 @@
         });
     }
 
+    const soundParameters = [sound0, sound1, sound2, sound3, sound4, sound5];
+    const pitchParameters = [pitch0, pitch1, pitch2, pitch3, pitch4, pitch5];
+    const shapeParameters = [shape0, shape1, shape2, shape3, shape4, shape5];
+    const euclidParameters = [euclid0, euclid1, euclid2, euclid3, euclid4, euclid5];
+
+    $: attach($room, 'sound0', sound0, 0.5);
+    $: attach($room, 'sound1', sound1, 0.5);
+    $: attach($room, 'sound2', sound2, 0.5);
+    $: attach($room, 'sound3', sound3, 0.5);
+    $: attach($room, 'sound4', sound4, 0.5);
+    $: attach($room, 'sound5', sound5, 0.5);
+
+    $: attach($room, 'pitch0', pitch0, 0.0);
+    $: attach($room, 'pitch1', pitch1, 0.0);
+    $: attach($room, 'pitch2', pitch2, 0.0);
+    $: attach($room, 'pitch3', pitch3, 0.0);
+    $: attach($room, 'pitch4', pitch4, 0.0);
+    $: attach($room, 'pitch5', pitch5, 0.0);
+
+    $: attach($room, 'shape0', shape0, 1.0);
+    $: attach($room, 'shape1', shape1, 1.0);
+    $: attach($room, 'shape2', shape2, 1.0);
+    $: attach($room, 'shape3', shape3, 1.0);
+    $: attach($room, 'shape4', shape4, 1.0);
+    $: attach($room, 'shape5', shape5, 1.0);
+
+    $: attach($room, 'euclid0', euclid0, 0);
+    $: attach($room, 'euclid1', euclid1, 0);
+    $: attach($room, 'euclid2', euclid2, 0);
+    $: attach($room, 'euclid3', euclid3, 0);
+    $: attach($room, 'euclid4', euclid4, 0);
+    $: attach($room, 'euclid5', euclid5, 0);
+
     $: $sound0, updateSound(0);
     $: $sound1, updateSound(1);
     $: $sound2, updateSound(2);
     $: $sound3, updateSound(3);
     $: $sound4, updateSound(4);
     $: $sound5, updateSound(5);
-
-    const soundParameters = [sound0, sound1, sound2, sound3, sound4, sound5];
-    const pitchParameters = [pitch0, pitch1, pitch2, pitch3, pitch4, pitch5];
-    const shapeParameters = [shape0, shape1, shape2, shape3, shape4, shape5];
-    const euclidParameters = [euclid0, euclid1, euclid2, euclid3, euclid4, euclid5];
-
-    soundParameters.forEach((param, i) => {
-        attach($room, `sound${i}`, param, 0.5);
-    });
-
-    pitchParameters.forEach((param, i) => {
-        attach($room, `pitch${i}`, param, 0);
-    });
-
-    shapeParameters.forEach((param, i) => {
-        attach($room, `shape${i}`, param, 1);
-    });
-
-    euclidParameters.forEach((param, i) => {
-        attach($room, `euclid${i}`, param, 0);
-    });
 </script>
 
 <div class="sequencer">

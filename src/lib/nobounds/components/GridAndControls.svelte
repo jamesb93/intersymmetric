@@ -45,12 +45,13 @@
         endOffset
     } from '$lib/nobounds/firebase-core';
 
-    attach($room, 'grid', grid, create_2d_array(6, 16, false));
-    attach($room, 'pitchOffset', pitchOffset, 0);
-    attach($room, 'length', length, 0.5);
-    attach($room, 'startOffset', startOffset, 1);
-    attach($room, 'endOffset', endOffset, 16);
-    attach($room, 'bpm', bpm, 120);
+    $: attach($room, 'grid', grid, create_2d_array(6, 16, false));
+    $: attach($room, 'pitchOffset', pitchOffset, 0);
+    $: attach($room, 'length', length, 0.5);
+    $: attach($room, 'startOffset', startOffset, 1);
+    $: attach($room, 'endOffset', endOffset, 16);
+    $: attach($room, 'bpm', bpm, 120);
+    $: attach($room, 'clockMultiplier', clockMultiplierLookup, 0);
 
     const multiplierTable = [
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0.875, 0.75, 0.66, 0.5, 0.33,
