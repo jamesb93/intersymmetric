@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
     import { onMount } from 'svelte';
     import { recentParamName, recentParamValue } from '$lib/nobounds/app.js';
     import { clip, mapRange } from '$lib/utility';
@@ -6,14 +6,14 @@
     import { createEventDispatcher } from 'svelte';
     const dispatch = createEventDispatcher();
 
-    dispatch('update')
+    dispatch('update');
 
     export let WIDTH = 80;
     export let HEIGHT = 60;
     export let resetValue: number | null = null;
     export let showTitle = true;
     export let title = '';
-    export let value = writable(0)
+    export let value = writable(0);
     export let max = 100;
     export let min = 0;
     export let showValue = true;
@@ -80,18 +80,18 @@
         $value = internal;
         $value = Math.round(($value - min) / step) * step + min;
         if (pv !== $value) {
-            dispatch('update', $value)
+            dispatch('update', $value);
         }
         pv = internal;
         $recentParamValue = $value;
     };
 
-    const move = posUpdate => {
+    const move = (posUpdate) => {
         if (enabled && down) {
             updatePosition(posUpdate);
         }
     };
-    const moveHandler = e => {
+    const moveHandler = (e) => {
         if (anchor) {
             move(e.movementY * -1);
             $recentParamName = title;
@@ -99,7 +99,7 @@
         }
     };
 
-    const touchMoveHandler = e => {
+    const touchMoveHandler = (e) => {
         const touch = e.touches[0];
         if (prevTouch) {
             const movementY = touch.pageY - prevTouch.pageY;
@@ -108,7 +108,7 @@
         prevTouch = touch;
     };
 
-    const downHandler = e => {
+    const downHandler = (e) => {
         if (enabled) {
             $recentParamName = title;
             down = true;
@@ -117,7 +117,7 @@
         }
     };
 
-    const upHandler = e => {
+    const upHandler = (e) => {
         if (enabled) {
             down = false;
             primaryColor = '#00c300';
@@ -136,7 +136,7 @@
             $value = resetValue;
             internal = $value;
             $recentParamValue = $value;
-            dispatch('update', $value)
+            dispatch('update', $value);
         }
     }
 </script>
@@ -145,8 +145,7 @@
     on:mousemove={moveHandler}
     on:touchmove={touchMoveHandler}
     on:mouseup={upHandler}
-    on:touchend={upHandler}
-/>
+    on:touchend={upHandler} />
 
 <div
     bind:this={knob}
@@ -154,13 +153,16 @@
     style={containerStyle}
     on:mousedown|preventDefault={downHandler}
     on:touchstart|preventDefault={downHandler}
-    on:dblclick|preventDefault={resetHandler}
->
+    on:dblclick|preventDefault={resetHandler}>
     {#if showTitle}
         <div id="title">{title}</div>
     {/if}
     <svg width="{WIDTH}px" height="{HEIGHT}px">
-        <path d={rangePath} stroke-width={strokeWidth} stroke={secondaryColor} class="knob-control__range" />
+        <path
+            d={rangePath}
+            stroke-width={strokeWidth}
+            stroke={secondaryColor}
+            class="knob-control__range" />
         <!-- Arc Fill -->
         <path
             d={valuePath}
@@ -169,13 +171,17 @@
             bind:this={pathValue}
             data-dash={length}
             style={dashStyle}
-            class="knob-control__value"
-        />
+            class="knob-control__value" />
         <!-- Line Value -->
         <path d={pointerPath} stroke-width="1" stroke="black" />
 
         {#if showValue}
-            <text x={MID_X} y={HEIGHT} text-anchor="middle" fill={textColor} class="value">
+            <text
+                x={MID_X}
+                y={HEIGHT}
+                text-anchor="middle"
+                fill={textColor}
+                class="value">
                 {#if altValue === null}
                     {parseFloat($value.toFixed(1))}
                 {:else}

@@ -4,10 +4,12 @@
         <a target="_blank" href="http://www.riantreanor.com/">Rian Treanor</a>
     </span>
     <span class="no-hover">
-        Programming by <a target="_blank" href="https://www.jamesbradbury.net">James Bradbury</a>
+        Programming by <a target="_blank" href="https://www.jamesbradbury.net"
+            >James Bradbury</a>
     </span>
     <span class="no-hover">
-        Comissioned by <a target="_blank" href="https://www.aaassembly.org/">Algorithmic Art Assembly 2022</a>
+        Comissioned by <a target="_blank" href="https://www.aaassembly.org/"
+            >Algorithmic Art Assembly 2022</a>
     </span>
 </footer>
 

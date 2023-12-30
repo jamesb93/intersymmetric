@@ -21,7 +21,7 @@
     $: thumbX = clip(scale(value, min, max, 0, width), 0, width) + thumbWidth;
     $: lineStrokeWidth = value > 2 ? '1px' : '1px';
 
-    const move = e => {
+    const move = (e) => {
         rect = bar.getBoundingClientRect();
         if (down) {
             const x = e.pageX - rect.left;
@@ -36,7 +36,7 @@
         }
     };
 
-    const handlecontroldown = e => {
+    const handlecontroldown = (e) => {
         down = true;
         move(e);
     };
@@ -46,10 +46,10 @@
     const handletouchend = () => {
         down = false;
     };
-    const handlemousemove = e => {
+    const handlemousemove = (e) => {
         move(e);
     };
-    const handletouchmove = e => {
+    const handletouchmove = (e) => {
         const touch = e.touches[0];
         if (prevTouch) {
             move(touch);
@@ -62,8 +62,7 @@
     on:mousemove={handlemousemove}
     on:touchmove={handletouchmove}
     on:mouseup={handlemouseup}
-    on:touchend={handletouchend}
-/>
+    on:touchend={handletouchend} />
 
 <div class="container" style:width style:height>
     <svg
@@ -72,8 +71,7 @@
         {width}
         {height}
         bind:this={bar}
-        class:active
-    >
+        class:active>
         <!-- Fill -->
         <rect class="step-fill" x="0" width={thumbX} {height} />
         <!-- <line x1={thumbX} x2={thumbX} y1="0" y2={height} stroke-dasharray="3" /> -->
@@ -86,8 +84,7 @@
                 x2={(thumbX / div) * (i + 1)}
                 y1="0"
                 y2={height}
-                stroke-width={lineStrokeWidth}
-            />
+                stroke-width={lineStrokeWidth} />
         {/each}
 
         <line
@@ -96,12 +93,11 @@
             x2={(thumbX / div) * pos}
             y1="0"
             y2={height}
-            stroke-width={5}
-        />
+            stroke-width={5} />
     </svg>
     <div class="text" class:white={value > 15}>
         {#if value}
-        {value.toFixed(0)}
+            {value.toFixed(0)}
         {/if}
     </div>
 </div>

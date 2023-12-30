@@ -11,17 +11,17 @@
     const start = async () => {
         context = new (window.AudioContext || window.webkitAudioContext)();
         let output = context.createGain().connect(context.destination);
-        createDeviceInstance('/nyege/code/patch.export.json', context, output)
-        .then(response => {
-            patch = response;
-            const samples = new Array(33).fill(0).map((_, i) => ({
-                url: `/nyege/samples/${i}.mp3`,
-                buffer: `b.${i+1}`
-            }))
-            loadSamples(patch, context, samples);
-            samplesLoaded = true;
-        });
-
+        createDeviceInstance('/nyege/code/patch.export.json', context, output).then(
+            (response) => {
+                patch = response;
+                const samples = new Array(33).fill(0).map((_, i) => ({
+                    url: `/nyege/samples/${i}.mp3`,
+                    buffer: `b.${i + 1}`
+                }));
+                loadSamples(patch, context, samples);
+                samplesLoaded = true;
+            }
+        );
     };
 </script>
 
@@ -32,7 +32,8 @@
     <Interface bind:patch />
 {:else}
     <div class="loading">
-        <Button on:click={start} height={'60px'} width={'150px'} fontSize={'24px'}>load</Button>
+        <Button on:click={start} height={'60px'} width={'150px'} fontSize={'24px'}
+            >load</Button>
     </div>
 {/if}
 

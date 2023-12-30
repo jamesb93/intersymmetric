@@ -4,23 +4,19 @@
     import OrientationWarning from '$lib/nyege/interface/OrientationWarning.svelte';
     import IPhoneWarning from '$lib/nyege/interface/IPhoneWarning.svelte';
     import { createDeviceInstance } from '$lib/common/rnbo/helpers';
-    import { 
-        kick, metal, snare, fm,
-        grid_step
-    } from '$lib/seq-2/app';
+    import { kick, metal, snare, fm, grid_step } from '$lib/seq-2/app';
 
     /** @type {import('@rnbo/js').Device} */
-    let device; 
+    let device;
     /** @type {AudioContext} */
-    let context; 
+    let context;
 
     const start = async () => {
-        context = new (window.AudioContext)();
+        context = new window.AudioContext();
         let output = context.createGain().connect(context.destination);
-        createDeviceInstance('/seq-2/patch.json', context, output)
-        .then(response => {
+        createDeviceInstance('/seq-2/patch.json', context, output).then((response) => {
             device = response;
-            device.messageEvent.subscribe(e => {
+            device.messageEvent.subscribe((e) => {
                 switch (e.tag) {
                     case 'kick_env':
                         kick.level.set(e.payload);
@@ -32,19 +28,16 @@
                         metal.level.set(e.payload);
                         break;
                     case 'fm_env':
-                        fm.level.set(e.payload)
+                        fm.level.set(e.payload);
                         break;
                     case 'step':
                         grid_step.set(e.payload);
                         break;
                     default:
-                        break
+                        break;
                 }
-            })
+            });
         });
-
-
-
     };
 </script>
 
@@ -55,7 +48,8 @@
     <Interface bind:device />
 {:else}
     <div class="loading">
-        <Button on:click={start} height={'60px'} width={'150px'} fontSize={'24px'}>load</Button>
+        <Button on:click={start} height={'60px'} width={'150px'} fontSize={'24px'}
+            >load</Button>
     </div>
 {/if}
 

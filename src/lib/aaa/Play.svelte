@@ -5,7 +5,9 @@
 
     const offsetX = 25;
     const offsetY = 15;
-    const triangle = `${offsetX},${offsetY} ${offsetX},${HEIGHT - offsetY}, ${WIDTH - 30},${HEIGHT / 2}`;
+    const triangle = `${offsetX},${offsetY} ${offsetX},${HEIGHT - offsetY}, ${
+        WIDTH - 30
+    },${HEIGHT / 2}`;
 
     const click = () => {
         if (state === 0) {

@@ -1,6 +1,9 @@
 import { writable } from 'svelte/store';
 
-function enum_parameter(initial_index: number, options: Array<string | number | boolean>) {
+function enum_parameter(
+    initial_index: number,
+    options: Array<string | number | boolean>
+) {
     // Check if the initial value is in the allowed values
     if (initial_index < 0 || initial_index >= options.length) {
         throw new Error('Initial index is outside range of enum.');

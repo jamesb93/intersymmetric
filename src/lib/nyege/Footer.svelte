@@ -4,10 +4,13 @@
         <a target="_blank" href="http://www.riantreanor.com/">Rian Treanor</a>
     </div>
     <div class="no-hover">
-        Programming by <a target="_blank" href="https://www.jamesbradbury.net">James Bradbury</a>
+        Programming by <a target="_blank" href="https://www.jamesbradbury.net"
+            >James Bradbury</a>
     </div>
     <div class="no-hover">
-        Commissioned by <a target="_blank" href="https://noboundsfestival.co.uk/">No Bounds</a> and
+        Commissioned by <a target="_blank" href="https://noboundsfestival.co.uk/"
+            >No Bounds</a>
+        and
         <a target="blank" href="https://nyegenyege.com/">Nyege Nyege</a> festivals
     </div>
 </footer>

@@ -17,7 +17,12 @@ class KickSynth {
      * @param {number} duration - The duration of the kick.
      */
     trigger(time, velocity, duration) {
-        this.membrane.triggerAttackRelease(this.membrane.frequency.value, duration, time, velocity);
+        this.membrane.triggerAttackRelease(
+            this.membrane.frequency.value,
+            duration,
+            time,
+            velocity
+        );
     }
 }
 

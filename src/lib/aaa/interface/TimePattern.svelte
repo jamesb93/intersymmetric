@@ -4,7 +4,7 @@
     import Slider from '../Slider.svelte';
     import { ref, set } from 'firebase/database';
     import { calculated_speed, db, room, attach } from '$lib/aaa/app';
-    import { sendDeviceMessage } from '@jamesb93/rnbo-svelte'
+    import { sendDeviceMessage } from '@jamesb93/rnbo-svelte';
     import {
         a_mode,
         b_mode,
@@ -119,7 +119,7 @@
     let a_current_step = 0;
     let b_current_step = 0;
     let c_current_step = 0;
-    patch.messageEvent.subscribe(e => {
+    patch.messageEvent.subscribe((e) => {
         if (e.tag === 'pattern') {
             a_current_step = e.payload[0];
             b_current_step = e.payload[1];
@@ -134,52 +134,64 @@
         <div class="a time_unit">
             <div class="no-hover">steps</div>
             <RadioH
-            func={ () => set(ref(db, `/aaa/${$room}/a_mode`), $a_mode) }
-            bind:value={$a_mode}
-            />
+                func={() => set(ref(db, `/aaa/${$room}/a_mode`), $a_mode)}
+                bind:value={$a_mode} />
             <div class="slider-group">
-                <Slider {...a_steps_0_slider} bind:value={$a_steps_0} active={a_current_step === 0} />
-                <Slider {...a_steps_1_slider} bind:value={$a_steps_1} active={a_current_step === 1} />
-                <Slider {...a_steps_2_slider} bind:value={$a_steps_2} active={a_current_step === 2} />
+                <Slider
+                    {...a_steps_0_slider}
+                    bind:value={$a_steps_0}
+                    active={a_current_step === 0} />
+                <Slider
+                    {...a_steps_1_slider}
+                    bind:value={$a_steps_1}
+                    active={a_current_step === 1} />
+                <Slider
+                    {...a_steps_2_slider}
+                    bind:value={$a_steps_2}
+                    active={a_current_step === 2} />
             </div>
         </div>
         <div class="b time_unit">
             <div class="no-hover">durations</div>
             <RadioH
-            func={ () => set(ref(db, `/aaa/${$room}/b_mode`), $b_mode) }
-            bind:value={$b_mode}
-            />
+                func={() => set(ref(db, `/aaa/${$room}/b_mode`), $b_mode)}
+                bind:value={$b_mode} />
             <div class="slider-group">
                 <Slider
                     {...b_steps_0_slider}
                     bind:displayValue={calculated_b_0}
                     bind:value={$b_steps_0}
-                    active={b_current_step === 0}
-                />
+                    active={b_current_step === 0} />
                 <Slider
                     {...b_steps_1_slider}
                     bind:displayValue={calculated_b_1}
                     bind:value={$b_steps_1}
-                    active={b_current_step === 1}
-                />
+                    active={b_current_step === 1} />
                 <Slider
                     {...b_steps_2_slider}
                     bind:displayValue={calculated_b_2}
                     bind:value={$b_steps_2}
-                    active={b_current_step === 2}
-                />
+                    active={b_current_step === 2} />
             </div>
         </div>
         <div class="c time_unit">
             <div class="no-hover">subdivisions</div>
             <RadioH
-            func={ () => set(ref(db, `/aaa/${$room}/c_mode`), $c_mode) }
-            bind:value={$c_mode}
-            />
+                func={() => set(ref(db, `/aaa/${$room}/c_mode`), $c_mode)}
+                bind:value={$c_mode} />
             <div class="slider-group">
-                <Slider {...c_steps_0_slider} bind:value={$c_steps_0} active={c_current_step === 0} />
-                <Slider {...c_steps_1_slider} bind:value={$c_steps_1} active={c_current_step === 1} />
-                <Slider {...c_steps_2_slider} bind:value={$c_steps_2} active={c_current_step === 2} />
+                <Slider
+                    {...c_steps_0_slider}
+                    bind:value={$c_steps_0}
+                    active={c_current_step === 0} />
+                <Slider
+                    {...c_steps_1_slider}
+                    bind:value={$c_steps_1}
+                    active={c_current_step === 1} />
+                <Slider
+                    {...c_steps_2_slider}
+                    bind:value={$c_steps_2}
+                    active={c_current_step === 2} />
             </div>
         </div>
     </div>

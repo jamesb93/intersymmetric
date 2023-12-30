@@ -5,7 +5,7 @@
     export let width = '54px';
     export let height = '40px';
 
-    const set = i => {
+    const set = (i) => {
         value = i;
         func();
     };
@@ -13,9 +13,12 @@
 
 <div class="container centre" style:height style:width>
     {#each options as o}
-    <button class="no-hover" on:click={() => set(o.value)} class:selected={value === o.value}>
-        {o.display}
-    </button>
+        <button
+            class="no-hover"
+            on:click={() => set(o.value)}
+            class:selected={value === o.value}>
+            {o.display}
+        </button>
     {/each}
 </div>
 

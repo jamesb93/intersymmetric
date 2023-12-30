@@ -1,25 +1,26 @@
 <script>
-    import { mouseDown, prePos } from '$lib/nobounds/app'
-    import { db, room } from '$lib/nobounds/firebase-core'
-    import { grid } from '$lib/nobounds/firebase-core'
+    import { mouseDown, prePos } from '$lib/nobounds/app';
+    import { db, room } from '$lib/nobounds/firebase-core';
+    import { grid } from '$lib/nobounds/firebase-core';
     import { set, ref } from 'firebase/database';
     export let y = 0;
     export let x = 0;
     $: emphasis = $prePos === y;
 
     function clickHandler() {
-        $grid[x][y] = !$grid[x][y]
-        set(ref(db, `/seq1/${$room}/grid`), $grid)
-    };
+        $grid[x][y] = !$grid[x][y];
+        set(ref(db, `/seq1/${$room}/grid`), $grid);
+    }
 </script>
 
 <svg
     class="cell"
-    class:emphasis={emphasis}
+    class:emphasis
     class:selemph={emphasis && $grid[x][y]}
     on:click={clickHandler}
-    on:mousedown={() => { $mouseDown = true }}
->
+    on:mousedown={() => {
+        $mouseDown = true;
+    }}>
     <line x1="0" x2="50" y1="0" y2="0" class="outline" />
     <line x1="0" x2="0" y1="0" y2="50" class="outline" />
     {#if y === 15}

@@ -6,7 +6,8 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 export const firebaseProdConfig = {
     apiKey: 'AIzaSyBQ-SUfm2OZ_i4UCSK4qGfqZeflaewS004',
     authDomain: 'intersymmetric-7e851.firebaseapp.com',
-    databaseURL: 'https://intersymmetric-7e851-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL:
+        'https://intersymmetric-7e851-default-rtdb.europe-west1.firebasedatabase.app',
     projectId: 'intersymmetric-7e851',
     storageBucket: 'intersymmetric-7e851.appspot.com',
     messagingSenderId: '500933689703',
@@ -17,7 +18,8 @@ export const firebaseProdConfig = {
 export const firebaseDevConfig = {
     apiKey: 'AIzaSyCjOuL3px3S0ptXWgKyvH91tv2bnHM8ZBA',
     authDomain: 'intersymmetric-staging.firebaseapp.com',
-    databaseURL: 'https://intersymmetric-staging-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL:
+        'https://intersymmetric-staging-default-rtdb.europe-west1.firebasedatabase.app',
     projectId: 'intersymmetric-staging',
     storageBucket: 'intersymmetric-staging.appspot.com',
     messagingSenderId: '766905406427',
@@ -33,7 +35,9 @@ export const firebaseDevConfig = {
  * @returns {Object} The Firebase configuration object.
  */
 export const firebaseConfig =
-    env.PUBLIC_MODE === 'dev' || env.PUBLIC_MODE === undefined ? firebaseDevConfig : firebaseProdConfig;
+    env.PUBLIC_MODE === 'dev' || env.PUBLIC_MODE === undefined
+        ? firebaseDevConfig
+        : firebaseProdConfig;
 
 export const app = initializeApp(firebaseConfig);
 

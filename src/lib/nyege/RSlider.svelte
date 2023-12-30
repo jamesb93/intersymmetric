@@ -23,17 +23,17 @@
     $: highX = clip(scale(high, min, max, 0, width), 0, width);
     $: fill = 0; // the width of the internal box (range)
 
-    const move = e => {
+    const move = (e) => {
         if (down) {
             const x = e.pageX - rect.left;
             const ratio = x / width;
             const scaled = scale(ratio, 0, 1, min, max);
             if (edge === 0) {
                 low = Math.round((scaled - min) / step) * step + min;
-                low = clip(low, min, high-5);
+                low = clip(low, min, high - 5);
             } else if (edge === 1) {
                 high = Math.round((scaled - min) / step) * step + min;
-                high = clip(high, low+5, max);
+                high = clip(high, low + 5, max);
             }
             if (prevLow !== low) {
                 lofunc();
@@ -46,15 +46,15 @@
         }
     };
 
-    const handle_controldown = e => {
+    const handle_controldown = (e) => {
         down = true;
         rect = bar.getBoundingClientRect();
         const x = e.pageX - rect.left;
         // Which handle are you closer to?
         // This will always snap to the left edge at minimum range... fix
-        const distances = [lowX, highX].map(v => Math.abs(x - v));
+        const distances = [lowX, highX].map((v) => Math.abs(x - v));
         edge = distances.indexOf(Math.min(...distances));
-        console.log(edge)
+        console.log(edge);
         move(e);
     };
     const handle_mouseup = () => {
@@ -63,10 +63,10 @@
     const handle_touchend = () => {
         down = false;
     };
-    const handle_mousemove = e => {
+    const handle_mousemove = (e) => {
         move(e);
     };
-    const handle_touchmove = e => {
+    const handle_touchmove = (e) => {
         const touch = e.touches[0];
         if (prev_touch) {
             move(touch);
@@ -79,10 +79,15 @@
     on:mousemove={handle_mousemove}
     on:touchmove={handle_touchmove}
     on:mouseup={handle_mouseup}
-    on:touchend={handle_touchend}
-/>
+    on:touchend={handle_touchend} />
 
-<svg on:mousedown={handle_controldown} on:touchstart={handle_controldown} {width} {height} bind:this={bar} class:active>
+<svg
+    on:mousedown={handle_controldown}
+    on:touchstart={handle_controldown}
+    {width}
+    {height}
+    bind:this={bar}
+    class:active>
     <rect class="step-fill" x={lowX} width={Math.max(highX - lowX, 2)} {height} />
 </svg>
 

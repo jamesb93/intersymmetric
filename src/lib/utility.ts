@@ -9,7 +9,14 @@
  * @param {number} exp
  * @returns {number}
  */
-export const max_scale = (x: number, imin: number, imax: number, omin: number, omax: number, exp: number) => {
+export const max_scale = (
+    x: number,
+    imin: number,
+    imax: number,
+    omin: number,
+    omax: number,
+    exp: number
+) => {
     // duped from https://docs.cycling74.com/max8/refpages/scale
     return (x - imin) / (imax - imin) == 0
         ? omin
@@ -59,7 +66,13 @@ export const clip = (i: number, low: number, high: number) => {
  * @param {number} oMax
  * @returns {number}
  */
-export const mapRange = (i: number, iMin: number, iMax: number, oMin: number, oMax: number) => {
+export const mapRange = (
+    i: number,
+    iMin: number,
+    iMax: number,
+    oMin: number,
+    oMax: number
+) => {
     return ((i - iMin) * (oMax - oMin)) / (iMax - iMin) + oMin;
 };
 
@@ -72,7 +85,13 @@ export const mapRange = (i: number, iMin: number, iMax: number, oMin: number, oM
  * @param {number} oMax
  * @returns {number}
  */
-export const scale = (i: number, iMin: number, iMax: number, oMin: number, oMax: number): number => {
+export const scale = (
+    i: number,
+    iMin: number,
+    iMax: number,
+    oMin: number,
+    oMax: number
+): number => {
     return mapRange(i, iMin, iMax, oMin, oMax);
 };
 

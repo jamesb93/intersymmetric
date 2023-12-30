@@ -8,7 +8,7 @@
 </script>
 
 <div class="container">
-    <Transport bind:patch/>
+    <Transport bind:patch />
     <A bind:patch />
     <B bind:patch />
     <C bind:patch />

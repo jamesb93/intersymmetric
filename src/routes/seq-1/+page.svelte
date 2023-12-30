@@ -6,4 +6,3 @@
         goto('idx');
     });
 </script>
-

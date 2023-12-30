@@ -20,8 +20,7 @@
         bind:value={code}
         on:change={changeHandler}
         placeholder={everUsed === false && $room === '' ? 'enter room code' : $room}
-        id="room-input"
-    />
+        id="room-input" />
 </div>
 
 <style>

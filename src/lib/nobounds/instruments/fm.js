@@ -45,7 +45,11 @@ class FMSynth {
         this.c1freq = new Tone.Multiply(1.0).connect(this.c1fb1);
         this.c1ratio = new Tone.Signal(1.0).connect(this.c1freq);
 
-        this.fund = new Tone.Signal(250).fan(this.c1freq.factor, this.c2freq.factor, this.c3freq.factor);
+        this.fund = new Tone.Signal(250).fan(
+            this.c1freq.factor,
+            this.c2freq.factor,
+            this.c3freq.factor
+        );
 
         // Now hook up the feedbacks
         this.fm2to1.fan(this.c1fb2.addend);

@@ -7,7 +7,9 @@ import { getDatabase, onValue, ref } from 'firebase/database';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 const firebaseConfig =
-    env.PUBLIC_MODE === 'dev' || env.PUBLIC_MODE === undefined ? firebaseDevConfig : firebaseProdConfig;
+    env.PUBLIC_MODE === 'dev' || env.PUBLIC_MODE === undefined
+        ? firebaseDevConfig
+        : firebaseProdConfig;
 
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);

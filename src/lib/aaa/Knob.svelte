@@ -63,7 +63,7 @@
 
     let pv = null;
     $: value = Math.round((internal - min) / step) * step + min;
-    const updatePosition = change => {
+    const updatePosition = (change) => {
         // This way it always forces it to match the bound value when it is first moved.
         if (!internal) {
             internal = value;
@@ -77,17 +77,17 @@
 
     let down = false;
 
-    const move = posUpdate => {
+    const move = (posUpdate) => {
         if (enabled && down) {
             updatePosition(posUpdate);
         }
     };
-    const mouseMoveHandler = e => {
+    const mouseMoveHandler = (e) => {
         move(e.movementY * -1);
     };
 
     let prev_touch;
-    const touchMoveHandler = e => {
+    const touchMoveHandler = (e) => {
         const touch = e.touches[0];
         if (prev_touch) {
             const movementY = touch.pageY - prev_touch.pageY;
@@ -96,14 +96,14 @@
         prev_touch = touch;
     };
 
-    const handleDown = e => {
+    const handleDown = (e) => {
         if (enabled) {
             down = true;
         }
         prev_touch = null;
     };
 
-    const handleUp = e => {
+    const handleUp = (e) => {
         if (enabled) {
             down = false;
         }
@@ -127,8 +127,7 @@
     on:mousemove={mouseMoveHandler}
     on:touchmove={touchMoveHandler}
     on:mouseup={handleUp}
-    on:touchend={handleUp}
-/>
+    on:touchend={handleUp} />
 
 <div
     bind:this={knob}
@@ -137,16 +136,14 @@
     style:width={`${WIDTH}px`}
     on:mousedown={handleDown}
     on:touchstart={handleDown}
-    on:dblclick={resetHandler}
->
+    on:dblclick={resetHandler}>
     <div id="title" class="no-hover">{title}</div>
     <svg width={WIDTH} height={HEIGHT}>
         <path
             d={range_path}
             stroke-width={stroke_width}
             stroke={down ? primary_darker : primaryColor}
-            class="knob-control__range"
-        />
+            class="knob-control__range" />
         <!-- Arc Fill -->
         <path
             d={value_path}
@@ -155,8 +152,7 @@
             style={dash_style}
             bind:this={pathValue}
             data-dash={length}
-            class="knob-control__value"
-        />
+            class="knob-control__value" />
         <!-- Line Value -->
         <path d={pointer_path} stroke-width="1" stroke="black" />
 

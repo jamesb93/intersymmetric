@@ -1,9 +1,9 @@
-<script lang='ts'>
+<script lang="ts">
     import { onMount } from 'svelte';
     import { clip, mapRange } from '$lib/utility';
 
     export let title = '';
-	export let WIDTH = 38;
+    export let WIDTH = 38;
     export let HEIGHT = 50;
     export let RADIUS = 17;
     export let SHIFT = 1;
@@ -56,13 +56,13 @@
     $: sweep = value_radians > zero_radians ? 0 : 1;
     $: value = Math.round((internal - min) / step) * step + min;
 
-        $: { 
+    $: {
         if (needsUpdate) {
             needsUpdate = false;
             func();
         }
     }
-    const updatePosition = change => {
+    const updatePosition = (change) => {
         // This way it always forces it to match the bound value when it is first moved.
         if (!internal) {
             internal = value;
@@ -76,16 +76,16 @@
             pv = value;
         }
     };
-    const move = posUpdate => {
+    const move = (posUpdate) => {
         if (enabled && down) {
             updatePosition(posUpdate);
         }
     };
-    const mouseMoveHandler = e => {
+    const mouseMoveHandler = (e) => {
         move(e.movementY * -1);
     };
 
-    const touchMoveHandler = e => {
+    const touchMoveHandler = (e) => {
         const touch = e.touches[0];
         if (prevTouch) {
             const movementY = touch.pageY - prevTouch.pageY;
@@ -94,10 +94,10 @@
         prevTouch = touch;
     };
     const handleDown = () => {
-		down = enabled ? true : false;
+        down = enabled ? true : false;
     };
-    const handleUp = e => {
-		down = enabled ? false : false
+    const handleUp = (e) => {
+        down = enabled ? false : false;
         prevTouch = null;
     };
     const dashLength = () => {
@@ -105,12 +105,12 @@
         let length = element.getTotalLength();
         element.dataset.dash = length;
         length = length;
-    }
+    };
     const resetHandler = () => {
         value = resetValue;
         internal = value;
         func();
-    }
+    };
 
     onMount(() => {
         dashLength();
@@ -121,8 +121,7 @@
     on:mousemove={mouseMoveHandler}
     on:touchmove={touchMoveHandler}
     on:mouseup={handleUp}
-    on:touchend={handleUp}
-/>
+    on:touchend={handleUp} />
 
 <div
     bind:this={knob}
@@ -131,8 +130,7 @@
     style:width={`${WIDTH}px`}
     on:mousedown={handleDown}
     on:touchstart={handleDown}
-    on:dblclick={resetHandler}
->
+    on:dblclick={resetHandler}>
     <div class="knob-title no-hover">{title}</div>
     <svg width={WIDTH} height={HEIGHT}>
         <path d={range_path} class="knob stroke" />
@@ -142,20 +140,18 @@
             style={dashStyle}
             bind:this={pathValue}
             data-dash={length}
-            class="knob knob-arc"
-        />
+            class="knob knob-arc" />
         <!-- Line Value -->
         <path d={pointer_path} class="knob knob-needle" />
 
         {#if showValue}
-        <text x={MID_X} y={HEIGHT} text-anchor="middle" class="knob knob-value">
-
-            {#if displayValue !== null}
-                {displayValue}
-            {:else}
-                { parseFloat(value.toFixed(1)) }
-            {/if}
-        </text>
+            <text x={MID_X} y={HEIGHT} text-anchor="middle" class="knob knob-value">
+                {#if displayValue !== null}
+                    {displayValue}
+                {:else}
+                    {parseFloat(value.toFixed(1))}
+                {/if}
+            </text>
         {/if}
     </svg>
 </div>
@@ -168,7 +164,8 @@
         cursor: grab;
     }
 
-    .container:active, .container:focus {
+    .container:active,
+    .container:focus {
         cursor: grabbing;
     }
 </style>

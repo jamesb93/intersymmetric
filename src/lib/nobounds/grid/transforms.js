@@ -9,7 +9,7 @@ const sendGrid = () => {
 
 /**
  * Rotates a column in the grid by the specified amount.
- * 
+ *
  * @param {number} amount - The amount to rotate the column by.
  * @param {number} column - The index of the column to rotate.
  */

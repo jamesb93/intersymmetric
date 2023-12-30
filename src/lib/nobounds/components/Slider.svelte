@@ -12,7 +12,14 @@
     <span class="text title">{title}</span>
     <div class="container">
         <span class="text min">{min}</span>
-        <input class="slider" type="range" {min} {max} {step} bind:value on:input={func} />
+        <input
+            class="slider"
+            type="range"
+            {min}
+            {max}
+            {step}
+            bind:value
+            on:input={func} />
         <span class="text max">{max}</span>
     </div>
     {#if showValue}

@@ -3,7 +3,7 @@
     export let value = 0;
     export let func = () => {};
 
-    const set = i => {
+    const set = (i) => {
         value = i;
         func();
     };
@@ -11,7 +11,11 @@
 
 <div class="container">
     {#each options as o, i}
-        <button class="no-hover" on:mousedown={() => set(i)} on:touchstart={() => set(i)} class:selected={value === i}>
+        <button
+            class="no-hover"
+            on:mousedown={() => set(i)}
+            on:touchstart={() => set(i)}
+            class:selected={value === i}>
             {o}
         </button>
     {/each}

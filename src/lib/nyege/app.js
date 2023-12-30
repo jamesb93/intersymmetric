@@ -7,7 +7,9 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { PUBLIC_FB_USERNAME, PUBLIC_FB_PASSWORD } from '$env/static/public';
 
 let firebaseConfig =
-    env.PUBLIC_MODE === 'dev' || env.PUBLIC_MODE === undefined ? firebaseDevConfig : firebaseProdConfig;
+    env.PUBLIC_MODE === 'dev' || env.PUBLIC_MODE === undefined
+        ? firebaseDevConfig
+        : firebaseProdConfig;
 
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);

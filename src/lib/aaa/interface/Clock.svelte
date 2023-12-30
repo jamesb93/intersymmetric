@@ -1,7 +1,7 @@
 <script>
     import { ref, set } from 'firebase/database';
     import { max_scale, clip } from '$lib/utility';
-    import { sendDeviceMessage } from '@jamesb93/rnbo-svelte'
+    import { sendDeviceMessage } from '@jamesb93/rnbo-svelte';
     import { speed, tala, calculated_speed, room, db, attach } from '$lib/aaa/app';
     import Knob from '$lib/common/Knob.svelte';
     import Play from '$lib/aaa/Play.svelte';
@@ -24,14 +24,21 @@
     };
 
     $: $calculated_speed = clip(
-        max_scale(_speed, speed_knob.min, speed_knob.max, speed_knob.min, speed_knob.max, 3.5).toFixed(2),
+        max_scale(
+            _speed,
+            speed_knob.min,
+            speed_knob.max,
+            speed_knob.min,
+            speed_knob.max,
+            3.5
+        ).toFixed(2),
         speed_knob.min,
         10
     );
 
     let state = 0;
 
-    patch.messageEvent.subscribe(e => {
+    patch.messageEvent.subscribe((e) => {
         if (e.tag === 'pattern') {
             $tala[0] = e.payload[0];
         } else if (e.tag === 'b_index') {
@@ -56,8 +63,7 @@
             bind:internal={$speed}
             bind:value={_speed}
             bind:displayValue={$calculated_speed}
-            func={ () => set(ref(db, `/aaa/${$room}/speed`), $speed) }
-        />
+            func={() => set(ref(db, `/aaa/${$room}/speed`), $speed)} />
     </div>
 
     <div class="tala no-hover">

@@ -3,14 +3,14 @@
 </script>
 
 <header>
-    <div class='header-content'>
+    <div class="header-content">
         <div id="title">
             <div class="no-hover">Intersymmetric Works | Seq 2</div>
         </div>
         <div id="room">
             <RoomPrompt />
         </div>
-        <div></div>
+        <div />
     </div>
 </header>
 

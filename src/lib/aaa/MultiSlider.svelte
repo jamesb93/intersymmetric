@@ -9,7 +9,11 @@
 
 <div class="container">
     {#each sliders as slider}
-        <Slider min={slider.min} max={slider.max} steps={slider.steps} bind:value={slider.value} />
+        <Slider
+            min={slider.min}
+            max={slider.max}
+            steps={slider.steps}
+            bind:value={slider.value} />
     {/each}
 </div>
 

@@ -1,7 +1,7 @@
 <script>
     import { room } from '$lib/nobounds/firebase-core';
     import { goto } from '$app/navigation';
-    
+
     let everUsed = false;
     let code = '';
 
@@ -22,8 +22,7 @@
         on:change={handleChange}
         placeholder={everUsed === false && $room === '' ? 'enter room code' : $room}
         id="room-input"
-        class={$$props.class}
-    />
+        class={$$props.class} />
 </div>
 
 <style>

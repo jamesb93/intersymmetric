@@ -7,25 +7,43 @@
     import { onDestroy } from 'svelte';
     import { browser } from '$app/environment';
     import { pos, prePos, play } from '$lib/nobounds/app';
-    import { kick, snare, fm1, fm2, metal1, metal2 } from '$lib/nobounds/instruments/ensemble';
+    import {
+        kick,
+        snare,
+        fm1,
+        fm2,
+        metal1,
+        metal2
+    } from '$lib/nobounds/instruments/ensemble';
     import { wrap } from '$lib/utility';
     import { setDbValue } from '$lib/nobounds/firebase-core';
     import { create_2d_array } from '$lib/utility';
-    import { invertGridVertical, clearGrid, randomiseGrid } from '$lib/nobounds/grid/transforms.js';
+    import {
+        invertGridVertical,
+        clearGrid,
+        randomiseGrid
+    } from '$lib/nobounds/grid/transforms.js';
 
     onDestroy(() => {
         Tone.Transport.stop();
         if (loop) {
-            loop.stop()
+            loop.stop();
         }
         $play = false;
     });
 
-    import { grid, clockMode, attach, room, length,
+    import {
+        grid,
+        clockMode,
+        attach,
+        room,
+        length,
         pitchOffset,
         bpm,
         clockMultiplierLookup,
-        startOffset, endOffset } from '$lib/nobounds/firebase-core'
+        startOffset,
+        endOffset
+    } from '$lib/nobounds/firebase-core';
 
     attach($room, 'grid', grid, create_2d_array(6, 16, false));
     attach($room, 'pitchOffset', pitchOffset, 0);
@@ -34,15 +52,15 @@
     attach($room, 'endOffset', endOffset, 16);
     attach($room, 'bpm', bpm, 120);
 
-
     const multiplierTable = [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0.875, 0.75, 0.66, 0.5, 0.33, 0.25, 0.125, 0
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0.875, 0.75, 0.66, 0.5, 0.33,
+        0.25, 0.125, 0
     ];
     $: clockMultiplier = multiplierTable[$clockMultiplierLookup];
 
     /**
      * Updates the play status of the synthesizer.
-     * 
+     *
      * @param {boolean} status - The new play status.
      */
     function updatePlayStatus(status) {
@@ -51,7 +69,7 @@
             Tone.Transport.start('+0.15');
             if (loop) {
                 loop.start();
-            } 
+            }
         } else if ($play === false) {
             Tone.Transport.stop();
             if (loop) {
@@ -85,7 +103,7 @@
     if (browser) {
         Tone.context.lookAhead = 0.2;
         updatePlayStatus(false);
-        loop = new Tone.Loop(time => {
+        loop = new Tone.Loop((time) => {
             if ($grid[KICK][$pos] === true) {
                 kick.trigger(time, 1.0, $length);
             }
@@ -156,13 +174,12 @@
             }
         }, '16n').start(0);
     }
-    
-    // This is unbelievably stupid. But otherwise svelte complains.
-    let tempo = [bpm]
-    let clockMult = [clockMultiplierLookup]
-    let offsets = [startOffset, endOffset]
-    let globalParameters = [pitchOffset, length]
 
+    // This is unbelievably stupid. But otherwise svelte complains.
+    let tempo = [bpm];
+    let clockMult = [clockMultiplierLookup];
+    let offsets = [startOffset, endOffset];
+    let globalParameters = [pitchOffset, length];
 </script>
 
 <div id="all-controls">
@@ -173,56 +190,64 @@
             <span id="clock-title" class="container-title">Clock</span>
             <div id="clock-top">
                 <Play bind:playing={$play} start={startLoop} pause={stopLoop} />
-                <Knob 
-                title="Rate" 
-                resetValue={120} 
-                min={5} 
-                max={300} 
-                step={1} 
-                bind:value={tempo[0]} 
-                on:update={() => setDbValue('bpm', $bpm)} 
-                />
                 <Knob
-                resetValue={0}
-                scale={0.4}
-                title="Multiplier"
-                min={0}
-                max={22}
-                step={1}
-                bind:value={clockMult[0]}
-                bind:altValue={clockMultiplier}
-                on:update={() => setDbValue('clockMultiplier', $clockMultiplierLookup)}
-                />
+                    title="Rate"
+                    resetValue={120}
+                    min={5}
+                    max={300}
+                    step={1}
+                    bind:value={tempo[0]}
+                    on:update={() => setDbValue('bpm', $bpm)} />
+                <Knob
+                    resetValue={0}
+                    scale={0.4}
+                    title="Multiplier"
+                    min={0}
+                    max={22}
+                    step={1}
+                    bind:value={clockMult[0]}
+                    bind:altValue={clockMultiplier}
+                    on:update={() =>
+                        setDbValue('clockMultiplier', $clockMultiplierLookup)} />
             </div>
             <div id="clock-bottom">
                 <Clock />
-                <Knob scale={0.125} title="Start" min={1} max={16} bind:value={offsets[0]} on:update={() => setDbValue('start_offset', $startOffset)} />
-                <Knob scale={0.125} title="End" min={1} max={16} bind:value={offsets[1]} on:update={() => setDbValue('end_offset', $endOffset)} />
+                <Knob
+                    scale={0.125}
+                    title="Start"
+                    min={1}
+                    max={16}
+                    bind:value={offsets[0]}
+                    on:update={() => setDbValue('start_offset', $startOffset)} />
+                <Knob
+                    scale={0.125}
+                    title="End"
+                    min={1}
+                    max={16}
+                    bind:value={offsets[1]}
+                    on:update={() => setDbValue('end_offset', $endOffset)} />
             </div>
         </div>
 
         <div id="grid-transforms" class="control-column-container">
             <span class="container-title">Transforms</span>
             <div id="transform-functions">
-                <BoxButton 
-                on:click={() => { 
-                    invertGridVertical(grid)
-                    setDbValue('grid', $grid)
-                }}
-                text="Flip V" 
-                />
-                <BoxButton 
-                on:click={() => { 
-                    randomiseGrid()
-                }} 
-                text="Randomise" 
-                />
-                <BoxButton 
-                on:click={() => { 
-                    clearGrid()
-                }}
-                text="Clear" 
-                />
+                <BoxButton
+                    on:click={() => {
+                        invertGridVertical(grid);
+                        setDbValue('grid', $grid);
+                    }}
+                    text="Flip V" />
+                <BoxButton
+                    on:click={() => {
+                        randomiseGrid();
+                    }}
+                    text="Randomise" />
+                <BoxButton
+                    on:click={() => {
+                        clearGrid();
+                    }}
+                    text="Clear" />
             </div>
         </div>
     </div>
@@ -231,24 +256,26 @@
         <div />
         <div id="global-parameters">
             <Knob
-            resetValue={0}
-            title="Pitch Offset"
-            min={-48}
-            max={48}
-            step={1}
-            bind:value={globalParameters[0]}
-            on:update={() => { setDbValue('pitchOffset', $pitchOffset) }}
-            />
+                resetValue={0}
+                title="Pitch Offset"
+                min={-48}
+                max={48}
+                step={1}
+                bind:value={globalParameters[0]}
+                on:update={() => {
+                    setDbValue('pitchOffset', $pitchOffset);
+                }} />
             <Knob
-            title="Shape Scale"
-            scale={0.005}
-            resetValue={1.0}
-            min={0.05}
-            max={1}
-            step={0.01}
-            bind:value={globalParameters[1]}
-            on:update={() => { setDbValue('length', $length) }}
-            />
+                title="Shape Scale"
+                scale={0.005}
+                resetValue={1.0}
+                min={0.05}
+                max={1}
+                step={0.01}
+                bind:value={globalParameters[1]}
+                on:update={() => {
+                    setDbValue('length', $length);
+                }} />
         </div>
         <div />
     </div>

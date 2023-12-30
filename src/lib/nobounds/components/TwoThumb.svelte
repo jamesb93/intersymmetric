@@ -41,7 +41,13 @@
 <svg height={h} width="100%" bind:this={svg} on:mousedown={mouseDownSVG}>
     <line class="thumb" x1={pos.one} x2={pos.one} y1="0" y2={h} />
     <line class="thumb" x1={pos.two} x2={pos.two} y1="0" y2={h} />
-    <line class="filler" stroke-width={h} x1={pos.one} x2={pos.two} y1={h / 2} y2={h / 2} />
+    <line
+        class="filler"
+        stroke-width={h}
+        x1={pos.one}
+        x2={pos.two}
+        y1={h / 2}
+        y2={h / 2} />
 </svg>
 
 <style>

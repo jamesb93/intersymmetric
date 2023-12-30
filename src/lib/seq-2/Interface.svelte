@@ -8,15 +8,18 @@
     import Button from './Button.svelte';
     import Grid from './Grid.svelte';
     import InstrumentControl from './InstrumentControl.svelte';
-    import { 
-        state, 
+    import {
+        state,
         bpm,
         direction,
         multiplier,
         grid_end,
         grid_start,
         grid,
-        kick, snare, metal, fm
+        kick,
+        snare,
+        metal,
+        fm
     } from './app';
 
     const bpm_knob = {
@@ -26,45 +29,46 @@
         resetValue: bpm.init(),
         scale: 1,
         title: 'bpm'
-    }
+    };
     const multiplier_knob = {
         min: 0,
-        max: multiplier.get_options().length-1,
+        max: multiplier.get_options().length - 1,
         step: 1,
         resetValue: 0,
         scale: 0.25,
         title: 'multiplier'
-    }
+    };
 
     const randomise_everything = () => {
-        $grid = $grid.map(row => row.map(() => Math.random() > 0.5))
+        $grid = $grid.map((row) => row.map(() => Math.random() > 0.5));
         sendDeviceMessage(device, 'randomise', [0]);
         sendDeviceMessage(device, 'grid', $grid.flat());
-    }
-    $: sendDeviceMessage(device, 'state', [$state])
-    $: sendDeviceMessage(device, 'bpm', [$bpm])
-    $: sendDeviceMessage(device, 'direction', [$direction])
-    $: sendDeviceMessage(device, 'multiplier', [multiplier.get_value($multiplier)])
-    $: sendDeviceMessage(device, 'grid_start', [$grid_start])
-    $: sendDeviceMessage(device, 'grid_end', [$grid_end])
+    };
+    $: sendDeviceMessage(device, 'state', [$state]);
+    $: sendDeviceMessage(device, 'bpm', [$bpm]);
+    $: sendDeviceMessage(device, 'direction', [$direction]);
+    $: sendDeviceMessage(device, 'multiplier', [multiplier.get_value($multiplier)]);
+    $: sendDeviceMessage(device, 'grid_start', [$grid_start]);
+    $: sendDeviceMessage(device, 'grid_end', [$grid_end]);
 </script>
 
 <div class="container">
-    <div class='controls'>
-        <Toggle bind:enabled={$state}/>
-        <Button on:click={randomise_everything}>
-            rand
-        </Button>
-        <Knob { ...bpm_knob} bind:value={$bpm} />
-        <Knob {...multiplier_knob} bind:value={$multiplier} displayValue={multiplier.get_value($multiplier)} />
+    <div class="controls">
+        <Toggle bind:enabled={$state} />
+        <Button on:click={randomise_everything}>rand</Button>
+        <Knob {...bpm_knob} bind:value={$bpm} />
+        <Knob
+            {...multiplier_knob}
+            bind:value={$multiplier}
+            displayValue={multiplier.get_value($multiplier)} />
     </div>
     <Grid bind:device />
     <div class="grid-and-parameters">
         <div class="instrument-controllers">
-            <InstrumentControl instrument={kick}/>
-            <InstrumentControl instrument={snare}/>
-            <InstrumentControl instrument={fm}/>
-            <InstrumentControl instrument={metal}/>
+            <InstrumentControl instrument={kick} />
+            <InstrumentControl instrument={snare} />
+            <InstrumentControl instrument={fm} />
+            <InstrumentControl instrument={metal} />
         </div>
     </div>
 </div>

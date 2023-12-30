@@ -6,14 +6,23 @@
     import Knob from '$lib/common/Knob.svelte';
     import { ref, set } from 'firebase/database';
     import { attach, room, db } from '$lib/nyege/app';
-    import { sendDeviceMessage } from '@jamesb93/rnbo-svelte'
-    import { buf6, scale, len6, chordfollow, chordspread, chordlow, chordhigh, hbp } from '$lib/nyege/app';
+    import { sendDeviceMessage } from '@jamesb93/rnbo-svelte';
+    import {
+        buf6,
+        scale,
+        len6,
+        chordfollow,
+        chordspread,
+        chordlow,
+        chordhigh,
+        hbp
+    } from '$lib/nyege/app';
 
     export let patch;
     let w;
 
     const radioh = {
-        options: [1, 2, 3, 4, 5, 6, 7, 8].map(x => ({ display: x, value: x })),
+        options: [1, 2, 3, 4, 5, 6, 7, 8].map((x) => ({ display: x, value: x })),
         height: '50px',
         width: '450px'
     };
@@ -57,14 +66,19 @@
 
     let blip;
 
-    patch.messageEvent.subscribe(e => {
+    patch.messageEvent.subscribe((e) => {
         if (e.tag === 'blip' && e.payload === 6) {
             blip.blink();
         }
     });
 
     $: sendDeviceMessage(patch, 'chordfollow', [$chordfollow]);
-    $: sendDeviceMessage(patch, 'chordscale', [$chordspread, $chordlow / 100.0, $chordhigh / 100.0, $scale]);
+    $: sendDeviceMessage(patch, 'chordscale', [
+        $chordspread,
+        $chordlow / 100.0,
+        $chordhigh / 100.0,
+        $scale
+    ]);
     $: sendDeviceMessage(patch, 'chordsampler', [$buf6, $len6]);
 
     $: attach($room, 'buf6', buf6, 20);
@@ -80,29 +94,44 @@
 
 <div class="grid container">
     <Blip bind:this={blip} />
-    <RadioV {...radiov} bind:value={$chordfollow} func={ () => set(ref(db, `/nnnb/${$room}/chordfollow`), $chordfollow) } />
+    <RadioV
+        {...radiov}
+        bind:value={$chordfollow}
+        func={() => set(ref(db, `/nnnb/${$room}/chordfollow`), $chordfollow)} />
     <div class="centre">
         <RSlider
-        {...rslider}
-        bind:low={$chordlow}
-        bind:high={$chordhigh}
-        width={w <= hbp ? 448 : 598}
-        lofunc={ () => set(ref(db, `/nnnb/${$room}/chordlow`), $chordlow) }
-        hifunc={ () => set(ref(db, `/nnnb/${$room}/chordhigh`), $chordhigh) }
-        />
-        <RadioH {...radioh} bind:value={$chordspread} width={w <= hbp ? '450px' : '600px'} func={ () => set(ref(db, `/nnnb/${$room}/chordspread`), $chordspread) } />
+            {...rslider}
+            bind:low={$chordlow}
+            bind:high={$chordhigh}
+            width={w <= hbp ? 448 : 598}
+            lofunc={() => set(ref(db, `/nnnb/${$room}/chordlow`), $chordlow)}
+            hifunc={() => set(ref(db, `/nnnb/${$room}/chordhigh`), $chordhigh)} />
+        <RadioH
+            {...radioh}
+            bind:value={$chordspread}
+            width={w <= hbp ? '450px' : '600px'}
+            func={() => set(ref(db, `/nnnb/${$room}/chordspread`), $chordspread)} />
     </div>
     <div class="box">
         <div class="header">sound</div>
-        <Knob {...soundKnob} bind:value={$buf6} func={ () => set(ref(db, `/nnnb/${$room}/buf6`), $buf6)} />
+        <Knob
+            {...soundKnob}
+            bind:value={$buf6}
+            func={() => set(ref(db, `/nnnb/${$room}/buf6`), $buf6)} />
     </div>
     <div class="box">
         <div class="header">scale</div>
-        <Knob {...scaleKnob} bind:value={$scale} func={ () => set(ref(db, `/nnnb/${$room}/scale`), $scale) } />
+        <Knob
+            {...scaleKnob}
+            bind:value={$scale}
+            func={() => set(ref(db, `/nnnb/${$room}/scale`), $scale)} />
     </div>
     <div class="box">
         <div class="header">length</div>
-        <Knob {...lenKnob} bind:value={$len6} func={ () => set(ref(db, `/nnnb/${$room}/len6`), $len6) } />
+        <Knob
+            {...lenKnob}
+            bind:value={$len6}
+            func={() => set(ref(db, `/nnnb/${$room}/len6`), $len6)} />
     </div>
 </div>
 

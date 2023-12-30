@@ -4,11 +4,11 @@
     import RadioH from '$lib/nyege/RadioH.svelte';
     import { ref, set } from 'firebase/database';
     import { attach, room, db } from '$lib/nyege/app';
-    import { sendDeviceMessage } from '@jamesb93/rnbo-svelte'
+    import { sendDeviceMessage } from '@jamesb93/rnbo-svelte';
     import { rate, globalCycle, hbp } from '$lib/nyege/app';
 
     export let patch;
-    
+
     let playing = false;
     let w;
 
@@ -21,7 +21,10 @@
     };
 
     const radio = {
-        options: [32, 24, 16, 12, 9, 8, 6, 4, 3, 2, 1, 0.5].map(x => ({ value: x, display: x })),
+        options: [32, 24, 16, 12, 9, 8, 6, 4, 3, 2, 1, 0.5].map((x) => ({
+            value: x,
+            display: x
+        })),
         height: '45px'
     };
 
@@ -48,13 +51,15 @@
     </div>
     <div class="grid row">
         <Play bind:state={playing} />
-        <Knob {...rateKnob} bind:value={$rate} func={ () => set(ref(db, `/nnnb/${$room}/rate`), $rate)} />
-        <RadioH 
-        {...radio} 
-        bind:value={$globalCycle}
-        width={w <= hbp ? '450px' : '600px'} 
-        func={ () => set(ref(db, `/nnnb/${$room}/globalCycle`), $globalCycle) } 
-        />
+        <Knob
+            {...rateKnob}
+            bind:value={$rate}
+            func={() => set(ref(db, `/nnnb/${$room}/rate`), $rate)} />
+        <RadioH
+            {...radio}
+            bind:value={$globalCycle}
+            width={w <= hbp ? '450px' : '600px'}
+            func={() => set(ref(db, `/nnnb/${$room}/globalCycle`), $globalCycle)} />
     </div>
 </div>
 

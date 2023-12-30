@@ -1,16 +1,16 @@
 <script>
-	import * as Tone from 'tone'
-	import BoxButton from './components/BoxButton.svelte'
-    import Interface from './Interface.svelte'
-    import OrientationWarning from '$lib/nyege/interface/OrientationWarning.svelte'
-    import IPhoneWarning from '$lib/nyege/interface/IPhoneWarning.svelte'
+    import * as Tone from 'tone';
+    import BoxButton from './components/BoxButton.svelte';
+    import Interface from './Interface.svelte';
+    import OrientationWarning from '$lib/nyege/interface/OrientationWarning.svelte';
+    import IPhoneWarning from '$lib/nyege/interface/IPhoneWarning.svelte';
 
-	let loaded = false
+    let loaded = false;
 
     async function start() {
-		Tone.start()
-		loaded = true
-    };
+        Tone.start();
+        loaded = true;
+    }
 </script>
 
 <IPhoneWarning />
@@ -20,7 +20,7 @@
     <Interface />
 {:else}
     <div class="loading">
-		<BoxButton text='load' on:click={start}/>
+        <BoxButton text="load" on:click={start} />
     </div>
 {/if}
 

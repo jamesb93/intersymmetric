@@ -9,7 +9,12 @@ class MetalSynth {
     }
 
     trigger(time, velocity, duration) {
-        this.source.triggerAttackRelease(this.source.frequency.value, duration, time, velocity);
+        this.source.triggerAttackRelease(
+            this.source.frequency.value,
+            duration,
+            time,
+            velocity
+        );
     }
 }
 

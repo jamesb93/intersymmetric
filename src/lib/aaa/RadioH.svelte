@@ -3,7 +3,7 @@
     export let value = 0;
     export let func = () => {};
 
-    const set = i => {
+    const set = (i) => {
         value = i;
         func();
     };

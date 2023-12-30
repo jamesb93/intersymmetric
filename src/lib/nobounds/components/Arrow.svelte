@@ -1,5 +1,5 @@
 <script>
-    export let direction = 'left'
+    export let direction = 'left';
 
     export const WIDTH = 50;
     export const HEIGHT = 50;

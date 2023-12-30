@@ -24,7 +24,12 @@ class SnareSynth {
         velocity = clip(velocity, 0.09, 1.0);
         this.env.triggerAttack(time, velocity);
         this.env.triggerRelease(time + 0.001);
-        this.membrane.triggerAttackRelease(this.membrane.frequency.value, duration, time, velocity);
+        this.membrane.triggerAttackRelease(
+            this.membrane.frequency.value,
+            duration,
+            time,
+            velocity
+        );
     }
 }
 

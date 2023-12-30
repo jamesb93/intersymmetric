@@ -34,10 +34,22 @@
     <span class="text title">{title} | {value.toFixed(2)}</span>
     <div class="container">
         <span class="text min">{min}</span>
-        <input class="slider" type="range" {min} {max} {step} bind:value on:input={updateText} />
+        <input
+            class="slider"
+            type="range"
+            {min}
+            {max}
+            {step}
+            bind:value
+            on:input={updateText} />
         <span class="text max">{max}</span>
     </div>
-    <input class="numbox" type="number" step={0.01} bind:value={tempValue} on:change={inputFunc} />
+    <input
+        class="numbox"
+        type="number"
+        step={0.01}
+        bind:value={tempValue}
+        on:change={inputFunc} />
 </div>
 
 <style>

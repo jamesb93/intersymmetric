@@ -1,5 +1,5 @@
-<script lang='ts'>
-    import { clockMode } from '$lib/nobounds/firebase-core'
+<script lang="ts">
+    import { clockMode } from '$lib/nobounds/firebase-core';
     function handleClick(mode: number) {
         $clockMode = mode;
         //TODO firebase send code here
@@ -7,9 +7,9 @@
 </script>
 
 <div class="container">
-    {#each clockMode.get_options() as option, i }
+    {#each clockMode.get_options() as option, i}
         <button class:select={$clockMode === i} on:click={() => handleClick(i)}>
-            <span id="text" class:select-text={$clockMode === i}> { option } </span>
+            <span id="text" class:select-text={$clockMode === i}> {option} </span>
         </button>
     {/each}
 </div>

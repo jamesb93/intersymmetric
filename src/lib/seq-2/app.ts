@@ -11,7 +11,9 @@ import { PUBLIC_FB_USERNAME, PUBLIC_FB_PASSWORD } from '$env/static/public';
 import { create_2d_array } from '../utility';
 
 let firebaseConfig =
-    env.PUBLIC_MODE === 'dev' || env.PUBLIC_MODE === undefined ? firebaseDevConfig : firebaseProdConfig;
+    env.PUBLIC_MODE === 'dev' || env.PUBLIC_MODE === undefined
+        ? firebaseDevConfig
+        : firebaseProdConfig;
 
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
@@ -61,7 +63,10 @@ export const bpm = numeric_parameter(120, { min: 1, max: 300, step: 1 });
 export const direction = enum_parameter(0, ['forward', 'rebound', 'wander']);
 export const multiplier = enum_parameter(
     0,
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0.875, 0.75, 0.66, 0.5, 0.33, 0.25, 0.125, 0]
+    [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0.875, 0.75, 0.66, 0.5, 0.33,
+        0.25, 0.125, 0
+    ]
 );
 export const grid_start = numeric_parameter(0, { min: 0, max: 15, step: 1 });
 export const grid_end = numeric_parameter(15, { min: 0, max: 15, step: 1 });
