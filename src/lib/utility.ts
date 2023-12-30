@@ -72,21 +72,30 @@ export const mapRange = (i: number, iMin: number, iMax: number, oMin: number, oM
  * @param {number} oMax
  * @returns {number}
  */
-export const scale = (i, iMin, iMax, oMin, oMax) => {
 export const scale = (i: number, iMin: number, iMax: number, oMin: number, oMax: number): number => {
     return mapRange(i, iMin, iMax, oMin, oMax);
 };
 
-const fmod = (a: number, b: number) => {
-    return Number((a - Math.floor(a / b) * b).toPrecision(8));
-};
-
+/**
+ * Wraps a number within a specified range.
+ * @param i The number to wrap.
+ * @param min The minimum value of the range.
+ * @param max The maximum value of the range.
+ * @returns The wrapped number.
+ */
 export const wrap = (i: number, min: number, max: number): number => {
     const range = max - min;
     const normalized = (i - min) % range;
     return normalized >= 0 ? normalized + min : normalized + max;
 };
 
+/**
+ * Linearly interpolates between two numbers.
+ * @param a - The starting value.
+ * @param b - The ending value.
+ * @param t - The interpolation factor.
+ * @returns The interpolated value.
+ */
 export function lerp(a: number, b: number, t: number): number {
     return a + (b - a) * t
 }
