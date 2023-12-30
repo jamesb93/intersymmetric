@@ -1,25 +1,17 @@
-<script>
-    import { socket } from '$lib/nobounds/app';
-    export let value;
-
-    function handleClick(mode) {
-        value = mode;
-        socket.emit('clock::mode', value);
+<script lang='ts'>
+    import { clockMode } from '$lib/nobounds/firebase-core'
+    function handleClick(mode: number) {
+        $clockMode = mode;
+        //TODO firebase send code here
     }
 </script>
 
 <div class="container">
-    <button class:select={value === 'forward'} on:click={() => handleClick('forward')}>
-        <span id="text" class:select-text={value === 'forward'}> Forward </span>
-    </button>
-
-    <button class:select={value === 'rebound'} on:click={() => handleClick('rebound')}>
-        <span id="text" class:select-text={value === 'rebound'}> Rebound </span>
-    </button>
-
-    <button class:select={value === 'wander'} on:click={() => handleClick('wander')}>
-        <span id="text" class:select-text={value === 'wander'}> Wander </span>
-    </button>
+    {#each clockMode.get_options() as option, i }
+        <button class:select={$clockMode === i} on:click={() => handleClick(i)}>
+            <span id="text" class:select-text={$clockMode === i}> { option } </span>
+        </button>
+    {/each}
 </div>
 
 <style>
