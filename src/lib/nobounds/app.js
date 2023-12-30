@@ -1,95 +1,14 @@
-import { io } from 'socket.io-client';
 import { writable } from 'svelte/store';
+import numeric_parameter from '$lib/common/parameters/numeric';
 
-// Sockets
-let socketAddr = import.meta.env.PROD ? 'wss://api.intersymmetric.xyz:4300' : 'ws://localhost:4300';
-
-export const socket = io(socketAddr);
-
-socket.on('connect', () => {
-    console.log('connected to websocket');
-});
-
-export const userMessage = writable('');
-socket.on('userMessage', x => userMessage.set(x));
+export const pos = numeric_parameter(0, { min: 0, max: 15, step: 1})
+export const prePos = numeric_parameter(0, { min: 0, max: 15, step: 1})
+export const mouseDown = writable(false)
 
 // High-Level Information
-export const recentParamValue = writable('');
+export const recentParamValue = writable(0);
 export const recentParamName = writable('');
-export const recentSample = writable(null);
-export const userInteracted = writable(false);
-
-//  Patterns
-export const velocityPattern = writable(0);
-socket.on('velocityPattern', x => velocityPattern.set(x));
-
-// No Bounds MetaData // Interpolation
-export const trackSound = writable(new Array(6).fill(0.5));
-export const trackPitch = writable(new Array(6).fill(0.0));
-export const trackShape = writable(new Array(6).fill(1.0));
-socket.on('trackPitch', x => trackPitch.set(x));
-socket.on('trackShape', x => trackShape.set(x));
-
-// Room Management
-export const workshopID = writable('');
-export const numUsers = writable(0);
-export const room = writable('');
-socket.on('numUsers', x => numUsers.set(x));
-
-// Sequencer Data
-export const maxCells = writable(32);
-socket.on('maxCells', x => maxCells.set(x));
-
-export const mirrorPoint = writable(8);
-socket.on('mirrorPoint', x => mirrorPoint.set(x));
-
-export const prevInsertions = writable([]);
-socket.on('prevInsertions', x => prevInsertions.set(x));
-
-export const grid = writable([]);
-export const gridValid = writable(false);
-socket.on('grid', x => {
-    grid.set(x);
-    gridValid.set(true);
-});
-
 export const play = writable(false);
-
-export const velocity = writable(1.0);
-socket.on('velocity', x => velocity.set(x));
-
-export const pitchOffset = writable(0);
-socket.on('pitchOffset', x => pitchOffset.set(x));
-
-export const length = writable(1.0);
-socket.on('length', x => length.set(x));
-
-export const euclidSteps = writable(new Array(6).fill(0));
-socket.on('euclid', x => euclidSteps.set(x));
-
-export const offset = writable({ start: 1, end: 16 });
-socket.on('clock::offset', x => offset.set(x));
-
-export const bpm = writable(120);
-socket.on('bpm', x => bpm.set(x));
-
-export const clockMode = writable();
-socket.on('clock::mode', x => clockMode.set(x));
-
-export const clockMultiplierLookup = writable(0);
-socket.on('clock::multiplier', x => clockMultiplierLookup.set(x));
-
-export const sampleSelectors = writable([0, 0, 0, 0, 0, 0]);
-socket.on('sampleSelectors', x => sampleSelectors.set(x));
-
-export const trackRates = writable(new Array(6).fill(1.0));
-socket.on('trackRates', x => trackRates.set(x));
-
-export const trackLengths = writable(new Array(6).fill(1.0));
-socket.on('trackLengths', x => trackLengths.set(x));
-
-export const playbackRate = writable(1.0);
-socket.on('playbackRate', x => playbackRate.set(x));
 
 // Synthesiser Data
 export const params = writable({
@@ -164,4 +83,3 @@ export const params = writable({
         op3gain: 1
     }
 });
-socket.on('params', x => params.set(x)); // get all params in one message
