@@ -20,7 +20,6 @@ authenticate();
  */
 export const attach = (room, path, state, fallback) => {
     const r = ref(db, `/seq1/${room}/${path}`);
-    console.log(room)
 
     onValue(r, (s) => {
         if (s.exists()) {

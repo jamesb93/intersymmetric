@@ -2,10 +2,10 @@
     import { setDbValue, attach, room, clockMode } from '$lib/nobounds/firebase-core';
     function handleClick(mode: number) {
         $clockMode = mode;
-        setDbValue('clockMode', mode)
+        setDbValue('clockMode', mode);
     }
 
-    $: attach($room, 'clockMode', clockMode, 0)
+    $: attach($room, 'clockMode', clockMode, 0);
 </script>
 
 <div class="container">
