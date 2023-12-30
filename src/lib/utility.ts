@@ -73,17 +73,11 @@ export const mapRange = (i: number, iMin: number, iMax: number, oMin: number, oM
  * @returns {number}
  */
 export const scale = (i, iMin, iMax, oMin, oMax) => {
+export const scale = (i: number, iMin: number, iMax: number, oMin: number, oMax: number): number => {
     return mapRange(i, iMin, iMax, oMin, oMax);
 };
 
-/**
- * Returns remainder of a division floored 
- *
- * @param {number} a
- * @param {number} b
- * @returns {number}
- */
-const fmod = (a, b) => {
+const fmod = (a: number, b: number) => {
     return Number((a - Math.floor(a / b) * b).toPrecision(8));
 };
 
@@ -93,16 +87,7 @@ export const wrap = (i: number, min: number, max: number): number => {
     return normalized >= 0 ? normalized + min : normalized + max;
 };
 
-/**
- * Interpolate between two values
- *
- * @export
- * @param {number} a
- * @param {number} b
- * @param {number} t
- * @returns {number}
- */
-export function linearInterp(a: number, b: number, t: number): number {
+export function lerp(a: number, b: number, t: number): number {
     return a + (b - a) * t
 }
 
@@ -110,7 +95,7 @@ Array.prototype.rotate = (() => {
     const unshift = Array.prototype.unshift;
     const splice = Array.prototype.splice;
 
-    return function (count) {
+    return (count: number) => {
         var len = this.length >>> 0,
             count = count >> 0;
 
