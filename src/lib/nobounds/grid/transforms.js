@@ -1,50 +1,17 @@
-import { socket } from '../app.js';
-import { mirror, deepCopy } from './matrix.js';
-import { get } from 'svelte/store';
+import { get } from 'svelte/store'
+import { grid, setDbValue } from '$lib/nobounds/firebase-core'
+import { mirror, deepCopy } from './matrix'
+import { create_2d_array, wrap } from '$lib/utility'
 
-const sendGrid = store => {
-    const grid = get(store);
-    socket.emit('grid', grid);
+const sendGrid = () => {
+    setDbValue('grid', get(grid))
 };
 
-export const rotateGridColumn = (store, amt, column) => {
-    let grid = get(store);
-    grid[column].rotate(amt);
-    store.set(grid);
-    sendGrid(store);
-};
-
-export const mirrorWithPoint = (store, axis) => {
-    if (axis < 1) {
-        return;
-    }
-    const grid = get(store);
-    let temp = new Array(grid.length).fill([]);
-    grid.forEach((row, i) => {
-        const slice = row.slice(0, axis);
-        const sliceRev = row.slice(0, axis).reverse();
-        // how many times can we copy the slice
-        const how = Math.floor(row.length / axis);
-        let mirrored = [];
-        for (let i = 0; i < how; i++) {
-            if (i % 2 == 0) {
-                mirrored.push(slice);
-            } else {
-                mirrored.push(sliceRev);
-            }
-        }
-
-        mirrored = mirrored.flat();
-        const diff = row.length - mirrored.length;
-        if (diff != 0) {
-            const append = sliceRev.slice(0, diff);
-            mirrored.push(append);
-            mirrored = mirrored.flat();
-        }
-        temp[i] = mirrored;
-    });
-    store.set(temp);
-    sendGrid(store);
+export const rotateGridColumn = (amount, column) => {
+    let tempGrid: Array<Array<Boolean>> = get(grid);
+    tempGrid[column].rotate(amount);
+    grid.set(tempGrid);
+    sendGrid()
 };
 
 export const mirrorGridHorizontal = (store, mirrorPoint) => {
@@ -77,46 +44,44 @@ export const invertGridVertical = store => {
     sendGrid(store);
 };
 
-export const shiftColumnDown = (store, col) => {
-    let grid = get(store);
-    const temp = deepCopy(grid);
-    for (var i = 0; i < grid.length; i++) {
+export const shiftColumnDown = (col) => {
+    let tempGrid = get(grid);
+    const overflow = deepCopy(tempGrid)
+    for (var i = 0; i < tempGrid.length; i++) {
         // in each row
-        let below = (i + 1) % grid.length;
-        grid[below][col] = temp[i][col];
+        let below = (i + 1) % tempGrid.length;
+        tempGrid[below][col] = overflow[i][col];
     }
-    store.set(grid);
-    sendGrid(store);
+    grid.set(tempGrid);
+    sendGrid();
 };
 
-export const shiftColumnUp = (store, col) => {
-    let grid = get(store);
-    const temp = deepCopy(grid);
-    for (var i = 0; i < grid.length; i++) {
-        // in each row
-        let invert = grid.length - i - 1;
+export const shiftColumnUp = (col) => {
+    let tempGrid = get(grid);
+    const overflow = deepCopy(tempGrid);
+    for (var i = 0; i < tempGrid.length; i++) {
+        let invert = tempGrid.length - i - 1;
         let above = invert - 1;
 
         if (above < 0) {
-            // Wrap
-            above = grid.length - Math.abs(0 - above);
+            above = tempGrid.length - Math.abs(0 - above);
         }
-        grid[above][col] = temp[invert][col];
+        tempGrid[above][col] = overflow[invert][col];
     }
-    store.set(grid);
-    sendGrid(store);
+    grid.set(tempGrid);
+    sendGrid();
 };
 
-export const clearGrid = store => {
-    let grid = get(store);
-    grid = grid.map(gridRow => gridRow.map(cell => false));
-    store.set(grid);
-    sendGrid(store);
+export const clearGrid = () => {
+    grid.set(
+        create_2d_array(16, 6, false)
+    )
+    sendGrid();
 };
 
-export const randomiseGrid = store => {
-    let grid = get(store);
-    grid = grid.map(gridRow => gridRow.map(cell => Math.random() < 0.2));
-    store.set(grid);
-    sendGrid(store);
+export const randomiseGrid = () => {
+    let tempGrid = get(grid);
+    tempGrid = tempGrid.map(gridRow => gridRow.map(cell => Math.random() < 0.2));
+    grid.set(tempGrid);
+    sendGrid();
 };
