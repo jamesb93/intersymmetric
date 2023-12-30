@@ -1,103 +1,25 @@
 <script>
-    import { grid, maxCells, prevInsertions, socket } from '$lib/nobounds/app';
-    export let y;
-    export let x;
-    export let func;
-    export let emph;
-    export let cellSnapshot;
-    export let anyMouseDown;
+    import { mouseDown, prePos } from '$lib/nobounds/app'
+    import { db, room } from '$lib/nobounds/firebase-core'
+    import { grid } from '$lib/nobounds/firebase-core'
+    import { set, ref } from 'firebase/database';
+    export let y = 0;
+    export let x = 0;
+    $: emphasis = $prePos === y;
 
-    const handleMouseDown = () => {
-        anyMouseDown = true;
-        cellSnapshot = $grid[x][y];
-    };
-    const handleEnter = () => {
-        if (anyMouseDown) {
-            $grid[x][y] = cellSnapshot;
-            if (cellSnapshot === true) {
-                const insertion = { x: x, y: y };
-                $prevInsertions.push(insertion);
-                socket.emit('prevInsertions', $prevInsertions);
-                if ($maxCells > 0) {
-                    let trueCount = 0;
-                    for (let i = 0; i < $grid.length; i++) {
-                        for (let j = 0; j < $grid[i].length; j++) {
-                            trueCount += $grid[i][j];
-                        }
-                    }
-
-                    if (trueCount > $maxCells && $prevInsertions.length >= $maxCells) {
-                        for (let i = 0; i < $grid.length; i++) {
-                            for (let j = 0; j < $grid[i].length; j++) {
-                                $grid[i][j] = false;
-                            }
-                        }
-
-                        $prevInsertions.slice(-$maxCells).forEach(d => {
-                            $grid[d.x][d.y] = true;
-                        });
-                    }
-                }
-            }
-        }
-        func();
-    };
-
-    const compositeFunction = () => {
-        if (!$grid[x][y]) {
-            // if this is changing something to on
-            const insertion = { x: x, y: y };
-            $grid[x][y] = true;
-
-            let unique = true;
-            $prevInsertions.slice(-$maxCells).forEach(d => {
-                if (d.x == insertion.x && d.y == insertion.y) {
-                    unique = false;
-                }
-            });
-
-            if (unique) {
-                $prevInsertions.push(insertion);
-            }
-
-            if ($maxCells > 0) {
-                let trueCount = 0;
-                for (let i = 0; i < $grid.length; i++) {
-                    for (let j = 0; j < $grid[i].length; j++) {
-                        trueCount += $grid[i][j];
-                    }
-                }
-
-                if (trueCount > $maxCells && $prevInsertions.length >= $maxCells) {
-                    for (let i = 0; i < $grid.length; i++) {
-                        for (let j = 0; j < $grid[i].length; j++) {
-                            $grid[i][j] = false;
-                        }
-                    }
-
-                    $prevInsertions.slice(-$maxCells).forEach(d => {
-                        $grid[d.x][d.y] = true;
-                    });
-                }
-            }
-            socket.emit('prevInsertions', $prevInsertions);
-        } else {
-            $grid[x][y] = false;
-        }
-
-        func();
+    function clickHandler() {
+        $grid[x][y] = !$grid[x][y]
+        set(ref(db, `/seq1/${$room}/grid`), $grid)
     };
 </script>
 
 <svg
     class="cell"
-    class:emphasis={emph}
-    class:selemph={emph && $grid[x][y]}
-    on:click={compositeFunction}
-    on:mouseenter={handleEnter}
-    on:mousedown={handleMouseDown}
+    class:emphasis={emphasis}
+    class:selemph={emphasis && $grid[x][y]}
+    on:click={clickHandler}
+    on:mousedown={() => { $mouseDown = true }}
 >
-    <!-- <text x="25" y="25">{x}|{y}</text> -->
     <line x1="0" x2="50" y1="0" y2="0" class="outline" />
     <line x1="0" x2="0" y1="0" y2="50" class="outline" />
     {#if y === 15}
@@ -108,9 +30,8 @@
         <line x1="0" x2="50" y1="50" y2="50" class="outline" />
     {/if}
     {#if $grid[x][y]}
-        <!-- Cross -->
-        <line class:checkemph={emph} x1="49" x2="1" y1="1" y2="49" class="check" />
-        <line class:checkemph={emph} x1="1" x2="49" y1="1" y2="49" class="check" />
+        <line class:checkemph={emphasis} x1="49" x2="1" y1="1" y2="49" class="check" />
+        <line class:checkemph={emphasis} x1="1" x2="49" y1="1" y2="49" class="check" />
     {/if}
 </svg>
 
