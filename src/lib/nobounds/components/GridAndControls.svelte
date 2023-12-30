@@ -6,8 +6,8 @@
     import Clock from './Control/Clock.svelte';
     import { onDestroy } from 'svelte';
     import { browser } from '$app/environment';
-    import { pos, prePos } from '$lib/nobounds/app';
-    import { kick, snare, fm1, fm2, metal1, metal2 } from '$lib/nobounds/instruments/ensemble.js';
+    import { pos, prePos, play } from '$lib/nobounds/app';
+    import { kick, snare, fm1, fm2, metal1, metal2 } from '$lib/nobounds/instruments/ensemble';
     import { wrap } from '$lib/utility';
     import { setDbValue } from '$lib/nobounds/firebase-core';
     import { create_2d_array } from '$lib/utility';
@@ -20,15 +20,11 @@
         $play = false;
     });
 
-    import {
-        play,
-        length,
+    import { grid, clockMode, attach, room, length,
         pitchOffset,
         bpm,
         clockMultiplierLookup,
-        startOffset, endOffset
-    } from '$lib/nobounds/app';
-    import { grid, clockMode, attach, room } from '$lib/nobounds/firebase-core'
+        startOffset, endOffset } from '$lib/nobounds/firebase-core'
 
     attach($room, 'grid', grid, create_2d_array(6, 16, false));
 
