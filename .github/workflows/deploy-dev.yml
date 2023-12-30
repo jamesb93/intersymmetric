@@ -32,11 +32,10 @@ jobs:
                   echo PUBLIC_MODE=dev >> .env
                   cat .env
 
-            - name: install dependencies
-              run: npm i --registry https://registry.npmjs.org
+            - uses: oven-sh/setup-bun@v1
 
             - name: Build Site
-              run: npm run build
+              run: bun i && bun build
 
             - name: Upload To Droplet
               run: |
