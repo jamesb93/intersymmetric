@@ -8,12 +8,12 @@
 }
 
 .knob-needle {
-	stroke: var(--primary);
+    stroke: var(--primary);
 }
 
 .knob-arc {
-	fill: none;
-	stroke: var(--primary);
+    fill: none;
+    stroke: var(--primary);
 }
 
 .knob-value {
@@ -21,9 +21,8 @@
     font-size: var(--font-size);
 }
 
-
 .knob-title {
-	text-align: center;
-	color: black;
-	font-size: var(--font-size);
+    text-align: center;
+    color: black;
+    font-size: var(--font-size);
 }

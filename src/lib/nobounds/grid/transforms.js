@@ -1,29 +1,29 @@
-import { get } from 'svelte/store'
-import { grid, setDbValue } from '$lib/nobounds/firebase-core'
-import { mirror, deepCopy } from './matrix'
-import { create_2d_array, wrap } from '$lib/utility'
+import { get } from 'svelte/store';
+import { grid, setDbValue } from '$lib/nobounds/firebase-core';
+import { mirror, deepCopy } from './matrix';
+import { create_2d_array, wrap } from '$lib/utility';
 
 const sendGrid = () => {
-    setDbValue('grid', get(grid))
+    setDbValue('grid', get(grid));
 };
 
 export const rotateGridColumn = (amount, column) => {
     let tempGrid: Array<Array<Boolean>> = get(grid);
     tempGrid[column].rotate(amount);
     grid.set(tempGrid);
-    sendGrid()
+    sendGrid();
 };
 
 export const mirrorGridHorizontal = (store, mirrorPoint) => {
     const grid = get(store);
-    const t = grid.map(row => mirror(row));
+    const t = grid.map((row) => mirror(row));
     store.set(t);
     sendGrid(store);
 };
 
-export const mirrorGridVertical = store => {
+export const mirrorGridVertical = (store) => {
     const grid = get(store);
-    const t = grid.map(row => row);
+    const t = grid.map((row) => row);
     for (let i = 0; i < grid.length; i++) {
         if (i >= grid.length / 2) {
             let mirrored = grid.length - 1 - i;
@@ -34,7 +34,7 @@ export const mirrorGridVertical = store => {
     sendGrid(store);
 };
 
-export const invertGridVertical = store => {
+export const invertGridVertical = (store) => {
     let grid = get(store);
     const temp = deepCopy(grid);
     for (let i = grid.length - 1, j = 0; i > 0, j < grid.length; i--, j++) {
@@ -46,7 +46,7 @@ export const invertGridVertical = store => {
 
 export const shiftColumnDown = (col) => {
     let tempGrid = get(grid);
-    const overflow = deepCopy(tempGrid)
+    const overflow = deepCopy(tempGrid);
     for (var i = 0; i < tempGrid.length; i++) {
         // in each row
         let below = (i + 1) % tempGrid.length;
@@ -73,15 +73,13 @@ export const shiftColumnUp = (col) => {
 };
 
 export const clearGrid = () => {
-    grid.set(
-        create_2d_array(16, 6, false)
-    )
+    grid.set(create_2d_array(16, 6, false));
     sendGrid();
 };
 
 export const randomiseGrid = () => {
     let tempGrid = get(grid);
-    tempGrid = tempGrid.map(gridRow => gridRow.map(cell => Math.random() < 0.2));
+    tempGrid = tempGrid.map((gridRow) => gridRow.map((cell) => Math.random() < 0.2));
     grid.set(tempGrid);
     sendGrid();
 };

@@ -11,7 +11,7 @@ class KickSynth {
     }
     /**
      * Triggers the kick instrument.
-     * 
+     *
      * @param {number} time - The time at which the kick should be triggered.
      * @param {number} velocity - The velocity of the kick.
      * @param {number} duration - The duration of the kick.

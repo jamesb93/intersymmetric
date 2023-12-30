@@ -1,44 +1,43 @@
 import { writable } from 'svelte/store';
 import { env } from '$env/dynamic/public';
 import { firebaseProdConfig, firebaseDevConfig } from '$lib/core';
-import { initializeApp } from "firebase/app";
-import { getDatabase, onValue, ref } from "firebase/database";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { initializeApp } from 'firebase/app';
+import { getDatabase, onValue, ref } from 'firebase/database';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { PUBLIC_FB_USERNAME, PUBLIC_FB_PASSWORD } from '$env/static/public';
 
-let firebaseConfig = env.PUBLIC_MODE === 'dev' || 
-    env.PUBLIC_MODE === undefined ? 
-    firebaseDevConfig : firebaseProdConfig;
+let firebaseConfig =
+    env.PUBLIC_MODE === 'dev' || env.PUBLIC_MODE === undefined ? firebaseDevConfig : firebaseProdConfig;
 
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
 
 const auth = getAuth(app);
-const authenticate = async() => {
+const authenticate = async () => {
     await signInWithEmailAndPassword(auth, PUBLIC_FB_USERNAME, PUBLIC_FB_PASSWORD)
-    .then((userCredential) => {
-        const user = userCredential.user;
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage)
-    });
+        .then((userCredential) => {
+            const user = userCredential.user;
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+        });
 };
 
-authenticate()
+authenticate();
 
 export const attach = (room, path, state, fallback) => {
-    const r = ref(db, `/nnnb/${room}/${path}`)
+    const r = ref(db, `/nnnb/${room}/${path}`);
 
-    onValue(r, s => {
+    onValue(r, (s) => {
         if (s.exists()) {
-            state.set(s.val())
+            state.set(s.val());
         } else {
-            state.set(fallback)
+            state.set(fallback);
         }
-    })
-}
+    });
+};
 
 // Room Management
 export const room = writable('room1');

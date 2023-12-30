@@ -4,14 +4,14 @@ export const rotate = (arr, count) => {
     return arr;
 };
 
-export const random = arr => {
+export const random = (arr) => {
     for (var i = 0; i < arr.length; i++) {
         arr[i].state = Math.random() > 0.5;
     }
     return arr;
 };
 
-export const deepCopy = arr => {
+export const deepCopy = (arr) => {
     return JSON.parse(JSON.stringify(arr));
 };
 
@@ -39,7 +39,7 @@ export const shiftColumnUp = (grid, col) => {
     }
 };
 
-export const mirror = arr => {
+export const mirror = (arr) => {
     let halfway = Math.floor(arr.length / 2);
     let temp = new Array(arr.length).fill(false);
 

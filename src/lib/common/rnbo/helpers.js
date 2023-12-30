@@ -30,11 +30,11 @@ const sendDeviceMessage = (device, tag, message) => {
  */
 const loadSamples = async (patch, context, samples) => {
     return Promise.all(
-        samples.map(sample => {
+        samples.map((sample) => {
             return fetch(sample.url)
-                .then(response => response.arrayBuffer())
-                .then(buffer => context.decodeAudioData(buffer))
-                .then(audioBuf => patch.setDataBuffer(sample.buffer, audioBuf));
+                .then((response) => response.arrayBuffer())
+                .then((buffer) => context.decodeAudioData(buffer))
+                .then((audioBuf) => patch.setDataBuffer(sample.buffer, audioBuf));
         })
     );
 };
@@ -49,14 +49,14 @@ const loadSamples = async (patch, context, samples) => {
 const createDeviceInstance = (devicePath, context, output) => {
     return new Promise((resolve, reject) => {
         fetch(devicePath)
-            .then(response => response.json())
-            .then(response => {
+            .then((response) => response.json())
+            .then((response) => {
                 const patcher = response;
                 return RNBO.createDevice({ context, patcher });
             })
-            .then(device => {
+            .then((device) => {
                 device.node.connect(output);
-                device.messageEvent.subscribe(e => {
+                device.messageEvent.subscribe((e) => {
                     if (e.tag.includes('debug')) {
                         console.log(e.tag, e.payload);
                     }

@@ -7,13 +7,12 @@ interface Config {
 }
 
 function numeric_parameter(initial_value: number, config: Config) {
-    
     // Check initial value against bounds
     if (initial_value < config.min) initial_value = config.min;
     if (initial_value > config.max) initial_value = config.max;
-    
+
     const { subscribe, set, update } = writable(initial_value);
-    
+
     return {
         subscribe,
         set: (value: number) => {

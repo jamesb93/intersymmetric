@@ -1,9 +1,9 @@
 import { writable } from 'svelte/store';
 import numeric_parameter from '$lib/common/parameters/numeric';
 
-export const pos = numeric_parameter(0, { min: 0, max: 15, step: 1})
-export const prePos = numeric_parameter(0, { min: 0, max: 15, step: 1})
-export const mouseDown = writable(false)
+export const pos = numeric_parameter(0, { min: 0, max: 15, step: 1 });
+export const prePos = numeric_parameter(0, { min: 0, max: 15, step: 1 });
+export const mouseDown = writable(false);
 
 // High-Level Information
 export const recentParamValue = writable(0);

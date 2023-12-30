@@ -16,7 +16,7 @@ export const max_scale = (x: number, imin: number, imax: number, omin: number, o
         : (x - imin) / (imax - imin) > 0
         ? omin + (omax - omin) * Math.pow((x - imin) / (imax - imin), exp)
         : omin + (omax - omin) * -Math.pow((-x + imin) / (imax - imin), exp);
-}
+};
 
 /**
  * Create a standardised room identity from a prefix and a code
@@ -36,7 +36,7 @@ export const createRoomID = (prefix: string, code: string) => `${prefix}.${code}
  */
 export const freqMap = (midi: number) => {
     return Math.pow(2, midi / 12.0);
-}
+};
 
 /**
  * Clip a value between a minima and maxima
@@ -97,7 +97,7 @@ export const wrap = (i: number, min: number, max: number): number => {
  * @returns The interpolated value.
  */
 export function lerp(a: number, b: number, t: number): number {
-    return a + (b - a) * t
+    return a + (b - a) * t;
 }
 
 Array.prototype.rotate = (() => {
@@ -113,6 +113,6 @@ Array.prototype.rotate = (() => {
     };
 })();
 
-export const create_2d_array= (rows: number, cols: number, defaultValue: any) => {
+export const create_2d_array = (rows: number, cols: number, defaultValue: any) => {
     return Array.from({ length: rows }, () => Array(cols).fill(defaultValue));
-}
+};

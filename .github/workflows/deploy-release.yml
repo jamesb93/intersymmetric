@@ -17,20 +17,20 @@ jobs:
             - name: Setup SSH
               uses: shimataro/ssh-key-action@v2
               with:
-                key: ${{ secrets.DO_PRIVATE_KEY }}
-                known_hosts: 'placeholder'
+                  key: ${{ secrets.DO_PRIVATE_KEY }}
+                  known_hosts: 'placeholder'
 
             - name: Adding Known Hosts
               run: |
-                mkdir -p ~/.ssh
-                ssh-keyscan -H ${{ secrets.DO_IP }} >> ~/.ssh/known_hosts
+                  mkdir -p ~/.ssh
+                  ssh-keyscan -H ${{ secrets.DO_IP }} >> ~/.ssh/known_hosts
 
             - name: create .env file
-              run: | 
-                echo PUBLIC_FB_USERNAME=${{ secrets.PUBLIC_FB_USERNAME }} >> .env
-                echo PUBLIC_FB_PASSWORD=${{ secrets.PUBLIC_FB_PASSWORD }} >> .env
-                echo PUBLIC_MODE=prod >> .env
-                cat .env
+              run: |
+                  echo PUBLIC_FB_USERNAME=${{ secrets.PUBLIC_FB_USERNAME }} >> .env
+                  echo PUBLIC_FB_PASSWORD=${{ secrets.PUBLIC_FB_PASSWORD }} >> .env
+                  echo PUBLIC_MODE=prod >> .env
+                  cat .env
 
             - name: install dependencies
               run: npm i --registry https://registry.npmjs.org
@@ -40,4 +40,4 @@ jobs:
 
             - name: Upload To Droplet
               run: |
-                rsync -avz --delete --no-times --no-o --no-g --no-perms . root@${{ secrets.DO_IP }}:/root/deploy/intersymmetric/prod/
+                  rsync -avz --delete --no-times --no-o --no-g --no-perms . root@${{ secrets.DO_IP }}:/root/deploy/intersymmetric/prod/
