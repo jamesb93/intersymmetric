@@ -14,8 +14,8 @@
     import Arrow from '$lib/nobounds/components/Arrow.svelte';
     import { setDbValue } from '$lib/nobounds/firebase-core';
 
-    import { shiftColumnDown, shiftColumnUp, rotateGridColumn } from '$lib/nobounds/grid/transforms';
-    import { getPattern } from '$lib/nobounds/grid/euclid.js';
+    import { shiftColumnDown, shiftColumnUp, rotateGridColumn } from '$lib/nobounds/grid/transforms'
+    import { getPattern } from '$lib/nobounds/grid/euclid';
     import { 
         room, db, attach,
         grid,
@@ -25,7 +25,7 @@
         pitch0, pitch1, pitch2, pitch3, pitch4, pitch5
     } from '$lib/nobounds/firebase-core';
 
-    let instrumentMap = ['kick', 'snare', 'metal1', 'metal2', 'fm1', 'fm2'];
+    const instrumentMap = ['kick', 'snare', 'metal1', 'metal2', 'fm1', 'fm2'];
 
     /**
      * Updates the sound with the given value.
@@ -103,25 +103,32 @@
             <div class="cell-container">
                 {#if x === 0}
                     {#each row as _, y}
-                        <Arrow direction="up" func={() => shiftColumnUp(grid, y)} />
+                        <Arrow 
+                        direction="up" 
+                        on:click={() => shiftColumnUp(y)} 
+                        />
                     {/each}
                 {/if}
             </div>
             <div class="cell-container">
-                <Arrow direction="left" func={() => rotateGridColumn(grid, 1, x)} />
+                <Arrow 
+                direction="left" 
+                on:click={() => rotateGridColumn(1, x)} 
+                />
                 {#each row as _, y}
                     <Cell {x} {y} />
                 {/each}
-                <Arrow direction="right" func={() => rotateGridColumn(grid, -1, x)} />
+                <Arrow 
+                direction="right" 
+                on:click={() => rotateGridColumn(-1, x)} 
+                />
             </div>
             {#if x === $grid.length - 1}
                 <div class="cell-container">
                     {#each row as _, y}
                         <Arrow
-                            direction="down"
-                            func={() => {
-                                shiftColumnDown(grid, y);
-                            }}
+                        direction="down"
+                        on:click={() => {shiftColumnDown(grid, y) }}
                         />
                     {/each}
                 </div>
