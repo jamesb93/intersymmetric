@@ -9,6 +9,13 @@ class KickSynth {
 
         this.distortion.oversample = 'none';
     }
+    /**
+     * Triggers the kick instrument.
+     * 
+     * @param {number} time - The time at which the kick should be triggered.
+     * @param {number} velocity - The velocity of the kick.
+     * @param {number} duration - The duration of the kick.
+     */
     trigger(time, velocity, duration) {
         this.membrane.triggerAttackRelease(this.membrane.frequency.value, duration, time, velocity);
     }
