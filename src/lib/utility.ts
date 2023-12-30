@@ -87,29 +87,10 @@ const fmod = (a, b) => {
     return Number((a - Math.floor(a / b) * b).toPrecision(8));
 };
 
-/**
- * Wrap a value between a minimum and maximum mapRange
- * @date 07/05/2023 - 14:24:35
- *
- * @param {*} i
- * @param {*} min
- * @param {*} max
- * @returns {*}
- */
-export const wrap = (i, min, max) => {
-    let retVal;
-    let range = max - min;
-    if (i < max && i >= min) {
-        return i;
-    }
-    if (max == min) {
-        return min;
-    }
-    if (i < min) {
-        retVal = i;
-        while (retVal < min) retVal += range;
-    } else retVal = fmod(i - min, range) + min;
-    return retVal;
+export const wrap = (i: number, min: number, max: number): number => {
+    const range = max - min;
+    const normalized = (i - min) % range;
+    return normalized >= 0 ? normalized + min : normalized + max;
 };
 
 /**
