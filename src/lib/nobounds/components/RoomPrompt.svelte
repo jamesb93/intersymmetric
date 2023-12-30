@@ -1,18 +1,15 @@
 <script>
-    import { socket, room, workshopID } from '$lib/nobounds/app';
+    import { room } from '$lib/nobounds/firebase-core';
     import { goto } from '$app/navigation';
-    import { createRoomID } from '$lib/utility';
+    
     let everUsed = false;
     let code = '';
 
     function handleChange() {
         everUsed = true;
-        socket.emit('roomJoin', createRoomID($workshopID, code));
         $room = code;
-        const namespace = $workshopID === 'workshop' ? '/workshop/' : '/seq-1/';
-        const href = namespace + code;
-        goto(href);
         code = '';
+        goto(`/seq-1/${$room}`);
     }
 </script>
 
