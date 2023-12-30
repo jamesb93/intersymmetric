@@ -1,24 +1,28 @@
-<script>
+<script lang='ts'>
     import { onMount } from 'svelte';
     import { recentParamName, recentParamValue } from '$lib/nobounds/app.js';
     import { clip, mapRange } from '$lib/utility';
+    import { writable } from 'svelte/store';
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
+
+    dispatch('update')
 
     export let WIDTH = 80;
     export let HEIGHT = 60;
-    export let resetValue = null;
+    export let resetValue: number | null = null;
     export let showTitle = true;
     export let title = '';
-    export let value;
+    export let value = writable(0)
     export let max = 100;
     export let min = 0;
     export let showValue = true;
-    export let altValue = null;
+    export let altValue: number | null = null;
     export let scale = 1.0;
     export let enabled = true;
     export let step = 1;
     export let secondaryColor = '#989898';
     export let strokeWidth = 1;
-    export let func = () => {};
 
     const RADIUS = 21;
     const MID_X = WIDTH / 2;
@@ -29,10 +33,10 @@
 
     let pathValue;
     let knob;
-    let length = 0;
-    let internal = null;
-    let pv = null;
-    let prevTouch = null;
+    let length: numbers = 0;
+    let internal: number | null = null;
+    let pv: number | null = null;
+    let prevTouch: any = null;
     let anchor = null;
     let down = false;
 
@@ -54,7 +58,7 @@
         min > 0 && max > 0
             ? mapRange(min, min, max, MIN_RADIANS, MAX_RADIANS)
             : mapRange(0, min, max, MIN_RADIANS, MAX_RADIANS);
-    $: valueRadians = mapRange(value, min, max, MIN_RADIANS, MAX_RADIANS);
+    $: valueRadians = mapRange($value, min, max, MIN_RADIANS, MAX_RADIANS);
     $: minX = MID_X + Math.cos(MIN_RADIANS) * RADIUS;
     $: minY = SHIFT * MID_Y - Math.sin(MIN_RADIANS) * RADIUS;
     $: maxX = MID_X + Math.cos(MAX_RADIANS) * RADIUS;
@@ -66,18 +70,20 @@
     $: largeArc = Math.abs(zeroRadians - valueRadians) < Math.PI ? 0 : 1;
     $: sweep = valueRadians > zeroRadians ? 0 : 1;
 
-    const updatePosition = change => {
+    const updatePosition = (change) => {
         // This way it always forces it to match the bound value when it is first moved.
         if (internal === null) {
-            internal = value;
+            internal = $value;
         }
         internal += change * scale;
         internal = clip(internal, min, max);
-        value = internal;
-        value = Math.round((value - min) / step) * step + min;
-        if (pv !== value) func();
+        $value = internal;
+        $value = Math.round(($value - min) / step) * step + min;
+        if (pv !== $value) {
+            dispatch('update', $value)
+        }
         pv = internal;
-        $recentParamValue = value;
+        $recentParamValue = $value;
     };
 
     const move = posUpdate => {
@@ -89,7 +95,7 @@
         if (anchor) {
             move(e.movementY * -1);
             $recentParamName = title;
-            $recentParamValue = value;
+            $recentParamValue = $value;
         }
     };
 
@@ -120,18 +126,17 @@
     };
 
     function dashLength() {
-        let element = pathValue;
-        let length = element.getTotalLength();
-        element.dataset.dash = length;
+        let length = pathValue.getTotalLength();
+        pathValue.dataset.dash = length;
         length = length;
     }
 
     function resetHandler() {
         if (resetValue !== null) {
-            value = resetValue;
-            internal = value;
-            $recentParamValue = value;
-            func();
+            $value = resetValue;
+            internal = $value;
+            $recentParamValue = $value;
+            dispatch('update', $value)
         }
     }
 </script>
@@ -147,9 +152,9 @@
     bind:this={knob}
     class="knob-control"
     style={containerStyle}
-    on:mousedown={downHandler}
-    on:touchstart={downHandler}
-    on:dblclick={resetHandler}
+    on:mousedown|preventDefault={downHandler}
+    on:touchstart|preventDefault={downHandler}
+    on:dblclick|preventDefault={resetHandler}
 >
     {#if showTitle}
         <div id="title">{title}</div>
@@ -172,7 +177,7 @@
         {#if showValue}
             <text x={MID_X} y={HEIGHT} text-anchor="middle" fill={textColor} class="value">
                 {#if altValue === null}
-                    {parseFloat(value.toFixed(1))}
+                    {parseFloat($value.toFixed(1))}
                 {:else}
                     {altValue}
                 {/if}
