@@ -1,6 +1,5 @@
 <script>
-    export let direction;
-    export let func = () => {};
+    export let direction = 'left'
 
     export const WIDTH = 50;
     export const HEIGHT = 50;
@@ -13,7 +12,8 @@
     const BOT = HEIGHT * 0.7;
 </script>
 
-<svg width={WIDTH} height={HEIGHT} on:click={func}>
+<!-- TODO: make this a button -->
+<svg width={WIDTH} height={HEIGHT} on:click>
     {#if direction === 'left'}
         <line x1={LEFT} x2={RIGHT} y1={MID_Y} y2={TOP} />
         <line x1={LEFT} x2={RIGHT} y1={MID_Y} y2={BOT} />
