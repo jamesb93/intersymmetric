@@ -11,6 +11,7 @@
     import { wrap } from '$lib/utility';
     import { setDbValue } from '$lib/nobounds/firebase-core';
     import { create_2d_array } from '$lib/utility';
+    import { invertGridVertical, clearGrid, randomiseGrid } from '$lib/nobounds/grid/transforms.js';
 
     onDestroy(() => {
         Tone.Transport.stop();
@@ -27,8 +28,12 @@
         startOffset, endOffset } from '$lib/nobounds/firebase-core'
 
     attach($room, 'grid', grid, create_2d_array(6, 16, false));
+    attach($room, 'pitchOffset', pitchOffset, 0);
+    attach($room, 'length', length, 0.5);
+    attach($room, 'startOffset', startOffset, 1);
+    attach($room, 'endOffset', endOffset, 16);
+    attach($room, 'bpm', bpm, 120);
 
-    import { invertGridVertical, clearGrid, randomiseGrid } from '$lib/nobounds/grid/transforms.js';
 
     const multiplierTable = [
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0.875, 0.75, 0.66, 0.5, 0.33, 0.25, 0.125, 0

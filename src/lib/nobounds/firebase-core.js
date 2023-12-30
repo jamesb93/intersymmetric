@@ -71,9 +71,8 @@ export const euclid4 = numeric_parameter(0, { min: 0, max: 16, step: 1 });
 export const euclid5 = numeric_parameter(0, { min: 0, max: 16, step: 1 });
 
 export const pitchOffset = numeric_parameter(0, { min: -24, max: 24, step: 1 });
-export const length = numeric_parameter(0, { min: 0, max: 1, step: 0.001 });
-export const startOffset = numeric_parameter(0, { min: 0, max: 16, step: 1 });
+export const length = numeric_parameter(1.0, { min: 0, max: 1, step: 0.001 });
+export const startOffset = numeric_parameter(1, { min: 0, max: 16, step: 1 });
 export const endOffset = numeric_parameter(16, { min: 1, max: 16, step: 1 });
-
 export const bpm = numeric_parameter(120, { min: 5, max: 300, step: 1 });
 export const clockMultiplierLookup = writable(0);

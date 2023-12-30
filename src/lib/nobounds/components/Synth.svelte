@@ -1,8 +1,7 @@
 <script>
     import { interpolateObject } from 'd3-interpolate';
-    import { set, ref, } from 'firebase/database';
     import { get } from 'svelte/store'
-    import { prePos } from '$lib/nobounds/app';
+    import { params } from '$lib/nobounds/app';
     import kickPreset from '$lib/nobounds/presets/kick.json';
     import snarePreset from '$lib/nobounds/presets/snare.json';
     import metal1Preset from '$lib/nobounds/presets/metal1.json';
@@ -17,7 +16,7 @@
     import { shiftColumnDown, shiftColumnUp, rotateGridColumn } from '$lib/nobounds/grid/transforms'
     import { getPattern } from '$lib/nobounds/grid/euclid';
     import { 
-        room, db, attach,
+        room, attach,
         grid,
         euclid0, euclid1, euclid2, euclid3, euclid4, euclid5,
         shape0, shape1, shape2, shape3, shape4, shape5,
@@ -33,18 +32,47 @@
      * @param {number} x - The value to update the sound with.
      */
     function updateSound(x) {
-        // TODO: figure out logic of this one. We need to figure out which preset changed.
-        // const presets = [kickPreset, snarePreset, metal1Preset, metal2Preset, fm1Preset, fm2Preset];
-        // const numPresets = Object.keys(presets[x]).length;
-        // const preset1 = Math.floor($trackSound[x] * numPresets - 1);
-        // const preset2 = preset1 + 1;
-        // const amount = $trackSound[x] % 1.0;
+        let amount = 0.0
+        switch (x) {
+            case 0:
+                amount = $sound0;
+                break;
+            case 1:
+                amount = $sound1;
+                break;
+            case 2:
+                amount = $sound2;
+                break;
+            case 3:
+                amount = $sound3;
+                break;
+            case 4:
+                amount = $sound4;
+                break;
+            case 5:
+                amount = $sound5;
+                break;
+        }
 
-        // const result = interpolateObject(presets[x][preset1], presets[x][preset2])(amount);
-        // Object.entries(result).forEach(([key, value]) => {
-        //     $params[instrumentMap[x]][key] = value;
-        // });
+        const presets = [kickPreset, snarePreset, metal1Preset, metal2Preset, fm1Preset, fm2Preset];
+        const numPresets = Object.keys(presets[x]).length;
+        const preset1 = Math.floor(amount * numPresets - 1);
+        const preset2 = preset1 + 1;
+        amount = amount % 1.
+
+        const result = interpolateObject(presets[x][preset1], presets[x][preset2])(amount);
+        Object.entries(result).forEach(([key, value]) => {
+            $params[instrumentMap[x]][key] = value;
+        });
     }
+
+    $: $sound0, updateSound(0);
+    $: $sound1, updateSound(1);
+    $: $sound2, updateSound(2);
+    $: $sound3, updateSound(3);
+    $: $sound4, updateSound(4);
+    $: $sound5, updateSound(5);
+
     const soundParameters = [
         sound0, sound1, sound2, sound3, sound4, sound5
     ]
@@ -148,10 +176,9 @@
             max={parameter.get().max}
             step={parameter.get().step}
             bind:value={soundParameters[i]}
-            func={() => {
-                // updateSound(i);
-                set(ref(db, `/seq1/${$room}/sound${i}`), get(soundParameters[i]))
-
+            on:update={() => {
+                updateSound(i);
+                setDbValue(`sound${i}`, get(soundParameters[i]))
             }}
             />
         {/each}
@@ -171,8 +198,8 @@
             max={parameter.get().max}
             step={parameter.get().step}
             bind:value={pitchParameters[i]}
-            func={ () => {
-                set(ref(db, `/seq1/${$room}/pitch${i}`), get(pitchParameters[i]))
+            on:update={ () => {
+                setDbValue(`pitch${i}`, get(pitchParameters[i]))
             }}
             />
         {/each}
@@ -192,8 +219,8 @@
             max={parameter.get().max}
             step={parameter.get().step}
             bind:value={shapeParameters[i]}
-            func={() => {
-                set(ref(db, `/seq1/${$room}/shape${i}`), get(shapeParameters[i]))
+            on:update={() => {
+                setDbValue(`shape${i}`, get(shapeParameters[i]))
             }}
             />
         {/each}

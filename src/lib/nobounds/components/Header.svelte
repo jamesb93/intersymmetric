@@ -7,14 +7,14 @@
 
 <header>
     <div id="title">
-        <span>Intersymmetric Works</span>
-        <span>Sequencer 01</span>
+        <div>Intersymmetric Works</div>
+        <div>Sequencer 01</div>
     </div>
     <div id="room">
         <RoomPrompt />
     </div>
     <div id="recent-param">
-        <span id="param">{$recentParamName}</span>
+        <div id="param">{$recentParamName}</div>
         <div id="value">
             {#if $recentParamName !== ''}
                 {parseFloat($recentParamValue).toFixed(2)}
@@ -31,7 +31,7 @@
     }
     header {
         display: grid;
-        grid-template-columns: 411px 141px auto 200px;
+        grid-template-columns: 411px auto 200px;
         font-size: 10px;
         min-height: var(--h);
         max-height: var(--h);
@@ -43,12 +43,6 @@
         word-wrap: none;
         display: flex;
         flex-direction: column;
-    }
-
-    #participants {
-        display: flex;
-        flex-direction: column;
-        text-align: left;
     }
 
     #recent-param {
@@ -64,11 +58,5 @@
         margin-top: -10px;
         font-size: 20px;
         padding-top: 11px;
-    }
-
-    #user-message {
-        color: green;
-        text-align: left;
-        white-space: nowrap;
     }
 </style>
