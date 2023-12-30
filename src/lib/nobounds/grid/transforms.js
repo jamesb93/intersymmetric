@@ -1,14 +1,20 @@
 import { get } from 'svelte/store';
 import { grid, setDbValue } from '$lib/nobounds/firebase-core';
 import { mirror, deepCopy } from './matrix';
-import { create_2d_array, wrap } from '$lib/utility';
+import { create_2d_array } from '$lib/utility';
 
 const sendGrid = () => {
     setDbValue('grid', get(grid));
 };
 
+/**
+ * Rotates a column in the grid by the specified amount.
+ * 
+ * @param {number} amount - The amount to rotate the column by.
+ * @param {number} column - The index of the column to rotate.
+ */
 export const rotateGridColumn = (amount, column) => {
-    let tempGrid: Array<Array<Boolean>> = get(grid);
+    let tempGrid = get(grid);
     tempGrid[column].rotate(amount);
     grid.set(tempGrid);
     sendGrid();
