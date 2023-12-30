@@ -1,36 +1,18 @@
 <script>
-    import { numUsers, recentParamValue, recentParamName, userMessage } from '$lib/nobounds/app.js';
+    import { recentParamValue, recentParamName } from '$lib/nobounds/app.js';
     import RoomPrompt from '$lib/nobounds/components/RoomPrompt.svelte';
 
-    export let context = '';
-
-    console.log('%c Intersymmetric Version 0.2', 'background: #222; color: #bada55');
+    console.log('%c Intersymmetric Version 1.0', 'background: #222; color: #bada55');
 </script>
 
 <header>
     <div id="title">
         <span>Intersymmetric Works</span>
-        {#if context === 'artist'}
-            <!-- ARTIST NAME GOES HERE -->
-            <span>Beatrice Dillon</span>
-        {:else}
-            <span>Sequencer 01</span>
-        {/if}
+        <span>Sequencer 01</span>
     </div>
-    {#if context !== 'artist'}
-        <div id="room">
-            <RoomPrompt />
-        </div>
-    {/if}
-    <div id="participants">
-        <span>Users:</span>
-        <span>{$numUsers}</span>
+    <div id="room">
+        <RoomPrompt />
     </div>
-    {#if context === 'artist'}
-        <div id="user-message">
-            {$userMessage}
-        </div>
-    {/if}
     <div id="recent-param">
         <span id="param">{$recentParamName}</span>
         <div id="value">
