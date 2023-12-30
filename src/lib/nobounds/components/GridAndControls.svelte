@@ -212,15 +212,13 @@
                 />
                 <BoxButton 
                 on:click={() => { 
-                    randomiseGrid(grid)
-                    setDbValue('grid', $grid) 
+                    randomiseGrid()
                 }} 
                 text="Randomise" 
                 />
                 <BoxButton 
                 on:click={() => { 
-                    clearGrid(grid)
-                    setDbValue('grid', $grid)
+                    clearGrid()
                 }}
                 text="Clear" 
                 />
