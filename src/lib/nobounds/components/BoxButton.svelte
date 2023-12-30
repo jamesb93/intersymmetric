@@ -1,9 +1,8 @@
 <script>
-    export let func = () => {};
     export let text = '';
 </script>
 
-<button on:click={func}>
+<button on:click>
     <div id="text">{text}</div>
 </button>
 
