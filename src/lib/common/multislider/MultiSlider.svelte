@@ -3,7 +3,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import { onMount } from 'svelte';
 	import { CircularBuffer } from '$lib/common/queue';
-	import { linearInterp, clip, mapRange } from '$lib/utility';
+	import { lerp, clip, mapRange } from '$lib/utility';
 
 	export let focus = null;
 	export let index;
@@ -75,9 +75,9 @@
 						
 						let value = 0.0;
 						if (isRev) {
-							value = linearInterp(end, start, interp);
+							value = lerp(end, start, interp);
 						} else{
-							value = linearInterp(start, end, interp);
+							value = lerp(start, end, interp);
 						}
 						const clampedIndex = clip(
 						Math.min(a.idx, b.idx)+i,
