@@ -1,11 +1,11 @@
 <script>
-	import BoxButton from './components/BoxButton.svelte';
-	import * as Tone from 'tone';
-    import Interface from './Interface.svelte';
-    import OrientationWarning from '$lib/nyege/interface/OrientationWarning.svelte';
-    import IPhoneWarning from '$lib/nyege/interface/IPhoneWarning.svelte';
+	import BoxButton from './components/BoxButton.svelte'
+	import * as Tone from 'tone'
+    import Interface from './Interface.svelte'
+    import OrientationWarning from '$lib/nyege/interface/OrientationWarning.svelte'
+    import IPhoneWarning from '$lib/nyege/interface/IPhoneWarning.svelte'
 
-	let loaded = false;
+	let loaded = false
 
     async function start() {
 		Tone.start()
