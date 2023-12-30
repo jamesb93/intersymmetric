@@ -1,5 +1,9 @@
 <script>
-    import Landing from '$lib/nobounds/components/Landing.svelte';
+    import { onMount } from 'svelte';
+    import { goto } from '$app/navigation';
+
+    onMount(async () => {
+        goto('idx');
+    });
 </script>
 
-<Landing route="/seq-1/" />
