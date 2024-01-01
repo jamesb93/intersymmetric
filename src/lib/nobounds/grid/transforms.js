@@ -79,7 +79,7 @@ export const shiftColumnUp = (col) => {
 };
 
 export const clearGrid = () => {
-    grid.set(create_2d_array(16, 6, false));
+    grid.set(create_2d_array(6, 16, false));
     sendGrid();
 };
 
