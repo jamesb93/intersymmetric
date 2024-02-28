@@ -4,9 +4,16 @@
     import OrientationWarning from '$lib/nyege/interface/OrientationWarning.svelte';
     import IPhoneWarning from '$lib/nyege/interface/IPhoneWarning.svelte';
     import { loadSamples, createDeviceInstance } from '@jamesb93/rnbo-svelte';
+    import { onDestroy } from 'svelte';
 
     let patch, context;
     let samplesLoaded = false;
+
+    onDestroy(() => {
+        if (context) {
+            context.close();
+        }
+    });
 
     const start = async () => {
         context = new (window.AudioContext || window.webkitAudioContext)();

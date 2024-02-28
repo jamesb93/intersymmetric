@@ -2,9 +2,16 @@
     import Interface from './interface/Interface.svelte';
     import Button from './Button.svelte';
     import { loadSamples, createDeviceInstance } from '@jamesb93/rnbo-svelte';
+    import { onDestroy } from 'svelte';
 
     let patch, context;
     let samplesLoaded = false;
+
+    onDestroy(() => {
+        if (context) {
+            context.close();
+        }
+    });
 
     const start = async () => {
         context = new (window.AudioContext || window.webkitAudioContext)();
@@ -32,7 +39,6 @@
     </div>
 {/if}
 
-<!-- <a href='https://www.dropbox.com/sh/w7uso18978mbcu5/AAA9g_0PD4BaO-L1rnbvHb2Ha?dl=0'>presets</a> -->
 <style>
     .loading {
         margin: 10em;
