@@ -12,7 +12,7 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Setup SSH
               uses: shimataro/ssh-key-action@v2
@@ -39,4 +39,4 @@ jobs:
 
             - name: Upload To Droplet
               run: |
-                  rsync -avz --delete --no-times --no-o --no-g --no-perms . root@${{ secrets.DO_IP }}:/root/deploy/intersymmetric/dev/
+                  rsync -avz --delete --no-times --no-o --no-g --no-perms . root@${{ secrets.HETZNER_IP }}:/root/deploy/intersymmetric/dev/
