@@ -17,7 +17,7 @@ jobs:
             - name: Setup SSH
               uses: shimataro/ssh-key-action@v2
               with:
-                  key: ${{ secrets.DO_PRIVATE_KEY }}
+                  key: ${{ secrets.HETZNER_PRIVATE_KEY }}
                   known_hosts: 'placeholder'
 
             - name: Adding Known Hosts
