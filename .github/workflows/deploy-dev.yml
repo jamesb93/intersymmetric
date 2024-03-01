@@ -23,7 +23,7 @@ jobs:
             - name: Adding Known Hosts
               run: |
                   mkdir -p ~/.ssh
-                  ssh-keyscan -H ${{ secrets.DO_IP }} >> ~/.ssh/known_hosts
+                  ssh-keyscan -H ${{ secrets.HETZNER_IP }} >> ~/.ssh/known_hosts
 
             - name: create .env file
               run: |
