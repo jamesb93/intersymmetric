@@ -1,4 +1,4 @@
-name: deploy
+name: deploy-dev
 concurrency:
     group: environment-${{ github.ref }}
     cancel-in-progress: true
