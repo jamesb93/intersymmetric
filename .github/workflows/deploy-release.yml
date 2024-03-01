@@ -12,7 +12,7 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Setup SSH
               uses: shimataro/ssh-key-action@v2
@@ -23,7 +23,7 @@ jobs:
             - name: Adding Known Hosts
               run: |
                   mkdir -p ~/.ssh
-                  ssh-keyscan -H ${{ secrets.DO_IP }} >> ~/.ssh/known_hosts
+                  ssh-keyscan -H ${{ secrets.HETZNER_IP }} >> ~/.ssh/known_hosts
 
             - name: create .env file
               run: |
@@ -39,4 +39,4 @@ jobs:
 
             - name: Upload To Droplet
               run: |
-                  rsync -avz --delete --no-times --no-o --no-g --no-perms . root@${{ secrets.DO_IP }}:/root/deploy/intersymmetric/prod/
+                  rsync -avz --delete --no-times --no-o --no-g --no-perms . root@${{ secrets.HETZNER_IP }}:/root/deploy/intersymmetric/prod/
