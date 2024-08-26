@@ -106,6 +106,9 @@
                 class="view-tog"
                 on:click={() => {
                     view = i;
+                }}
+                on:touchstart|preventDefault={() => {
+                    view = i;
                 }} />
         {/each}
     </div>
@@ -168,6 +171,9 @@
         background-color: yellow;
         border: none;
         outline: none;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
     }
 
     .view-tog:focus {
