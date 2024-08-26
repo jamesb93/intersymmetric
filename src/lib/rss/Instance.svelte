@@ -24,14 +24,10 @@
 
 <style>
     .start-btn {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        place-items: center;
         font-family: var(--font);
         background-color: rgb(0, 0, 0);
         color: white;
-        font-size: 5rem;
+        font-size: 2rem;
     }
 </style>
