@@ -2,7 +2,7 @@
     // @ts-nocheck
     import { attach, db } from '$lib/rss/app';
     import { ref, set } from 'firebase/database';
-    import { sendDeviceMessage } from '$lib/common/rnbo/helpers.js';
+    import { sendDeviceMessage } from '$lib/common/rnbo/helpers';
     import MultiSlider from '$lib/common/multislider/MultiSlider.svelte';
     import {
         s0,
@@ -63,12 +63,24 @@
     ];
 </script>
 
+<svelte:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+</svelte:head>
+
 <div
     class="state"
     class:stateon={active}
+    role="button"
+    tabindex="0"
     on:click={() => {
         active = !active;
-    }} />
+    }}
+    on:keypress={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            active = !active;
+        }
+    }}
+/>
 <div class="wrapper">
     <MultiSlider
         bind:index
@@ -130,6 +142,9 @@
         width: 25px;
         height: 25px;
         background-color: red;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
     }
 
     .stateon {
@@ -141,12 +156,17 @@
         width: 100%;
         height: 100%;
         min-height: 100%;
+        touch-action: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
     }
     .view-toggle {
         display: flex;
         flex-direction: row;
         height: 200px;
         border-top: 1px solid black;
+        touch-action: none;
     }
     .view-tog {
         height: 100%;
@@ -155,6 +175,10 @@
         border: none;
         margin-left: 1px;
         margin-right: 1px;
+        touch-action: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
     }
 
     .view-tog:focus {

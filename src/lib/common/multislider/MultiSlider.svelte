@@ -127,6 +127,7 @@
     }
 
     function touchMoveHandler(e) {
+        e.preventDefault(); // Prevent default touch behavior
         if (listening) {
             for (let i = 0; i < e.touches.length; i++) {
                 const touch = e.touches[i];
@@ -177,6 +178,7 @@
         clearCache();
     }}
     on:touchend={(e) => {
+        e.preventDefault(); // Prevent default touch behavior
         for (let i = 0; i < e.changedTouches.length; i++) {
             const touch = e.changedTouches[i];
             const id = touch.identifier;
@@ -186,7 +188,7 @@
             listening = false;
         }
     }}
-    on:touchmove={touchMoveHandler}
+    on:touchmove|preventDefault={touchMoveHandler}
     on:mousemove={mouseMoveHandler}
     on:keydown={keyPressHandler}
     bind:scrollX
@@ -243,9 +245,15 @@
     }
     .wrapper {
         touch-action: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
     }
 
     .svg {
         touch-action: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
     }
 </style>

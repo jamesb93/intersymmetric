@@ -31,7 +31,6 @@ authenticate();
 
 /**
  * Bind a value to a firebase setter
- * @param {string} project – the name of the project
  * @param {string} room – the name of the room
  * @param {string} path – the path of the parameter
  * @param {import('svelte/store').writable} state -

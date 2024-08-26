@@ -2,7 +2,7 @@
     // @ts-nocheck
     import { attach, db } from '$lib/rss/app';
     import { ref, set } from 'firebase/database';
-    import { sendDeviceMessage } from '$lib/common/rnbo/helpers.js';
+    import { sendDeviceMessage } from '$lib/common/rnbo/helpers';
     import MultiSlider from '$lib/common/multislider/MultiSlider.svelte';
     import {
         s0,

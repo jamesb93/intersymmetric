@@ -1,6 +1,6 @@
 <script>
     import Interface from './Interface.svelte';
-    import { createDeviceInstance } from '../common/rnbo/helpers';
+    import { createDeviceInstance } from '$lib/common/rnbo/helpers';
 
     /** @type {import('@rnbo/js').Device} */
     let device;
