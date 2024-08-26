@@ -24,7 +24,7 @@
     "type": "module",
     "dependencies": {
         "@jamesb93/rnbo-svelte": "1.1.1",
-        "@rnbo/js": "^1.2.5",
+        "@rnbo/js": "^1.3.2",
         "carbon-components-svelte": "^0.73.5",
         "d3-interpolate": "^3.0.1",
         "firebase": "^9.23.0",
