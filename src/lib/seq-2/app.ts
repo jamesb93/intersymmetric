@@ -3,7 +3,7 @@ import numeric_parameter from '$lib/common/parameters/numeric';
 import enum_parameter from '$lib/common/parameters/enum';
 
 import { env } from '$env/dynamic/public';
-import { firebaseProdConfig, firebaseDevConfig } from '$lib/core';
+import { firebaseProdConfig, firebaseDevConfig } from '$lib/firebase-config';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, onValue, ref } from 'firebase/database';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';

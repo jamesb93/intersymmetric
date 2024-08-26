@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { env } from '$env/dynamic/public';
 import { PUBLIC_FB_USERNAME, PUBLIC_FB_PASSWORD } from '$env/static/public';
-import { firebaseProdConfig, firebaseDevConfig } from '$lib/core';
+import { firebaseProdConfig, firebaseDevConfig } from '$lib/firebase-config';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, onValue, ref } from 'firebase/database';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
