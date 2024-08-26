@@ -2,5 +2,6 @@
     "name": "Intersymmetric",
     "short_name": "Intersymmetric",
     "display": "standalone",
-    "start_url": "/rss/play"
+    "start_url": "/rss/play",
+    "background_color": "#ffff54"
 }
