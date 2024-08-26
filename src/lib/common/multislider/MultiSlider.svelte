@@ -243,17 +243,4 @@
     rect:focus {
         outline: none;
     }
-    .wrapper {
-        touch-action: none;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        user-select: none;
-    }
-
-    .svg {
-        touch-action: none;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        user-select: none;
-    }
 </style>
