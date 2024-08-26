@@ -241,7 +241,7 @@
 
 <style>
     rect:focus {
-        outline: 4px solid green;
+        outline: none;
     }
     .wrapper {
         touch-action: none;
