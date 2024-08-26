@@ -157,12 +157,14 @@
     .view-toggle {
         display: flex;
         flex-direction: row;
-        height: 200px;
+        height: 25vw; /* Change from fixed height to 25% of viewport width */
+        max-height: 200px; /* Set a maximum height if desired */
         border-top: 1px solid black;
     }
     .view-tog {
-        height: 100%;
-        width: 25%;
+        flex: 1;
+        aspect-ratio: 1 / 1; /* Ensure square aspect ratio */
+        max-width: 25%; /* Limit maximum width to 25% of parent */
         background-color: yellow;
         border: none;
         outline: none;
