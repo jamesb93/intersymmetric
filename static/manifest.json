@@ -1,6 +1,6 @@
 {
     "name": "Intersymmetric",
     "short_name": "Intersymmetric",
-    "start_url": "/",
-    "display": "standalone"
+    "display": "standalone",
+    "start_url": "/rss/play"
 }

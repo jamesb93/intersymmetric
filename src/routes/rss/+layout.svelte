@@ -2,6 +2,10 @@
     import './theme.css';
 </script>
 
+<svelte:head>
+    <link rel="manifest" href="%sveltekit.assets%/manifest.json" />
+</svelte:head>
+
 <div class="container">
     <slot />
 </div>
