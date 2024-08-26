@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-DJK1K816BJ"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-
-            gtag('config', 'G-DJK1K816BJ');
-        </script>
-
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="%sveltekit.assets%/favicon.png" />
+
+        <!-- Add these new meta tags and link -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-mobile-web-app-title" content="Your App Name" />
+        <link rel="apple-touch-icon" href="%sveltekit.assets%/apple-touch-icon.png" />
+        <link rel="manifest" href="%sveltekit.assets%/manifest.json" />
+
         %sveltekit.head%
     </head>
     <body>

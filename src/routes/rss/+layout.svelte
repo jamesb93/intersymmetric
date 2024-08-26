@@ -11,6 +11,7 @@
         height: 100vh;
         min-height: 100vh;
         width: 100%;
-        min-width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
     }
 </style>

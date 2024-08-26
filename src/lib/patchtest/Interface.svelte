@@ -1,6 +1,6 @@
 <script>
-    // @ts-nocheck
     import { attach, db } from '$lib/rss/app';
+    // @ts-ignore
     import { ref, set } from 'firebase/database';
     import { sendDeviceMessage } from '$lib/common/rnbo/helpers';
     import MultiSlider from '$lib/common/multislider/MultiSlider.svelte';
@@ -158,7 +158,7 @@
     }
 
     .view-tog:focus {
-        outline: 4px solid green;
+        outline: none; /* Remove the green outline on focus */
     }
 
     .selected {

@@ -173,8 +173,9 @@
         width: 25%;
         background-color: yellow;
         border: none;
-        margin-left: 1px;
-        margin-right: 1px;
+        outline: none;
+        /* margin-left: 1px; */
+        /* margin-right: 1px; */
         touch-action: none;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -182,7 +183,7 @@
     }
 
     .view-tog:focus {
-        outline: 4px solid green;
+        outline: none;
     }
 
     .selected {
