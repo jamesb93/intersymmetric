@@ -23,17 +23,20 @@
         s15
     } from '$lib/rss/app';
 
-    export let device;
+    /** @type {import('@rnbo/js').Device | null} */
+    export let device = null;
 
     let view = 0;
     let index = 0;
-    let active = true;
+    export let active = false;
 
-    $: sendDeviceMessage(device, 'on_off', [active]);
-    $: sendDeviceMessage(device, 'sliders0', [$s0, $s1, $s2, $s3]);
-    $: sendDeviceMessage(device, 'sliders1', [$s4, $s5, $s6, $s7]);
-    $: sendDeviceMessage(device, 'sliders2', [$s8, $s9, $s10, $s11]);
-    $: sendDeviceMessage(device, 'sliders3', [$s12, $s13, $s14, $s15]);
+    $: if (device) {
+        sendDeviceMessage(device, 'on_off', [active]);
+        sendDeviceMessage(device, 'sliders0', [$s0, $s1, $s2, $s3]);
+        sendDeviceMessage(device, 'sliders1', [$s4, $s5, $s6, $s7]);
+        sendDeviceMessage(device, 'sliders2', [$s8, $s9, $s10, $s11]);
+        sendDeviceMessage(device, 'sliders3', [$s12, $s13, $s14, $s15]);
+    }
 
     $: attach('devtest', 'view0slider0', s0, 0.5);
     $: attach('devtest', 'view0slider1', s1, 0.5);
@@ -61,82 +64,106 @@
         [$s8, $s9, $s10, $s11],
         [$s12, $s13, $s14, $s15]
     ];
+
+    $: isDeviceReady = !!device;
 </script>
 
 <svelte:head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
 </svelte:head>
 
-<div
-    class="state"
-    class:stateon={active}
-    role="button"
-    tabindex="0"
-    on:click={() => {
-        active = !active;
-    }}
-    on:keypress={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            active = !active;
-        }
-    }}
-/>
-<div class="wrapper">
-    <MultiSlider
-        bind:index
-        bind:data={data[view]}
-        config={{
-            width: 400,
-            maxWidth: '100%',
-            height: '100%',
-            maxHeight: '100%',
-            bgColour: 'yellow',
-            colour: 'black',
-            min: 0.0,
-            max: 1.0
+<div class="interface" class:disabled={!isDeviceReady}>
+    <div
+        class="state"
+        class:stateon={active}
+        role="button"
+        tabindex="0"
+        on:click={() => {
+            if (isDeviceReady) active = !active;
         }}
-        on:change={() => {
-            set(ref(db, `/rss/devtest/view${view}slider${index}`), data[view][index]);
-        }} />
+        on:keypress={(e) => {
+            if (isDeviceReady && (e.key === 'Enter' || e.key === ' ')) {
+                active = !active;
+            }
+        }}
+    />
+    <div class="wrapper">
+        <MultiSlider
+            bind:index
+            bind:data={data[view]}
+            config={{
+                width: 400,
+                maxWidth: '100%',
+                height: '100%',
+                maxHeight: '100%',
+                bgColour: 'yellow',
+                colour: 'black',
+                min: 0.0,
+                max: 1.0
+            }}
+            on:change={() => {
+                if (isDeviceReady) {
+                    set(ref(db, `/rss/devtest/view${view}slider${index}`), data[view][index]);
+                }
+            }}
+        />
 
-    <div class="view-toggle">
-        {#each new Array(4) as x, i}
-            <button
-                class:selected={view === i}
-                class="view-tog"
-                on:click={() => {
-                    view = i;
-                }}
-                on:touchstart|preventDefault={() => {
-                    view = i;
-                }} />
-        {/each}
+        <div class="view-toggle">
+            {#each new Array(4) as x, i}
+                <button
+                    class:selected={view === i}
+                    class="view-tog"
+                    on:click={() => {
+                        if (isDeviceReady) view = i;
+                    }}
+                    on:touchstart|preventDefault={() => {
+                        if (isDeviceReady) view = i;
+                    }}
+                />
+            {/each}
+        </div>
     </div>
 </div>
 
 <svelte:window
     on:keypress|preventDefault={(e) => {
-        switch (e.code) {
-            case 'Space':
-                active = !active;
-            case 'Digit1':
-                view = 0;
-                break;
-            case 'Digit2':
-                view = 1;
-                break;
-            case 'Digit3':
-                view = 2;
-                break;
-            case 'Digit4':
-                view = 3;
-                break;
-            default:
-                break;
+        if (isDeviceReady) {
+            switch (e.code) {
+                case 'Space':
+                    active = !active;
+                case 'Digit1':
+                    view = 0;
+                    break;
+                case 'Digit2':
+                    view = 1;
+                    break;
+                case 'Digit3':
+                    view = 2;
+                    break;
+                case 'Digit4':
+                    view = 3;
+                    break;
+                default:
+                    break;
+            }
         }
-    }} />
+    }}
+/>
 
 <style>
+    .interface {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .interface.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
     .state {
         touch-action: none;
         position: absolute;
@@ -182,5 +209,11 @@
 
     .selected {
         background-color: black;
+    }
+
+    @media (max-width: 800px) {
+        .interface {
+            max-width: none;
+        }
     }
 </style>

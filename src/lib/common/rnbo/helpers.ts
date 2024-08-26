@@ -32,7 +32,7 @@ const loadSamples = async (
 const createDeviceInstance = (
     devicePath: string,
     context: AudioContext,
-    output: GainNode
+    output: AudioNode
 ): Promise<RNBO.Device> => {
     return new Promise((resolve, reject) => {
         fetch(devicePath)
