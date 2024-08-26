@@ -142,9 +142,6 @@
         width: 25px;
         height: 25px;
         background-color: red;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        user-select: none;
     }
 
     .stateon {
@@ -156,17 +153,12 @@
         width: 100%;
         height: 100%;
         min-height: 100%;
-        touch-action: none;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        user-select: none;
     }
     .view-toggle {
         display: flex;
         flex-direction: row;
         height: 200px;
         border-top: 1px solid black;
-        touch-action: none;
     }
     .view-tog {
         height: 100%;
@@ -174,12 +166,6 @@
         background-color: yellow;
         border: none;
         outline: none;
-        /* margin-left: 1px; */
-        /* margin-right: 1px; */
-        touch-action: none;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        user-select: none;
     }
 
     .view-tog:focus {
