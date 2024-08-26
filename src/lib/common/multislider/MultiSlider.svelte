@@ -22,8 +22,7 @@
     let listening = false;
     let mounted = false;
     let wrapper;
-    // let bufCache = Array.from({ length: 10}, () => new CircularBuffer(2)); // we store 10 circular buffers. One for each finger.
-    let bufCache = {};
+    let bufCache = new Map();
     let rect;
     let width = 0;
     let height = 0;
@@ -49,7 +48,7 @@
     });
 
     function updatePoints() {
-        for (const [id, buf] of Object.entries(bufCache)) {
+        for (const [id, buf] of bufCache.entries()) {
             if (buf.isFull()) {
                 const canvasWidth = rect.right - rect.left;
                 let a = buf.get(0);
@@ -121,7 +120,7 @@
         if (listening) {
             const [x, y] = getPointer(e.clientX, e.clientY);
             checkOrCreateCache(0);
-            bufCache[0].enqueue({ idx: null, x: x, y: y });
+            bufCache.get(0).enqueue({ idx: null, x: x, y: y });
             updatePoints();
         }
     }
@@ -132,9 +131,10 @@
             for (let i = 0; i < e.touches.length; i++) {
                 const touch = e.touches[i];
                 const id = touch.identifier;
-                checkOrCreateCache(id);
-                const [x, y] = getPointer(touch.clientX, touch.clientY);
-                bufCache[id].enqueue({ idx: null, x: x, y: y });
+                if (bufCache.has(id)) {
+                    const [x, y] = getPointer(touch.clientX, touch.clientY);
+                    bufCache.get(id).enqueue({ idx: null, x: x, y: y });
+                }
             }
             updatePoints();
         }
@@ -162,13 +162,13 @@
     }
 
     function checkOrCreateCache(id) {
-        if (!bufCache.hasOwnProperty(id)) {
-            bufCache[id] = new CircularBuffer(2);
+        if (!bufCache.has(id)) {
+            bufCache.set(id, new CircularBuffer(2));
         }
     }
 
     function clearCache() {
-        bufCache = {};
+        bufCache.clear();
     }
 </script>
 
@@ -182,7 +182,9 @@
         for (let i = 0; i < e.changedTouches.length; i++) {
             const touch = e.changedTouches[i];
             const id = touch.identifier;
-            bufCache[id].clear();
+            if (bufCache.has(id)) {
+                bufCache.get(id).clear();
+            }
         }
         if (e.touches.length === 0) {
             listening = false;
@@ -214,6 +216,10 @@
             on:touchstart={(e) => {
                 clearCache();
                 listening = true;
+                for (let i = 0; i < e.touches.length; i++) {
+                    const touch = e.touches[i];
+                    checkOrCreateCache(touch.identifier);
+                }
             }}>
             {#each data as d, i}
                 <rect
