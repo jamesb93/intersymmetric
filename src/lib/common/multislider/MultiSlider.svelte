@@ -200,7 +200,8 @@
     style:width={config.width}
     style:height={config.height}
     style:max-width={config.maxWidth}
-    style:max-height={config.maxHeight}>
+    style:max-height={config.maxHeight}
+    style:touch-action="none">
     {#if mounted && width}
         <svg
             class="svg"
@@ -240,6 +241,10 @@
 </div>
 
 <style>
+    .wrapper {
+        touch-action: none;
+    }
+
     rect:focus {
         outline: none;
     }
